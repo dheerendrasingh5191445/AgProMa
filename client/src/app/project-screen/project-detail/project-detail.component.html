@@ -1,0 +1,21 @@
+<div class="col-lg-6">
+        <div class="button">
+        <div class="card-one">
+          <div class="top">
+            <div class="wrapper">
+              <div class="mynav">
+               
+                <a *ngIf="Data.actAs == 0" href="javascript:;">
+                  <span routerLink = "/app-dashboard/app-invite-people/{{Data.projectId}}" class="lnr lnr-plus-circle"></span>
+                  <span routerLink="/app-dashboard/fill-details/{{Data.projectId}}" class="lnr lnr-pencil"></span>
+                  <span (click)="delete(Data.projectId)" class="lnr lnr-trash"></span>
+              </a>
+              </div>
+              <h1 class="heading">{{Data.name}}</h1>
+             
+            </div>
+          </div>
+          
+        </div>
+      </div>
+</div>

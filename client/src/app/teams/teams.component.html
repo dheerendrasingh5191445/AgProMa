@@ -1,0 +1,67 @@
+<!--team screen starts here-->
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <!--team cards starts here-->
+                <div class="team card" *ngFor="let item of Teams; let i = index">
+                    <div class="card-header">
+                        <i class="fa fa-users"></i>&nbsp;&nbsp;{{item.teamName}}
+                    </div>
+                    <!-- <div id=drag{{i}} class="card-body" dnd-droppable-container (onDragSuccess)="teamListupdata($event)"  [dropZones]="['boxers-zone']" [droppableData]="listTeamOne"> -->
+                    <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
+                      <app-teammember *ngIf="item.teamId" [Data]="item.teamId"></app-teammember>                           
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class=" card available"> 
+
+                    <div class="card-header">
+                        <i class="fa fa-user-plus"></i> &nbsp;&nbsp;Available Members
+                    </div>
+                    <div class="card-body"> 
+                        <ul class="list-group">
+                            <li *ngFor="let item of TeamList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item" (onDragSuccess)="removeMember()"> 
+                                <i class="fa fa-user icons">
+                                    </i>{{item.memberName}} </li>
+                            <li></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <button type="button" class=" add btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Team &nbsp;<i class="fa fa-plus-circle"></i>
+    </button>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Enter Team Name here</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">Name:</label>
+                                <input type="text" class="form-control" id="recipient-name" #team>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTeam(team.value)">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

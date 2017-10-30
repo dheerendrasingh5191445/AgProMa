@@ -1,0 +1,6 @@
+<ul class="list-group">
+    <li *ngFor="let items of TeamList" class="list-group-item">
+        <i class="fa fa-user icons"></i>&nbsp;&nbsp;{{items.memberName}}&nbsp;&nbsp;<i (click)="delete(items.id)" class=" icons fa fa-window-close icon" aria-hidden="true"></i>
+    </li>
+    <li></li>
+</ul>

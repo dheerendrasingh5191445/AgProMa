@@ -1,0 +1,29 @@
+.card{
+    width:100%;
+    background: transparent;  /* fallback for old browsers */
+    padding:30px;
+    border: 2px solid #000;
+}
+.btn{
+    background: none;
+    border: 1px solid #000;
+    margin: 10px;
+}
+textarea{
+    height: 100px;
+  }
+  input,textarea{
+      background: rgba(0, 0, 0, 0.21);
+  }
+  h1{
+      font-size: 30px;
+      text-align: center;
+      padding: 30px;
+      border: 2px solid #000;
+  }
+  .form-control:focus {
+    border-color: #000000;
+    color: #000;
+    background-color: transparent;
+    /* color: #FFFFFF; */
+}

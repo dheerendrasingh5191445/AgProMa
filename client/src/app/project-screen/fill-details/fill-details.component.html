@@ -1,0 +1,37 @@
+<div class="card">
+<div class="tab-pane fade show active" role="tabpanel">
+  <div>
+    <h1>Add Details Of Project</h1>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="text-input">Project title</label>
+    <div class="col-md-9">
+      <input type="text" id="text-input"  [(ngModel)]="projectname" [ngModelOptions]="{standalone: true}" name="text-input"
+        class="form-control" placeholder="Text">
+
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="textarea-input">Project discription</label>
+    <div class="col-md-9">
+
+      <textarea id="textarea-input"  [(ngModel)]="projectdescription" [ngModelOptions]="{standalone: true}"
+        name="textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
+
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="textarea-input">Technologies Used</label>
+    <div class="col-md-9">
+
+      <textarea id="textarea-input" [(ngModel)]="technologies" [ngModelOptions]="{standalone: true}"
+        name="textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
+
+    </div>
+  <span *ngIf="condition == 'id'">
+  <button class='btn' (click)="AddProject()"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Add Project</button>
+</span>
+<span  *ngIf="updateId">
+<button class='btn'  (click)="updateProject()"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Update Project</button>
+</span>
+</div>
