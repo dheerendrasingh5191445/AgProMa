@@ -8,36 +8,42 @@
                     <div class="card-header">
                         <i class="fa fa-users"></i>&nbsp;&nbsp;{{item.teamName}}
                     </div>
-                    <!-- <div id=drag{{i}} class="card-body" dnd-droppable-container (onDragSuccess)="teamListupdata($event)"  [dropZones]="['boxers-zone']" [droppableData]="listTeamOne"> -->
+                    
                     <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
                       <app-teammember *ngIf="item.teamId" [Data]="item.teamId"></app-teammember>                           
                     </div>
                 </div>
+                <!--team card ends here-->
             </div>
             <div class="col-sm-4">
+                <!--div for available member list starts here-->
                 <div class=" card available"> 
 
                     <div class="card-header">
                         <i class="fa fa-user-plus"></i> &nbsp;&nbsp;Available Members
                     </div>
                     <div class="card-body"> 
+                        <!--list for member list starts here-->
                         <ul class="list-group">
                             <li *ngFor="let item of TeamList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item" (onDragSuccess)="removeMember()"> 
                                 <i class="fa fa-user icons">
                                     </i>{{item.memberName}} </li>
                             <li></li>
                         </ul>
+                        <!--list for member list ends here-->
                     </div>
 
-                </div>
+                </div><!--div for available member list ends here-->
             </div>
 
-        </div>
+        </div><!--row div ends here-->
+        <!--div for add team button-->
         <div>
-            <button type="button" class=" add btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Add Team &nbsp;<i class="fa fa-plus-circle"></i>
-    </button>
-        </div>
+           <button type="button"  value="val"class=" add btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add Team &nbsp;<i class="fa fa-plus-circle"></i>
+           </button>
+        </div> <!--div for add team ends here-->
+        <!--modal starts here-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -46,7 +52,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-                    </div>
+                    </div><!--modal-header ends here-->
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
@@ -55,13 +61,14 @@
                             </div>
 
                         </form>
-                    </div>
+                    </div><!-- modal-body ends here-->
                     <div class="modal-footer">
+                        <!--button for adding team-->
                         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTeam(team.value)">Add</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div><!--modal-footer ends here-->
+                </div><!--modal-content ends here-->
+            </div><!--modal dialog ends here-->
+        </div><!--modal ends here-->
+    </div><!--containers ends here-->
 </body>
