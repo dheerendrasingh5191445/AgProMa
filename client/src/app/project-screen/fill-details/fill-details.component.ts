@@ -18,8 +18,8 @@ export class FillDetailsComponent implements OnInit {
   constructor(private projectscrservice:ProjectScreenService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
-    this.route.params.subscribe((param) => this.updateId = +param.id);
-    this.
+    this.route.params.subscribe((param) => console.log (param.id));
+
   }
 
   //this method is used to add new project

@@ -31,10 +31,15 @@ export class ProjectScreenService {
                   .then(Response => Response);
   }
 //this is to update the project detail in database 
-updateProject(Id:number,projectitem:ProjectMaster):Promise<any>{
-  return this.http.put(ConfigFile.ProjectMasterUrls.updateProject+Id,projectitem,{headers: new Headers({ 'Content-Type': 'application/json'})})
+ updateProject(Id:number,projectitem:ProjectMaster):Promise<any>{
+   return this.http.put(ConfigFile.ProjectMasterUrls.updateProject+Id,projectitem,{headers: new Headers({ 'Content-Type': 'application/json'})})
                   .toPromise()
                   .then(Response => Response);
   }
-
+//this function is to get the projectdetails
+ getProject(Id:number):Promise<any>{
+   return this.http.get(ConfigFile.ProjectMasterUrls.getProjectName)
+                   .toPromise()
+                   .then(Response => Response);
+ }
 }

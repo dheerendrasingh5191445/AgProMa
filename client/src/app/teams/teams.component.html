@@ -10,7 +10,8 @@
                     </div>
                     
                     <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
-                      <app-teammember *ngIf="item.teamId" [Data]="item.teamId"></app-teammember>                           
+                      <app-teammember *ngIf="item.teamId" [Data]="item.teamId"></app-teammember>
+                      <li></li>                           
                     </div>
                 </div>
                 <!--team card ends here-->

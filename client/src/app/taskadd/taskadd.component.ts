@@ -1,7 +1,7 @@
 
   import { Component, OnInit } from '@angular/core';
   import { TaskService } from '../shared/services/task.service';
-  import { Task} from '../shared/models/task';
+  import { Task} from '../shared/model/task';
   import swal from 'sweetalert2';
   
   
@@ -10,7 +10,7 @@
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskAddComponent implements OnInit {
   sub: string ="";
   
 

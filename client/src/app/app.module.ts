@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule }from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
@@ -21,6 +22,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { RegisterUserWithNewPasswordComponent } from './register-user-with-new-password/register-user-with-new-password.component';
 import { InvitePeopleComponent } from './invite-people/invite-people.component';
 import { TeammemberComponent } from './teams/teammember/teammember.component';
+import { TeamsComponent} from './teams/teams.component';
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -61,9 +63,11 @@ export function provideConfig() {
     ForgetPasswordComponent,
     RegisterUserWithNewPasswordComponent,
     InvitePeopleComponent,
-    TeammemberComponent
+    TeammemberComponent,
+    TeamsComponent
   ],
   imports: [
+    DndModule.forRoot(),
     BrowserModule,
     FormsModule,
     AppRoutingModule,

@@ -25,7 +25,7 @@ const routes: Routes = [
     children:[
     { path:'',redirectTo:'project-screen', pathMatch:'full'},
     { path: 'project-screen', component:ProjectScreenComponent},
-    { path :'app-invite-people/:id', component: InvitePeopleComponent},
+    { path:'app-invite-people/:id', component: InvitePeopleComponent},
     { path: 'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},
     { path:'app-teams/:id', component: TeamsComponent }
