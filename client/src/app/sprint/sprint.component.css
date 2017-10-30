@@ -1,0 +1,150 @@
+.sprint {
+    background-color: #DDDCDC;
+    margin-right: 1em;
+    height: 100%;
+}
+
+.backlogItmes {
+    background-color: #DBDBDB;
+    height: 100%;
+}
+
+.header_sprint {
+    text-align: center;
+}
+
+#header_backlog_items {
+    text-align: center;
+}
+
+.text-content {
+    text-align: justify;
+}
+
+#btn_sprint {
+    position: relative; 
+    margin-bottom: 0rem;
+}
+
+.sprint1 {
+    border-block-end: #6D7FE6;
+}
+
+.card-text {
+    padding: 5px;
+}
+
+
+
+@media screen and (max-width: 575px) {
+    .sprint {
+        margin-right: 0em;
+    }
+}
+
+textarea {
+    height: 6em;
+}
+
+ul {
+    
+    list-style:none
+    }
+    li::before{
+        content:"\2022";
+        color:transparent
+    }
+    .card-header{
+        margin-bottom: 20px;
+    }
+    .card-text li{
+        width: 200px;
+        height: 20px;
+        margin: 5px 20px 5px 20px;
+    }
+
+
+
+
+.dark_header {
+    background: #666;
+    margin: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+  }
+  fieldset.custom {
+    border: 1px solid #ddd;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 5px 10px 10px 0px;
+    background-color: #fbfbfb ;
+    border-radius: 5px;
+  }
+  .no-margin {
+    margin: 0 !important;
+  }
+  .test_q_list_item.active {
+    border: 1px solid #1BA9F9 ;
+    background: #fff;
+  }
+  .test_q_list_item {
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    background: #f9f9f9 ;
+    position: relative;
+  }
+  #test_questions_wrapper, .test_q_list_item {
+   
+    user-select: none;
+  }
+  .div_with_left_icon {
+    position: relative;
+    min-height: 50px;
+  }
+  li{
+    display: inline;
+  }
+  .container-fluid{
+    color: grey
+  }
+
+  #myModal{
+    
+    margin: auto;
+    }
+    .modal-header{
+      background-color: #0C0D0C ;
+      color:white;
+    
+    }
+    .modal-body{
+      background-color: #B8B1B1 ;
+    }
+    #addBtn{
+    float: right;
+    border-radius: 5px;
+    size:200px;
+    }
+    #closeBtn{
+      background-color:white;
+    }
+    #addBtn:hover{
+      background-color: #787171 ;
+      color: white;
+    }
+    
+    .datelabel {
+        padding-top: 10px;
+        text-align: center;
+    }
+    
+    .modal_btns {
+        margin-top: 1em;
+        float: right;
+    }

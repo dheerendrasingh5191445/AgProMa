@@ -29,7 +29,7 @@ namespace ForgetPassword.Controllers
         {
             try
             {
-                _service.EmailForInvitation(people); //mail for forget password
+                _service.EmailForInvitation(people); //mail for invite people
                 return new NoContentResult();
             }
             catch (ArgumentNullException e)

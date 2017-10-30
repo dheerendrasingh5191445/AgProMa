@@ -35,16 +35,17 @@ namespace MyNeo4j.Service
         {
             
                     var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress(Configuration["Title"], Configuration["FromEmail"]));
-                    message.To.Add(new MailboxAddress(people.Email));
-                    message.Subject = Configuration["SubjectForEmailReset"];
+                    message.From.Add(new MailboxAddress(Configuration["Title"], Configuration["FromEmail"])); //mail title and mail from(Email)
+                    message.To.Add(new MailboxAddress(people.Email)); //mail to(client)
+                    message.Subject = Configuration["SubjectForEmailReset"]; //mail subject
                     var bodyBuilder = new BodyBuilder();
                     //body of the mail
-                    bodyBuilder.HtmlBody = "Click here to reset your password-  http://localhost:4200/app-register/" + people.ProjectId;
+                    bodyBuilder.HtmlBody = "Click here to join project-  http://localhost:4200/app-register/" + people.ProjectId; //link sent in mail
                     message.Body = bodyBuilder.ToMessageBody();
 
                     using (var client = new SmtpClient())
                     {
+			//required field for email
                         client.Connect(Configuration["Domain"], 587, false);
                         client.Authenticate(Configuration["FromEmail"], Configuration["Password"]);
                         client.Send(message);

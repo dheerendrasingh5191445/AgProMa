@@ -11,6 +11,7 @@ namespace MyNeo4j.Repository
     public interface IBacklogRepository
     {
         List<ProductBacklog> GetAll(int  id);
+        List<ProductBacklog> GetUnassignedStory(int projectId);
         void Add(ProductBacklog bklog);
         void Update(int id, ProductBacklog bklog);
         void Delete(int id);
@@ -45,7 +46,11 @@ namespace MyNeo4j.Repository
             _context.SaveChanges();
         }
 
-
+        //get unassigned user stories only
+        public List<ProductBacklog> GetUnassignedStory(int projectId)
+        {
+            return _context.Productbl.Where(m => m.ProjectId == projectId && m.InSprintNo == 0).ToList();
+        }
 
 
         public List<ProductBacklog> GetAll(int  id)

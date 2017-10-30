@@ -22,6 +22,7 @@ namespace AgProMa.Controllers
         [Route("api/[controller]")]
         public IActionResult Get()
         {
+            //exception handling
             try
             {
                 List<Master> list = _context.GetAllDetails();
@@ -44,6 +45,7 @@ namespace AgProMa.Controllers
 
         // GET api/values/5
         [Route("api/[controller]/{emailid}")]
+        //this method get the details of a particular user
         public IActionResult Get(string emailid)
         {
             return Ok(_context.Get(emailid));
@@ -53,6 +55,7 @@ namespace AgProMa.Controllers
         
         [HttpPost]
         [Route("api/[controller]")]
+        //this method adds a user details
         public void PostUserDetails([FromBody]Master user)
         {
             _context.Add_User(user);
@@ -61,8 +64,10 @@ namespace AgProMa.Controllers
         // PUT api/values/5
         [HttpPut("{id}")]
         [Route("api/[controller]")]
+        //this method updates the user details
         public IActionResult Put(string emailid, [FromBody]Master user)
         {
+            //exceptional handling
             try
             {
                 _context.Update(emailid, user);
@@ -73,12 +78,6 @@ namespace AgProMa.Controllers
                 return Ok("internal server error");
 
             }
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

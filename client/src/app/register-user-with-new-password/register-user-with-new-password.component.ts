@@ -1,3 +1,5 @@
+//import all the dependencies
+
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -14,7 +16,7 @@ import { RegisterUserWithNewPasswordService } from "../shared/services/register-
   styleUrls: ['./register-user-with-new-password.component.css']
 })
 export class RegisterUserWithNewPasswordComponent implements OnInit {
-
+  //inject sevices on which this component depends
   constructor(private registerUser : RegisterUserWithNewPasswordService, private route:ActivatedRoute, private router : Router ) { }
 
   userId : string;
@@ -25,22 +27,22 @@ export class RegisterUserWithNewPasswordComponent implements OnInit {
   
 
   ngOnInit() {
-    this.route.paramMap
+    this.route.paramMap                                            //finding the id from the url
     .switchMap((params:ParamMap)=>this.registerUser.getUserDetails(params.get('id')))
-    .subscribe(data =>{ this.userDetail = data.json()});
+    .subscribe(data =>{ this.userDetail = data.json()});      
   }
 
   resetPassword()
   {
-    this.userDetail.password=this.password;
+    this.userDetail.password=this.password;                
     if(this.password==this.confirmpassword){
-    this.registerUser.updatePassword(this.userDetail);
-      swal('',"Password updated successfully","success");
-      this.router.navigateByUrl('/app-signup');
+    this.registerUser.updatePassword(this.userDetail);             //updating the password by calling the update
+      swal('',"Password updated successfully","success");           //password function ofbRegisterwithnew password service 
+      this.router.navigateByUrl('/app-signup');                 //navigate to the signup page
   }
   else
     {
-      swal('',"Password does not match with confirm password","error");
+      swal('',"Password does not match with confirm password","error");  //showing message if password does not match
     }
   }
 
