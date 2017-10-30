@@ -1,5 +1,6 @@
 <div class="back">
 <div class="invite-card container col-6">
+  <!-- text shown on page -->
 <h1>Invite People</h1>
 <br />
 <h4>Invite your team to work together on this project</h4>
@@ -7,16 +8,24 @@
 <div class="card text-center" style="width: 40rem;">
   <div class="card-header">
     <div>
+      <!-- image used as logo -->
     <img class="team-image" src="../../assets/images/team.png">
     </div>
-    <h3>Member()</h3>
+    <!-- shows number of member in that group -->
+    <h3>Member({{memberDetail.length}})</h3>
   </div>
   <div class="card-block">
     <h4 class="card-title">Members can see and create everything in project</h4>
     <p class="card-text">Invite a person to this project as a member</p>
     <div class="input-group">
+      <!-- input box is used to take input -->
         <input type="text" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon2" [(ngModel)]="model.email"
-        value={{email}}>
+        value={{email}} list="channel" >
+        <datalist id="channel">
+          <!--  -->
+          <option *ngFor="let h of data" value="{{h.email}}">
+        </option>
+        </datalist>
         <span class="btn btn-success" id="basic-addon2" (click)="inviteMember()">Invite Member</span>
       </div>
   </div>
@@ -24,14 +33,15 @@
     Members already invited to this project
     <hr />
     <div>
-        <div class="chip">
+      <!-- this will show number of people that are present in that team -->
+        <div class="chip" *ngFor="let details of memberDetail">
+            <!-- this will show logo of man  -->
             <img src="../../assets/images/man.png" alt="Person" width="96" height="96">
-            John Doe
+            {{details.memberName}}
             <span class="closebtn" onclick="this.parentElement.style.display='none'" >&times;</span>
-        </div>
+        </div>     
     </div> 
-  </div>
-  
+  </div> 
 </div>
 </div>
 </div>

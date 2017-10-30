@@ -9,22 +9,27 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./invite-people.component.css']
 })
 export class InvitePeopleComponent implements OnInit {
+
+  //local variable used in this component
   private model={
     projectId:0,
     email:''
   };
+  
   constructor(private invitePeople : InvitePeopleService, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    //this is method is get the id from project screen component
      this.route.params.subscribe((param) => 
               this.model.projectId = +param['id']);
   }
 
   inviteMember()
   {
+    //this method will first check whether the user has accounnt with AgProMa
+    //if not then an email will be trigged to that user
     this.invitePeople.emailto(this.model)
                .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
-               console.log(this.model);
   }
 
 }

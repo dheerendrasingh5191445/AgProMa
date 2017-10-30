@@ -39,9 +39,9 @@ namespace ForgetPassword.service
                 {
 
                     var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress(Configuration["Title"], Configuration["FromEmail"]));
-                    message.To.Add(new MailboxAddress(email));
-                    message.Subject = Configuration["SubjectForEmailReset"];
+                    message.From.Add(new MailboxAddress(Configuration["Title"], Configuration["FromEmail"])); //Mail title and mail from(Email)
+                    message.To.Add(new MailboxAddress(email)); // Mail to(Email)
+                    message.Subject = Configuration["SubjectForEmailReset"]; //Mail's Subject
                     var bodyBuilder = new BodyBuilder();
                     //body of the mail
                     bodyBuilder.HtmlBody = "Click here to reset your password-  http://localhost:4200/app-register-user-with-new-password/" + 1;
@@ -49,6 +49,7 @@ namespace ForgetPassword.service
 
                     using (var client = new SmtpClient())
                     {
+			//details required for mail
                         client.Connect(Configuration["Domain"], 587, false);
                         client.Authenticate(Configuration["FromEmail"], Configuration["Password"]);
                         client.Send(message);
