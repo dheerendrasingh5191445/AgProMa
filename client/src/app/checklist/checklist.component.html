@@ -1,0 +1,49 @@
+<!-- start main container -->
+<div class="container">
+  <!-- list row start -->
+  <div class="row">
+    <!-- dividing column -->
+    <!--</div> -->
+    <div class=" input-group temo">
+      <div class="form row">
+        <!-- input enter checklist  -->
+        <label class="col-md-3"><h4>Checklist Name : </h4></label>
+        <div class="col-md-6">
+          <div class="row">
+            <input type="text" class="col-12 form-control" (keyup.enter)="newTodo=''" id="textsize" placeholder="ENTER CHECKLIST" name="newTodo"
+              aria-describedby="basic-addon2" [(ngModel)]="model.checklistName" value={{email}}></div>
+        </div>
+        <!-- both the buttons -->
+        <div class="col-md-3">
+          <button class="btn btn-sm snip1086" (click)="addCheckList()" type="button"><span>Add Checklist</span><i class="ion-checkmark"></i></button>
+        </div>
+      </div>
+      <!-- <span class="btn btn-outline-success" (click)="addCheckList()" id="basic-addon2">ADD CHECKLIST</span> -->
+      <!-- <span class="btn btn-outline-danger" (click)="deleteSelectedTodos()" id="basic-addon2">DELETE CHECKLIST</span> -->
+
+    </div>
+    <div [hidden]="!model">
+    </div>
+    <div class="temo1 col-md-9">
+      <h4 class="text-responsive">List Of Checklist</h4>
+      <ul>
+        <!-- ngFor starts -->
+        <li *ngFor="let item of details" class="list-group-item ">
+          <div class="material-switch pull-right">
+            <input id="someSwitchOptionSuccess{{item.checklistId}}" class="label-success" name="someSwitchOption001{{item.checklistId}}"
+              type="checkbox" (click)="markCompleted(item.status,item)" [checked]="item.status" />
+
+            <label for="someSwitchOptionSuccess{{item.checklistId}}"></label>
+            <span [ngClass]="{crossText: check==item.status}">{{item.checklistName}}</span>
+            <a href="#" class="snip1303 ion-android-close" (click)="deleteChecklist(item)"></a>
+            <!-- <button (click)="deleteChecklist(item)">DELETE</button> -->
+            <br>
+          </div>
+          <!-- ngFor ends here  -->
+        </li>
+      </ul>
+    </div>
+    <!-- list row ends here -->
+  </div>
+  <!-- end main container -->
+</div>
