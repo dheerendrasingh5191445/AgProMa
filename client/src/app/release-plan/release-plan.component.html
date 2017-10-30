@@ -1,0 +1,122 @@
+<!--this button takes you to the previous page-->
+<button (click)=navigateNewRelease() class="btn-lg newRelease"><span>Add a new release</span><i class="ion-checkmark"></i></button>
+<br>
+<hr>
+<h4 class="text-responsive">Existing Release Plans</h4>
+<br>
+<div class="row container" >  <!--main container starts-->
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col" *ngFor = "let list of release"> <!--card starts-->
+        <figure class="card snip1418">
+          <figure class="snip1584">
+            <img src="./assets/images/ReleasePlanNameBackground.jpg"/>
+            <figcaption>
+              <h4>
+                <button class="btn btn-outline-secondary btnrel" data-toggle="modal" data-target="#modalforsprint">{{list.releaseName}}</button>
+              </h4>
+            </figcaption>
+          </figure>
+          <div class="add-to-cart">
+            <i class="ion-android-add"></i>
+            <span>BURNUP CHART</span>
+          </div>
+          <figcaption>
+            <p>Status: {{list.status}}</p>
+              <div class="price">
+                <span>{{list.description}}</span>
+              </div>
+          </figcaption>
+          <div class="card">
+            <div class="card-header">
+              <strong>Release Name:</strong> {{list.releaseName}}
+            </div>
+            <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
+              <ul class="list-group">
+                <li *ngFor="let item of listTeamOne; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item.sprintId}} : {{item.sprintGoal}}</li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+      </figure>
+    </div><!--card ends-->
+  </div>
+  </div>
+
+  <!--drag n drop starts-->
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header">
+            <h4>Lists of Sprints:</h4>
+          </div>
+          <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="data">
+            <ul class="list-group">
+              <li *ngFor="let item of data; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item.sprintId}}:{{item.sprintGoal}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--drag and drop ends-->
+</div>  <!--main container ends-->
+
+<!-- Modal-->
+<div class="modal fade" id="modalforsprint" tabindex="-1" role="dialog" aria-labelledby="modalforsprintLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLabel">Details of a release</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container" *ngFor = "let details of data">
+        <form>
+          <div class="row">
+            <div class="col-3">
+              <label>
+                <h5 class="text-responsive">Release Name</h5>
+              </label>
+              </div>
+              <div class="col-9">
+                <span>{{details.releaseName}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <label>
+                  <h5 class="text-responsive">Description</h5>
+                </label>
+              </div>
+              <div class="col-9">
+                <span>{{details.description}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-3">
+                <h5>Start Date</h5>
+              </label>
+              <div class="col-9">
+                <span>{{details.startDate}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-3">
+                <h5>Release Date</h5>
+              </label>
+              <div class="col-9">
+                <span>{{details.releaseDate}}</span>
+              </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div><!--modal ends-->

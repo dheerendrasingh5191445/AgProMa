@@ -1,0 +1,47 @@
+<br>
+<!--this button takes you to the previous page-->
+<button (click)="backOnPrevious()" class="snip1099"><span>Back</span><i class="ion-android-arrow-back"></i></button>
+<br>
+<br>
+<br>
+<div class="container jumbotron main">  <!--main container starts-->
+  <br>
+  <form>  <!--form starts-->
+    <div class="row">
+      <div class="col-3">
+        <label><h5 class="text-responsive" id="relName">Release Name</h5></label>
+      </div>
+      <div class="col-9">
+        <input type="text" name="releasename" class="form-control" placeholder="Release Name" [(ngModel)]="release.releaseName">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-3">
+        <label><h5 class="text-responsive" id="description">Description</h5></label>
+      </div>
+      <div class="col-9">
+        <input name="description" [(ngModel)]="release.description" type="text" class="form-control" placeholder="Description">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <label class="col" id="startDate"><h5>Start Date</h5></label>
+      <div class="col">
+        <input name="startdate" [(ngModel)]="release.startDate" class="form-control" type="date" value="" id="example-date-input">
+      </div>
+      <label class="col" id="releaseDate"><h5>Release Date</h5></label>
+      <div class="col">
+        <input name="releaseDate" [(ngModel)]="release.releaseDate" class="form-control" type="date" value="" id="example-date-input">
+      </div>
+    </div>
+    <br>
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <!--this button is for adding a new release-->
+    <button (click)="addingNewRelease()" class="snip1099"><span>Add Release</span><i class="ion-android-arrow-forward"></i></button>
+    <br>
+  </form> <!--form ends-->
+</div>  <!--main container ends-->
