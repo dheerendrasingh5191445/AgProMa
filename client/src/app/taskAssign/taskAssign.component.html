@@ -1,0 +1,37 @@
+<h2>Assign The Tasks</h2> <!--main heading-->
+<hr>
+<div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <!--task cards starts here-->
+                <div class="team card" *ngFor="let item of AvailTask; let i = index">
+                    <div class="card-header"><!-- card header for tasks-->
+                        <i class="fa fa-users"></i>&nbsp;&nbsp;{{item.taskName}} <!--task name -->
+                    </div>
+                    <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.taskId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
+                      <app-task  *ngIf="item" [Data]="item"></app-task>  <!--bring the person assigned to a particular task-->
+                      <li></li>      <!--list to fill the tasks and members assigned-->                   
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <!--team cards starts here-->
+                <div class=" card available"> 
+                    <div class="card-header"> <!--title starts here-->
+                        <select class=" custom-select form-control" [(ngModel)]="myId" (ngModelChange) = "getTeamMember()" name="choice" id="choice"><!--select drop down-->
+                            <option value="undefined" disabled selected hidden>Select Your Choice</option><!--dropdown heading-->
+                            <option  *ngFor="let team of AvailTeam" [ngValue]="team.teamId">{{team.teamName}}</option><!--values for dropdown show the name of the team-->
+                      </select>
+                    </div>
+                    <div class="card-body"> <!--body for team card-->
+                        <ul class="list-group">
+                            <li *ngFor="let item of TeamMemberList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item"> <!--team member list-->
+                                <i class="fa fa-user icons">
+                                    </i>{{item.memberName}} </li><!--list of team members display here-->
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

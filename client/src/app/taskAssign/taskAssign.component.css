@@ -1,0 +1,65 @@
+.heading{
+        text-align: center
+        
+    }
+
+ul {
+    list-style:none;
+    }
+.list-group li{
+    color:white;
+    background-color: transparent;
+    border-color:transparent;
+}
+
+    li::before{
+        content:"\2022";
+        color:transparent
+    }
+    .card-header{
+        margin-bottom: 20px;
+    }
+    .card-text li{
+        width: 200px;
+        height: 20px;
+        margin: 5px 20px 5px 20px;
+    
+    }
+.available{
+    /* margin-left:40%; */
+    background-color: #2f2f2f6e;
+    color:white;
+    
+    text-align: center
+}
+
+.icons{
+    margin-left: 3%;
+    margin-right:3%;
+}
+.team {
+    margin-left: 1%;
+    background-color:#2f2f2f6e;
+
+}
+.card{
+    margin-top:20%;
+}
+.card:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,1); 
+}
+.card-header{
+    background-color:#2f2f2f00;
+    color:white;
+    text-align: center
+}
+.add{
+    margin-left: 1%;
+    margin-top: 10%
+}
+.modal-header{
+    background-color: darkgrey
+}
+.remove{
+    background-color: transparent;
+}
