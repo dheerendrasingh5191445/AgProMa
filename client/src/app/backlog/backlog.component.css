@@ -1,0 +1,104 @@
+
+.bklog{
+    padding-top: 30px;
+}
+
+.addbtn{
+    background-color:#5B4F4F;
+    color: #ffffff;
+    margin-left: 0PX;
+}
+
+.dark_header {
+    background: #5B4F4F;
+    padding-left: 20px;
+    margin: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 21px;
+    text-align: center;
+ }
+ fieldset.custom {
+    border: 1px solid #ddd;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 5px 10px 10px 0px;
+    background-color: #fbfbfb ;
+    border-radius: 5px;
+ }
+ .no-margin {
+    margin: 0 !important;
+ }
+ .test_q_list_item.active {
+    border: 1px solid #1BA9F9 ;
+    background: #fff;
+ }
+ .test_q_list_item {
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    background: #f9f9f9 ;
+    position: relative;
+ }
+ #test_questions_wrapper, .test_q_list_item {
+    
+    user-select: none;
+ }
+ .div_with_left_icon {
+    position: relative;
+    min-height: 50px;
+ }
+ li{
+    display: inline;
+ }
+ .container-fluid{
+    color: grey
+ }
+ .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
+ .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
+ 
+
+ .modal-header{
+    background-color: #0C0D0C ;
+    color:white;
+ 
+ }
+ .modal-body{
+    background-color: #C5BEBE;
+ }
+ #addBtn{
+ float: right;
+ border-radius: 5px;
+ size:200px;
+ }
+ #closeBtn{
+    background-color:white;
+ }
+ #addBtn:hover{
+    background-color: #787171 ;
+    color: white;
+ }
+ .div_details:hover{
+     opacity:0.5;
+ }
+.mdl{
+
+        box-shadow: rgba(0,0,0, 0.3) 20px 20px 20px;
+      
+}
+textarea{
+    height: 100px;
+    width: 450px;
+}
+body {margin:2rem;}
+
+.form-rounded {
+border-radius: 1rem;
+}
+.contentstory{
+    text-decoration: none;
+ color: black;
+}

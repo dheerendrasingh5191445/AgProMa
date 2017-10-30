@@ -1,0 +1,149 @@
+
+<div class=" bklog col-6">
+  <h1 class="dark_header margin-bottom-15">
+      <strong>Product Backlog </strong>
+    </h1>
+
+      
+
+      <div class="card-text"  dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="data">
+          <div class="test_q_list_item" *ngFor="let item of data;let i = index">
+            <!-- <div class="card-header">
+              Available Members
+            </div> -->
+          
+           
+            <a class="contentstory" data-toggle="modal" href=#mymodal{{i}} >  <div class="div_details ">
+                <button class="priority btn  btn-circle">{{item.priority}}</button>
+            
+           <span   style="text-align: justify;"dnd-sortable [sortableIndex]="i">{{item.storyName}}</span>
+              
+            
+            </div>
+          </a>
+
+
+
+            <div class="modal fade mdl" id="mymodal{{i}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+   
+                  </div>
+                  <div class="modal-body">
+   
+   
+                    <form >
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="text-input">User Story</label>
+                            <div class="col-md-10">
+                                <textarea  class="form-control form-rounded" type="text-area" placeholder="Write" #story>{{item.storyName}}</textarea>                           
+                            
+                          </div>
+                   
+                            <label class="col-md-3 col-form-label" for="text-input">Remarks</label>
+                            <div class="col-md-10">
+                            <textarea  class="form-control form-rounded" type="text-area" rows="3"  placeholder="Write" #cmnt>{{item.comments}}</textarea>                           
+                        
+                            
+
+                            <label class="col-md-3 col-form-label" for="text-input">Priority</label>
+                            <div class="col-md-10">
+                            <textarea  class="form-control" style="width: 55px; height: 40px"  #prt>{{item.priority}}</textarea>                 
+                         
+                    </div>
+
+                    </div></div>
+
+                      <button style=" background:#5B4F4F" type="submit" value="sub" name="sub" class="btn rjt" (click)="updateBacklog(story.value,cmnt.value,prt.value,item)" data-dismiss="modal"
+                        target=_blank>Update</button>
+
+                      <button style=" background:#5B4F4F" type="submit" value="sub" name="sub" class="btn rjt" (click)="deleteBacklog(item)" data-dismiss="modal"
+                      target=_blank>Delete</button>
+                    </form>
+                  </div>
+              </div>
+              </div>
+     
+         
+
+
+          </div>
+          
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+   <button class="btn addbtn" data-toggle="modal" data-target="#myModal" type="submit">Add</button>
+    <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+     
+                    </div>
+                    <div class="modal-body">
+     
+     
+                      <form >
+                          <div class="form-group row">
+                              <label class="col-md-3 col-form-label" for="text-input">User Story</label>
+                              <div class="col-md-10">
+                                  <textarea  class="form-control form-rounded" type="text-area" placeholder="Write" #story></textarea>                           
+                              
+                            </div>
+                     
+                              <label class="col-md-3 col-form-label" for="text-input">Remarks</label>
+                              <div class="col-md-10">
+                              <textarea  class="form-control form-rounded" type="text-area" rows="3"  placeholder="Write" #cmnt> </textarea>                           
+                           
+                      </div>
+
+    
+                    </div>
+                    
+                             <label class="col-md-3 col-form-label" for="text-input">Priority</label>
+                             <div class="col-md-10">
+                             <textarea  class="form-control" style="width: 55px; height: 40px"  #prt>{{length+1}}</textarea>                 
+                          
+                     </div>
+
+                        <button style=" background:#5B4F4F" type="submit" value="sub" name="sub" class="btn rjt" (click)="addBacklog(story.value,cmnt.value,prt.value)" data-dismiss="modal"
+                          target=_blank>Add</button>
+                      </form>
+                    </div>
+                </div>
+                </div>
+       
+           
+
+
+            </div>
+            
+          </div>
+        </div>
+
+ 
+  
