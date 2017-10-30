@@ -12,7 +12,7 @@ namespace MyNeo4j.Service
         List<SprintBacklog> GetAll(int projectId);
         SprintBacklog Get(int sprintId);
         void Add(SprintBacklog sprint);
-        void Update(int sprintId,SprintBacklog sprint);
+        void Update(int sprintId,ProductBacklog sprint);
         void Delete(int sprintId);
     }
     public class SprintService : ISprintService
@@ -42,7 +42,7 @@ namespace MyNeo4j.Service
             return _repository.GetAll(projectId);
         }
         
-        public void Update(int sprintId, SprintBacklog sprint)
+        public void Update(int sprintId, ProductBacklog sprint)
         {
             _repository.Update(sprintId, sprint);
         }

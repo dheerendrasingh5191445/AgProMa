@@ -22,7 +22,7 @@ namespace MyNeo4j.Controllers
         // GET: api/backlog
         [HttpGet]
         [Route("{id}")]
-        public IEnumerable<ProductBacklog> Get( int  id)
+        public IEnumerable<ProductBacklog> Get(int id)
         {
             List<ProductBacklog> data = _service.GetAll(id);
                 return data;

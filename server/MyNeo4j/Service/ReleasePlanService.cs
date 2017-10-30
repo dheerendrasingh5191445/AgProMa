@@ -9,7 +9,7 @@ namespace MyNeo4j.Service
 {
     public interface IReleasePlanService    //Interface
     {
-        List<ReleasePlanMaster> GetAllReleasePlan();
+        List<ReleasePlanMaster> GetAllReleasePlan(int id);
         void AddRelease(ReleasePlanMaster releasePlan);
         List<SprintBacklog> GetAllSprints(int id);
     }
@@ -30,9 +30,18 @@ namespace MyNeo4j.Service
         }
 
         //Method for getting a list of all release
-        public List<ReleasePlanMaster> GetAllReleasePlan()
+        public List<ReleasePlanMaster> GetAllReleasePlan(int id)
         {
-            return _releasePlanRepo.GetAllRelease();
+            List<ReleasePlanMaster> release = new List<ReleasePlanMaster>();
+            List<ReleasePlanMaster> allRelease = _releasePlanRepo.GetAllRelease();
+            foreach(ReleasePlanMaster rem in allRelease)
+            {
+                if(rem.ProjectId  == id)
+                {
+                    release.Add(rem);
+                }
+            }
+            return release;
         }
 
         //Method for getting the list of all sprints

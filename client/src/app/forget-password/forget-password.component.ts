@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 
-import { ForgetServiceService } from "../Shared/Services/forget-service.service";
+import { ForgetServiceService } from "../shared/services/forget-service.service";
 
 
 @Component({

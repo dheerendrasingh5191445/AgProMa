@@ -26,8 +26,8 @@ export class ChecklistService {
         completionStatus(id,checklist){
           console.log("hhhhhhhhhhhhhhhhhhhhhhhhh",id,checklist)
           return this.http
-          .put(this.checkListUrl+'/'+id,checklist,{headers: this.headers})
-          .map((Response)=>Response.json())
+          .put(this.checkListUrl+id,checklist,{headers: this.headers})
+          .map((Response)=>Response)
           .catch((error:any)=>{
             return Observable.throw(error);
           });
@@ -35,7 +35,7 @@ export class ChecklistService {
         deleteChecklists(checklistId){
           return this.http
           .delete(this.checkListUrl+checklistId,{headers:this.headers})
-          .map((Response)=>Response.json())
+          .map((Response)=>Response)
           .catch((error:any)=>{
         return Observable.throw(error);
       });

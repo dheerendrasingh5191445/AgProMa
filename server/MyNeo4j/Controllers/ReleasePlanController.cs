@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace MyNeo4j.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/ReleasePlan")]
     public class ReleasePlanController : Controller
     {
         IReleasePlanService _releasePlanService;
@@ -18,15 +19,15 @@ namespace MyNeo4j.Controllers
         }
 
         // GET api/Release
-        [HttpGet]
-        public IActionResult GetRelease()
+        [HttpGet("GetRelease/{id}")]
+        public List<ReleasePlanMaster> GetRelease(int id)
         {
-            List<ReleasePlanMaster> data = _releasePlanService.GetAllReleasePlan();
-            return Ok(data);
+            List<ReleasePlanMaster> data = _releasePlanService.GetAllReleasePlan(id);
+            return data;
         }
         //GET api/Sprint
-        [HttpGet("{id}")]
-        public IEnumerable<SprintBacklog> GetSprint(int id)
+        [HttpGet("GetSprint/{id}")]
+        public List<SprintBacklog> GetSprint(int id)
         {
             List<SprintBacklog> data = _releasePlanService.GetAllSprints(id);
             return data;

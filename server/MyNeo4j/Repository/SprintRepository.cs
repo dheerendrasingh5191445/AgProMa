@@ -12,7 +12,7 @@ namespace MyNeo4j.Repository
         List<SprintBacklog> GetAll(int projectId);
         SprintBacklog Get(int sprintId);
         void Add(SprintBacklog sprint);
-        void Update(int sprintId, SprintBacklog sprint);
+        void Update(int sprintId, ProductBacklog sprint);
         void Delete(int sprintId);
     }
 
@@ -52,13 +52,10 @@ namespace MyNeo4j.Repository
         }
         
         //updates sprint details of the specific sprint.
-        public void Update(int sprintId, SprintBacklog sprint)
+        public void Update(int sprintId, ProductBacklog sprint)
         {
-            SprintBacklog sprints = _context.Sprintbl.FirstOrDefault(m => m.SprintId == sprintId);
-            sprints.SprintName = sprint.SprintName;
-            sprints.StartDate = sprint.StartDate;
-            sprints.Status = sprint.Status;
-            sprints.TotalDays = sprint.TotalDays;
+            ProductBacklog sprints = _context.Productbl.FirstOrDefault(m => m.StoryId == sprint.StoryId);
+            sprints.InSprintNo = sprintId;
             _context.SaveChanges();
         }
     }

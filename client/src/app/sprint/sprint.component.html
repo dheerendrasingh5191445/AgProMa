@@ -3,21 +3,22 @@
 
     <!-- Fixed container -->
     <div class="sprint col-lg-7 col-sm-7 col-md-7 rounded">
-      <div id="header_sprint row">
+      <h1 id="header_sprint">
         <strong>Sprints</strong>
-      </div>
+      </h1>
       <hr>
 
       <!-- Sprints already present  -->
       <!-- <div class="backlog_items container"*ngFor="let sprint of listTeamTwo" > -->
-      <div class="sprints card" *ngFor="let item of listTeamOne; let i = index">
+      <div class="sprints card" *ngFor="let sprint of sprints; let i = index">
         <div class="card-header">
-          <!-- {{item.sprintName}} -->
-          <p>Hello</p>
+          {{sprint.sprintName}}
         </div>
-        <div class=" team card" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
-          <div class="card-text">
-            <li dnd-sortable [sortableIndex]="i">{{item}}</li>
+        <div dnd-droppable (onDropSuccess)="updateSprint($event,sprint.sprintId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
+          <div class="story" *ngFor="let story of backlogs">
+            <div class="card-text" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
+              <li >{{story.storyName}}</li>
+            </div>
           </div>
         </div>
       </div>
@@ -41,21 +42,17 @@
     </div>
 
     <!-- Fixed container -->
-    <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamTwo">
-      <div id="header_backlog_items row">
+    <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="backlogs">
+      <h1 id="header_backlog_items">
         <strong>Unassigned Backlog Items</strong>
-      </div>
+      </h1>
       <hr>
 
       <!-- Backlog Items that are not assigned -->
-
-      <!-- <div class="backlog_items container" *ngFor="let backlog of backlogs">
-        <p>{{backlog.storyName}}</p>
-      </div> -->
       <div class="">
-        <div class=" team card" *ngFor="let item of listTeamTwo; let i = index">
+        <li *ngFor="let story of unAssignedBacklogs; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item">
           <div class="card-text">
-            <p dnd-sortable [sortableIndex]="i">{{item}}</p>
+            <p>{{story.storyName}}</p>
           </div>
         </div>
       </div>
@@ -63,49 +60,49 @@
     </div>
   </div>
 
-  <!-- Modal Form -->
-  <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Sprint Details</h4>
-        </div>
-        <div class="modal-body container">
-          <form class="form-group">
-            <div class="row">
-              <div class="col-3">
-                <label class="text-responsive"><strong>Sprint ID</strong></label>
-              </div>
-              <div class="col-9">
-                <input type="text" id="text-input" name="sprintname" class="form-control" [(ngModel)]="newsprint.sprintName" placeholder="Enter Sprint Name">
-              </div>
+<!-- Modal Form -->
+<div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Sprint Details</h4>
+      </div>
+      <div class="modal-body container">
+        <form class="form-group">
+          <div class="row">
+            <div class="col-3">
+              <label class="text-responsive"><strong>Sprint ID</strong></label>
             </div>
-            <br>
-            <div class="row">
-              <div class="col-3">
-                <label class="text-responsive"><strong>Sprint Description</strong></label>
-              </div>
-              <div class="col-9">
-                <textarea type="text" cols="30" rows="10" name="sprintgoal" class="form-control" [(ngModel)]="newsprint.sprintGoal" placeholder="Description"></textarea>
-              </div>
+            <div class="col-9">
+              <input type="text" id="text-input" name="sprintname" class="form-control" [(ngModel)]="newsprint.sprintName" placeholder="Enter Sprint Name">
             </div>
-            <br>
-            <hr>
-            <div class="row">
-              <label class="datelabel col"><strong>Start Date</strong></label>
-              <div class="date col">
-                <input class="form-control" type="date" id="example-date-input" name="startdate" [(ngModel)]="newsprint.startDate">
-              </div>
-              <label class="datelabel col"><strong>No. of Days</strong></label>
-              <div class="date col">
-                <input type="text" id="text-input" name="text-input" name="sprintname" class="form-control" [(ngModel)]="newsprint.totalDays">
-              </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-3">
+              <label class="text-responsive"><strong>Sprint Description</strong></label>
             </div>
-            <div class="modal_btns">
-              <button class="btn btn-primary" type="submit" (click)="onSaveSprint()" data-dismiss="modal" target="blank">Submit</button>
-              <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="col-9">
+              <textarea type="text" cols="30" rows="10" name="sprintgoal" class="form-control" [(ngModel)]="newsprint.sprintGoal" placeholder="Description"></textarea>
             </div>
-          </form>
-        </div>
+          </div>
+          <br>
+          <hr>
+          <div class="row">
+            <label class="datelabel col"><strong>Start Date</strong></label>
+            <div class="date col">
+              <input class="form-control" type="date" id="example-date-input" name="startdate" [(ngModel)]="newsprint.startDate">
+            </div>
+            <label class="datelabel col"><strong>No. of Days</strong></label>
+            <div class="date col">
+              <input type="text" id="text-input" name="text-input" name="sprintname" class="form-control" [(ngModel)]="newsprint.totalDays">
+            </div>
+          </div>
+          <div class="modal_btns">
+            <button class="btn btn-primary" type="submit" (click)="onSaveSprint()" data-dismiss="modal" target="blank">Submit</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>

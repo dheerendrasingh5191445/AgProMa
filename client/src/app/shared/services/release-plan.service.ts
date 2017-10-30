@@ -20,12 +20,14 @@ export class ReleasePlanService {
 
   //this method shows the list of all release
   getAllRelease() {
-    return this.http.get("http://localhost:52258/api/ReleasePlan",this.options).map(response => response.json());
+    return this.http.get("http://localhost:52258/api/ReleasePlan/GetRelease/"+1)
+                    .map(response => response.json());
   }
 
   //this method shows the list of all sprints
   getAllSprints() {
-    return this.http.get("http://localhost:52258/api/ReleasePlan/1",this.options).map(response => response.json());
+    return this.http.get("http://localhost:52258/api/ReleasePlan/GetSprint/"+1)
+                    .map(response => response.json());
   }
 
   //this method is for error handling

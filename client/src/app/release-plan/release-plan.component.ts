@@ -9,17 +9,6 @@ import { ReleasePlanService } from "../shared/services/release-plan.service";
 })
 export class ReleasePlanComponent implements OnInit {
 
-  // //dummy list of sprints
-  // listBoxers: Array<string> = [
-  //                               'Sprint 1 .............',
-  //                               'Sprint 2..............',
-  //                               'Sprint 3..............',
-  //                               'Sprint 4..............',
-  //                               'Sprint 5..............',
-  //                               'Sprint 6..............',
-  //                               'Sprint 7..............',
-  //                               'Sprint 8...............'                               
-  //                              ];
   listTeamOne: Array<string> = [];
 
   constructor(private router:Router, private releasePlanService: ReleasePlanService) { }
@@ -43,7 +32,7 @@ export class ReleasePlanComponent implements OnInit {
 
   //this method is to go back on previous page
   navigateNewRelease(){
-    this.router.navigateByUrl('/app-dashboard/new-release-filling-details')
+    this.router.navigateByUrl('/app-dashboard/newreleasedetail/1')
   }
 
 }

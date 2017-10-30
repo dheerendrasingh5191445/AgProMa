@@ -27,7 +27,7 @@ namespace MyNeo4j.Controllers
         {
             return _service.GetAll(id);
         }
-        
+
         // POST api/values
         //it will add a new sprint.
         [HttpPost]
@@ -39,9 +39,9 @@ namespace MyNeo4j.Controllers
         // PUT api/values/5
         //it will update the current sprint details.
         [HttpPut("{id}")]
-        public void Put(int sprintId, [FromBody]SprintBacklog sprint)
+        public void Put(int sprintId,[FromBody] ProductBacklog sprint)
         {
-            _service.Update(sprintId, sprint);
+            _service.Update(sprintId,sprint);
         }
 
         // DELETE api/values/5

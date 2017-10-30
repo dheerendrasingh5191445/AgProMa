@@ -25,17 +25,23 @@
 <!-- <app-sidebar></app-sidebar> -->
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
 	<ul class="list-group">
-		<div routerLink="/dashboard/{{session}}" [routerLinkActive]="['router-link-active']" class="list-group-item">
+		<div routerLink="/app-dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
 			<i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' }}
 		</div>
-		<div routerLink="/dashboard/globaluser" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Requests' }}
+		<div routerLink="/app-dashboard/epic/1" class="list-group-item">
+			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Epics' }}
 		</div>
-		<div routerLink="/dashboard/myprofile" class="list-group-item">
-			<i class="fa fa-fw fa-user"></i>&nbsp;{{ 'Profile' }}
+		<div routerLink="/app-dashboard/backlog/1" class="list-group-item">
+			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Product Backlog' }}
 		</div>
-		<div routerLink="/dashboard/assetaccepted" class="list-group-item">
-			<i class="fa fa-fw fa-user"></i>&nbsp;{{ 'Accepted Assets' }}
+		<div routerLink="/app-dashboard/releaseplan/1" class="list-group-item">
+			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'ReleasePlan' }}
+		</div>
+		<div routerLink="/app-dashboard/app-sprint" class="list-group-item">
+			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Sprint Backlog' }}
+		</div>
+		<div routerLink="/app-dashboard/app-checklist/:id" class="list-group-item">
+			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Checklist ' }}
 		</div>
 	</ul>
 	<!-- end side bar -->

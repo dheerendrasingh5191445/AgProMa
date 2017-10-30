@@ -15,7 +15,10 @@ export class SprintService {
     return this.http.get(this.sprint_url + projectId)
       .map((response) => response.json());
   }
-
+  //update the sprint in database
+  updateSprint(storyData,Id){
+    return this.http.put(this.sprint_url+Id,storyData, { headers: this.headers });
+  }
   //it will add new sprint.
   onSave(sprint: any) {
     return this.http.post(this.sprint_url, sprint, { headers: this.headers });

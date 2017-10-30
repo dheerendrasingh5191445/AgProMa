@@ -13,6 +13,13 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { RegisterUserWithNewPasswordComponent } from './register-user-with-new-password/register-user-with-new-password.component';
 import { InvitePeopleComponent } from "./invite-people/invite-people.component";
 import { TeamsComponent } from './teams/teams.component';
+import { EpicComponent} from './epic/epic.component';
+import { BacklogComponent} from './backlog/backlog.component';
+import { ReleasePlanComponent } from './release-plan/release-plan.component';
+import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
+import { SprintComponent } from './sprint/sprint.component';
+import { ChecklistComponent } from './checklist/checklist.component';
+
 
 // paths to all the respective pages
 const routes: Routes = [
@@ -28,7 +35,13 @@ const routes: Routes = [
     { path:'app-invite-people/:id', component: InvitePeopleComponent},
     { path: 'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},
-    { path:'app-teams/:id', component: TeamsComponent }
+    { path:'app-teams/:id', component: TeamsComponent },
+    { path:'epic/:id',component:EpicComponent},
+    { path:'backlog/:id',component:BacklogComponent},
+    { path:'releaseplan/:id',component:ReleasePlanComponent},
+    { path:'newreleasedetail/:id',component:NewReleaseFillingDetailsComponent},
+    { path:'app-sprint',component:SprintComponent},
+    { path:'app-checklist/:id',component:ChecklistComponent}
     ]}
 ]
 @NgModule({

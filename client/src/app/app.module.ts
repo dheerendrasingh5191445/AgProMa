@@ -3,13 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SocialLoginModule } from "angular4-social-login";
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule }from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
-import {ShowHidePasswordModule} from 'ngx-show-hide-password';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 //component declaration
 import { SignupComponent } from './signup/signup.component';
@@ -22,7 +22,13 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { RegisterUserWithNewPasswordComponent } from './register-user-with-new-password/register-user-with-new-password.component';
 import { InvitePeopleComponent } from './invite-people/invite-people.component';
 import { TeammemberComponent } from './teams/teammember/teammember.component';
-import { TeamsComponent} from './teams/teams.component';
+import { TeamsComponent } from './teams/teams.component';
+import { EpicComponent } from './epic/epic.component';
+import { BacklogComponent } from './backlog/backlog.component';
+import { ReleasePlanComponent } from './release-plan/release-plan.component';
+import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
+import { SprintComponent } from './sprint/sprint.component';
+import { ChecklistComponent } from './checklist/checklist.component';
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -33,9 +39,13 @@ import { AuthService } from "angular4-social-login";
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import { ProjectScreenService } from './project-screen/project-screen.service';
 import { TeamsService } from './shared/services/teams.service';
+import { EpicService } from './shared/services/epic.service';
+import { BacklogService } from './shared/services/backlog.service';
+import { ReleasePlanService } from './shared/services/release-plan.service';
+import { SprintService} from './shared/services/sprint.service';
+import { ChecklistService } from './shared/services/checklist.service';
 
-
-//
+//configuration for social  login 
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -53,6 +63,8 @@ export function provideConfig() {
 
 @NgModule({
   declarations: [
+    ChecklistComponent,
+    EpicComponent,
     AppComponent,
     SignupComponent,
     RegisterComponent,
@@ -64,7 +76,11 @@ export function provideConfig() {
     RegisterUserWithNewPasswordComponent,
     InvitePeopleComponent,
     TeammemberComponent,
-    TeamsComponent
+    TeamsComponent,
+    BacklogComponent,
+    ReleasePlanComponent,
+    NewReleaseFillingDetailsComponent,
+    SprintComponent
   ],
   imports: [
     DndModule.forRoot(),
@@ -76,12 +92,17 @@ export function provideConfig() {
     ShowHidePasswordModule.forRoot()
   ],
   providers: [
+    ChecklistService,
+    ReleasePlanService,
+    BacklogService,
     ProjectScreenService,
     AuthService,
     ForgetServiceService,
     InvitePeopleService,
     RegisterUserWithNewPasswordService,
     LoginService,
+    EpicService,
+    SprintService,
     TeamsService,
     {
       provide: AuthServiceConfig,

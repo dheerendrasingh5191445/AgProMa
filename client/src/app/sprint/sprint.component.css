@@ -3,49 +3,51 @@
     margin-right: 1em;
     height: 100%;
 }
-
 .backlogItmes {
     background-color: #DBDBDB;
     height: 100%;
 }
-
-.header_sprint {
+#header_sprint {
+    background: #5B4F4F;
+    padding-left: 20px;
+    margin: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 21px;
     text-align: center;
 }
-
 #header_backlog_items {
+    background: #5B4F4F;
+    padding-left: 20px;
+    margin: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 21px;
     text-align: center;
 }
-
 .text-content {
     text-align: justify;
 }
-
 #btn_sprint {
     position: relative; 
     margin-bottom: 0rem;
 }
-
 .sprint1 {
     border-block-end: #6D7FE6;
 }
-
 .card-text {
     padding: 5px;
 }
-
-
-
 @media screen and (max-width: 575px) {
     .sprint {
         margin-right: 0em;
     }
 }
-
 textarea {
     height: 6em;
 }
-
 ul {
     
     list-style:none
@@ -62,10 +64,6 @@ ul {
         height: 20px;
         margin: 5px 20px 5px 20px;
     }
-
-
-
-
 .dark_header {
     background: #666;
     margin: 0px;
@@ -113,7 +111,6 @@ ul {
   .container-fluid{
     color: grey
   }
-
   #myModal{
     
     margin: auto;

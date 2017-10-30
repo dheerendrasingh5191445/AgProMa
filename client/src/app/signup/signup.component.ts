@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import swal from 'sweetalert2';
 
-import{LoginService}from '../Shared/Services/login.service'
+import{LoginService}from '../shared/services/login.service'
 
 
 @Component({

@@ -51,7 +51,18 @@ namespace MyNeo4j
             services.AddScoped<IProjectMemberRepository, ProjectMemberRepository>();
             services.AddScoped<ITeamRepo, TeamRepo>();
             services.AddScoped<ITeamService, TeamService>();
-
+            services.AddScoped<IEpicServices, EpicService>();
+            services.AddScoped<IEpicRepository, EpicRepository>();
+            services.AddScoped<IBacklogServices, BacklogService>();
+            services.AddScoped<IBacklogRepository, BacklogRepository>();
+            services.AddScoped<IReleasePlanRepo,ReleasePlanRepo>();
+            services.AddScoped<IReleasePlanService,ReleasePlanService>();
+            services.AddScoped<ISprintRepository, SprintRepository>();
+            services.AddScoped<ISprintService, SprintService>();
+            services.AddScoped<ICheckListRepository, ChecklistRepository>();
+            services.AddScoped<ICheckListService, ChecklistService>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITaskServices, TaskService>();
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(
