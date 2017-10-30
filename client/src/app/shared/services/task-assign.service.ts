@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http , Response , Headers }  from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { Members } from "../Models/members";
+import { Members } from "./../model/members";
 
 @Injectable()
 export class TaskAssignService {

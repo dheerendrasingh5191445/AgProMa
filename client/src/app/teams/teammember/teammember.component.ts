@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import{ Members } from '../../model/members';
-import{ TeamMaster } from '../../model/teamMaster';
+import{ Members } from './../../shared/model/members';
+import{ TeamMaster } from './../../shared/model/teamMaster';
 import { TeamsService } from "../../shared/services/teams.service";
 
 @Component({

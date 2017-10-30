@@ -3,8 +3,8 @@ import { Http,Headers,Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { TeamMaster } from "../../model/teamMaster";
-import { Members } from "../../model/members";
+import { TeamMaster } from "./../model/teamMaster";
+import { Members } from "./../model/members";
 
 @Injectable()
 export class TeamsService{

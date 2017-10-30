@@ -20,7 +20,6 @@ export class FillDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((param) => { this.condition = param.id;
                                              this.token = this.condition.endsWith("a")});
-                                             this.updateId = 
   }
 
   //this method is used to add new project

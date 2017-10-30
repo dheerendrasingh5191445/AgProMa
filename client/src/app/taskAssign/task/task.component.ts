@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { TaskBackLog } from "../../shared/Models/TaskBacklog";
+import { TaskBackLog } from "../../shared/model/TaskBacklog";
 import { TaskAssignService } from "../../shared/Services/task-assign.service";
 
 @Component({

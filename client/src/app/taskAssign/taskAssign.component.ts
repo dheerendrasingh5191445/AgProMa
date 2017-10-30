@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { TaskAssignService } from "../shared/Services/task-assign.service";
-import { TaskBackLog } from "../shared/Models/TaskBacklog";
-import { TeamMaster } from "../shared/Models/teamMaster";
+import { TaskBackLog } from "../shared/model/TaskBacklog";
+import { TeamMaster } from "../shared/model/teamMaster";
 import { ActivatedRoute } from "@angular/router";
-import { Members } from "../shared/Models/members";
+import { Members } from "../shared/model/members";
 
 @Component({
     selector: 'multi',

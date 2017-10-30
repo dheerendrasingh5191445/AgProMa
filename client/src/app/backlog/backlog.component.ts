@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BacklogService } from '../shared/services/backlog.service';
 import { ProductBacklog} from '../shared/model/productBacklog';
-import { OrderModule } from 'ngx-order-pipe';
 import swal from 'sweetalert2';
 
 @Component({
