@@ -20,12 +20,20 @@ namespace MyNeo4j.Controllers
 
         }
         // GET: api/backlog
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id}")]
         public IEnumerable<ProductBacklog> Get( int  id)
         {
             List<ProductBacklog> data = _service.GetAll(id);
                 return data;
            
+        }
+
+        [HttpGet]
+        [Route("GetUnassignedStory/{id}")]
+        public List<ProductBacklog> GetUnassignedStory(int id)
+        {
+            return _service.GetUnassignedStory(id);
         }
 
         // GET: api/Master/5
