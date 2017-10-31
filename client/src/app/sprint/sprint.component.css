@@ -7,6 +7,9 @@
     background-color: #DBDBDB;
     height: 100%;
 }
+p {
+  text-align: justify;
+}
 #header_sprint {
     background: #5B4F4F;
     padding-left: 20px;
@@ -16,6 +19,12 @@
     color: #fff;
     font-size: 21px;
     text-align: center;
+}
+.date {
+  float: right;
+}
+.story_name {
+  margin-bottom: 10px;
 }
 #header_backlog_items {
     background: #5B4F4F;
@@ -27,18 +36,13 @@
     font-size: 21px;
     text-align: center;
 }
-.text-content {
-    text-align: justify;
-}
 #btn_sprint {
     position: relative; 
     margin-bottom: 0rem;
 }
-.sprint1 {
-    border-block-end: #6D7FE6;
-}
 .card-text {
-    padding: 5px;
+    text-align: justify;
+    margin-bottom: 10px;
 }
 @media screen and (max-width: 575px) {
     .sprint {

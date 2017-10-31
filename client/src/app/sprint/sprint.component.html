@@ -1,56 +1,42 @@
-<div class="container">
+<div class="container" ng-controller="dateCtrl">
   <div class="row">
-
-    <!-- Fixed container -->
+    <!-- Sprint container -->
     <div class="sprint col-lg-7 col-sm-7 col-md-7 rounded">
       <h1 id="header_sprint">
         <strong>Sprints</strong>
       </h1>
       <hr>
-
       <!-- Sprints already present  -->
-      <!-- <div class="backlog_items container"*ngFor="let sprint of listTeamTwo" > -->
-      <div class="sprints card" *ngFor="let sprint of sprints; let i = index">
+      <div class="sprints card" *ngFor= " let sprint of sprints">
         <div class="card-header">
           {{sprint.sprintName}}
+          <p class="date">{{sprint.startDate | date: "dd.MM.y"}}</p>
         </div>
         <div dnd-droppable (onDropSuccess)="updateSprint($event,sprint.sprintId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
           <div class="story" *ngFor="let story of backlogs">
-            <div class="card-text" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
-              <li >{{story.storyName}}</li>
+            <div class="card-text" id="story_name" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
+              <p>{{story.storyName}}</p>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- <div class="" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
-          <div class=" team card" *ngFor="let item of sprints; let i = index">
-            <div class="card-text">
-              <p dnd-sortable [sortableIndex]="i">{{item.sprintGoal}}</p>
-            </div>
-          </div>
-        </div> -->
       <hr>
       <!-- Add Sprint Button -->
       <div id="btn_sprint">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Sprint</button>
       </div>
-
-      <!-- it will show a form for the new sprint -->
-
-
+      <!-- End of Add Button -->
     </div>
-
-    <!-- Fixed container -->
+    <!-- End of Sprint Container -->
+    <!-- Unassigned Backlogs -->
     <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="backlogs">
       <h1 id="header_backlog_items">
         <strong>Unassigned Backlog Items</strong>
       </h1>
       <hr>
-
-      <!-- Backlog Items that are not assigned -->
-      <div class="">
-        <li *ngFor="let story of unAssignedBacklogs; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item">
+      <!-- Backlogs that are not assigned -->
+      <div class="unassigned_backlogs">
+        <div *ngFor="let story of unAssignedBacklogs; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item">
           <div class="card-text">
             <p>{{story.storyName}}</p>
           </div>
@@ -58,8 +44,9 @@
       </div>
       <hr>
     </div>
+    <!-- End of Unassigned Backlogs -->
   </div>
-
+</div>
 <!-- Modal Form -->
 <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -106,3 +93,4 @@
       </div>
     </div>
   </div>
+</div>
