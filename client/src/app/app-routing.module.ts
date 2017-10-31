@@ -32,7 +32,7 @@ const routes: Routes = [
     { path: 'app-dashboard', component: DashboardComponent,
     children:[
     { path:'',redirectTo:'project-screen', pathMatch:'full'},
-    { path: 'project-screen', component:ProjectScreenComponent},
+    { path:'project-screen', component:ProjectScreenComponent},
     { path:'app-invite-people/:id', component: InvitePeopleComponent},
     { path:'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},

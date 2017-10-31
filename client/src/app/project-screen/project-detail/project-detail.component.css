@@ -93,7 +93,7 @@
   left: 0;
   background: rgba(0, 0, 0, 0.5);
 }
-.lnr-trash,.lnr-pencil,.lnr-plus-circle{
+.lnr-trash,.lnr-pencil,.lnr-plus-circle,.lnr-users{
   float: right;
   margin-left: 10px;
 }
