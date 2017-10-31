@@ -43,5 +43,13 @@ namespace ForgetPassword.Controllers
             }
         }
 
+        //this method is to fetch the data
+       [HttpGet]
+       [Route("api/InviteMembers/{id}")]
+       public List<AvailableMember> GetMemberName(int id)
+        {
+            return _service.GetMemberName(id);
+        }
+
     }
 }

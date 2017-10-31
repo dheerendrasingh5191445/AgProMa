@@ -15,17 +15,19 @@ namespace MyNeo4j.Service
     public interface IinviteMembersService
     {
         void EmailForInvitation(InvitePeople people);
+        List<AvailableMember> GetMemberName(int id);
     }
 
     public class InviteMembersService : IinviteMembersService
     {
-       
 
-        public InviteMembersService()
-        {
+        public IInviteRepository _repository;
+        public InviteMembersService(IInviteRepository repository)
+        { 
             var builder = new ConfigurationBuilder() //config file for the email method
            .AddJsonFile("config.json", optional: false, reloadOnChange: true);
             Configuration = builder.Build();// config file for email id
+            _repository = repository;
         }
         public IConfigurationRoot Configuration { get; }
 
@@ -50,9 +52,26 @@ namespace MyNeo4j.Service
                         client.Authenticate(Configuration["FromEmail"], Configuration["Password"]);
                         client.Send(message);
                         client.Disconnect(true);
-                    }
-                 
-            
+                    }          
+        }
+
+        public List<AvailableMember> GetMemberName(int id)
+        {
+            List<AvailableMember> myMember = new List<AvailableMember>();
+            List<ProjectMember> member = _repository.GetMemberName();
+            foreach (ProjectMember pm in member)
+            {
+                if (pm.ProjectId == id)
+                {
+                    Master master = _repository.AllData(pm.MemberId);
+                    AvailableMember am = new AvailableMember();
+                    am.MemberId = master.Id;
+                    am.MemberName = master.FirstName + " " + master.LastName;
+                    myMember.Add(am);
+                }
+            }
+
+            return myMember;
         }
     }
 }

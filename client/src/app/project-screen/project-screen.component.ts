@@ -19,7 +19,6 @@ export class ProjectScreenComponent implements OnInit {
   ngOnInit() {
     //this is to fetch the list of project of particular employee
       var session = sessionStorage.getItem("id");
-      console.log(session);
       this.userId = parseInt(session);
       this.projectscrservice.getAllProjectOfEmployee(this.userId)
                             .subscribe(data =>{this.projects = data.json();console.log(this.projects)});

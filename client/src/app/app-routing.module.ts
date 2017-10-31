@@ -19,7 +19,8 @@ import { ReleasePlanComponent } from './release-plan/release-plan.component';
 import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
-
+import { TaskAddComponent } from './taskadd/taskadd.component';
+import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 
 // paths to all the respective pages
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
     { path:'',redirectTo:'project-screen', pathMatch:'full'},
     { path: 'project-screen', component:ProjectScreenComponent},
     { path:'app-invite-people/:id', component: InvitePeopleComponent},
-    { path: 'project-detail', component:ProjectDetailComponent },
+    { path:'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},
     { path:'app-teams/:id', component: TeamsComponent },
     { path:'epic/:id',component:EpicComponent},
@@ -41,7 +42,9 @@ const routes: Routes = [
     { path:'releaseplan/:id',component:ReleasePlanComponent},
     { path:'newreleasedetail/:id',component:NewReleaseFillingDetailsComponent},
     { path:'app-sprint',component:SprintComponent},
-    { path:'app-checklist/:id',component:ChecklistComponent}
+    { path:'app-checklist/:id',component:ChecklistComponent},
+    { path:'taskadd/:id',component:TaskAddComponent},
+    { path:'taskassign/:id',component:TaskAssignComponent}
     ]}
 ]
 @NgModule({

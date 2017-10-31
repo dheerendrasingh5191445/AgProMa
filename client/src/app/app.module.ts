@@ -29,6 +29,10 @@ import { ReleasePlanComponent } from './release-plan/release-plan.component';
 import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
+import { TaskAddComponent } from './taskadd/taskadd.component';
+import { TaskAssignComponent } from './taskAssign/taskAssign.component';
+import { TaskComponent } from './taskAssign/task/task.component';
+
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -44,8 +48,10 @@ import { BacklogService } from './shared/services/backlog.service';
 import { ReleasePlanService } from './shared/services/release-plan.service';
 import { SprintService} from './shared/services/sprint.service';
 import { ChecklistService } from './shared/services/checklist.service';
+import { TaskService } from './shared/services/task.service';
+import { TaskAssignService } from './shared/services/task-assign.service';
 
-//configuration for social  login 
+//configuration for social  login
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -63,6 +69,9 @@ export function provideConfig() {
 
 @NgModule({
   declarations: [
+    TaskAssignComponent,
+    TaskComponent,
+    TaskAddComponent,
     ChecklistComponent,
     EpicComponent,
     AppComponent,
@@ -92,6 +101,7 @@ export function provideConfig() {
     ShowHidePasswordModule.forRoot()
   ],
   providers: [
+    TaskAssignService,
     ChecklistService,
     ReleasePlanService,
     BacklogService,
@@ -103,6 +113,7 @@ export function provideConfig() {
     LoginService,
     EpicService,
     SprintService,
+    TaskService,
     TeamsService,
     {
       provide: AuthServiceConfig,

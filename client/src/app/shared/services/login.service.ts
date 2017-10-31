@@ -14,7 +14,8 @@ export class LoginService {
   constructor(private http: Http) { }
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
- 
+  invite_url='http://localhost:52258/api/InviteMembers/';
+  
   private headers = new Headers({ 'Content-Type': 'application/json' });
  
  //get all the details of user
@@ -50,7 +51,12 @@ export class LoginService {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
-
+   //this is to get the existing member in the project
+  getUserData(projectId:number){
+    return this.http.get(this.invite_url+projectId)
+                    .map(Response=>Response);
+  
+  }
 
 }
 

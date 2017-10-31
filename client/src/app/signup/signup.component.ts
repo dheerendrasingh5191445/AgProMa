@@ -75,6 +75,7 @@ export class SignupComponent implements OnInit {
           }
         else if((this.password == this.details.password)&&(this.email==this.details.email)){
           //if user's credentials are correct then user will br redirected to dashboard
+          sessionStorage.setItem("id",this.details.id);
           this.router.navigate(["/app-dashboard"]);
         }
         else{

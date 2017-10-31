@@ -10,7 +10,7 @@
                     </div>
                     <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.taskId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
                       <app-task  *ngIf="item" [Data]="item"></app-task>  <!--bring the person assigned to a particular task-->
-                      <li></li>      <!--list to fill the tasks and members assigned-->                   
+                     <ul><li></li> </ul>     <!--list to fill the tasks and members assigned-->                   
                     </div>
                 </div>
             </div>

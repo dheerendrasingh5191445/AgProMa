@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TaskAssignService } from "../shared/Services/task-assign.service";
+import { TaskAssignService } from "../shared/services/task-assign.service";
 import { TaskBackLog } from "../shared/model/TaskBacklog";
 import { TeamMaster } from "../shared/model/teamMaster";
 import { ActivatedRoute } from "@angular/router";

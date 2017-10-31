@@ -48,10 +48,9 @@ namespace MyNeo4j.Controllers
         // PUT api/values/5
         [HttpPut]
         [Route("api/[controller]/{id}")]
-        public void Put(int id, [FromBody]ChecklistBacklog value) //update checklist
+        public void Put(int id,[FromBody]ChecklistBacklog value) //update checklist
         {
-            _context.Update(id, value);
-           
+            _context.Update(id, value);           
         }
 
         // DELETE api/values/5

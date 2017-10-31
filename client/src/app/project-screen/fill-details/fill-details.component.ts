@@ -15,11 +15,16 @@ export class FillDetailsComponent implements OnInit {
   projectname:string;
   projectdescription:string;
   technologies:string;
+  leaderId:number;
   constructor(private projectscrservice:ProjectScreenService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
-    this.route.params.subscribe((param) => console.log (param.id));
-
+    this.route.params.subscribe((param) => {
+                                      this.updateId = +param.id;
+                                      this.condition = param.id;
+    });
+    var session = sessionStorage.getItem("id");
+    this.leaderId = parseInt(session);
   }
 
   //this method is used to add new project
@@ -27,7 +32,7 @@ export class FillDetailsComponent implements OnInit {
   {
     if(this.projectdescription != null && this.projectname !=null && this.technologies != null)
     {
-    let projectitem = new ProjectMaster(this.projectname,this.updateId,this.projectdescription,this.technologies);
+    let projectitem = new ProjectMaster(this.projectname,this.leaderId,this.projectdescription,this.technologies);
     this.projectscrservice.addNewProject(projectitem)
                           .then(data => this.router.navigate(["app-dashboard"]));
     }

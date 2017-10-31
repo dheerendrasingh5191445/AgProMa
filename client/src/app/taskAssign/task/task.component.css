@@ -1,5 +1,7 @@
 .list-group li{
     color:white;
+    list-style: none;
+    text-align: center;
     background-color: transparent;
     border-color:transparent;
 }

@@ -47,6 +47,7 @@ namespace MyNeo4j
             services.AddScoped<ISignUpService, SignUpService>();
             services.AddScoped<ISignUpRepository, SignUpRepository>();
             services.AddScoped<IinviteMembersService, InviteMembersService>();
+            services.AddScoped<IInviteRepository, InviteRepository>();
             services.AddScoped<IProjectMemberService, ProjectMemberService>();
             services.AddScoped<IProjectMemberRepository, ProjectMemberRepository>();
             services.AddScoped<ITeamRepo, TeamRepo>();
@@ -63,6 +64,8 @@ namespace MyNeo4j
             services.AddScoped<ICheckListService, ChecklistService>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskServices, TaskService>();
+            services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
+            services.AddScoped<ITaskBacklogService, TaskBacklogService>();
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(
