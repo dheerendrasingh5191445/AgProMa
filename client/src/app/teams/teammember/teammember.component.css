@@ -3,3 +3,6 @@
     background-color: transparent;
     border-color:transparent;
 }
+ul {
+    list-style:none;
+    }
