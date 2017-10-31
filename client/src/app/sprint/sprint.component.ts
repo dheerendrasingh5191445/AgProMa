@@ -18,10 +18,6 @@ export class SprintComponent implements OnInit {
 
   newsprint = new Sprint( null ,'','',null,null,null);
 
-  listBoxers: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali', 'George Foreman', 'Joe Frazier', 'Jake LaMotta', 'Joe Louis', 'Jack Dempsey', 'Rocky Marciano', 'Mike Tyson', 'Oscar De La Hoya'];
-  listTeamOne: Array<string> = ['George Foreman', 'Joe Frazier', 'Jake LaMotta'];
-  listTeamTwo: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali',];
-
   constructor(private sprintService: SprintService, private backlogService: BacklogService) {  }
 
   ngOnInit() {
