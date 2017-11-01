@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900");
 @import url("https://cdn.linearicons.com/free/1.0.0/icon-font.min.css");
 
 .card-one {
   margin: 60px auto;
-  height: 200px;
-  width: 350px;
+  height: 150px;
+  width: 300px;
   background: #fff;
   box-shadow: 0 1px 38px rgba(0, 0, 0, 0.5), 0 5px 12px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -16,9 +15,6 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: url("https://i.pinimg.com/originals/71/2f/19/712f19fd0eec5a3e351849676681d9cc.jpg") no-repeat;
-  background-size: cover;
-  background-position: center center;
   text-align: center;
 
 }
@@ -36,7 +32,7 @@
   height: 20px;
 }
 .card-one .top .wrapper .mynav .lnr {
-  color: #fff;
+  color: #000000;
   font-size: 20px;
 }
 .card-one .top .wrapper .mynav .lnr-chevron-left {
@@ -49,9 +45,9 @@
 }
 .card-one .top .wrapper .heading {
   margin-top: 20px;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 400;
-  color: #fff;
+  color: #000000;
 }
 .card-one .top .wrapper .location {
   margin-top: 20px;
@@ -91,7 +87,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 .lnr-trash,.lnr-pencil,.lnr-plus-circle,.lnr-users{
   float: right;

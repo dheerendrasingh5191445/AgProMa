@@ -18,40 +18,13 @@ namespace AgProMa.Controllers
 
             _context = context;
         }
-       // GET api/values
-       [HttpGet]
-       [Route("api/[controller]")]
+        // GET api/values
+        [HttpGet]
+        [Route("api/[controller]")]
         public IActionResult Get()
         {
             return Ok("oidsjicd");
-            //try
-            //{
-            //    List<Master> list = _context.GetAllDetails();
-            //    if (list.Count != 0)
-            //    {
-            //        return Ok(list);
-            //    }
-            //    else
-            //    {
-            //        return StatusCode(404);
-            //    }
-
-            //}
-            //catch
-            //{
-
-            //    return StatusCode(500);
-            //}
         }
-
-        // GET api/values/5
-        //[Route("api/[controller]/{emailid}")]
-        //public IActionResult Get(string emailid)
-        //{
-        //    return Ok(_context.Get(emailid));
-        //}
-
-        // POST api/values
 
         [HttpPost]
         [Route("api/[controller]")]
@@ -60,27 +33,6 @@ namespace AgProMa.Controllers
             _context.Add_MemberDetails(user);
         }
 
-        // PUT api/values/5
-        //[HttpPut("{id}")]
-        //[Route("api/[controller]")]
-        //public IActionResult Put(string emailid, [FromBody]Master user)
-        //{
-        //    try
-        //    {
-        //        _context.Update(emailid, user);
-        //        return Ok("success");
-        //    }
-        //    catch
-        //    {
-        //        return Ok("internal server error");
-
-        //    }
-        //}
-
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+       
     }
 }

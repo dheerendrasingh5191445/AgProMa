@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AgProMa.Repository;
+using AgProMa.Services;
+using ForgetPassword.service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MyNeo4j.model;
-using Microsoft.EntityFrameworkCore;
 using MyNeo4j.Repository;
 using MyNeo4j.Service;
-using MyNeo4j.Hubs;
-using ForgetPassword.service;
-using AgProMa.Services;
-using AgProMa.Repository;
 
 namespace MyNeo4j
 {
@@ -40,6 +35,8 @@ namespace MyNeo4j
             services.AddDbContext<Neo4jDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IProjectMasterRepo, ProjectMasterRepo>();
             services.AddScoped<IProjectMasterService, ProjectMasterService>();
+            services.AddScoped<IProjectMemberRepository, ProjectMemberRepository>();
+            services.AddScoped<IProjectMemberService, ProjectMemberService>();
             services.AddSignalR();
             services.AddScoped<IforgetPassword, forgetPassword>();
             services.AddScoped<IMasterRepository, MasterRepository>();
@@ -80,10 +77,10 @@ namespace MyNeo4j
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<ProjectMasterHub>("promaster");
-            });
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<ProjectMasterHub>("promaster");
+            //});
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());
             app.UseMvc();
         }
