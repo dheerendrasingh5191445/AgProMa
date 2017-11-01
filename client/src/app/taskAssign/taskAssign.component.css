@@ -18,19 +18,22 @@ ul {
     }
     .card-header{
         margin-bottom: 20px;
+        background-color:black;
     }
-    .card-text li{
-        width: 200px;
+    /* .card-text li{
+        width: px;
         height: 20px;
         margin: 5px 20px 5px 20px;
     
-    }
+    } */
 .available{
     /* margin-left:40%; */
     background-color: #2f2f2f6e;
     color:white;
+    width:100%;
+  
     
-    text-align: center
+    float:right;
 }
 
 .icons{
@@ -38,18 +41,17 @@ ul {
     margin-right:3%;
 }
 .team {
-    margin-left: 1%;
+   
     background-color:#2f2f2f6e;
+    
 
 }
-.card{
-    margin-top:20%;
-}
+
 .card:hover{
     box-shadow: 0 0 11px rgba(33,33,33,1); 
 }
 .card-header{
-    background-color:#2f2f2f00;
+    background-color:#544F4F;
     color:white;
     text-align: center
 }
@@ -62,4 +64,29 @@ ul {
 }
 .remove{
     background-color: transparent;
+}
+.chip {
+    display: inline-block;
+    padding:  25px;
+    height: 100px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #762222 ;
+ }
+ 
+ .closebtn:hover {
+    color: #9C9696;
+ }
+ .closebtn{
+     background-color:#F6F6EC;
+
+ }
+ #teamcard{
+     height:1000px;
+     
+ }
+h1{
+    font-size: 20px;
+    text-align: center;
 }

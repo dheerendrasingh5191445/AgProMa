@@ -1,21 +1,26 @@
-<h2>Assign The Tasks</h2> <!--main heading-->
+<h1>Please Assign Task To Member</h1> <!--main heading-->
 <hr>
 <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <!--task cards starts here-->
-                <div class="team card" *ngFor="let item of AvailTask; let i = index">
-                    <div class="card-header"><!-- card header for tasks-->
-                        <i class="fa fa-users"></i>&nbsp;&nbsp;{{item.taskName}} <!--task name -->
+            <div class="col-md-8">
+             <h1>TASKS</h1>
+             <hr>
+                <div index='teamcard' class="team card" *ngFor="let item of AvailTask; let i = index"><!--task cards starts here-->
+                    <div index='teamcard' class="card-header"><!-- card header for tasks-->
+                        <i class="fa fa-tasks"></i>&nbsp;&nbsp;{{item.taskName}} <!--task name -->
                     </div>
                     <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.taskId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
                       <app-task  *ngIf="item" [Data]="item"></app-task>  <!--bring the person assigned to a particular task-->
                      <ul><li></li> </ul>     <!--list to fill the tasks and members assigned-->                   
                     </div>
                 </div>
+                
             </div>
-            <div class="col-sm-4">
+            
+            <div class="col-md-4">
                 <!--team cards starts here-->
+            <h1>TEAM MEMBERS</h1>
+            <hr>
                 <div class=" card available"> 
                     <div class="card-header"> <!--title starts here-->
                         <select class=" custom-select form-control" [(ngModel)]="myId" (ngModelChange) = "getTeamMember()" name="choice" id="choice"><!--select drop down-->
@@ -24,11 +29,18 @@
                       </select>
                     </div>
                     <div class="card-body"> <!--body for team card-->
-                        <ul class="list-group">
-                            <li *ngFor="let item of TeamMemberList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item"> <!--team member list-->
-                                <i class="fa fa-user icons">
-                                    </i>{{item.memberName}} </li><!--list of team members display here-->
-                            <li></li>
+                        <ul class="list-group" *ngFor="let item of TeamMemberList; let i = index">
+                             
+                            <li class="chip"  [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item"> <!--team member list-->
+                                
+                     
+                                    {{item.memberName}}
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none'"></span>
+                                </li><!--list of team members display here-->
+                                                                   
+                                     
+                            <li ></li>
+                           
                         </ul>
                     </div>
                 </div>
