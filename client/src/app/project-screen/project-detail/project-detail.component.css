@@ -20,6 +20,8 @@
 }
 
 .card-one:hover{
+  
+    background-color: rgba(228, 228, 228, 0.99);
     opacity:1.0;
     filter: alpha(opacity=100);
 }
@@ -53,7 +55,7 @@
   margin-top: 20px;
   font-size: 21px;
   font-weight: 400;
-  color: #fff;
+  color: #FFFFFF;
 }
 .card-one .top .wrapper .temp {
   margin-top: 20px;
@@ -79,16 +81,7 @@
   vertical-align: top;
   margin-top: 10px;
 }
-.card-one .top:after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(255, 255, 255, 0.5);
-}
+
 .lnr-trash,.lnr-pencil,.lnr-plus-circle,.lnr-users{
   float: right;
   margin-left: 10px;
