@@ -2,23 +2,27 @@
   <h1>Add New Projects</h1>
   <hr>
   <div class="row">
-    <div class="hovereffect">
-      <img class="img-responsive" src="http://ricon.net.au/online/wp-content/uploads/New-Project.jpg" alt="">
-      <div class="overlay">
-        <h2>New Projects</h2>
-        <a id="subbtn" class=" info col-4 btn-responsive" routerLink="/app-dashboard/fill-details/id">Add Project</a>
-      </div>
-    </div>
+    <figure class="snip1566">
+      <img src="./../assets/images/addproject.png" alt="sq-sample14" />
+      <figcaption>
+        <i class="ion-android-add">
+          <a id="subbtn" class=" info col-4 btn-responsive" routerLink="/app-dashboard/fill-details/id"></a>
+        </i>
+      </figcaption>
+    </figure>   
   </div>
   <h1>Existing Projects</h1>
   <hr>
   <br>
-  <div>
+  <div *ngIf="projects">
     <div class="row">
-      <div class="col-lg-4" *ngFor="let item of projects | paginate: { itemsPerPage: 6, currentPage: p }">
+      <div class="col-lg-4" *ngFor="let item of projects | paginate: { itemsPerPage: 3, currentPage: p }">
         <app-project-detail *ngIf="item" [Data]="item" (onDelete)="onDelete($event)"></app-project-detail>
       </div>
     </div>
+  </div>
+  <div *ngIf="projects == null">
+     <p>There are no existing project,pleasae make new project</p>
   </div>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

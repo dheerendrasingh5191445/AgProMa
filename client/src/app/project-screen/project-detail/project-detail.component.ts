@@ -2,6 +2,8 @@ import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { ProjectMaster } from './../../shared/model/ProjectMaster';
 import { ProjectScreenService } from "./../project-screen.service";
 import { Router} from  '@angular/router';
+import { TitleCasePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-project-detail',

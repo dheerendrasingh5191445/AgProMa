@@ -14,6 +14,7 @@ namespace MyNeo4j.Service
         void Add(EpicMaster backlog);
         void Update(int id, EpicMaster res);
         void Delete(int id);
+        void SetConnectId(int userId,string conId);
     }
 
     public class EpicService:IEpicServices
@@ -40,7 +41,12 @@ namespace MyNeo4j.Service
         return _repository.GetAll(id).ToList();
     }
 
-    public void Update(int id, EpicMaster res)
+    public void SetConnectId(int userId,string conId)
+    {
+        _repository.SetConnectId(userId, conId);        
+    }
+
+        public void Update(int id, EpicMaster res)
     {
         _repository.Update(id, res);
     }

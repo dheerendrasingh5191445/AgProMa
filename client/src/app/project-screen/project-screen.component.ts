@@ -21,7 +21,7 @@ export class ProjectScreenComponent implements OnInit {
       var session = sessionStorage.getItem("id");
       this.userId = parseInt(session);
       this.projectscrservice.getAllProjectOfEmployee(this.userId)
-                            .subscribe(data =>{this.projects = data.json();console.log(this.projects)});
+                            .subscribe(data =>{this.projects = data.json()});
   }
   //this is splice the list
   onDelete(Id:number)
