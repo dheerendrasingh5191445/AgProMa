@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
 //component declaration
 import { RegisterComponent } from './register/register.component';
 import { SignupComponent } from './signup/signup.component';
@@ -21,6 +22,7 @@ import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
+import {LineGraphComponent} from './line-graph/line-graph.component'
 
 // paths to all the respective pages
 const routes: Routes = [
@@ -44,7 +46,8 @@ const routes: Routes = [
     { path:'app-sprint',component:SprintComponent},
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},
-    { path:'taskassign/:id',component:TaskAssignComponent}
+    { path:'taskassign/:id',component:TaskAssignComponent},
+    {path:'line-graph',component:LineGraphComponent}
     ]}
 ]
 @NgModule({

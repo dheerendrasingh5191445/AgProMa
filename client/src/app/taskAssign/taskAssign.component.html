@@ -1,5 +1,9 @@
 <h1>Please Assign Task To Member</h1> <!--main heading-->
+ 
 <hr>
+<div class="tooltip">Hover over me
+        <span class="tooltiptext">Tooltip text</span>
+      </div>
 <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -30,15 +34,17 @@
                     </div>
                     <div class="card-body"> <!--body for team card-->
                         <ul class="list-group" *ngFor="let item of TeamMemberList; let i = index">
-                             
-                            <li class="chip"  [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item"> <!--team member list-->
+                             <div class="chip">
+                            
+                            <li  [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item"> <!--team member list-->
+                                <i id="fa-user" class="fa fa-user"></i>
+                              <span class="tool">  {{item.memberName}}
+                                    <span class="tooltiptext">Drag and drop members</span>
+                              </span>
                                 
-                     
-                                    {{item.memberName}}
-                                    <span class="closebtn" onclick="this.parentElement.style.display='none'"></span>
                                 </li><!--list of team members display here-->
-                                                                   
-                                     
+                                              
+                        </div>    
                             <li ></li>
                            
                         </ul>
@@ -46,4 +52,5 @@
                 </div>
             </div>
         </div>
+        
 </div>
