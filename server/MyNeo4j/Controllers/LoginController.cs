@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AgProMa.Services;
 using MyNeo4j.model;
+using MyNeo4j.Viewmodel;
 
 namespace AgProMa.Controllers
 {
@@ -18,7 +19,7 @@ namespace AgProMa.Controllers
             _context = context;
         }
        // GET api/values
-       [HttpGet]
+        [HttpGet]
         [Route("api/[controller]")]
         public IActionResult Get()
         {
@@ -42,13 +43,20 @@ namespace AgProMa.Controllers
                 return StatusCode(500);
             }
         }
-
-        // GET api/values/5
-        [Route("api/[controller]/{emailid}")]
-        //this method get the details of a particular user
-        public IActionResult Get(string emailid)
+        [HttpGet]
+        [Route("api/[controller]/{email}")]
+        //this method updates the user details
+        public int Get(string email)
         {
-            return Ok(_context.Get(emailid));
+            return _context.GetId(email);
+        }
+        // GET api/values/5
+        [HttpPost]
+        [Route("api/[controller]/Check")]
+        //this method get the details of a particular user
+        public IActionResult Check([FromBody]IdPassword modal)
+        {
+            return Ok(_context.Check(modal));
         }
 
         // POST api/values
@@ -56,9 +64,10 @@ namespace AgProMa.Controllers
         [HttpPost]
         [Route("api/[controller]")]
         //this method adds a user details
-        public void PostUserDetails([FromBody]Master user)
+        public IActionResult PostUserDetails([FromBody]Master user)
         {
-            _context.Add_User(user);
+           string str =  _context.Add_User(user);          
+           return Ok(str);
         }
 
         // PUT api/values/5

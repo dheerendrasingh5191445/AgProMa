@@ -7,6 +7,7 @@ import { ProjectMember } from "../model/projectMember";
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { IdPassword } from '../model/idpassword';
 
 @Injectable()
 export class LoginService {
@@ -15,7 +16,7 @@ export class LoginService {
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
-  
+  checkurl='http://localhost:52258/api/Login/Check';
   private headers = new Headers({ 'Content-Type': 'application/json' });
  
  //get all the details of user
@@ -24,19 +25,27 @@ export class LoginService {
    .get(this.url)
    .map((response)=>response.json());
  }
- //get details of a particular user by emailid
- get(email:string){
+  //get the userid on basis of email
+  get(email:string){
+    return this.http.get(this.url+"/"+email)
+                    .map(data => data);
+  }
+
+ //check details of a particular user by emailid and password
+  check(data:IdPassword){
    return this.http
-   .get(this.url + '/' + email)
-   .map((response)=>response.json())
-   .toPromise()
-   .catch(this.handleError);
+              .post(this.checkurl,data,{headers:this.headers})
+              .map((response)=>response.json())
+              .toPromise()
+              .catch(this.handleError);
 
  }
  //post the details of a new user 
   postLoginDetails(logindetails:Login){
     return this.http
-    .post(this.url,logindetails,{headers:this.headers}).toPromise().catch(this.handleError);
+                .post(this.url,logindetails,{headers:this.headers})
+                .toPromise()
+                .catch(this.handleError);
    
   }
 

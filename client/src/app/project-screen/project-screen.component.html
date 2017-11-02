@@ -14,12 +14,15 @@
   <h1>Existing Projects</h1>
   <hr>
   <br>
-  <div>
+  <div *ngIf="projects">
     <div class="row">
       <div class="col-lg-4" *ngFor="let item of projects | paginate: { itemsPerPage: 3, currentPage: p }">
         <app-project-detail *ngIf="item" [Data]="item" (onDelete)="onDelete($event)"></app-project-detail>
       </div>
     </div>
+  </div>
+  <div *ngIf="projects == null">
+     <p>There are no existing project,pleasae make new project</p>
   </div>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

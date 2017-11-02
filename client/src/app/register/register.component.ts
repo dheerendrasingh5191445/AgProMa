@@ -9,6 +9,7 @@ import { Login } from './../shared/model/login';
 import swal from 'sweetalert2';
 import { LoginService } from '../shared/services/login.service'
 import { ProjectMember } from "../shared/model/projectMember";
+import { IdPassword } from '../shared/model/idpassword';
 
 @Component({
   selector: 'app-register',
@@ -18,8 +19,8 @@ import { ProjectMember } from "../shared/model/projectMember";
 export class RegisterComponent implements OnInit {
 
   user: SocialUser;
+  userId:number;
   details: any[] = [];
-  userdetails: any;
   index: Login;
   private model = {             //Binding with html 
     FirstName: '',
@@ -77,7 +78,6 @@ export class RegisterComponent implements OnInit {
 
   CreateAccount() {                        //registering the user
 
-
     this.index = this.details.find((m) => m.email == this.model.Email);  //find the details of a particular user 
 
 
@@ -94,33 +94,47 @@ export class RegisterComponent implements OnInit {
 
     else if (this.model.Password == this.ConfirmPassword) 
     {
-      if (this.index == undefined) 
-        {
         if (this.projectmember.ProjectId) 
         {
           this.projectmember.ActAs = 1;
+          console.log("sdfdsvds");
           this.loginservice.postLoginDetails(this.model)
-                           .then(data => this.loginservice.get(this.model.Email)
-                                                          .then(detail => {  //posting the details of user 
-                                                                this.userdetails = detail;                                                                                        //then calling the get method to find the user unique id  
-                                                                this.projectmember.MemberId = this.userdetails.id;                                                                //then posting the user id and team id
-                                                                          }))
-                           .then(project => this.loginservice.postMemberDetails(this.projectmember))
-                                                             .then(msg => swal('', 'Your account has been created', 'success'));
-          this.router.navigateByUrl('/app-signup');     //navigate to the signup page
+                           .then(data => { let response = data.json();
+                                            if(response == "success")
+                                            {
+                                                this.loginservice.get(this.model.Email)
+                                                                 .subscribe(detail => {  //posting the details of user 
+                                                                                      console.log(detail.json()); 
+                                                                                      this.projectmember.MemberId = detail.json();  //then calling the get method to find the user unique id 
+                                                                                      this.loginservice.postMemberDetails(this.projectmember) //then posting the user id and team id
+                                                                                      swal('', 'Your account has been created', 'success');
+                                                                                      this.router.navigateByUrl('/app-signup');     //navigate to the signup page
+                                                                                      }
+                                                                            )
+                                            }
+                                            else{
+                                              swal('', 'Email Already Exists', 'error')    //if enter id matches with the existing id in database 
+                                            }
+                                        }
+                                );
         }
         else {
-          this.loginservice.postLoginDetails(this.model);       //calling post method to register the details       
-          swal('', 'Your account has been created', 'success');
-          this.router.navigateByUrl('/app-signup');      //navigate to the signup page
-        }
-      }
-      else {
-        swal('', 'Email Already Exists', 'error')      //if enter id matches with the existing id in database 
-      }
+          this.loginservice.postLoginDetails(this.model)     //calling post method to register the details  
+                           .then(data =>{
+                                        if(data.json() == "success")
+                                        {     
+                                          swal('', 'Your account has been created', 'success');
+                                          this.router.navigateByUrl('/app-signup');      //navigate to the signup page
+                                        }
+                                        else
+                                        {
+                                          swal('', 'Email Already Exists', 'error')      //if enter id matches with the existing id in database 
+                                        }
+      })
     }
 
 
   }
-
 }
+}
+

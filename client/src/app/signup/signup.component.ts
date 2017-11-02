@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import swal from 'sweetalert2';
 
-import{LoginService}from '../shared/services/login.service'
-
+import { LoginService }from '../shared/services/login.service'
+import { IdPassword } from '../shared/model/idpassword';
+import { Credential } from '../shared/model/credential';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   user: SocialUser;
   email:string ='';
   password:string='';
-  details:any;
+  data:Credential;
   
     constructor(private authService: AuthService, private router:Router,private loginservice:LoginService) { }
   
@@ -67,19 +68,21 @@ export class SignupComponent implements OnInit {
            swal('',"Enter the proper details","error"); 
         }
         else{
-      this.loginservice.get(this.email).then(details=>{
-        this.details=details;
-        if(details==undefined) // if user is not register with AgProMa
+        let model:IdPassword=new IdPassword(this.email,this.password);
+        console.log(model);
+        this.loginservice.check(model).then(data=>{console.log(data);
+        this.data = data;
+        if(this.data["status"] == "success") // if user is not register with AgProMa
           {
-            swal('',"you are not registered","error");  
+            sessionStorage.setItem("id",this.data["userId"].toString());
+            this.router.navigate(["/app-dashboard"]); //if user's credentials are correct then user will br redirected to dashboard
           }
-        else if((this.password == this.details.password)&&(this.email==this.details.email)){
-          //if user's credentials are correct then user will br redirected to dashboard
-          sessionStorage.setItem("id",this.details.id);
-          this.router.navigate(["/app-dashboard"]);
+        else if(this.data["status"] == "email"){
+          swal('',"Enter Valid Id or Password","error");
         }
         else{
-          swal('',"Enter Valid Id or Password","error");  //if username or password is incorrect        
+            //if username or password is incorrect
+            swal('',"you are not registered","error");        
         }
       });
     }
