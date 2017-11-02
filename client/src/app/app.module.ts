@@ -10,6 +10,7 @@ import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { ChartsModule } from "ng2-charts";
 
 //component declaration
 import { SignupComponent } from './signup/signup.component';
@@ -50,6 +51,9 @@ import { SprintService} from './shared/services/sprint.service';
 import { ChecklistService } from './shared/services/checklist.service';
 import { TaskService } from './shared/services/task.service';
 import { TaskAssignService } from './shared/services/task-assign.service';
+import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
+import { KanbanService } from "./shared/services/kanban.service";
+import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
 
 //configuration for social  login
 let config = new AuthServiceConfig([
@@ -89,7 +93,9 @@ export function provideConfig() {
     BacklogComponent,
     ReleasePlanComponent,
     NewReleaseFillingDetailsComponent,
-    SprintComponent
+    SprintComponent,
+    KanbanBoardComponent,
+    EfficiencyGraphComponent
   ],
   imports: [
     DndModule.forRoot(),
@@ -98,9 +104,11 @@ export function provideConfig() {
     AppRoutingModule,
     NgxPaginationModule,
     HttpModule,
+    ChartsModule,
     ShowHidePasswordModule.forRoot()
   ],
   providers: [
+    KanbanService,
     TaskAssignService,
     ChecklistService,
     ReleasePlanService,

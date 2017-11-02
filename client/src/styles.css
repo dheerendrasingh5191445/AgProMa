@@ -9,7 +9,8 @@ body {
 body{
     font-family: 'Hind';
     background-color: #000;
-    color: #fff;
+    color: #fff;font-family: 'Raleway', Arial, sans-serif !important;
+    
 }
 .brand-logo{
     width: 60%;

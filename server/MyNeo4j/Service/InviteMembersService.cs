@@ -20,16 +20,15 @@ namespace MyNeo4j.Service
 
     public class InviteMembersService : IinviteMembersService
     {
-
+        public IConfiguration _config;
         public IInviteRepository _repository;
-        public InviteMembersService(IInviteRepository repository)
+        public InviteMembersService(IInviteRepository repository,IConfiguration config)
         { 
-            var builder = new ConfigurationBuilder() //config file for the email method
-           .AddJsonFile("config.json", optional: false, reloadOnChange: true);
-            Configuration = builder.Build();// config file for email id
+           
             _repository = repository;
+            _config = config;
         }
-        public IConfigurationRoot Configuration { get; }
+        
 
 
 
@@ -37,9 +36,9 @@ namespace MyNeo4j.Service
         {
             
                     var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress(Configuration["Title"], Configuration["FromEmail"])); //mail title and mail from(Email)
+                    message.From.Add(new MailboxAddress(_config["EmailConfig:Title"], _config["EmailConfig:FromEmail"])); //mail title and mail from(Email)
                     message.To.Add(new MailboxAddress(people.Email)); //mail to(client)
-                    message.Subject = Configuration["SubjectForEmailReset"]; //mail subject
+                    message.Subject = _config["EmailConfig:SubjectForInvitation"]; //mail subject
                     var bodyBuilder = new BodyBuilder();
                     //body of the mail
                     bodyBuilder.HtmlBody = "Click here to join project-  http://localhost:4200/app-register/" + people.ProjectId; //link sent in mail
@@ -48,8 +47,8 @@ namespace MyNeo4j.Service
                     using (var client = new SmtpClient())
                     {
 			//required field for email
-                        client.Connect(Configuration["Domain"], 587, false);
-                        client.Authenticate(Configuration["FromEmail"], Configuration["Password"]);
+                        client.Connect(_config["EmailConfig:Domain"], 587, false);
+                        client.Authenticate(_config["EmailConfig:FromEmail"], _config["EmailConfig:Password"]);
                         client.Send(message);
                         client.Disconnect(true);
                     }          

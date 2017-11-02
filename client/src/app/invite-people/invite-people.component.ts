@@ -38,4 +38,5 @@ export class InvitePeopleComponent implements OnInit {
                .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
   }
 
+ 
 }

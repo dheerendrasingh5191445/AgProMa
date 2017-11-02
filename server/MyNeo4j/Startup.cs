@@ -66,6 +66,7 @@ namespace MyNeo4j
             services.AddScoped<ITaskServices, TaskService>();
             services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
             services.AddScoped<ITaskBacklogService, TaskBacklogService>();
+            services.AddSingleton<IConfiguration>(Configuration);
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(

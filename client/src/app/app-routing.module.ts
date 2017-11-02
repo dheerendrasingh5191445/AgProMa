@@ -21,6 +21,8 @@ import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
+import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
+import { EfficiencyGraphComponent } from "./efficiency-graph/efficiency-graph.component";
 
 // paths to all the respective pages
 const routes: Routes = [
@@ -44,7 +46,9 @@ const routes: Routes = [
     { path:'app-sprint',component:SprintComponent},
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},
-    { path:'taskassign/:id',component:TaskAssignComponent}
+    { path:'taskassign/:id',component:TaskAssignComponent},
+    { path: 'kanban/:id', component : KanbanBoardComponent},
+    { path: 'efficiency', component : EfficiencyGraphComponent}
     ]}
 ]
 @NgModule({
