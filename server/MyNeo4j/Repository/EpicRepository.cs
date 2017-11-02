@@ -14,6 +14,8 @@ namespace MyNeo4j.Repository
         void Add(EpicMaster bklog);
         void Update(int id, EpicMaster bklog);
         void Delete(int id);
+        void SetConnectId(int userId,string conId);
+        List<SignalRMaster> GetAllConnect();
     }
     public class EpicRepository:IEpicRepository
     { 
@@ -52,7 +54,20 @@ namespace MyNeo4j.Repository
         return _context.EpicDb.Include(f => f.ProjectMaster).Where(r => r.ProjectId == id).ToList();
     }
 
-    public void Update(int id, EpicMaster bklog)
+    public List<SignalRMaster> GetAllConnect()
+    {
+            return _context.SignalRDb.ToList();
+    }
+
+        public void SetConnectId(int userId,string conId)
+    {
+           SignalRMaster sg = _context.SignalRDb.FirstOrDefault(p => p.MemberId == userId);
+            sg.ConnectionId = conId;
+            sg.HubCode = HubCode.epic;
+           _context.SaveChanges();
+    }
+
+        public void Update(int id, EpicMaster bklog)
     {
         EpicMaster data = _context.EpicDb.FirstOrDefault(m => m.EpicId == id);
 

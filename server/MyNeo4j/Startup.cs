@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MyNeo4j.Hubs;
 using MyNeo4j.model;
 using MyNeo4j.Repository;
 using MyNeo4j.Service;
@@ -63,6 +64,7 @@ namespace MyNeo4j
             services.AddScoped<ITaskServices, TaskService>();
             services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
             services.AddScoped<ITaskBacklogService, TaskBacklogService>();
+            services.AddSingleton<IConfiguration>(Configuration);
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(
@@ -77,11 +79,12 @@ namespace MyNeo4j
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            //app.UseSignalR(routes =>
-            //{
-            //    routes.MapHub<ProjectMasterHub>("promaster");
-            //});
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            app.UseSignalR(routes =>
+            {
+               routes.MapHub<EpicHub>("epichub");
+            });
+            
             app.UseMvc();
         }
     }

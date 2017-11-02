@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,6 +9,14 @@ using System.Threading.Tasks;
 
 namespace MyNeo4j.model
 {
+    public enum HubCode
+    {
+        epic,
+        backlog,
+        sprint,
+        taskbl,
+        task
+    }
     public class SignalRMaster
     {
         [Key]
@@ -15,10 +25,13 @@ namespace MyNeo4j.model
 
         public int MemberId { get; set; }
 
-        public int ConnectionId { get; set; }
+        public string ConnectionId { get; set; }
 
         public bool Online  { get; set; }
 
+        [EnumDataType(typeof(HubCode))]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public HubCode HubCode { get; set; }
 
     }
 }

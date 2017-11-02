@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="task-table row">
+    <h1>Task - Kanban Board</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Unplanned</th>
+          <th>In Progress</th>
+          <th>Complete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <td>
+        <!-- <div class="unplanned col-lg-4"> -->
+          <div *ngFor="let item of data">
+            <ul *ngIf="item.status == 'Unplanned'">
+              <li id="todo">
+                <a>
+                  <p>{{item.taskName}}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        <!-- </div> -->
+        </td>
+        <td>
+        <!-- <div class="inprogress col-lg-4"> -->
+          <div *ngFor="let item of data">
+            <ul *ngIf="item.status == 'Inprogress'">
+              <li id="doing">
+                <a>
+                    <p>{{item.taskName}}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        <!-- </div> -->
+        </td>
+
+        <td>
+        <!-- <div class="complted col-lg-4"> -->
+          <div *ngFor="let item of data">
+            <ul *ngIf="item.status == 'Completed'">
+              <li id="done">
+                <a>
+                    <p>{{item.taskName}}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        <!-- </div> -->
+        </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
