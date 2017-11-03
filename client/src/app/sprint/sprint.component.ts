@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SprintService } from '../shared/services/sprint.service';
 import { Sprint } from '../shared/model/sprint';
 import { BacklogService } from '../shared/services/backlog.service';
-
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-sprint',
@@ -11,16 +11,18 @@ import { BacklogService } from '../shared/services/backlog.service';
 })
 export class SprintComponent implements OnInit {
 
-  projectId: number=1;
+  projectId: number;
   sprints: Array<any>;
   backlogs: any[];
   unAssignedBacklogs:Array<any>;
 
   newsprint = new Sprint( null ,'','',null,null,null);
 
-  constructor(private sprintService: SprintService, private backlogService: BacklogService) {  }
+  constructor(private sprintService: SprintService, private backlogService: BacklogService,private route:ActivatedRoute) {  }
 
   ngOnInit() {
+
+    this.route.params.subscribe((param) => this.projectId = +param['id']);  
     //get all the sprints according to the project id.
     this.getSprints();
 

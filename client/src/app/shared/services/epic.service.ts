@@ -16,8 +16,7 @@ export class EpicService {
     
     get(id) //for getting all epic based on projectid
     {
-      
-      
+          
       return this.http.get(this.EpicUrl+'/'+id).map((res:Response)=>res.json());
     }
   add(item)//for adding new epic 

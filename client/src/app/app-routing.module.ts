@@ -41,7 +41,7 @@ const routes: Routes = [
     { path:'backlog/:id',component:BacklogComponent},
     { path:'releaseplan/:id',component:ReleasePlanComponent},
     { path:'newreleasedetail/:id',component:NewReleaseFillingDetailsComponent},
-    { path:'app-sprint',component:SprintComponent},
+    { path:'app-sprint/:id',component:SprintComponent},
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},
     { path:'taskassign/:id',component:TaskAssignComponent}

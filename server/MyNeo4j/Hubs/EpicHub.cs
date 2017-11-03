@@ -23,27 +23,38 @@ namespace MyNeo4j.Hubs
             _service.SetConnectId(userid,Context.ConnectionId);
         }
 
-        public IEnumerable<EpicMaster> Get(int id)
+        public Task Get(int id)
         {
+            CreateGroup(id);
             List<EpicMaster> data = _service.GetAll(id);
-            return data;
-
+            return Clients.Group("mygroup").InvokeAsync("getBacklog", data);
         }
 
-        public void Post(EpicMaster backlog)
+        public Task Post(EpicMaster backlog)
         {
             _service.Add(backlog);
-
+            return Clients.Client(Context.ConnectionId).InvokeAsync("whenAdded");
         }
 
-        public void put(int id,EpicMaster value)
+        public void CreateGroup(int projectId)
         {
-            _service.Update(id, value);
+            List<string> users = _service.getGroup(projectId);
+            foreach(var user in users)
+            {
+                Groups.AddAsync(user, "mygroup");
+            }
         }
 
-        public void Delete(int id)
+        public Task put(int id,EpicMaster value,int proId)
+        {
+            _service.Update(id,value);
+            return Clients.Client(Context.ConnectionId).InvokeAsync("whenUpdated");
+        }
+
+        public Task Delete(int id,int proId)
         {
             _service.Delete(id);
+            return Clients.Client(Context.ConnectionId).InvokeAsync("whenDeleted");
         }
     }
 }
