@@ -14,7 +14,7 @@ using MyNeo4j.Service;
 
 namespace MyNeo4j
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IHostingEnvironment env)
         {
@@ -27,7 +27,7 @@ namespace MyNeo4j
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -64,6 +64,7 @@ namespace MyNeo4j
             services.AddScoped<ITaskServices, TaskService>();
             services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
             services.AddScoped<ITaskBacklogService, TaskBacklogService>();
+            services.AddSingleton(Configuration);
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(
@@ -86,7 +87,13 @@ namespace MyNeo4j
                routes.MapHub<ReleasePlanHub>("releaseplan");
             });
             
+            if(env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             app.UseMvc();
+            
+           
         }
     }
 }

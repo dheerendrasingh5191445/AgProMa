@@ -69,6 +69,8 @@ namespace MyNeo4j.Repository
           //  data. = bklog.Comments;
             _context.SaveChanges();
         }
+
+
     }
 
 }

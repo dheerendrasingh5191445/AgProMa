@@ -14,6 +14,7 @@ namespace MyNeo4j.Repository
         List<SprintBacklog> AllSprint();
         List<TeamMember> AllTeamMember();
         Master Master(int id);
+        List<TaskBacklog> GetAllTaskDetail(int id);
         void Update(int memberId,int TaskId);
     }
     public class TaskBacklogRepository : ITaskBacklogReposiory
@@ -54,6 +55,12 @@ namespace MyNeo4j.Repository
             TaskBacklog task = _context.Taaskbl.FirstOrDefault(p => p.TaskId == TaskId);
             task.PersonId = memberId;
             _context.SaveChanges();
+        }
+
+        //this method will return all the task in that same sprint from database
+        public List<TaskBacklog> GetAllTaskDetail(int SprintId)
+        {
+            return _context.Taaskbl.Where(p => p.SprintId == SprintId).ToList();
         }
     }
 }

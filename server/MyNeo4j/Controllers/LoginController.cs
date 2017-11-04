@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using AgProMa.Services;
 using MyNeo4j.model;
 using MyNeo4j.Viewmodel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgProMa.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     public class LoginController : Controller
     {
@@ -43,6 +45,8 @@ namespace AgProMa.Controllers
                 return StatusCode(500);
             }
         }
+
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/[controller]/{email}")]
         //this method updates the user details

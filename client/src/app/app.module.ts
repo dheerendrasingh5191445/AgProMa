@@ -10,6 +10,8 @@ import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import {LineGraphComponent} from './line-graph/line-graph.component'
+import{ChartsModule} from 'ng2-charts'
 
 //component declaration
 import { SignupComponent } from './signup/signup.component';
@@ -48,6 +50,10 @@ import { SprintService} from './shared/services/sprint.service';
 import { ChecklistService } from './shared/services/checklist.service';
 import { TaskService } from './shared/services/task.service';
 import { TaskAssignService } from './shared/services/task-assign.service';
+import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
+import { KanbanService } from "./shared/services/kanban.service";
+import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
+import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
 
 //configuration for social  login
 let config = new AuthServiceConfig([
@@ -85,7 +91,10 @@ export function provideConfig() {
     TeamsComponent,
     BacklogComponent,
     ReleasePlanComponent,
-    SprintComponent
+    SprintComponent,
+    LineGraphComponent, 
+    KanbanBoardComponent,
+    EfficiencyGraphComponent
   ],
   imports: [
     DndModule.forRoot(),
@@ -94,9 +103,12 @@ export function provideConfig() {
     AppRoutingModule,
     NgxPaginationModule,
     HttpModule,
+    ShowHidePasswordModule.forRoot(),ChartsModule
+   ,
     ShowHidePasswordModule.forRoot()
   ],
   providers: [
+    KanbanService,
     TaskAssignService,
     ChecklistService,
     ReleasePlanService,
@@ -111,6 +123,7 @@ export function provideConfig() {
     SprintService,
     TaskService,
     TeamsService,
+    EfficiencyGraphService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

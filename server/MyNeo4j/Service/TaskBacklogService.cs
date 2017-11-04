@@ -14,6 +14,7 @@ namespace MyNeo4j.Service
         List<TeamMaster> GetByTeamId(int SprintId);
         List<AvailTeamMember> getTeamMember(int teamId);
         void UpdateTask(int memberID, int taskId);
+        List<TaskBacklog> GetAllTask(int id);
         string getName(int id);
     }
     public class TaskBacklogService : ITaskBacklogService
@@ -95,6 +96,12 @@ namespace MyNeo4j.Service
         public void UpdateTask(int memberID, int taskId)
         {
             _taskBacklog.Update(memberID, taskId);
+        }
+
+        //this method will return all the task in that same sprint
+        public List<TaskBacklog> GetAllTask(int id)
+        {
+            return _taskBacklog.GetAllTaskDetail(id);
         }
     }
 }
