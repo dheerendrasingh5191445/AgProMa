@@ -9,8 +9,7 @@ namespace MyNeo4j.Service
 {
     public interface IBacklogServices
     {
-        List<ProductBacklog> GetAll(int  id);
-        List<ProductBacklog> GetUnassignedStory(int projectId);
+        List<ProductBacklog> GetAll(int id);
         void Add(ProductBacklog backlog);
         void Update(int id, ProductBacklog res);
         void Delete(int id);
@@ -32,11 +31,6 @@ namespace MyNeo4j.Service
         public void Delete(int id)
         {
             _repository.Delete(id);
-        }
-
-        public List<ProductBacklog> GetUnassignedStory(int projectId)
-        {
-            return _repository.GetUnassignedStory(projectId);
         }
 
         public List<ProductBacklog> GetAll(int  id)

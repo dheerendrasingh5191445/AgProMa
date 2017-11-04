@@ -14,6 +14,8 @@ namespace MyNeo4j.Repository
         void Add(SprintBacklog sprint);
         void Update(int sprintId, ProductBacklog sprint);
         void Delete(int sprintId);
+        void UpdateConnectionId(string connectionid, int memberid);
+        List<SignalRMaster> CreateGroup(int projectid);
     }
 
     public class SprintRepository : ISprintRepository
@@ -34,7 +36,7 @@ namespace MyNeo4j.Repository
         //delete particular sprint.
         public void Delete(int sprintId)
         {
-            SprintBacklog sprint=_context.Sprintbl.FirstOrDefault(m => m.SprintId == sprintId);
+            SprintBacklog sprint = _context.Sprintbl.FirstOrDefault(m => m.SprintId == sprintId);
             _context.Sprintbl.Remove(sprint);
             _context.SaveChanges();
         }
@@ -50,7 +52,7 @@ namespace MyNeo4j.Repository
         {
             return _context.Sprintbl.Where(m => m.ProjectId == projectId).ToList();
         }
-        
+
         //updates sprint details of the specific sprint.
         public void Update(int sprintId, ProductBacklog sprint)
         {
@@ -58,5 +60,33 @@ namespace MyNeo4j.Repository
             sprints.InSprintNo = sprintId;
             _context.SaveChanges();
         }
+        public void UpdateConnectionId(string connectionid, int memberid)
+        {
+            SignalRMaster signalr = _context.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);
+            signalr.ConnectionId = connectionid;
+            signalr.HubCode = HubCode.sprint;
+            signalr.Online = true;
+            _context.SaveChanges();
+
+        }
+        public List<SignalRMaster> CreateGroup(int projectid)
+        {
+            List<ProjectMember> members = _context.Projectmember.Where(p => p.ProjectId == projectid).ToList();
+
+            List<SignalRMaster> onlinemembers = _context.SignalRDb.Where(m => m.Online == true && m.HubCode == HubCode.sprint).ToList();
+            var data = members.Select(m => m.MemberId).ToList();
+            var users = onlinemembers.Where(om => data.Contains(om.MemberId)).ToList();
+            return users;
+        }
+
+
+
+
+
+
+
+
+
     }
 }
+

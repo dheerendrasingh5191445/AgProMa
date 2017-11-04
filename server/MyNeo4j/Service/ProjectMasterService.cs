@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 
 namespace MyNeo4j.Service
-{//interface id used for making method to be implemented
+{   
+    //interface id used for making method to be implemented
     public interface IProjectMasterService
     {
         void AddProject(ProjectMaster projectmas);
@@ -84,7 +85,7 @@ namespace MyNeo4j.Service
             }
             return projectdetail;
         }
-
+        //this is to update the project
         public void UpdateProject(int Id, ProjectMaster projectmas)
         {
             _repocontext.UpdateProject(Id, projectmas);

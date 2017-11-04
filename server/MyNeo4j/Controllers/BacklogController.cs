@@ -29,13 +29,6 @@ namespace MyNeo4j.Controllers
            
         }
 
-        [HttpGet]
-        [Route("GetUnassignedStory/{id}")]
-        public List<ProductBacklog> GetUnassignedStory(int id)
-        {
-            return _service.GetUnassignedStory(id);
-        }
-
         // GET: api/Master/5
         //    [HttpGet("{id}", Name = "Get")]
         //public string Get(int id)

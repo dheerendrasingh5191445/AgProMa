@@ -29,8 +29,7 @@ export class EpicComponent implements OnInit {
     this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
     this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
     this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); 
-    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });  
-    
+    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
     this.connection.start().then(() => { 
     this.connection.invoke("SetConnectId",this.userId);
     this.connection.invoke("Get",this.projectId);
@@ -55,14 +54,12 @@ updateBacklog(content:any, item) //for updating  particular epic
     swal('Please fill user story', '', 'error');
   }
   item.description = content;
-  this.connection.invoke("put",item.epicId,item,this.projectId);
-  this.connection.invoke("Get",this.projectId);
+  this.connection.invoke("put",item.epicId,item);
 }
 
 deleteBacklog(item:any){       //for deleting the epic 
 
-    this.connection.invoke("Delete",item.epicId,this.projectId);
+    this.connection.invoke("Delete",item.epicId);
     this.connection.invoke("Get",this.projectId);
-}
-  
   }
+}

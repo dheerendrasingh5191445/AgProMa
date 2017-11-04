@@ -12,12 +12,13 @@
           {{sprint.sprintName}}
           <p class="date">{{sprint.startDate | date: "dd.MM.y"}}</p>
         </div>
-        <div dnd-droppable (onDropSuccess)="updateSprint($event,sprint.sprintId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
-          <div class="story" *ngFor="let story of backlogs">
+        <div dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
+          <div class="story" *ngFor="let story of backlogs">            
             <div class="card-text" id="story_name" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
-              <p>{{story.storyName}}</p>
+              <p>{{story.storyName}}</p>             
             </div>
           </div>
+          <ul><li></li></ul>
         </div>
       </div>
       <hr>
@@ -29,16 +30,16 @@
     </div>
     <!-- End of Sprint Container -->
     <!-- Unassigned Backlogs -->
-    <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="backlogs">
+    <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded">
       <h1 id="header_backlog_items">
         <strong>Unassigned Backlog Items</strong>
       </h1>
       <hr>
       <!-- Backlogs that are not assigned -->
       <div class="unassigned_backlogs">
-        <div *ngFor="let story of unAssignedBacklogs; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item">
-          <div class="card-text">
-            <p>{{story.storyName}}</p>
+        <div *ngFor="let story of backlogs; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="story">
+          <div class="list-group-item" *ngIf="story.inSprintNo == 0">
+           <div class="card-text"> <p>{{story.storyName}}</p></div>
           </div>
         </div>
       </div>

@@ -30,6 +30,7 @@ export class ProjectScreenComponent implements OnInit {
                                             else{ this.data = "no project";}
                             });
   }
+  
   //this is splice the list
   onDelete(Id:number)
   {

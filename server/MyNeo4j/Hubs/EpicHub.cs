@@ -12,17 +12,17 @@ namespace MyNeo4j.Hubs
     public class EpicHub:Hub
     {
         private IEpicServices _service;
-
+        //constructor of epic service
         public EpicHub(IEpicServices service)
         {
             _service = service;
         }
-
+        //this is to set the connection Id for user Id
         public void SetConnectId(int userid)
         {
             _service.SetConnectId(userid,Context.ConnectionId);
         }
-
+        //this method is to get the epic according to project Id 
         public Task Get(int id)
         {
             CreateGroup(id);
@@ -45,13 +45,13 @@ namespace MyNeo4j.Hubs
             }
         }
 
-        public Task put(int id,EpicMaster value,int proId)
+        public Task put(int id,EpicMaster value)
         {
             _service.Update(id,value);
             return Clients.Client(Context.ConnectionId).InvokeAsync("whenUpdated");
         }
 
-        public Task Delete(int id,int proId)
+        public Task Delete(int id)
         {
             _service.Delete(id);
             return Clients.Client(Context.ConnectionId).InvokeAsync("whenDeleted");
