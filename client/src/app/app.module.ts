@@ -10,7 +10,8 @@ import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { ChartsModule } from "ng2-charts";
+import {LineGraphComponent} from './line-graph/line-graph.component'
+import{ChartsModule} from 'ng2-charts'
 
 //component declaration
 import { SignupComponent } from './signup/signup.component';
@@ -94,7 +95,8 @@ export function provideConfig() {
     BacklogComponent,
     ReleasePlanComponent,
     NewReleaseFillingDetailsComponent,
-    SprintComponent,
+    SprintComponent,LineGraphComponent,
+   
     KanbanBoardComponent,
     EfficiencyGraphComponent
   ],
@@ -105,7 +107,8 @@ export function provideConfig() {
     AppRoutingModule,
     NgxPaginationModule,
     HttpModule,
-    ChartsModule,
+    ShowHidePasswordModule.forRoot(),ChartsModule
+   ,
     ShowHidePasswordModule.forRoot()
   ],
   providers: [
