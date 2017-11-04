@@ -1,9 +1,15 @@
+<!-- used for kanban board -->
 <div class="container">
   <div class="task-table row">
-    <h1>Task - Kanban Board</h1>
-    <table class="table">
+    <div class="table-head">
+			<!--Heading of page -->
+       <h1>Task - Kanban Board</h1> 
+		</div>
+		<!-- Start of table -->
+    <table class="table"> 
       <thead>
         <tr>
+					<!-- Header of table -->
           <th>Unplanned</th>
           <th>In Progress</th>
           <th>Complete</th>
@@ -11,46 +17,45 @@
       </thead>
       <tbody>
         <tr>
-        <td>
-        <!-- <div class="unplanned col-lg-4"> -->
-          <div *ngFor="let item of data">
-            <ul *ngIf="item.status == 'Unplanned'">
-              <li id="todo">
-                <a>
-                  <p>{{item.taskName}}</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        <!-- </div> -->
-        </td>
-        <td>
-        <!-- <div class="inprogress col-lg-4"> -->
-          <div *ngFor="let item of data">
-            <ul *ngIf="item.status == 'Inprogress'">
-              <li id="doing">
-                <a>
+          <td>
+						<!-- Iteration for task backlog -->
+            <div *ngFor="let item of data">
+							<!-- if condition for unplanned -->
+              <ul *ngIf="item.status == 'Unplanned'">
+                <li id="todo">
+                  <a>
                     <p>{{item.taskName}}</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        <!-- </div> -->
-        </td>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <div *ngFor="let item of data">
+              <ul *ngIf="item.status == 'Inprogress'">
+                <li id="doing">
+                  <a>
+                    <p>{{item.taskName}}</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- </div> -->
+          </td>
 
-        <td>
-        <!-- <div class="complted col-lg-4"> -->
-          <div *ngFor="let item of data">
-            <ul *ngIf="item.status == 'Completed'">
-              <li id="done">
-                <a>
+          <td>
+            <!-- <div class="complted col-lg-4"> -->
+            <div *ngFor="let item of data">
+              <ul *ngIf="item.status == 'Completed'">
+                <li id="done">
+                  <a>
                     <p>{{item.taskName}}</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        <!-- </div> -->
-        </td>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- </div> -->
+          </td>
         </tr>
 
       </tbody>

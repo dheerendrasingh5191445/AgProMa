@@ -54,6 +54,7 @@ import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
+import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
 
 //configuration for social  login
 let config = new AuthServiceConfig([
@@ -123,6 +124,7 @@ export function provideConfig() {
     SprintService,
     TaskService,
     TeamsService,
+    EfficiencyGraphService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

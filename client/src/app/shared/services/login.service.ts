@@ -8,6 +8,7 @@ import { ProjectMember } from "../model/projectMember";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { IdPassword } from '../model/idpassword';
+import { authentication } from "../model/Authentication";
 
 @Injectable()
 export class LoginService {
@@ -40,6 +41,14 @@ export class LoginService {
               .catch(this.handleError);
 
  }
+
+
+ getToken(auth : authentication)
+ {
+   return this.http.post("http://localhost:57318/api/TokenGeneration/createtoken",auth,{headers:this.headers})
+                    .toPromise();
+ }
+
  //post the details of a new user 
   postLoginDetails(logindetails:Login){
     return this.http

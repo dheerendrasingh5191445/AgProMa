@@ -10,24 +10,21 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class KanbanBoardComponent implements OnInit {
 
+  //local variable used in backend
   data : TaskBackLog[];
- 
   taskBackLog : TaskBackLog ;
   SprintId : number = 2;
+
   constructor(private kanbanService : KanbanService, private route : ActivatedRoute) { }
 
   ngOnInit() {
 
+    // getting sprint id from route 
     // this.route.params.subscribe((param) =>
     // this.taskBackLog.SprintId = +param['id']);
 
-    this.kanbanService.getTaskDetail(this.SprintId).subscribe(data => {console.log(data);this.data = data});
-  }
-  compareStatus(status) {
-    console.log("'''''''''''''"+status);
-    if(status=='Unplanned') {
-      return true;
-    }
+    //Getting the detail of task backlog
+    this.kanbanService.getTaskDetail(this.SprintId).subscribe(data => {this.data = data});
   }
 
 }
