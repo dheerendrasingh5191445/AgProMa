@@ -21,12 +21,10 @@ import { FillDetailsComponent } from './project-screen/fill-details/fill-details
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { RegisterUserWithNewPasswordComponent } from './register-user-with-new-password/register-user-with-new-password.component';
 import { InvitePeopleComponent } from './invite-people/invite-people.component';
-import { TeammemberComponent } from './teams/teammember/teammember.component';
 import { TeamsComponent } from './teams/teams.component';
 import { EpicComponent } from './epic/epic.component';
 import { BacklogComponent } from './backlog/backlog.component';
 import { ReleasePlanComponent } from './release-plan/release-plan.component';
-import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
@@ -84,11 +82,9 @@ export function provideConfig() {
     ForgetPasswordComponent,
     RegisterUserWithNewPasswordComponent,
     InvitePeopleComponent,
-    TeammemberComponent,
     TeamsComponent,
     BacklogComponent,
     ReleasePlanComponent,
-    NewReleaseFillingDetailsComponent,
     SprintComponent
   ],
   imports: [

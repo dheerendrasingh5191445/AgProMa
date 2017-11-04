@@ -11,11 +11,13 @@ namespace MyNeo4j.Hubs
         {
             _service = service;
         }
+
         public void SetConnectionId(int Memberid)
         {
             //call method to add memberinfo into db with connectionid and memberid
             _service.UpdateConnectionId(Context.ConnectionId, Memberid);
         }
+
         public void CreateGroup(int projectid)
         {
             var users = _service.CreateGroup(projectid);
@@ -24,10 +26,13 @@ namespace MyNeo4j.Hubs
                 Groups.AddAsync(user.ConnectionId, "releaseGroup");
             }
         }
-        public void GetReleasePlans(int projectid)
+
+
+        public Task GetReleasePlans(int projectId)
         {
-            var data = _service.GetAllReleasePlan(projectid);
-            Clients.Client(Context.ConnectionId).InvokeAsync("getreleaseplans", data);
+            CreateGroup(projectId);
+            var data = _service.GetAllReleasePlan(projectId);
+            return Clients.Group("releaseGroup").InvokeAsync("getreleaseplans", data);
         }
         public Task AddRelease(ReleasePlanMaster release)
         {
@@ -36,11 +41,19 @@ namespace MyNeo4j.Hubs
             return Clients.Group("releaseGroup").InvokeAsync("postrelease", release);
         }
 
-
-        public void GetAllSprints(int projectid)
+        public Task GetAllSprints(int projectId)
         {
-            var data = _service.GetAllSprints(projectid);
-            Clients.Client(Context.ConnectionId).InvokeAsync("getsprints", data);
+            CreateGroup(projectId);
+            var data = _service.GetAllSprints(projectId);
+            return Clients.Group("releaseGroup").InvokeAsync("getsprints", data);
+        }
+
+        public void UpdateReleaseInSprint(SprintBacklog sprintbl,int releaseId)
+        {
+            CreateGroup(sprintbl.ProjectId);
+            _service.UpdateReleaseInSprint(sprintbl,releaseId);
+            GetAllSprints(sprintbl.ProjectId);
+
         }
 
 

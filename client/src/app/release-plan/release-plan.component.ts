@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ReleasePlanService } from "../shared/services/release-plan.service";
 import { HubConnection } from "@aspnet/signalr-client/dist/src";
+import { ReleasePlan } from '../shared/model/release-plan';
+import swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-release-plan',
   templateUrl: './release-plan.component.html',
@@ -9,15 +13,25 @@ import { HubConnection } from "@aspnet/signalr-client/dist/src";
 })
 export class ReleasePlanComponent implements OnInit {
   listTeamOne: Array<string> = [];
-  constructor(private router:Router, private releasePlanService: ReleasePlanService,private route:ActivatedRoute) { }
+  relName: string = "";
+  description: string = "";
+  startDate: string = "";
+  releaseDate: string = "";
   projectId:any;
-  release:any;
-  data:any;
+  release:any[];
+  releasePlan: ReleasePlan = new ReleasePlan();
+  sprints:any[];
+  data: any;
   connection:HubConnection;
+
+
+  constructor(private router:Router, private releasePlanService: ReleasePlanService,private route:ActivatedRoute) { }
+
   connectReleasePlanHub() {
     this.connection = new HubConnection("http://localhost:52258/releaseplan");
-    this.connection.on("getreleaseplans", data => { this.release = data });
-    this.connection.on("getsprints", sprint =>this.data=sprint);
+    this.connection.on("whenAdded", data => { swal('ADDED','','success' );});
+    this.connection.on("getreleaseplans", data => {console.log(data); this.release = data });
+    this.connection.on("getsprints", sprint =>{console.log(sprint);this.sprints=sprint});
     this.connection.start().then(() => {
       this.connection.invoke("SetConnectionId",3);
       this.connection.invoke("GetReleasePlans",this.projectId)
@@ -27,13 +41,68 @@ export class ReleasePlanComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((param) => 
-    this.projectId = +param['id']);               //getting project id from route
+    this.route.params.subscribe((param) => this.projectId = +param['id']); //getting project id from route
     
-this.connectReleasePlanHub();
+  this.connectReleasePlanHub();
   }
+
   //this method is to go back on previous page
   navigateNewRelease(){
-    this.router.navigateByUrl('/app-dashboard/newreleasedetail/1')
+    this.router.navigateByUrl('/app-dashboard/newreleasedetail/1');
   }
+
+  updateReleaseInSprint($event,releaseId:number){
+    console.log("successs");
+    let sprintData: any = $event.dragData;
+    console.log($event.dragData);
+    console.log("dhiru"+releaseId);
+    this.connection.invoke("UpdateReleaseInSprint",sprintData,releaseId);
+
+  }
+
+  compareStory(releasePlanId,inreleasePlanId)
+  {
+     if(releasePlanId == inreleasePlanId) return true;
+     else return false;
+  }
+
+   //this method adds a new release
+   addingNewRelease() {
+    console.log("ramram", this.releasePlan.releaseDate > this.releasePlan.startDate);
+    if ((this.releasePlan.releaseName == undefined)
+      || (this.releasePlan.description == undefined)
+      || (this.releasePlan.startDate == undefined)
+      || (this.releasePlan.releaseDate == undefined)) {
+      swal('PLEASE FILL ALL DETAILS', '', 'error');
+    }
+    else {
+      var date1 = this.releasePlan.releaseDate.split("-")
+      console.log(date1[2]);
+      var date2 = this.releasePlan.startDate.split("-")
+      console.log(date1, date2);
+      if (date2[0] <= date1[0])//year
+      {
+        if (date2[1] <= date1[1]) // month
+        {
+          console.log(date2[1]<=date1[1])
+          if (date2[2] <= date1[2])
+           {
+            this.releasePlan.projectId = this.projectId;
+            this.connection.invoke("AddRelease",this.releasePlan)
+                           .then(() => this.connection.invoke("GetReleasePlans",this.projectId));
+          }
+          else {
+            swal('enter valid date', '', 'error') //alert for a year
+          }
+        }
+        else {
+          swal('enter valid months', '', 'error') //alert for a month
+        }
+      }
+      else {
+        swal('enter valid year', '', 'error')  //alert for a date
+      } 
+    } 
+  }
+
 }

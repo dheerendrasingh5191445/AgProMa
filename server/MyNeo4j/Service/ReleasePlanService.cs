@@ -10,6 +10,7 @@ namespace MyNeo4j.Service
         List<SprintBacklog> GetAllSprints(int id);
         void UpdateConnectionId(string connectionid, int memberid);
         List<SignalRMaster> CreateGroup(int projectid);
+        void UpdateReleaseInSprint(SprintBacklog sprintbl,int releaseId);
     }
     public class ReleasePlanService : IReleasePlanService
     {
@@ -51,6 +52,11 @@ namespace MyNeo4j.Service
         public List<SignalRMaster> CreateGroup(int projectid)
         {
             return _releasePlanRepo.CreateGroup(projectid);
+        }
+
+        public void UpdateReleaseInSprint(SprintBacklog sprintbl, int releaseId)
+        {
+            _releasePlanRepo.UpdateReleaseInSprint(sprintbl.SprintId, releaseId);
         }
     }
 }

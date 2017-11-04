@@ -16,7 +16,6 @@ import { TeamsComponent } from './teams/teams.component';
 import { EpicComponent} from './epic/epic.component';
 import { BacklogComponent} from './backlog/backlog.component';
 import { ReleasePlanComponent } from './release-plan/release-plan.component';
-import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
     { path:'epic/:id',component:EpicComponent},
     { path:'backlog/:id',component:BacklogComponent},
     { path:'releaseplan/:id',component:ReleasePlanComponent},
-    { path:'newreleasedetail/:id',component:NewReleaseFillingDetailsComponent},
     { path:'app-sprint/:id',component:SprintComponent},
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},

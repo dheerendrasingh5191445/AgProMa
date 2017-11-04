@@ -12,6 +12,7 @@ namespace MyNeo4j.Repository
         void AddRelease(ReleasePlanMaster releasePlan);
         void UpdateConnectionId(string connectionid, int memberid);
         List<SignalRMaster> CreateGroup(int projectid);
+        void UpdateReleaseInSprint(int sprintId,int releaseId);
     }
     public class ReleasePlanRepo : IReleasePlanRepo
     {
@@ -51,6 +52,13 @@ namespace MyNeo4j.Repository
             var data = members.Select(m => m.MemberId).ToList();
             var users = onlinemembers.Where(om => data.Contains(om.MemberId)).ToList();
             return users;
+        }
+
+        public void UpdateReleaseInSprint(int sprintId, int releaseId)
+        {
+            SprintBacklog sprbl = _context.Sprintbl.FirstOrDefault(p => p.SprintId == sprintId);
+            sprbl.ReleasePlanId = releaseId;
+            _context.SaveChanges();
         }
     }
 }
