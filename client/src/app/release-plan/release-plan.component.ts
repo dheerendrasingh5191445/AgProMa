@@ -13,7 +13,6 @@ import swal from 'sweetalert2';
 })
 export class ReleasePlanComponent implements OnInit {
   listTeamOne: Array<string> = [];
-  relName: string = "";
   description: string = "";
   startDate: string = "";
   releaseDate: string = "";

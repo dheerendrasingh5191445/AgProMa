@@ -10,5 +10,6 @@ namespace MyNeo4j.Viewmodel
         public int MemberId { get; set; }
 
         public string MemberName { get; set; }
+
     }
 }

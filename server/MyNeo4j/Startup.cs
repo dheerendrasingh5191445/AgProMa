@@ -85,6 +85,8 @@ namespace MyNeo4j
                routes.MapHub<EpicHub>("epichub");
                routes.MapHub<SprintBacklogHub>("sprint");
                routes.MapHub<ReleasePlanHub>("releaseplan");
+               routes.MapHub<TeamHub>("teamhub");
+               routes.MapHub<TaskBacklogHub>("taskbacklog");
             });
             
             if(env.IsDevelopment())

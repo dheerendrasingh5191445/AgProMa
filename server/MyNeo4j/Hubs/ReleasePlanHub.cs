@@ -38,7 +38,7 @@ namespace MyNeo4j.Hubs
         {
             CreateGroup(release.ProjectId);
             _service.AddRelease(release);
-            return Clients.Group("releaseGroup").InvokeAsync("postrelease", release);
+            return Clients.Group("releaseGroup").InvokeAsync("whenAdded", release);
         }
 
         public Task GetAllSprints(int projectId)

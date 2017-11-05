@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AgProMa.Controllers
 {
-    [Authorize]
     [Produces("application/json")]
     public class LoginController : Controller
     {

@@ -15,7 +15,9 @@ namespace MyNeo4j.model
         backlog,
         sprint,
         taskbl,
-        task
+        task,
+        team,
+        releaseplan
     }
     public class SignalRMaster
     {

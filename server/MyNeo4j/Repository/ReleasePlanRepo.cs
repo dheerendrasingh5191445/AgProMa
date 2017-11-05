@@ -41,8 +41,7 @@ namespace MyNeo4j.Repository
         {
             SignalRMaster signalr = _context.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);
             signalr.ConnectionId = connectionid;
-            signalr.HubCode = HubCode.sprint;
-            signalr.Online = true;
+            signalr.HubCode = HubCode.releaseplan;
             _context.SaveChanges();
         }
         public List<SignalRMaster> CreateGroup(int projectid)

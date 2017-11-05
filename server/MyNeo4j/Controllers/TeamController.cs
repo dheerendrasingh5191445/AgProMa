@@ -48,7 +48,7 @@ namespace MyNeo4j.Controllers
         }
         // GET: api/team/1
         [HttpGet("GetAvailableMember/{id}")]
-        public List<AvailableMember> GetAvailableMember(int id)
+        public List<AvailTeamMember> GetAvailableMember(int id)
         {
             return _service.getAvailableMember(id);
         }
@@ -56,7 +56,7 @@ namespace MyNeo4j.Controllers
         [HttpGet("GetTeamMember/{id}")]
         public List<AvailTeamMember> getTeamMember(int id)
         {
-            return _service.getTeamMember(id);
+            return null;
         }
     }
 }

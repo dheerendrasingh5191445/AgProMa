@@ -93,7 +93,7 @@
                                 </label>
                             </div>
                             <div class="col-9">
-                                <input type="text" name="releasename" class="form-control" placeholder="Release Name" [(ngModel)]="release.releaseName">
+                                <input type="text" name="releasename" class="form-control" placeholder="Release Name" [(ngModel)]="releasePlan.releaseName">
                             </div>
                         </div>
                         <br>
@@ -104,7 +104,7 @@
                                 </label>
                             </div>
                             <div class="col-9">
-                                <input name="description" [(ngModel)]="release.description" type="text" class="form-control" placeholder="Description">
+                                <input name="description" [(ngModel)]="releasePlan.description" type="text" class="form-control" placeholder="Description">
                             </div>
                         </div>
                         <br>
@@ -113,7 +113,7 @@
                                 <h5>Start Date</h5>
                             </label>
                             <div class="col">
-                                <input name="startdate" [(ngModel)]="release.startDate" class="form-control" type="date" value="" id="example-date-input">
+                                <input name="startdate" [(ngModel)]="releasePlan.startDate" class="form-control" type="date" value="" id="example-date-input">
                             </div>
                         </div>
                         <br>
@@ -122,7 +122,7 @@
                                 <h5>Release Date</h5>
                             </label>
                         <div class="col">
-                            <input name="releaseDate" [(ngModel)]="release.releaseDate" class="form-control" type="date" value="" id="example-date-input">
+                            <input name="releaseDate" [(ngModel)]="releasePlan.releaseDate" class="form-control" type="date" value="" id="example-date-input">
                         </div>
                     </div>
                 </form> <!--form ends-->

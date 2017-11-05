@@ -31,8 +31,6 @@ import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
-import { TaskComponent } from './taskAssign/task/task.component';
-
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -74,7 +72,6 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     TaskAssignComponent,
-    TaskComponent,
     TaskAddComponent,
     ChecklistComponent,
     EpicComponent,
