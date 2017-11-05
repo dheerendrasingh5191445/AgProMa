@@ -24,7 +24,7 @@ export class EpicComponent implements OnInit {
   ngOnInit() {
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-    this.connection = new HubConnection("http://192.168.252.131:8030/epichub");//for connecting with hub // when this component reload ,it will call this method
+    this.connection = new HubConnection("http://localhost:52257/epichub");//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
     this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
@@ -53,8 +53,10 @@ updateBacklog(content:any, item) //for updating  particular epic
   if (content == "") {
     swal('Please fill user story', '', 'error');
   }
+  else{
   item.description = content;
   this.connection.invoke("put",item.epicId,item);
+}
 }
 
 deleteBacklog(item:any){       //for deleting the epic 
