@@ -37,19 +37,19 @@
                       </div>
                       <label class="col-md-3 col-form-label" for="text-input"><strong>Priority</strong></label>
                       <div class="col-md-10">
-                        <textarea class="form-control priority" placeholder="Write" #priority>{{item.priority}}</textarea>
+                        <input class="form-control priority" value={{item.priority}} type="number" #priority>
                       </div><br><br>
-                      <label class="col-md-3 col-form-label" for="text-input"><strong>Sprint Status</strong></label>
+                      <label class="col-md-4 col-form-label" for="text-input"><strong>Sprint Status</strong></label>
                       <div *ngIf="item.inSprintNo==0" class="col-md-10">
                         <label class="form-control unplanned"><strong>Unplanned</strong></label>
                       </div>
                       <div *ngIf="item.inSprintNo!=0" class="col-md-10">
-                        <label class="form-control planned"><strong>Sprint No :</strong>{{item.priority}}</label>
+                        <label class="form-control planned"><strong>Sprint No : </strong>{{item.priority}}</label>
                       </div>
                       <br>
-                      <label class="col-md-4 col-form-label" for="text-input">
+                      <label class="col-md-10 col-form-label" for="text-input">
                         <strong>Project Name:</strong>
-                      </label><strong>{{item.projectMaster.name}}</strong>
+                      <strong class="projectName"> &nbsp; {{item.projectMaster.name}}</strong></label>
     
                     </div>
                     <!--button for updation starts here-->

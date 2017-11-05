@@ -187,7 +187,7 @@ border-radius: 1rem;
 
 }
 .priority{
-  width: 55px;
+  width: 69px;
    height: 40px
   }
   .planned{
@@ -195,10 +195,13 @@ border-radius: 1rem;
     height: 40px;
   }
   .unplanned{
-    width: 100px;
+    width: 109px;
      height: 40px;
   }
-
+.projectName{
+  color:#434040;
+  
+}
   .tool {
     position: relative;
     display: inline-block;
