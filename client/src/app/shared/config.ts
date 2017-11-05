@@ -9,5 +9,8 @@ export const ConfigFile =
     },
     BacklogUrls: {
         connection: 'http://192.168.252.125:8030/backlog'
+    },
+    SprintUrls: {
+        connection: 'http://localhost:52258/sprint'
     }
 }

@@ -24,6 +24,8 @@ namespace MyNeo4j.Hubs
         {
             _service.UpdateConnectionId(Context.ConnectionId, memberId);
         }
+
+        //create a group and member join it each time they visited this Hub
         public void CreateGroup(int projectid)
         {
             var users = _service.CreateGroup(projectid);
@@ -33,12 +35,15 @@ namespace MyNeo4j.Hubs
             }
 
         }
+
+        //get all the sprints specific to projectId
         public void GetSprints(int projectid)
         {
             List<SprintBacklog> data = _service.GetAll(projectid);
             Clients.Client(Context.ConnectionId).InvokeAsync("getSprints",data);
         }
 
+        //add the sprint
         public Task AddSprint(SprintBacklog sprint)
         {
             CreateGroup(sprint.ProjectId);
@@ -46,6 +51,7 @@ namespace MyNeo4j.Hubs
             return Clients.Group("SprintGroup").InvokeAsync("postSprints", sprint);
         }
 
+        //update the sprint(assign story to sprint).
         public void UpdateStoryInSprint(ProductBacklog sprint, int sprintid,int projectid)
         {
             CreateGroup(projectid);
@@ -53,6 +59,7 @@ namespace MyNeo4j.Hubs
             GetAllBacklogs(projectid);
         }
 
+        //get all the backlogs specific to projectId
         public Task GetAllBacklogs(int projectId)
         {
             CreateGroup(projectId);
