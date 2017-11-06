@@ -12,5 +12,8 @@ export const ConfigFile =
     },
     SprintUrls: {
         connection: 'http://localhost:52258/sprint'
+    },
+    KanBanUrls:{
+        getTaskUrl : 'http://localhost:52258/api/TaskBacklog/GetAllTaskDetail/'
     }
 }

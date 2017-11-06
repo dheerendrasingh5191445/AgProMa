@@ -9,8 +9,9 @@ namespace MyNeo4j.Repository
 {
     public interface ICheckListRepository //interface
     {
+        TaskBacklog GetTaskDetail(int Id);
         List<ChecklistBacklog> Get();
-        IEnumerable<ChecklistBacklog> Get(int id);
+        List<ChecklistBacklog> Get(int id);
         void Add_Checklist(ChecklistBacklog addchecklist);
         void Update(int id, ChecklistBacklog checklist);
         void Delete(int id);
@@ -41,9 +42,14 @@ namespace MyNeo4j.Repository
             return _context.Checklistbl.Include(m=>m.TaskBacklog).ToList();
         }
 
-        public IEnumerable<ChecklistBacklog> Get(int id) //getting checklist according to task
+        public List<ChecklistBacklog> Get(int id) //getting checklist according to task
         {
-            return _context.Checklistbl.ToList().Where(Id => Id.TaskId == id);
+            return _context.Checklistbl.Where(Id => Id.TaskId == id).ToList();
+        }
+
+        public TaskBacklog GetTaskDetail(int Id)
+        {
+            return _context.Taaskbl.FirstOrDefault(p => p.TaskId == Id);
         }
 
         public void Update(int id, ChecklistBacklog checklist) //update checklist

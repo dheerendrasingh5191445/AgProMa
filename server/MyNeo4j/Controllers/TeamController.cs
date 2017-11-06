@@ -23,34 +23,34 @@ namespace MyNeo4j.Controllers
         [HttpPost]
         public void Post([FromBody]TeamMaster team)
         {
-            _service.addTeam(team);
+            _service.AddTeam(team);
         }
 
         // PUT: api/team/5
         [HttpPost("UpdateteamMember")]
         public void UpdateteamMember([FromBody]TeamMember member)
         {
-            _service.addMembers(member);
+            _service.AddMembers(member);
         }
 
         // DELETE: api/team/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _service.deleteMember(id);
+            _service.DeleteMember(id);
 
         }
         // GET: api/team/1
         [HttpGet("{id}")]
         public List<TeamMaster> GetTeams(int id)
             {
-            return _service.getTeam(id);
+            return _service.GetTeam(id);
         }
         // GET: api/team/1
         [HttpGet("GetAvailableMember/{id}")]
         public List<AvailTeamMember> GetAvailableMember(int id)
         {
-            return _service.getAvailableMember(id);
+            return _service.GetAvailableMember(id);
         }
         //GET: api/team
         [HttpGet("GetTeamMember/{id}")]

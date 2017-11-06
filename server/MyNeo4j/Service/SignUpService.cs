@@ -59,6 +59,8 @@ namespace AgProMa.Services
             {
                 cre.Status = "success";
                 cre.UserId = master.Id;
+                cre.UserName = master.FirstName;
+                cre.Email = master.Email;
                 return cre;
             }
             else if (master.Email == cread.Email && master.Password != cread.Password)

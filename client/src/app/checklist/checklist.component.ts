@@ -16,58 +16,59 @@ import { TaskService } from './../shared/services/task.service'
 export class ChecklistComponent implements OnInit {
   // variable declarations
   StatusStyle;
-  totalCount: number = 0;
+  totalCount:number;
   check: any;
   task: any;
-  id: any = 85;
   checklistStatus: number;
   statusInPer;
   countChecklist: number = 0;
   details: Checklist[];
   model: Checklist = {
-    taskId: null,
-    checklistName: '',
-    status: false
+  taskId: null,
+  checklistName: '',
+  status: false
   };
   msg: string;
   constructor(private checkListService: ChecklistService, private taskService: TaskService, private route: ActivatedRoute) { }
   // for taking data from backend
   ngOnInit() {
     this.route.params.subscribe((param) => this.model.taskId = +param['id']);
-    this.taskService.getById(this.id).subscribe((tasks => {
-      this.task = tasks;
-      console.log("helllllllllllllloooooooooooooooooooooooooooo", this.task)
-    }));
+    this.onStartComponent();
+  }
 
-    this.checkListService.getCheckList(this.id)
+
+  //this method is for filling data on start up of project
+  onStartComponent(){
+
+    this.checkListService.getById(this.model.taskId).subscribe((tasks => {
+      this.task = tasks;
+    }));
+     
+    this.checkListService.getCheckList(this.model.taskId)
       .subscribe(data => {
-        this.details = data;
-        console.log(this.details);
-        this.details.forEach(p => { this.totalCount++ });
+        this.details = data; 
+        this.totalCount = 0;
+        this.details.forEach(p => { this.totalCount++; });
         this.details.forEach(p => { if (p["status"] == true) { this.countChecklist++ } });
         this.checklistStatus = (((this.countChecklist) / (this.totalCount)) * 100);
         this.statusInPer = (this.checklistStatus + '%')
         this.StatusStyle = { 'width': this.statusInPer };
       });
-
-
   }
+
+
   // for adding checklist of user
   addCheckList() {
-    this.model.taskId = 85;
-    console.log(this.model);
-    
     this.checkListService.addCheckList(this.model)
       .subscribe(result => {
-        this.totalCount++;
-        this.ngOnInit();
+        this.onStartComponent();
       },
       error => {
         this.msg = "Something Went Wrong, Please Try Again Later";
-      })
-      
-
+      });
   }
+
+
   // task completed logic
   markCompleted(status: any, item) {
     if (status == false) {
@@ -92,19 +93,21 @@ export class ChecklistComponent implements OnInit {
     this.checklistStatus = (((this.countChecklist) / (this.totalCount)) * 100);
     this.statusInPer = (this.checklistStatus + '%')
     this.StatusStyle = { 'width': this.statusInPer };
-    
+
   }
+  
+
   //delete checklist
   deleteChecklist(item) {
     this.checkListService.deleteChecklists(item.checklistId)
       .subscribe(result => {
         this.totalCount--;
-        if(item.status==true){
+        if (item.status == true) {
           this.countChecklist--;
         }
-        this.ngOnInit();
+        this.onStartComponent();
         this.msg = "deleted";
       });
-      
+
   }
 }

@@ -82,7 +82,7 @@ namespace MyNeo4j.Service
                     avail.MemberId = master.Id;
                     avail.MemberName = master.FirstName + ' ' + master.LastName;
                     avail.TeamId = tm.TeamId;
-                    avail.Id = tm.id;
+                    avail.Id = tm.Id;
                     availteam.Add(avail);
                 }
             }

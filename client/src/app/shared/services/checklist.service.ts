@@ -12,6 +12,7 @@ export class ChecklistService {
   //intialize class with Http service
   constructor(private http: Http) { }
   //localhost address
+  getTaskUrl:string="http://localhost:52258/api/Checklist/GetTaskDetail/";
   private checkListUrl = 'http://localhost:52258/api/Checklist/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   //method used to add checklist
@@ -20,6 +21,13 @@ export class ChecklistService {
     return this.http.post(this.checkListUrl, checklist, { headers: this.headers });
 
   }
+
+  
+//get the task object for particular Id
+getById(id){
+  return this.http.get(this.getTaskUrl+id).map((res:Response)=>res.json());
+ }
+
   //method used to get checklist by task id
   getCheckList(id) {
     console.log('i am in service using getCheckList');

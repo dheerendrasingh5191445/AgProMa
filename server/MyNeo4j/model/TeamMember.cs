@@ -7,7 +7,7 @@ namespace MyNeo4j.model
 {
     public class TeamMember
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public int TeamId { get; set; }
 
