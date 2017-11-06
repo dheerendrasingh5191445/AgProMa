@@ -18,6 +18,7 @@ export class TeamsComponent implements OnInit {
    teams:TeamMaster[];
    teamList:Members[];
    myTeamList:Members[];
+   TeamList:any;
    val:string="";
    connection:HubConnection;
    userId:number;

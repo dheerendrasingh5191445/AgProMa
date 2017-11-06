@@ -40,7 +40,7 @@ namespace MyNeo4j.Controllers
         [HttpGet("GetTask/{id}")]
         public List<TaskBacklog> GetTask(int id)
         {
-            return task.getByTaskId(id);
+            return null;
         }
 
         [HttpGet("GetTeamMember/{id}")]

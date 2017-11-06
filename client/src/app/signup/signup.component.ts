@@ -74,12 +74,11 @@ export class SignupComponent implements OnInit {
         console.log(model);
         this.loginservice.check(model).then(data=>{console.log(data);
         this.data = data;
-        if(this.data["status"] == "success") // if user is not register with AgProMa
+        if(this.data["status"] == "success") // if user is register with AgProMa
           {
             sessionStorage.setItem("id",this.data["userId"].toString());
             auth.Name = data.password;
-            auth.Email=data.email;
-            //call method for token generation
+            auth.Email=data.email;//call method for token generation
             this.loginservice.getToken(auth).then(data=>
             {var tokenData = JSON.parse(data["_body"]).token;
             sessionStorage.setItem("token",tokenData)});

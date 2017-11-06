@@ -10,11 +10,11 @@ namespace MyNeo4j.Service
 {
     public interface ITaskBacklogService
     {
-        List<TaskBacklog> getByTaskId(int SprintId);
+        List<TaskBacklog> GetAllTask(int id);
         List<TeamMaster> GetByTeamId(int SprintId);
         List<AvailTeamMember> getTeamMember(int teamId);
         void UpdateTask(int memberID, int taskId);
-        List<TaskBacklog> GetAllTask(int id);
+        void UpdateConnectionId(string connectionid, int memberid);
         string getName(int id);
     }
     public class TaskBacklogService : ITaskBacklogService
@@ -23,20 +23,6 @@ namespace MyNeo4j.Service
         public TaskBacklogService(ITaskBacklogReposiory taskBacklog)
         {
             _taskBacklog = taskBacklog;
-        }
-        
-        public List<TaskBacklog> getByTaskId(int SprintId)
-        {
-            List<TaskBacklog> allTask = _taskBacklog.getByTaskId();
-            List<TaskBacklog> sprintTask = new List<TaskBacklog>();
-            foreach(TaskBacklog tb in allTask)
-            {
-                if(tb.SprintId == SprintId)
-                {
-                    sprintTask.Add(tb);
-                }
-            }
-            return sprintTask;
         }
 
         public List<TeamMaster> GetByTeamId(int SprintId)
@@ -102,6 +88,11 @@ namespace MyNeo4j.Service
         public List<TaskBacklog> GetAllTask(int id)
         {
             return _taskBacklog.GetAllTaskDetail(id);
+        }
+
+        public void UpdateConnectionId(string connectionid, int memberid)
+        {
+            _taskBacklog.UpdateConnectionId(connectionid, memberid);
         }
     }
 }

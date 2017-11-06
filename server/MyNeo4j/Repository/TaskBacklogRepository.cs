@@ -14,6 +14,7 @@ namespace MyNeo4j.Repository
         List<SprintBacklog> AllSprint();
         List<TeamMember> AllTeamMember();
         Master Master(int id);
+        void UpdateConnectionId(string connectionid, int memberid);
         List<TaskBacklog> GetAllTaskDetail(int id);
         void Update(int memberId,int TaskId);
     }
@@ -61,6 +62,14 @@ namespace MyNeo4j.Repository
         public List<TaskBacklog> GetAllTaskDetail(int SprintId)
         {
             return _context.Taaskbl.Where(p => p.SprintId == SprintId).ToList();
+        }
+
+        public void UpdateConnectionId(string connectionid, int memberid)
+        {
+            SignalRMaster signalr = _context.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);
+            signalr.ConnectionId = connectionid;
+            signalr.HubCode = HubCode.taskbl;
+            _context.SaveChanges();
         }
     }
 }

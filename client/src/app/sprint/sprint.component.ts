@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SprintService } from '../shared/services/sprint.service';
 import { Sprint } from '../shared/model/sprint';
-import { BacklogService } from '../shared/services/backlog.service';
 import { HubConnection } from "@aspnet/signalr-client/dist/src";
 import { ActivatedRoute } from "@angular/router";
-
+import swal from 'sweetalert2';
+import { ConfigFile } from '../shared/config';
+import { ProductBacklog } from '../shared/model/productBacklog';
 
 @Component({
   selector: 'app-sprint',
@@ -15,39 +15,54 @@ export class SprintComponent implements OnInit {
   //variable declaration
   userId: number;
   projectId: number;
-  sprints: Array<any>;
-  backlogs: any[];
-  unAssignedBacklogs: Array<any>;
+  sprints: Array<Sprint>;
+  backlogs: Array<ProductBacklog>;
   connection: HubConnection;
-  newdata: any;
-
-
   newsprint = new Sprint(null, '', '', null, null, null);
-
-
-  constructor(private sprintService: SprintService, private backlogService: BacklogService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     //getting member Id from session
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
+
     //getting project id from route
     this.route.params.subscribe((param) => this.projectId = +param['id']);
 
-    //get all the sprints according to the project id.
+    //register connection methods and get all the sprints according to the project id.
     this.connectBacklogHub();
   }
   //this is for connection to hub socket
   connectBacklogHub() {
-    this.connection = new HubConnection("http://localhost:52258/sprint");
-    this.connection.on("getSprints",data => { console.log(data);this.sprints = data });
-    this.connection.on("getBacklogs",data => { console.log(data); this.backlogs = data });
-    this.connection.on("postSprints",data => { console.log(data); this.sprints.push(data); });//get only unassigned user story.
-    this.connection.start().then(() => {
-      this.connection.invoke("SetConnectionId", 1); //member Id
-      this.connection.invoke("GetSprints", this.projectId);
-      this.connection.invoke("GetAllBacklogs", this.projectId);
+    this.connection = new HubConnection(ConfigFile.SprintUrls.connection);
+
+    //register getSprints method and get returned sprints from backend.
+    this.connection.on("getSprints", data => {
+      this.sprints = data
     });
+
+    //register getBacklogs and get returned backlogs from backend.
+    this.connection.on("getBacklogs", data => {
+      this.backlogs = data
+    });
+
+    //register postSprints Method and push sprint to the sprints.
+    this.connection.on("postSprints", data => {
+      this.sprints.push(data);
+    });
+
+    //establish the connection and get sprints and backlogs specific to projectId
+    this.connection.start()
+                    .then(() => {
+                      //updates the connection id for the user/
+                      this.connection.invoke("SetConnectionId", this.userId); //member Id
+
+                      //get all the sprints for a particular projectID
+                      this.connection.invoke("GetSprints", this.projectId);
+
+                      //get all the backlogs
+                      this.connection.invoke("GetAllBacklogs", this.projectId);
+                    });
   }
 
   //compare whether story exist in sprint or not
@@ -60,13 +75,11 @@ export class SprintComponent implements OnInit {
     }
   }
 
-
+  //assign task to particular members
   updateStoryInSprint($event, sprintNo: number) {
-    //assign task to particular members
-    console.log("successs");
     let storyData: any = $event.dragData;
-    console.log($event.dragData);
-    this.connection.invoke("UpdateStoryInSprint",storyData,sprintNo, this.projectId);
+    //invoke method for updating story in sprint.
+    this.connection.invoke("UpdateStoryInSprint", storyData, sprintNo, this.projectId);
   }
 
 
@@ -74,6 +87,8 @@ export class SprintComponent implements OnInit {
   onSaveSprint() {
     this.newsprint.status = false;
     this.newsprint.projectId = this.projectId;
-    this.connection.invoke("AddSprint", this.newsprint);
+    //invoke Add Sprint method of Backend
+    this.connection.invoke("AddSprint", this.newsprint)
+                    .then((notify) => swal('Sprint Added', '', 'success'));
   }
-}
+} 

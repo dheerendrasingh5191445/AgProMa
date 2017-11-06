@@ -1,17 +1,21 @@
+.container {
+  font-family: 'Raleway', Arial, sans-serif;
+}
 .sprint {
-    background-color: #DDDCDC;
     margin-right: 1em;
-    height: 100%;
+}
+.list {
+  overflow-y: auto;
+  height: 500px;
 }
 .backlogItmes {
-    background-color: #DBDBDB;
     height: 100%;
 }
 p {
   text-align: justify;
 }
 #header_sprint {
-    background: #5B4F4F;
+    background: #460619;
     padding-left: 20px;
     margin: 0px;
     padding: 10px;
@@ -23,11 +27,14 @@ p {
 .date {
   float: right;
 }
+.story {
+  padding-left: 10px;
+}
 .story_name {
   margin-bottom: 10px;
 }
 #header_backlog_items {
-    background: #5B4F4F;
+    background: #1f6d6d;
     padding-left: 20px;
     margin: 0px;
     padding: 10px;
@@ -36,14 +43,23 @@ p {
     font-size: 21px;
     text-align: center;
 }
-#btn_sprint {
-    position: relative; 
-    margin-bottom: 0rem;
+
+.card-header {
+  /* background: rgb(204, 20, 20); */
 }
+
 .card-text {
     text-align: justify;
     margin-bottom: 10px;
 }
+
+.stories_Sprint {
+  margin: 10px;
+  padding: 5px;
+  border: 2px solid rgb(116, 115, 115);
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 575px) {
     .sprint {
         margin-right: 0em;
@@ -61,15 +77,14 @@ ul {
         color:transparent
     }
     .card-header{
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
-    .card-text li{
-        width: 200px;
-        height: 20px;
-        margin: 5px 20px 5px 20px;
-    }
+  .card-text li{
+    width: 200px;
+    height: 20px;
+    margin: 5px 20px 5px 20px;
+  }
 .dark_header {
-    background: #666;
     margin: 0px;
     padding: 10px;
     border-radius: 5px;
@@ -115,17 +130,16 @@ ul {
   .container-fluid{
     color: grey
   }
+  .mdl {
+    font-family: 'Raleway', Arial, sans-serif;
+  }
   #myModal{
-    
-    margin: auto;
-    }
+  margin: auto;
+  }
     .modal-header{
-      background-color: #0C0D0C ;
+      background-color: #460619 ;
       color:white;
     
-    }
-    .modal-body{
-      background-color: #B8B1B1 ;
     }
     #addBtn{
     float: right;
@@ -136,7 +150,6 @@ ul {
       background-color:white;
     }
     #addBtn:hover{
-      background-color: #787171 ;
       color: white;
     }
     
@@ -149,3 +162,202 @@ ul {
         margin-top: 1em;
         float: right;
     }
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+    @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+    button.addButton {
+      font-family: 'Raleway', Arial, sans-serif;
+      border: none;
+      background-color: #000000;
+      border-radius: 5px;
+      color: #ffffff;
+      cursor: pointer;
+      padding: 10px 30px;
+      display: inline-block;
+      margin: 15px 30px;
+      text-transform: uppercase;
+      line-height: 1.5em;
+      font-weight: 400;
+      font-size: 1em;
+      outline: none;
+      position: relative;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    button.addButton span {
+      display: inline-block;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      opacity: 0.8;
+      -webkit-transition-delay: 0.3s;
+      transition-delay: 0.3s;
+    }
+    button.addButton i {
+      font-size: 28px;
+      text-align: center;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      display: block;
+      position: absolute;
+      opacity: 0;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    button.addButton:before {
+      content: '';
+      top: 0;
+      left: 50%;
+      right: 50%;
+      position: absolute;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      -webkit-transition-delay: 0.15s;
+      transition-delay: 0.15s;
+    }
+    button.addButton:hover span,
+    button.addButton.hover span {
+      opacity: 0;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    button.addButton:hover i,
+    button.addButton.hover i {
+      opacity: 1;
+      -webkit-transition-delay: 0.2s;
+      transition-delay: 0.2s;
+    }
+    button.addButton:hover:before,
+    button.addButton.hover:before {
+      left: 0;
+      right: 0;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    button.addButton:active:before {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+    @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+    button.submit {
+      font-family: 'Raleway', Arial, sans-serif;
+      border: none;
+      background-color: #1f6d6d;
+      border-radius: 5px;
+      color: #ffffff;
+      cursor: pointer;
+      padding: 10px 40px;
+      display: inline-block;
+      margin: 15px 30px;
+      text-transform: uppercase;
+      line-height: 1.5em;
+      font-weight: 500;
+      font-size: 1em;
+      outline: none;
+      position: relative;
+      opacity: 1;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    button.submit span {
+      display: inline-block;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      opacity: 0.8;
+      -webkit-transition-delay: 0.3s;
+      transition-delay: 0.3s;
+    }
+    button.submit i {
+      font-size: 28px;
+      text-align: center;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      display: block;
+      position: absolute;
+      opacity: 0;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    button.submit:before {
+      content: '';
+      top: 0;
+      left: 50%;
+      right: 50%;
+      position: absolute;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      -webkit-transition-delay: 0.15s;
+      transition-delay: 0.15s;
+    }
+    button.submit:hover span,
+    button.submit.hover span {
+      opacity: 0;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    button.submit:hover i,
+    button.submit.hover i {
+      opacity: 1;
+      -webkit-transition-delay: 0.2s;
+      transition-delay: 0.2s;
+    }
+    button.submit:hover:before,
+    button.submit.hover:before {
+      left: 0;
+      right: 0;
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    button.submit:active:before {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .unassigned_backlogs {
+      overflow-y:auto;
+      height:500px;
+    }
+    .panel {
+      overflow-y: auto;
+      height: 500px;
+    }
+    .sprints {
+      height: 300px;
+      text-align: justify;
+    }
+    .card:hover {
+      box-shadow: 0 0 11px rgba(33,33,33,1);
+    }
+  .tool {
+    position: relative;
+    display: inline-block;
+ }
+ 
+ .tool .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    height: 120px;
+    background-color: #2F2E2E;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+ 
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+ }
+ 
+ .tool:hover .tooltiptext {
+    visibility: visible;
+ }

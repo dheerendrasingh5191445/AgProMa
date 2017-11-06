@@ -18,9 +18,7 @@ export class TaskAssignComponent {
     AvailTeam:TeamMaster[]; 
     TeamMemberList:Members[];
     sprintId:number;
-    projectId:number;
     userId:number;
-    myId:number;
     name:string;
     data:TaskBackLog;
     connection:HubConnection;
@@ -28,7 +26,7 @@ export class TaskAssignComponent {
     constructor(private task: TaskAssignService,private route:ActivatedRoute) { } //inject TaskAssignservices
     
     ngOnInit(){
-        this.route.params.subscribe(param =>this.projectId = +param['id']);
+        this.route.params.subscribe(param =>this.sprintId = +param['id']);
         var session = sessionStorage.getItem("id");
         this.userId = parseInt(session);
 
@@ -44,17 +42,15 @@ export class TaskAssignComponent {
         this.connection = new HubConnection("http://localhost:52258/taskbacklog");
         // when this component reload ,it will call this method
         // registering event handlers
-        this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data; });//this will return list of teams
-        this.connection.on("getTeamList",data =>{ this.AvailTeam = data;  });//this will return list of available member
-        this.connection.on("getTeamMember",data => { this.TeamMemberList = data;})
+        this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data;console.log(this.AvailTask); });//this will return list of teams
+        this.connection.on("getTeamList",data =>{ this.AvailTeam = data;   });//this will return list of available member
+        this.connection.on("getTeamMember",data => { this.TeamMemberList = data; console.log(this.TeamMemberList);})
         //sweet alert when task happens following 3
-        this.connection.on("whenUpdated",data => { swal('Member Added', '', 'success') }); 
-        this.connection.on("whenAdded",data => { swal('Team Added', '', 'success') });
-        this.connection.on("whenDeleted",data => { swal('Member Removed', '', 'success') });   
+        this.connection.on("whenAssigned",data => { swal('Member Assigned To task', '', 'success') }); 
         this.connection.start().then(() => { 
         this.connection.invoke("SetConnectionId",this.userId);
         this.connection.invoke("GetAllTaskDetail",this.sprintId);//get the list of the tasks in a particular project
-        this.connection.invoke("GetTeamList",this.projectId);
+        this.connection.invoke("GetTeamList",this.sprintId);//get the team according to the the sprint id
         });
       }
 
@@ -69,15 +65,20 @@ export class TaskAssignComponent {
     //after adding the member to the list the list must be updated with the member name
     teamListupdate($event,id:number){  
        let teamMember:any  = $event.dragData;
-       this.connection.invoke("AssignTask",id,teamMember)
-                      .then(data => {  })
-       this.task.assignTask(teamMember,id) //assign task to particular members
-                .then(data => {this.task.getTaskList(2)
-                                        .then(data =>{ this.AvailTask = data.json();})});//return updated list in json
+       this.connection.invoke("AssignTask",id,teamMember)//assign task to particular members
+                      .then(data => {  this.connection.invoke("GetAllTaskDetail",this.sprintId); });//return updated list in json
+     
     }
+
     //method to bring member name from member id
     getName(task:TaskBackLog):string{
         return this.TeamMemberList.filter(t=>t["MemberId"]==task.PersonId)[0]["MemberName"];//filter members from member id and bring member name
      }
+
+     //this method is to compare wether a person exist in team or not
+     compareTask(taskblId:number,taskId:number){
+      if(taskId == taskId)return true;
+      else return false;
+     }
     
-}
+}  

@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyNeo4j.Service;
 using MyNeo4j.model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyNeo4j.Controllers
 {
-   // [Produces("application/json")]
-    [Route("api/[Controller]")]
+    // [Produces("application/json")]
+
+     [Route("api/[Controller]")]
     public class BacklogController:Controller {
         private IBacklogServices _service;
 

@@ -14,9 +14,12 @@
                         <i class="fa fa-tasks"></i>&nbsp;&nbsp;{{item.taskName}} <!--task name -->
                     </div>
                     <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.taskId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
-                        <ul class="list-group">
-                            <li><i class='fa fa-user'></i>{{item.Name}}</li> <!--names of the person assigned to a particular task-->
+                        <div *ngFor="let data of TeamMemberList">
+                          <ul class="list-group">
+                            <li *ngIf="compareTask(item.personId,data.memberId)">
+                            <i class='fa fa-user'></i>{{item.memberName}}</li> <!--names of the person assigned to a particular task-->
                           </ul>  <!--bring the person assigned to a particular task-->
+                        </div>
                      <ul><li></li> </ul>     <!--list to fill the tasks and members assigned-->                   
                     </div>
                 </div>

@@ -87,6 +87,7 @@ namespace MyNeo4j
                routes.MapHub<ReleasePlanHub>("releaseplan");
                routes.MapHub<TeamHub>("teamhub");
                routes.MapHub<TaskBacklogHub>("taskbacklog");
+	           routes.MapHub<BacklogHub>("backlog");
             });
             
             if(env.IsDevelopment())

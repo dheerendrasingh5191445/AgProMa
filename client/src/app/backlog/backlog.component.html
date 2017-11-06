@@ -1,149 +1,117 @@
-
-<div class=" bklog col-6">
-  <h1 class="dark_header margin-bottom-15">
-      <strong>Product Backlog </strong>
-    </h1>
-
-      
-
-      <div class="card-text"  dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="data">
-          <div class="test_q_list_item" *ngFor="let item of data;let i = index">
-            <!-- <div class="card-header">
-              Available Members
-            </div> -->
-          
-           
-            <a class="contentstory" data-toggle="modal" href=#mymodal{{i}} >  <div class="div_details ">
-                <button class="priority btn  btn-circle">{{item.priority}}</button>
-            
-           <span   style="text-align: justify;"dnd-sortable [sortableIndex]="i">{{item.storyName}}</span>
-              
+<div class="container-fluid">
+    <!--div for product backlog starts here-->
+    <div class=" bklog col-10">
+      <h1 class="dark_header margin-bottom-15">
+        <strong>Product Backlog </strong>
+      </h1>
+      <!--card for product backlog starts here-->
+      <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="stories">
+        <div class="test_q_list_item" *ngFor="let item of stories;let i = index">
+          <a class="contentstory" data-toggle="modal" href=#mymodal{{i}}>
+            <!--div for backlog details starts here-->
+            <div class="div_details">
+              <span style="text-align: justify;" dnd-sortable [sortableIndex]="i">{{item.storyName}}</span>
             
             </div>
+            <!--div for backlog details ends here-->
           </a>
-
-
-
-            <div class="modal fade mdl" id="mymodal{{i}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-   
-                  </div>
-                  <div class="modal-body">
-   
-   
-                    <form >
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="text-input">User Story</label>
-                            <div class="col-md-10">
-                                <textarea  class="form-control form-rounded" type="text-area" placeholder="Write" #story>{{item.storyName}}</textarea>                           
-                            
-                          </div>
-                   
-                            <label class="col-md-3 col-form-label" for="text-input">Remarks</label>
-                            <div class="col-md-10">
-                            <textarea  class="form-control form-rounded" type="text-area" rows="3"  placeholder="Write" #cmnt>{{item.comments}}</textarea>                           
-                        
-                            
-
-                            <label class="col-md-3 col-form-label" for="text-input">Priority</label>
-                            <div class="col-md-10">
-                            <textarea  class="form-control" style="width: 55px; height: 40px"  #prt>{{item.priority}}</textarea>                 
-                         
-                    </div>
-
-                    </div></div>
-
-                      <button style=" background:#5B4F4F" type="submit" value="sub" name="sub" class="btn rjt" (click)="updateBacklog(story.value,cmnt.value,prt.value,item)" data-dismiss="modal"
-                        target=_blank>Update</button>
-
-                      <button style=" background:#5B4F4F" type="submit" value="sub" name="sub" class="btn rjt" (click)="deleteBacklog(item)" data-dismiss="modal"
-                      target=_blank>Delete</button>
-                    </form>
-                  </div>
-              </div>
-              </div>
-     
-         
-
-
-          </div>
-          
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </div>
-   <button class="btn addbtn" data-toggle="modal" data-target="#myModal" type="submit">Add</button>
-    <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-     
-                    </div>
-                    <div class="modal-body">
-     
-     
-                      <form >
-                          <div class="form-group row">
-                              <label class="col-md-3 col-form-label" for="text-input">User Story</label>
-                              <div class="col-md-10">
-                                  <textarea  class="form-control form-rounded" type="text-area" placeholder="Write" #story></textarea>                           
-                              
-                            </div>
-                     
-                              <label class="col-md-3 col-form-label" for="text-input">Remarks</label>
-                              <div class="col-md-10">
-                              <textarea  class="form-control form-rounded" type="text-area" rows="3"  placeholder="Write" #cmnt> </textarea>                           
-                           
+          <!--modal for details starts here-->
+          <div class="modal fade mdl" id="mymodal{{i}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <strong>Details</strong >
+                              </div>
+                <!--modal body starts here-->
+                <div class="modal-body">
+                  <!--form for updating  user story details starts here-->
+                  <form>
+                    <div class="form-group row">
+                      <label class="col-md-3 col-form-label" for="text-input"><strong>User Story</strong></label>
+                      <div class="col-md-10">
+                        <textarea class="form-control form-rounded" type="text-area" placeholder="Write" #story>{{item.storyName}}</textarea>
                       </div>
-
+                      <label class="col-md-3 col-form-label" for="text-input"><strong>Remarks</strong></label>
+                      <div class="col-md-10">
+                        <textarea class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt>{{item.comments}}</textarea>
+                      </div>
+                      <label class="col-md-3 col-form-label" for="text-input"><strong>Priority</strong></label>
+                      <div class="col-md-10">
+                        <input class="form-control priority" value={{item.priority}} type="number" #priority>
+                      </div><br><br>
+                      <label class="col-md-4 col-form-label" for="text-input"><strong>Sprint Status</strong></label>
+                      <div *ngIf="item.inSprintNo==0" class="col-md-10">
+                        <label class="form-control unplanned"><strong>Unplanned</strong></label>
+                      </div>
+                      <div *ngIf="item.inSprintNo!=0" class="col-md-10">
+                        <label class="form-control planned"><strong>Sprint No : </strong>{{item.priority}}</label>
+                      </div>
+                      <br>
+                      <label class="col-md-10 col-form-label" for="text-input">
+                        <strong>Project Name:</strong>
+                      <strong class="projectName"> &nbsp; {{item.projectMaster.name}}</strong></label>
     
                     </div>
-                    
-                             <label class="col-md-3 col-form-label" for="text-input">Priority</label>
-                             <div class="col-md-10">
-                             <textarea  class="form-control" style="width: 55px; height: 40px"  #prt>{{length+1}}</textarea>                 
-                          
-                     </div>
-
-                        <button style=" background:#5B4F4F" type="submit" value="sub" name="sub" class="btn rjt" (click)="addBacklog(story.value,cmnt.value,prt.value)" data-dismiss="modal"
-                          target=_blank>Add</button>
-                      </form>
-                    </div>
+                    <!--button for updation starts here-->
+                    <button type="submit" value="sub" name="sub" class="buttonStyle" (click)="updateBacklog(story.value,cmnt.value,priority.value,item)"
+                     data-dismiss="modal" target=_blank><span>Update</span><i class="ion-android-arrow-forward"></i>
+                             </button>
+                    <!--button for updation ends here-->
+                    <!--button for deletion starts here-->
+                    <button type="submit" value="sub" name="sub" class="buttonStyle" (click)="deleteBacklog(item)" data-dismiss="modal" target=_blank><span>Delete</span><i class="ion-android-arrow-forward"></i>
+                            </button>
+                    <!--button for deletion ends here-->
+                  </form>
+                  <!--form for updating  user story details ends here-->
                 </div>
-                </div>
-       
-           
-
-
+                <!--modal body starts here-->
+              </div>
             </div>
-            
+          </div>
+          <!---modal body starts here-->
+        </div>
+        <!--button for submission starts here-->
+        <button class="buttonStyle" data-toggle="modal" data-target="#myModal" type="submit"><span>Add</span><i class="ion-android-arrow-forward"></i>
+        </button>
+        <!--button for submission ends here-->
+        <!--modal for adding new user story starts here-->
+        <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                Add New
+              </div>
+              <!--modal body starts here-->
+              <div class="modal-body">
+                <!--form for adding user story starts here-->
+                <form>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">User Story</label>
+                    <div class="col-md-10">
+                      <textarea class="form-control form-rounded" type="text-area" placeholder="Write" #story></textarea>
+                    </div>
+                    <label class="col-md-3 col-form-label" for="text-input">Remarks</label>
+                    <div class="col-md-10">
+                      <textarea class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt> </textarea>
+                    </div>
+                  </div>
+                  <label class="col-md-3 col-form-label " for="text-input">Priority</label>
+                  <div class="col-md-10">
+                    <textarea class="form-control priority" #prt>{{length+1}}</textarea>
+                  </div>
+                  <br>
+                  <button class="buttonStyle" type="submit" value="sub" name="sub" (click)="addBacklog(story.value,cmnt.value,prt.value)" data-dismiss="modal"
+                   target=_blank><span>Add</span><i class="ion-android-arrow-forward"></i></button>
+                </form>
+                <!--form for adding user story ends here-->
+              </div>
+              <!--modal body ends here-->
+            </div>
           </div>
         </div>
-
- 
-  
+        <!--modal for adding new user story ends here-->
+      </div>
+      <!--card for product backlog ends here-->
+    </div>
+    <!--div for product backlog starts here-->
+    </div>

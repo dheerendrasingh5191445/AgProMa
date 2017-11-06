@@ -42,7 +42,7 @@ namespace AuthenticationAPI.Controllers
             var claims = new[]
            {
                 
-                new Claim(JwtRegisteredClaimNames.Sub, tokenUser.Name),
+                new Claim(JwtRegisteredClaimNames.GivenName, tokenUser.Name),
                 new Claim(JwtRegisteredClaimNames.Email, tokenUser.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
