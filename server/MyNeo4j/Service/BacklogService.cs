@@ -24,22 +24,25 @@ namespace MyNeo4j.Service
         {
             _repository = repository;
         }
-
+        //for adding new user story
         public void Add(ProductBacklog backlog)
         {
             _repository.Add(backlog);
         }
 
+        //for deleting particular user story based on storyid
         public void Delete(int id)
         {
             _repository.Delete(id);
         }
-        
+
+        //for getting all unassingned story
         public List<ProductBacklog> GetAll(int  id)
         {
             return _repository.GetAll(id).ToList();
         }
 
+        // for update  a user story based on storyid
         public ProductBacklog Update(int id, ProductBacklog res)
         {
             return _repository.Update(id, res);

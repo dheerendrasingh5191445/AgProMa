@@ -21,48 +21,54 @@ namespace MyNeo4j.Service
     public class EpicService:IEpicServices
     {
         
-   private IEpicRepository _repository;
-    public EpicService(IEpicRepository repository)
-    {
-        _repository = repository;
-    }
+        private IEpicRepository _repository;
+        public EpicService(IEpicRepository repository)
+        {
+            _repository = repository;
+        }
 
-    public void Add(EpicMaster backlog)
-    {
-        _repository.Add(backlog);
-    }
+        //for adding new epic 
+        public void Add(EpicMaster backlog)
+        {
+            _repository.Add(backlog);
+        }
 
-    public void Delete(int id)
-    {
-        _repository.Delete(id);
-    }
+        //for deleting partcular epic based on epic id
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+        }
 
-    public List<EpicMaster> GetAll(int id)
-    {
-        return _repository.GetAll(id).ToList();
-    }
+        //for getting all epics based on projectid. 
+        public List<EpicMaster> GetAll(int id)
+        {
+            return _repository.GetAll(id).ToList();
+        }
 
-    public List<string> getGroup(int projectId)
-    {
-            List<string> signal = new List<string>();
-            List<ProjectMember> promem = _repository.GetMemberIdList(projectId);
-            foreach(ProjectMember pro in promem)
-            {
-                SignalRMaster entry = _repository.GetConnectIdByMemId(pro.MemberId);
-                if (entry.HubCode == 0 && entry.Online == true)
-                { signal.Add(entry.ConnectionId); }
-            }
+        //for getting the group of users to which we want to show the update
+        public List<string> getGroup(int projectId)
+        {
+           List<string> signal = new List<string>();
+           List<ProjectMember> promem = _repository.GetMemberIdList(projectId);
+           foreach(ProjectMember pro in promem)
+           {
+             SignalRMaster entry = _repository.GetConnectIdByMemId(pro.MemberId);
+             if (entry.HubCode == 0 && entry.Online == true)
+             { signal.Add(entry.ConnectionId); }
+           }
             return signal;
-    }
+        }
 
+        //update the connection for the user
         public void SetConnectId(int userId,string conId)
-    {
-        _repository.SetConnectId(userId, conId);        
-    }
+        {
+            _repository.SetConnectId(userId, conId);        
+        }
 
+        //for update particular epic based on project id 
         public void Update(int id, EpicMaster res)
-    {
-        _repository.Update(id, res);
+        {
+            _repository.Update(id, res);
+        }
     }
-}
 }

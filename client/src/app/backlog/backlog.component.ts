@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HubConnection } from "@aspnet/signalr-client";
-
 import swal from 'sweetalert2';
-
 import { ProductBacklog } from '../shared/model/productBacklog';
 import { ConfigFile } from './../shared/config';
-
-
 @Component({
   selector: 'app-backlog',
   templateUrl: './backlog.component.html',
   styleUrls: ['./backlog.component.css']
 })
-
 export class BacklogComponent implements OnInit {
   projectId: number;
   stories: Array<ProductBacklog>;
@@ -42,11 +37,9 @@ export class BacklogComponent implements OnInit {
     this.connection.on("getbacklog", backlogs => {
       this.stories = backlogs;
       this.length=this.stories.length;
-      
       this.stories.sort(function (a, b) {
         return a.priority - b.priority;
-        });
-
+      });
     });
 
     //get the added backlog return data with socket
@@ -79,22 +72,22 @@ export class BacklogComponent implements OnInit {
     if (story == "") {
       swal('Please fill user story', '', 'error');
     } else {
-      this.model.storyName = story;
-      this.model.comments = comment
-      this.model.projectId = this.projectId;
-      this.model.status = false;
-      this.model.priority = priority;
-      //invoke backend post method
-      this.connection.invoke("PostBacklog", this.model)
+       this.model.storyName = story;
+        this.model.comments = comment
+        this.model.projectId = this.projectId;
+        this.model.status = false;
+        this.model.priority = priority;
+        //invoke backend post method
+        this.connection.invoke("PostBacklog", this.model)
                       .then(data=>{swal('User story deleted', '', 'success');
       
-    });
-      this.connection.invoke("GetBacklog", this.projectId)
+                      });
+        this.connection.invoke("GetBacklog", this.projectId)
                       .then(data=>{this.stories.sort(function (a, b) {
                         return a.priority - b.priority;
                         });
                       });
-    }
+      }
   }
 
   //for updating a particular user story
@@ -103,12 +96,12 @@ export class BacklogComponent implements OnInit {
       swal('Please fill user story', '', 'error');
     }
     else {
-    item.storyName = content;
-    item.comments = comment;
-    item.priority = priority;
-    this.connection.invoke("UpdateBacklog", item.storyId, item)
+      item.storyName = content;
+      item.comments = comment;
+      item.priority = priority;
+      this.connection.invoke("UpdateBacklog", item.storyId, item)
                     .then(data=>{swal('User story updated', '', 'success')});
-    this.connection.invoke("GetBacklog", this.projectId)
+      this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{this.stories.sort(function (a, b) {
                       return a.priority - b.priority;
                       });
@@ -122,8 +115,7 @@ export class BacklogComponent implements OnInit {
                     .then(data=>{ swal('User story deleted', '', 'success')});
     this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{ this.stories.sort(function (a, b) {
-                      return a.priority - b.priority;
-                      });
-                    });
+                       return a.priority - b.priority;
+                    });});
   }
 }

@@ -15,7 +15,7 @@ export class EpicComponent implements OnInit {
 
   projectId: number = 12;
   connection: HubConnection;
-  data: Array<any>
+  data: Array<any> //all epics will store in this variable
   userId:number;
 
   model = new Epic(null, ''); //model for adding new epic
@@ -36,30 +36,30 @@ export class EpicComponent implements OnInit {
     });
   }
 
-addBacklog(story:any, comment:any)//for adding new  epic
-{
-  if (story == "") {
-    swal('Please fill user story','','error');
-  } else {
-    this.model.description = story;
-    this.model.projectId = this.projectId;
-    this.connection.invoke("Post",this.model);
-    this.connection.invoke("Get",this.projectId);
+  addBacklog(story:any, comment:any)//for adding new  epic
+  {
+    if (story == "") {
+      swal('Please fill user story','','error');
+    } 
+    else {
+      this.model.description = story;
+      this.model.projectId = this.projectId;
+      this.connection.invoke("Post",this.model);
+      this.connection.invoke("Get",this.projectId);
+    }
   }
-}
 
-updateBacklog(content:any, item) //for updating  particular epic 
-{
-  if (content == "") {
-    swal('Please fill user story', '', 'error');
+  updateBacklog(content:any, item){ //for updating  particular epic 
+    if (content == "") {
+      swal('Please fill user story', '', 'error');
+    }
+    else{
+      item.description = content;
+      this.connection.invoke("put",item.epicId,item);
+    } 
   }
-  else{
-  item.description = content;
-  this.connection.invoke("put",item.epicId,item);
-}
-}
 
-deleteBacklog(item:any){       //for deleting the epic 
+  deleteBacklog(item:any){       //for deleting the epic 
 
     this.connection.invoke("Delete",item.epicId);
     this.connection.invoke("Get",this.projectId);
