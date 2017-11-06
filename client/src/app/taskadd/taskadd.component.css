@@ -8,14 +8,14 @@
   margin-left: 0PX;
 }
 .dark_header {
-  background-color:#1f6d6d;
+  background-color:#460619;
   border-radius: 5px;
   color: white;
   /* width: 800px; */
   text-align: center;
-  height: 80px;
+  height: 50px;
   margin-top: 10PX;
-  font-size: 40px;
+  padding-top: 15px;
 }
 fieldset.custom {
   border: 1px solid #ddd;
