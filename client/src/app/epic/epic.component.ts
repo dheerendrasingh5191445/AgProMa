@@ -24,7 +24,7 @@ export class EpicComponent implements OnInit {
   ngOnInit() {
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-    this.connection = new HubConnection("http://localhost:52257/epichub");//for connecting with hub // when this component reload ,it will call this method
+    this.connection = new HubConnection("http://localhost:52258/epichub");//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
     this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts

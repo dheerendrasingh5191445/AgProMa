@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using MyNeo4j.model;
 using MyNeo4j.Service;
 using System.Threading.Tasks;
@@ -7,6 +7,7 @@ namespace MyNeo4j.Hubs
     public class ReleasePlanHub : Hub
     {
         private IReleasePlanService _service;
+        //constructor
         public ReleasePlanHub(IReleasePlanService service)
         {
             _service = service;
@@ -17,7 +18,7 @@ namespace MyNeo4j.Hubs
             //call method to add memberinfo into db with connectionid and memberid
             _service.UpdateConnectionId(Context.ConnectionId, Memberid);
         }
-
+        //method for creating a group to particular project id
         public void CreateGroup(int projectid)
         {
             var users = _service.CreateGroup(projectid);
@@ -26,28 +27,28 @@ namespace MyNeo4j.Hubs
                 Groups.AddAsync(user.ConnectionId, "releaseGroup");
             }
         }
-
-
+        //method for getting all release plans to a aprticular project id
         public Task GetReleasePlans(int projectId)
         {
             CreateGroup(projectId);
             var data = _service.GetAllReleasePlan(projectId);
-            return Clients.Group("releaseGroup").InvokeAsync("getreleaseplans", data);
+            return Clients.Client(Context.ConnectionId).InvokeAsync("getreleaseplans", data);
         }
+        //method for adding a new release
         public Task AddRelease(ReleasePlanMaster release)
         {
             CreateGroup(release.ProjectId);
             _service.AddRelease(release);
             return Clients.Group("releaseGroup").InvokeAsync("whenAdded", release);
         }
-
+        //method for getting all sprints to a particular project id
         public Task GetAllSprints(int projectId)
         {
             CreateGroup(projectId);
             var data = _service.GetAllSprints(projectId);
-            return Clients.Group("releaseGroup").InvokeAsync("getsprints", data);
+            return Clients.Client(Context.ConnectionId).InvokeAsync("getsprints", data);
         }
-
+        //Method for updating a release to a particular a sprint 
         public void UpdateReleaseInSprint(SprintBacklog sprintbl,int releaseId)
         {
             CreateGroup(sprintbl.ProjectId);
@@ -55,7 +56,5 @@ namespace MyNeo4j.Hubs
             GetAllSprints(sprintbl.ProjectId);
 
         }
-
-
     }
 }

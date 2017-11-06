@@ -32,7 +32,7 @@ export class BacklogComponent implements OnInit {
   }
 
   connectBacklogHub() {
-    this.connection = new HubConnection('http://localhost:52257/backlog');
+    this.connection = new HubConnection('http://localhost:52258/backlog');
     //register to get Backlogs from the backend.
     this.connection.on("getbacklog", backlogs => {
       this.stories = backlogs;

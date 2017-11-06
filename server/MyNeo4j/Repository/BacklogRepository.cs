@@ -86,7 +86,7 @@ namespace MyNeo4j.Repository
             var memberIds = projectMembers.Select(m => m.MemberId);
             List<SignalRMaster> onlineMembers = _context.SignalRDb.Where(m => m.Online == true && m.HubCode == HubCode.backlog).ToList();
             return onlineMembers.Where(n => memberIds.Contains(n.MemberId)).ToList();
-        }s
+        }
     }
 
 }
