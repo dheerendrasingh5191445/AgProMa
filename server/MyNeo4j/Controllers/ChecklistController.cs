@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +10,6 @@ using MyNeo4j.model;
 
 namespace MyNeo4j.Controllers
 {
-
     [Produces("application/json")]
    
     public class ChecklistController : Controller 
@@ -31,11 +30,19 @@ namespace MyNeo4j.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public ChecklistBacklog Get(int id)
+        [HttpGet]
+        [Route("api/[controller]/{id}")]
+        public IActionResult Get(int id)
         {
-            ChecklistBacklog a = _context.Get(id); // getting checklist according to task
-            return a;
+            try
+            {
+                _context.Get(id);
+                return Ok(_context.Get(id));
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         // POST api/values
@@ -43,7 +50,7 @@ namespace MyNeo4j.Controllers
         [Route("api/[controller]")]
         public void Post([FromBody]ChecklistBacklog value) //adding checklist
         {
-            _context.Add_User(value);
+            _context.Add_Checklist(value);
         }
 
         // PUT api/values/5

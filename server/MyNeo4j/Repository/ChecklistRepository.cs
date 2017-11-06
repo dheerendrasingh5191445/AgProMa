@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MyNeo4j.Repository
 {
-    public interface ICheckListRepository //declarations
+    public interface ICheckListRepository //interface
     {
         List<ChecklistBacklog> Get();
-        ChecklistBacklog Get(int id);
-        void Add_User(ChecklistBacklog adduser);
-        void Update(int id, ChecklistBacklog user);
+        IEnumerable<ChecklistBacklog> Get(int id);
+        void Add_Checklist(ChecklistBacklog addchecklist);
+        void Update(int id, ChecklistBacklog checklist);
         void Delete(int id);
     }
     public class ChecklistRepository : ICheckListRepository 
@@ -23,9 +23,9 @@ namespace MyNeo4j.Repository
             _context = con;
 
         }
-        public void Add_User(ChecklistBacklog adduser) //adding checklist
+        public void Add_Checklist(ChecklistBacklog addchecklist) //adding checklist
         {
-            _context.Checklistbl.Add(adduser);
+            _context.Checklistbl.Add(addchecklist);
             _context.SaveChanges();
         }
 
@@ -41,17 +41,16 @@ namespace MyNeo4j.Repository
             return _context.Checklistbl.Include(m=>m.TaskBacklog).ToList();
         }
 
-        public ChecklistBacklog Get(int id) //getting checklist according to task
+        public IEnumerable<ChecklistBacklog> Get(int id) //getting checklist according to task
         {
-            ChecklistBacklog s = _context.Checklistbl.FirstOrDefault(p => p.ChecklistId == id);
-            return s;
+            return _context.Checklistbl.ToList().Where(Id => Id.TaskId == id);
         }
 
-        public void Update(int id, ChecklistBacklog user) //update checklist
+        public void Update(int id, ChecklistBacklog checklist) //update checklist
         {
             ChecklistBacklog sign = _context.Checklistbl.FirstOrDefault(p => p.ChecklistId == id);
-            sign.ChecklistName = user.ChecklistName;
-            sign.Status = user.Status;
+            sign.ChecklistName = checklist.ChecklistName;
+            sign.Status = checklist.Status;
             _context.SaveChanges();
         }
     }
