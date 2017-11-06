@@ -77,12 +77,17 @@ export class SignupComponent implements OnInit {
         if(this.data["status"] == "success") // if user is not register with AgProMa
           {
             sessionStorage.setItem("id",this.data["userId"].toString());
-            auth.Name = data.password;
-            auth.Email=data.email;
+            console.log("pass",this.password);
+            console.log("email",this.email);
+            auth.Name = this.password;
+            auth.Email=this.email;
+            console.log("auth",auth);
             //call method for token generation
             this.loginservice.getToken(auth).then(data=>
             {var tokenData = JSON.parse(data["_body"]).token;
+            console.log("tokendat....-----",tokenData);
             sessionStorage.setItem("token",tokenData)});
+            console.log("get token",sessionStorage.getItem("token"));
             this.router.navigate(["/app-dashboard"]); //if user's credentials are correct then user will br redirected to dashboard
           }
         else if(this.data["status"] == "email"){
