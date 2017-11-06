@@ -22,6 +22,7 @@ export class TaskAssignComponent {
     name:string;
     data:TaskBackLog;
     connection:HubConnection;
+    myId: any;
 
     constructor(private task: TaskAssignService,private route:ActivatedRoute) { } //inject TaskAssignservices
     
@@ -60,7 +61,6 @@ export class TaskAssignComponent {
     getTeamMember(){
         this.connection.invoke("GetTeamMember",this.myId);
     }
-
 
     //after adding the member to the list the list must be updated with the member name
     teamListupdate($event,id:number){  
