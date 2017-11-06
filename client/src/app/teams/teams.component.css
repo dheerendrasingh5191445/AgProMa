@@ -40,6 +40,9 @@ ul {
     height:500px;
 }
 
+.availList{
+ padding-left: 10px;
+}
 .icons{
     margin-left: 3%;
     margin-right:3%;

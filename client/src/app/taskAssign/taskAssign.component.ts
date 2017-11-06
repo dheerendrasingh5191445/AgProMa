@@ -14,6 +14,7 @@ import swal from 'sweetalert2';
 })
 export class TaskAssignComponent {
     //available task
+    myId:number;
     AvailTask:TaskBackLog[]; 
     AvailTeam:TeamMaster[]; 
     TeamMemberList:Members[];

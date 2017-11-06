@@ -1,67 +1,74 @@
 ﻿using MyNeo4j.model;
-using MyNeo4j.Viewmodel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyNeo4j.Repository
 {
     public interface ITeamRepo
     {
-        List<TeamMaster> getTeam();
-        List<ProjectMember> getProjectMember(int projectId);
+        List<TeamMaster> GetTeam();
+        List<ProjectMember> GetProjectMember(int projectId);
         void UpdateConnectionId(string connectionid, int memberid);
-        List<TeamMember> getTeamMember(int teamId);
-        void addTeam(TeamMaster team);
-        void addMembers(TeamMember member);
-        void deleteMember(int id);
+        List<TeamMember> GetTeamMember(int teamId);
+        void AddTeam(TeamMaster team);
+        void AddMembers(TeamMember member);
+        void DeleteMember(int id);
     }
+
     public class TeamRepo : ITeamRepo
     {
         private Neo4jDbContext _neo4JDbContext;
+
         public TeamRepo(Neo4jDbContext _neo4JDbContext)
         {
             this._neo4JDbContext = _neo4JDbContext;
         }
-        public void addMembers(TeamMember member)
+
+        //this method will add member to a team
+        public void AddMembers(TeamMember member)
         {
             _neo4JDbContext.Teammemeber.Add(member);
             _neo4JDbContext.SaveChanges();
         }
 
-        public void addTeam(TeamMaster team)
+        //this method  will add team to a project
+        public void AddTeam(TeamMaster team)
         {
             _neo4JDbContext.Teammaster.Add(team);
             _neo4JDbContext.SaveChanges();
         }
 
-        public void deleteMember(int id)
+        //this method will delete a a  team member
+        public void DeleteMember(int id)
         {
-            TeamMember member = _neo4JDbContext.Teammemeber.FirstOrDefault(m => m.id == id);
+            TeamMember member = _neo4JDbContext.Teammemeber.FirstOrDefault(m => m.Id == id);
            _neo4JDbContext.Teammemeber.Remove(member);
             _neo4JDbContext.SaveChanges();
         }
 
-        public List<ProjectMember> getProjectMember(int id)
+        //this method  will return members of a particular project
+        public List<ProjectMember> GetProjectMember(int id)
         {
             return _neo4JDbContext.Projectmember.Where(p => p.ProjectId == id).ToList();
         }
 
-        public List<TeamMaster> getTeam()
+        //this method will return teams 
+        public List<TeamMaster> GetTeam()
         {
             return _neo4JDbContext.Teammaster.ToList();
         }
 
-        public List<TeamMember> getTeamMember(int id)
+        //this method will return members of a team
+        public List<TeamMember> GetTeamMember(int id)
         {
             return _neo4JDbContext.Teammemeber.Where(p => p.TeamId == id).ToList();
         }
 
-        public void UpdateConnectionId(string connectionid, int memberid)
+        //this method will update connection id of a member
+        public void UpdateConnectionId(string connectionId, int memberId)
         {
-            SignalRMaster signalr = _neo4JDbContext.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);
-            signalr.ConnectionId = connectionid;
+            SignalRMaster signalr = _neo4JDbContext.SignalRDb.FirstOrDefault(m => m.MemberId == memberId);
+            signalr.ConnectionId = connectionId;
             signalr.HubCode = HubCode.team;
             _neo4JDbContext.SaveChanges();
         }

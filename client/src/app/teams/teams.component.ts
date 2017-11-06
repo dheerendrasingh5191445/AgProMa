@@ -26,15 +26,13 @@ export class TeamsComponent implements OnInit {
   constructor(private teamService:TeamsService,private route:ActivatedRoute) {   
   }
 
-
-
+  //this will get called on component loading time
   ngOnInit() {
-      this.route.params.subscribe(param =>this.projectId = +param['id']);
-      var session = sessionStorage.getItem("id");
-      this.userId = parseInt(session);
-      this.connectToHub();
+    this.route.params.subscribe(param =>this.projectId = +param['id']);
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);
+    this.connectToHub();
   }
-
 
   //this is to make connection with the hub
   connectToHub(){
@@ -55,14 +53,14 @@ export class TeamsComponent implements OnInit {
   }
 
   //this will add new  team 
-    addTeam(name:string){
-      if(name==""){
-        swal('Enter valid task name','','warning');
-      }
-      if(name){
-        let mobject:TeamMaster = new TeamMaster(this.projectId,name);
-        this.connection.invoke("AddTeam",mobject)
-                       .then(data => {this.connection.invoke("GetTeams",this.projectId);});
+  addTeam(name:string){
+    if(name==""){
+      swal('Enter valid team name','','warning');
+    }
+    if(name){
+      let mobject:TeamMaster = new TeamMaster(this.projectId,name);
+      this.connection.invoke("AddTeam",mobject)
+                     .then(data => {this.connection.invoke("GetTeams",this.projectId);});
 
       }
     }
@@ -75,10 +73,10 @@ export class TeamsComponent implements OnInit {
  //this will add member to a particular team
   teamListupdate($event: any,teamId:number) {
     if(teamId){
-    let teamMember:any  = $event.dragData;
-    let Id:number=teamMember.memberId;
-    let mobject:Members = new Members(teamId,Id);
-    this.connection.invoke("UpdateteamMember",mobject,this.projectId);
+      let teamMember:any  = $event.dragData;
+      let Id:number=teamMember.memberId;
+      let mobject:Members = new Members(teamId,Id);
+      this.connection.invoke("UpdateteamMember",mobject,this.projectId);
     }
   }
 
@@ -90,13 +88,13 @@ export class TeamsComponent implements OnInit {
     }
   }
 
-  //compare whether story exist in sprint or not
-  compareStory(teamId,memteamId) {
+  //compare whether member exist in team or not
+  compareMember(teamId,memteamId) {
     if (teamId == memteamId) {
-      return true;          //sprint are available for that particular sprint.
+      return true;          //member is present in team
     }
     else {
-      return false;         //sprint are not available for particular sprint.
+      return false;         //member is not added in team
     }
   }
 }

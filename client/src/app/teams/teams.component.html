@@ -4,10 +4,12 @@
 		<div class="col-md-8 ">
 			<!--team screen starts here-->
 			<div class="row team_screen">
-				<div class="col-sm-3 text-responsive"><h3>Teams</h3></div>
+				<div class="col-sm-3 text-responsive">
+					<h3><strong>Teams</strong></h3>
+				</div>
 				<!--button for add teams starts here-->
 				<div class="col-1 offset-sm-8">
-					<button type="button" value="val" class="add btn" data-toggle="modal" data-target="#exampleModal">
+					<button type="button" value="val" class="add btn" data-toggle="modal" data-target="#addModal">
            <a data-toggle="tooltip"  title="Add Teams">
 					 	<i class="fa fa-plus-circle plus"></i>
 				  	</a>
@@ -17,6 +19,7 @@
 			</div>
 			<hr>
 			<!--team screen ends here-->
+
 			<!--team cards starts here-->
 			<div class="row">
 				<div class="col-md-4" *ngFor="let item of teams; let i = index">
@@ -27,28 +30,27 @@
 						<!--div for team-members -->
 						<div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info data">
 							<div *ngFor="let member of teamList">
-							<ul class="list-group">
-								<li  *ngIf=compareStory(item.teamId,member.teamId)>
-									<i class="fa fa-user icons"></i>
-									&nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
-									<i (click)="delete(member.id)" class="fa fa-close" aria-hidden="true"></i>
-								</li>
-								<li></li>
-							</ul>
+								<ul class="list-group">
+									<li *ngIf=compareMember(item.teamId,member.teamId)>
+										<i class="fa fa-user icons"></i> &nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
+										<i (click)="delete(member.id)" class="fa fa-close" aria-hidden="true"></i>
+									</li>
+									<li></li>
+								</ul>
+							</div>
 						</div>
-						</div><!--div for team-members ends here -->
+						<!--div for team-members ends here -->
 					</div>
 				</div>
 			</div>
 			<!--team cards starts here-->
 		</div>
 		<!--team col ends here-->
-
-		<div class="col-md-4">
+    <div class="col-md-4">
 			<!--div for available member list starts here-->
 			<div class=" card available">
 				<div class="card-header">
-					<i class="fa fa-user-plus"></i> &nbsp;&nbsp;Available Members
+					<i class="fa fa-user-plus"></i> &nbsp;&nbsp;<strong>Available Members</strong>
 					<!--heading for available card-->
 				</div>
 				<!--available card body starts here-->
@@ -57,7 +59,8 @@
 					<ul class="list-group">
 						<li *ngFor="let item of teamList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true" [dragData]="item"
 						 class="list-group-item" (onDragSuccess)="removeMember()">
-						 <div class="col-md-12" *ngIf="item.teamId == 0"><i class="fa fa-user icons" ></i>{{item.memberName | titlecase}}</div> </li>
+							<div class="col-md-12 availList" *ngIf="item.teamId == 0"><i class="fa fa-user icons"></i>{{item.memberName | titlecase}}</div>
+						</li>
 						<li></li>
 					</ul>
 					<!--list for member list ends here-->
@@ -69,12 +72,12 @@
 	</div>
 	<!--row div ends here-->
 	<!--modal for adding team starts here-->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<!--modal-header starts here-->
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">New Team</h5>
+					<h5 class="modal-title" id="addModalLabel">New Team</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           	<span aria-hidden="true">&times;</span>
           </button>
