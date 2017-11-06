@@ -23,7 +23,6 @@ export class TaskAssignComponent {
     names:Members[];
     data:TaskBackLog;
     connection:HubConnection;
-    myId: any;
 
     constructor(private task: TaskAssignService,private route:ActivatedRoute) { } //inject TaskAssignservices
     

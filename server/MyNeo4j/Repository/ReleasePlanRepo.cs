@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace MyNeo4j.Repository
 {
-    public interface IReleasePlanRepo   //Interface
+    //Interface
+    public interface IReleasePlanRepo
     {
-        List<SprintBacklog> GetAllSprints();
-        List<ReleasePlanMaster> GetAllRelease();
+        List<SprintBacklog> GetAllSprints(int projectId);
+        List<ReleasePlanMaster> GetAllRelease(int projectId);
         void AddRelease(ReleasePlanMaster releasePlan);
         void UpdateConnectionId(string connectionid, int memberid);
         List<SignalRMaster> CreateGroup(int projectid);
@@ -17,7 +18,8 @@ namespace MyNeo4j.Repository
     public class ReleasePlanRepo : IReleasePlanRepo
     {
         Neo4jDbContext _context;
-        public ReleasePlanRepo(Neo4jDbContext context)  //Constructor
+        //Constructor
+        public ReleasePlanRepo(Neo4jDbContext context)
         {
             _context = context;
         }
@@ -27,16 +29,17 @@ namespace MyNeo4j.Repository
             _context.Releasepl.Add(releasePlan);
             _context.SaveChanges();
         }
-        //Method for getting the list of all release
-        public List<ReleasePlanMaster> GetAllRelease()
+        //Method for getting the list of all release to a particular project id
+        public List<ReleasePlanMaster> GetAllRelease(int projectId)
         {
-            return _context.Releasepl.ToList();
+            return _context.Releasepl.Where(m=>m.ProjectId==projectId).ToList();
         }
-        //Method for getting the list of all sprints
-        public List<SprintBacklog> GetAllSprints()
+        //Method for getting the list of all sprints to a particular project id
+        public List<SprintBacklog> GetAllSprints(int projectId)
         {
-            return _context.Sprintbl.ToList();
+            return _context.Sprintbl.Where(m=>m.ProjectId==projectId).ToList();
         }
+        //Method for updating a connection id through a member id
         public void UpdateConnectionId(string connectionid, int memberid)
         {
             SignalRMaster signalr = _context.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);
@@ -44,6 +47,7 @@ namespace MyNeo4j.Repository
             signalr.HubCode = HubCode.releaseplan;
             _context.SaveChanges();
         }
+        //Method for creating a group to a particular project id
         public List<SignalRMaster> CreateGroup(int projectid)
         {
             List<ProjectMember> members = _context.Projectmember.Where(m => m.ProjectId == projectid).ToList();
@@ -52,7 +56,7 @@ namespace MyNeo4j.Repository
             var users = onlinemembers.Where(om => data.Contains(om.MemberId)).ToList();
             return users;
         }
-
+        //Method for updating a release to a particular sprint id
         public void UpdateReleaseInSprint(int sprintId, int releaseId)
         {
             SprintBacklog sprbl = _context.Sprintbl.FirstOrDefault(p => p.SprintId == sprintId);

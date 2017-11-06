@@ -11,67 +11,67 @@
   <div class="row container-fluid"><!--container for existing release-->
     <div class="col-md-9">
       <!--getting an existing release lists-->
-        <div class="card" *ngFor="let list of release">
-          <div class="row">
-            <div class="col-9">
-              <div class="card-header">
-                <!--release name from database-->
-                <strong class="text-responsive">&nbsp;&nbsp;Release Name : {{list.releaseName}}</strong>
-              </div>
-              <hr>
-              <!--status of particular release-->
-              <h5 class="card-subtitle mb-2">&nbsp;Status: {{list.status}}</h5>
-              <br>
-              <div class="row">
-                <!--release start date-->
-                <h6 class="card-subtitle col">&nbsp;Start Date : {{list.startDate | date: "dd.MM.y"}}</h6>
-                <!--release release date-->
-                <h6 class="card-subtitle col">&nbsp;Release Date : {{list.releaseDate | date: "dd.MM.y"}}</h6>
-              </div>
-              <br>
-              <!--description-->
-              <p class="card-text">&nbsp;Description : {{list.description}}</p>
-              <br>
+      <div class="card" *ngFor="let list of release">
+        <div class="row">
+          <div class="col-9">
+            <div class="card-header">
+              <!--release name from database-->
+              <strong class="text-responsive">&nbsp;&nbsp;Release Name : {{list.releaseName}}</strong>
             </div>
-            <div class="col-3 card">
-              <!--column for adding a sprint into a particular release-->
-              <div class="text-center card-header sprintsList">
-                <strong>Add Sprints:</strong>
-              </div>
-              <!--dragging and storing a sprints from a sprint list-->
-              <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.releasePlanId)"  [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
-                <div class="story" *ngFor="let story of sprints">    
-                  <div class="card-text " id="story_name" *ngIf=compareStory(list.releasePlanId,story.releasePlanId)>
-                    <p>{{story.sprintId}}:{{story.sprintGoal}}</p>             
-                  </div>
+            <hr>
+            <!--status of particular release-->
+            <h5 class="card-subtitle mb-2">&nbsp;Status: {{list.status}}</h5>
+            <br>
+            <div class="row">
+              <!--release start date-->
+              <h6 class="card-subtitle col">&nbsp;Start Date : {{list.startDate | date: "dd.MM.y"}}</h6>
+              <!--release release date-->
+              <h6 class="card-subtitle col">&nbsp;Release Date : {{list.releaseDate | date: "dd.MM.y"}}</h6>
+            </div>
+            <br>
+            <!--description-->
+            <p class="card-text">&nbsp;Description : {{list.description}}</p>
+            <br>
+          </div>
+          <div class="col-3 card">
+            <!--column for adding a sprint into a particular release-->
+            <div class="text-center card-header sprintsList">
+              <strong>Add Sprints:</strong>
+            </div>
+            <!--dragging and storing a sprints from a sprint list-->
+            <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.releasePlanId)"  [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
+              <div class="story" *ngFor="let story of sprints">    
+                <div class="card-text " id="story_name" *ngIf=compareStory(list.releasePlanId,story.releasePlanId)>
+                  <p>{{story.sprintId}}:{{story.sprintGoal}}</p>             
                 </div>
-                <ul>
-                  <li>Drop Here</li>
-                </ul>
               </div>
+              <ul>
+                <li>Drop Here</li>
+              </ul>
             </div>
-            <!--column ends-->
+          </div>
+          <!--column ends-->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-md-10">
+          <div class="card">
+            <div class="card-header">
+              <strong>Lists of Sprints:</strong>
+            </div>
+            <!--drag n drop starts-->
+            <div class="card-text" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item">
+              <!--list of all sprints related to a project id-->
+              <li class="list-group-item" *ngIf="item.releasePlanId == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
+            </div>
+            <!--drag and drop ends-->
           </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="row">
-          <div class="col-2"></div>
-            <div class="col-md-10">
-              <div class="card">
-                <div class="card-header">
-                  <strong>Lists of Sprints:</strong>
-                </div>
-                <!--drag n drop starts-->
-                <div class="card-text" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item">
-                  <!--list of all sprints related to a project id-->
-                  <li class="list-group-item" *ngIf="item.releasePlanId == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
-                </div>
-                <!--drag and drop ends-->
-              </div>
-            </div>
-          </div>
-      </div>
+    </div>
   </div><!--contaimer for existing release ends-->
 </div><!--main container ends-->
 
