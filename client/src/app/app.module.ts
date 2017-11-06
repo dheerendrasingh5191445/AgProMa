@@ -55,6 +55,7 @@ import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 //configuration for social  login
 let config = new AuthServiceConfig([
@@ -97,7 +98,8 @@ export function provideConfig() {
     SprintComponent,LineGraphComponent,
    
     KanbanBoardComponent,
-    EfficiencyGraphComponent
+    EfficiencyGraphComponent,
+    UserProfileComponent
   ],
   imports: [
     DndModule.forRoot(),

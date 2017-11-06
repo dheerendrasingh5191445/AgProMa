@@ -17,6 +17,7 @@ export class LoginService {
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
   checkurl='http://localhost:52258/api/Login/Check';
+  
   private headers = new Headers({ 'Content-Type': 'application/json' });
  
  //get all the details of user
@@ -54,6 +55,9 @@ export class LoginService {
     console.log(memberdetails);
     return this.http.post(this.memberUrl,memberdetails,{headers:this.headers}).toPromise().catch(this.handleError);
   }
+
+  //update details of a user
+  
 
   //handling the error
   private handleError(error: any): Promise<any> {

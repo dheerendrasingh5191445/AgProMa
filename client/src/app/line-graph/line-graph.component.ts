@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class LineGraphComponent  {
   title = 'app';
   public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Sprint 1'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Sprint 2'},
-   // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Given Time'},//time data for given time
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Actual Time'},//time data for actual time
+  
   ];
-  public lineChartLabels:Array<any> = ['Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5', 'Task 6', 'Task 7'];
+  public lineChartLabels:Array<any> = ['Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5', 'Task 6', 'Task 7'];//task lists
   public lineChartOptions:any = {
     responsive: true
   };
@@ -44,8 +44,8 @@ export class LineGraphComponent  {
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
- 
-  public randomize():void {
+ //Random function for bringing the random values for tasks
+  public randomize():void { 
     let _lineChartData:Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
@@ -56,13 +56,6 @@ export class LineGraphComponent  {
     this.lineChartData = _lineChartData;
   }
  
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
  
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
 
 }

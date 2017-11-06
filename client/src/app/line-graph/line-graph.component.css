@@ -1,7 +1,10 @@
-.container{
-    width:100%;
-    height: 100%;
+
+.main{
+    width: 40%;
+   
+    height:10%;
 }
+
 card{
     background-color: black;
     box-shadow: black;
@@ -13,5 +16,5 @@ card{
     width:100%;
 }
 .conntainer{
-    align-content: center;
+    padding-left: 500px;
 }

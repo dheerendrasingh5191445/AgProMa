@@ -71,8 +71,8 @@ namespace AgProMa.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        [Route("api/[controller]")]
+        [HttpPut]
+        [Route("api/[controller]/{id}")]
         //this method updates the user details
         public IActionResult Put(string emailid, [FromBody]Master user)
         {

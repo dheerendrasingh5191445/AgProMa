@@ -24,6 +24,7 @@ import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 import {LineGraphComponent} from './line-graph/line-graph.component'
 import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
+import {UserProfileComponent} from "./user-profile/user-profile.component"
 import { EfficiencyGraphComponent } from "./efficiency-graph/efficiency-graph.component";
 
 // paths to all the respective pages
@@ -51,7 +52,8 @@ const routes: Routes = [
     { path:'taskassign/:id',component:TaskAssignComponent},
     {path:'line-graph',component:LineGraphComponent},
     { path: 'kanban/:id', component : KanbanBoardComponent},
-    { path: 'efficiency', component : EfficiencyGraphComponent}
+    { path: 'efficiency', component : EfficiencyGraphComponent},
+    {path:'user-profile',component:UserProfileComponent}
     ]}
 ]
 @NgModule({
