@@ -81,7 +81,9 @@ export class SignupComponent implements OnInit {
             auth.Email=data.email;//call method for token generation
             this.loginservice.getToken(auth).then(data=>
             {var tokenData = JSON.parse(data["_body"]).token;
+            console.log("tokendat....-----",tokenData);
             sessionStorage.setItem("token",tokenData)});
+            console.log("get token",sessionStorage.getItem("token"));
             this.router.navigate(["/app-dashboard"]); //if user's credentials are correct then user will br redirected to dashboard
           }
         else if(this.data["status"] == "email"){

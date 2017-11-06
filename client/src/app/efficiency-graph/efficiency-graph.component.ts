@@ -10,15 +10,15 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class EfficiencyGraphComponent implements OnInit {
 
   //local variable used in component
-  total : number = 100;
-  //notEfficient : number = 20;
   
   data : any;
   taskId : number =20;
-  doughnutChartLabels:string[]=['Work Done', 'Remaining'];
-  efficient : number  = 100 - this.data;
-  doughnutChartData:number[]=[this.data, this.total ];
-  doughnutChartType:string="doughnut";
+  efficient : number  ;
+
+  //Initializing variable for doughnut chaty
+  doughnutChartLabels:string[]=['Efficient', 'Remaining']; //setting names on graph
+  doughnutChartData:number[]=[this.data, this.efficient ]; //setting the data to graph
+  doughnutChartType:string="doughnut"; //defining type of chart 
 
   constructor(private efficiencyGraphService : EfficiencyGraphService, private route : ActivatedRoute) {
     
@@ -33,29 +33,20 @@ export class EfficiencyGraphComponent implements OnInit {
     //this will get the data from 
     this.efficiencyGraphService.getEfficiencyDetail(this.taskId)
                                .subscribe(data => {this.data = data; console.log("init",this.data);
-                               this.efficient=this.data;
-                               this.doughnutChartLabels = ['Work Done', 'Remaining'];
-                               this.doughnutChartData = [ this.efficient, this.data];
-                               this.doughnutChartType = 'doughnut'; 
-                              });
-        
-                                                             
+
+                               //logic for douhgnut chart
+                               this.efficient=100 -this.data;
+                               this.doughnutChartData = [  this.data, this.efficient];
+                              });                              
   }
 
 
- // Doughnut
-//  public doughnutChartLabels:string[] = ['Work Done', 'Remaining'];
-//  public doughnutChartData:number[] = [ this.efficient, this.data];
-//  public doughnutChartType:string = 'doughnut';
+  // event on click to graph
+   public chartClicked(e:any):void {
+  }
 
- // events
- public chartClicked(e:any):void {
-   console.log(e);
- }
-
- // events
+ // event on hovering on chart
  public chartHovered(e:any):void {
-   console.log(e);
  }
 
 }

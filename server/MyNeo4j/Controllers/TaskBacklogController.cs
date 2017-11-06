@@ -52,7 +52,8 @@ namespace MyNeo4j.Controllers
         [HttpGet("GetMemberName/{id}")]
         public string GetMemberName(int id)
         {
-            return task.getName(id);
+            
+            return null;
         }
 
         // PUT: api/TaskBacklog/5

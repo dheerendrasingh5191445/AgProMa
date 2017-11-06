@@ -24,10 +24,13 @@ import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 import {LineGraphComponent} from './line-graph/line-graph.component'
 import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
 import { EfficiencyGraphComponent } from "./efficiency-graph/efficiency-graph.component";
+import { LandingpageComponent } from './landingpage/landingpage.component';
+
 
 // paths to all the respective pages
 const routes: Routes = [
-    { path: "", redirectTo: 'app-signup', pathMatch: "full" },
+    { path: "", redirectTo: 'landingpage', pathMatch: "full" },
+    { path: 'landingpage', component:LandingpageComponent},
     { path: 'app-signup', component: SignupComponent },
     { path: 'app-register/:id', component: RegisterComponent }, 
     { path: 'app-forget-password', component: ForgetPasswordComponent },

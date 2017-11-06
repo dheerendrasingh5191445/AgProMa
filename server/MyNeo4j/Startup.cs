@@ -16,8 +16,9 @@ namespace MyNeo4j
 {
     public partial class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            Configuration = configuration;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -66,11 +67,12 @@ namespace MyNeo4j
             services.AddScoped<ITaskBacklogService, TaskBacklogService>();
             services.AddSingleton(Configuration);
             // Add framework services.
+            ConfigureJwtAuthService(Configuration,services);
             services.AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling
                         = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddMvc();
+           // services.AddMvc();
             
         }
 
@@ -94,9 +96,8 @@ namespace MyNeo4j
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseMvc();
-            
-           
         }
     }
 }
