@@ -31,6 +31,7 @@ import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
+import { LandingpageComponent } from './landingpage/landingpage.component';
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -71,6 +72,7 @@ export function provideConfig() {
 
 @NgModule({
   declarations: [
+    LandingpageComponent,
     TaskAssignComponent,
     TaskAddComponent,
     ChecklistComponent,
