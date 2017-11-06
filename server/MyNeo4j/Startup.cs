@@ -85,6 +85,11 @@ namespace MyNeo4j
             app.UseSignalR(routes =>
             {
                routes.MapHub<EpicHub>("epichub");
+               routes.MapHub<SprintBacklogHub>("sprint");
+               routes.MapHub<ReleasePlanHub>("releaseplan");
+               routes.MapHub<TeamHub>("teamhub");
+               routes.MapHub<TaskBacklogHub>("taskbacklog");
+	           routes.MapHub<BacklogHub>("backlog");
             });
             
             if(env.IsDevelopment())

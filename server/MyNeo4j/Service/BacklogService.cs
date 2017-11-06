@@ -9,10 +9,11 @@ namespace MyNeo4j.Service
 {
     public interface IBacklogServices
     {
+        void setConnectionId(string connecitonId, int memberId);
+        List<SignalRMaster> JoinGroup(int projectId);
         List<ProductBacklog> GetAll(int  id);
-        List<ProductBacklog> GetUnassignedStory(int projectId);
         void Add(ProductBacklog backlog);
-        void Update(int id, ProductBacklog res);
+        ProductBacklog Update(int id, ProductBacklog res);
         void Delete(int id);
     }
 
@@ -33,20 +34,27 @@ namespace MyNeo4j.Service
         {
             _repository.Delete(id);
         }
-
-        public List<ProductBacklog> GetUnassignedStory(int projectId)
-        {
-            return _repository.GetUnassignedStory(projectId);
-        }
-
+        
         public List<ProductBacklog> GetAll(int  id)
         {
             return _repository.GetAll(id).ToList();
         }
 
-        public void Update(int id, ProductBacklog res)
+        public ProductBacklog Update(int id, ProductBacklog res)
         {
-            _repository.Update(id, res);
+            return _repository.Update(id, res);
+        }
+
+        //update the connection for the user
+        public void setConnectionId(string connectionId, int memberId)
+        {
+            _repository.setConnectionId(connectionId,memberId);
+        }
+
+        //get the online members.
+        public List<SignalRMaster> JoinGroup(int projectId)
+        {
+            return _repository.JoinGroup(projectId);
         }
     }
 }

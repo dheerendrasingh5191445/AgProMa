@@ -1,20 +1,14 @@
-body{
-    background: url(https://wallpapercave.com/wp/uSzT8Or.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-   
-    }
-    .heading{
-        text-align: center
-        
-    }
-
+.container-fluid {
+    font-family: 'Raleway', Arial, sans-serif !important;
+}
+.heading{
+    text-align: center 
+}
 ul {
     list-style:none;
-    }
+}
 .list-group li{
-    color:white;
-    background-color: transparent;
+    color:black;
     border-color:transparent;
 }
 
@@ -23,7 +17,7 @@ ul {
         color:transparent
     }
     .card-header{
-        margin-bottom: 20px;
+       margin-bottom: 20px;
     }
     .card-text li{
         width: 200px;
@@ -32,11 +26,18 @@ ul {
     
     }
 .available{
-    /* margin-left:40%; */
-    background-color: #2f2f2f6e;
-    color:white;
-    
-    text-align: center
+    text-align: center;
+}
+.available .card-header{
+    background-color: #1f6d6d;
+}
+.data{
+    overflow-y:auto;
+    height:100px;
+}
+.availData{
+    overflow-y:auto;
+    height:500px;
 }
 
 .icons{
@@ -44,28 +45,123 @@ ul {
     margin-right:3%;
 }
 .team {
-    margin-left: 1%;
-    background-color:#2f2f2f6e;
-
+    padding-left:0px;
+    background-color:white;
+}
+.team .card-header{
+    background-color: #881234;
+}
+.team_screen{
+    font-weight: bold;
 }
 .card{
-    margin-top:20%;
+   margin-bottom: 5%;
 }
 .card:hover{
     box-shadow: 0 0 11px rgba(33,33,33,1); 
 }
 .card-header{
-    background-color:#2f2f2f00;
+    
     color:white;
-    text-align: center
+    text-align: center;
+    margin-bottom: 0px;
 }
 .add{
-    margin-left: 1%;
-    margin-top: 10%
+    background-color: #881234;
+    float:right;
+    margin-left: 3%;
+    color:white
 }
+
 .modal-header{
-    background-color: darkgrey
+    background-color: #1f6d6d;
+    color:white;
 }
 .remove{
     background-color: transparent;
 }
+button.addTeam {
+    font-family: 'Raleway', Arial, sans-serif;
+    border: none;
+    background-color:#1f6d6d ;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 10px 40px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    font-weight: 500;
+    font-size: 1em;
+    outline: none;
+    position: relative;
+    opacity: 1;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  button.addTeam span {
+    display: inline-block;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0.8;
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+  }
+  button.addTeam i {
+    font-size: 28px;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    display: block;
+    position: absolute;
+    opacity: 0;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+  }
+  button.addTeam:before {
+    content: '';
+    top: 0;
+    left: 50%;
+    right: 50%;
+    position: absolute;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+  }
+  button.addTeam:hover span,
+  button.addTeam.hover span {
+    opacity: 0;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+  }
+  button.addTeam:hover i,
+  button.addTeam.hover i {
+    opacity: 1;
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+  }
+  button.addTeam:hover:before,
+  button.addTeam.hover:before {
+    left: 0;
+    right: 0;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+  }
+  .list-group li{
+    color:black;
+    border-color:transparent;
+}
+ul {
+    list-style:none;
+}
+
+  

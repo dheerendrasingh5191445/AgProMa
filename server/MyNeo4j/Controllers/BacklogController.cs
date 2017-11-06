@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyNeo4j.Service;
 using MyNeo4j.model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyNeo4j.Controllers
 {
-   // [Produces("application/json")]
-    [Route("api/[Controller]")]
+    // [Produces("application/json")]
+
+     [Route("api/[Controller]")]
     public class BacklogController:Controller {
         private IBacklogServices _service;
 
@@ -27,13 +29,6 @@ namespace MyNeo4j.Controllers
             List<ProductBacklog> data = _service.GetAll(id);
                 return data;
            
-        }
-
-        [HttpGet]
-        [Route("GetUnassignedStory/{id}")]
-        public List<ProductBacklog> GetUnassignedStory(int id)
-        {
-            return _service.GetUnassignedStory(id);
         }
 
         // GET: api/Master/5

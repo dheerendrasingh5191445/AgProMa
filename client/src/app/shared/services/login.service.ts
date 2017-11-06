@@ -14,10 +14,10 @@ import { authentication } from "../model/Authentication";
 export class LoginService {
 
   constructor(private http: Http) { }
-  url = 'http://localhost:52258/api/Login';                 //url for login 
+  url = 'http://192.168.252.131:8030/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://localhost:52258/api/Login/Check';
+  checkurl='http://192.168.252.131:8030/api/Login/Check';
   private headers = new Headers({ 'Content-Type': 'application/json' });
  
  //get all the details of user

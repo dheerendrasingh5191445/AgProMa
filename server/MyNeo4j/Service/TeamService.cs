@@ -11,17 +11,18 @@ namespace MyNeo4j.Service
     public interface ITeamService
     {
         List<TeamMaster> getTeam(int projectId);
-        List<AvailableMember> getAvailableMember(int projectId);
-        List<AvailTeamMember> getTeamMember(int teamId);
+        List<AvailTeamMember> getAvailableMember(int projectId);
         void addTeam(TeamMaster team);
         void addMembers(TeamMember member);
         void deleteMember(int id);
+        void UpdateConnectionId(string connectionid, int memberid);
     }
     public class TeamService : ITeamService
     {
         private Neo4jDbContext _dbcon;
         private ITeamRepo _teamRepo;
-        public TeamService(ITeamRepo _teamRepo, Neo4jDbContext dbcon)//reomve dbcon and use existing method in others repo
+        //reomve dbcon and use existing method in others repo
+        public TeamService(ITeamRepo _teamRepo, Neo4jDbContext dbcon)
         {
             this._teamRepo = _teamRepo;
             _dbcon = dbcon;
@@ -41,6 +42,46 @@ namespace MyNeo4j.Service
             _teamRepo.deleteMember(id);
         }
 
+        public List<AvailTeamMember> getAvailableMember(int projectId)
+        {
+            List<AvailTeamMember> availteam = new List<AvailTeamMember>();
+            List<ProjectMember> promem = _teamRepo.getProjectMember(projectId);
+            List<TeamMember> finalmemlist = new List<TeamMember>();
+            List<TeamMember> teammem = new List<TeamMember>();
+            List<TeamMaster> teams = getTeam(projectId);
+            foreach (TeamMaster tm in teams)
+            {
+                teammem = _teamRepo.getTeamMember(tm.TeamId);
+                 foreach(TeamMember temem in teammem)
+                {
+                    finalmemlist.Add(temem);
+                }
+            }
+            foreach (ProjectMember pm in promem)
+            {
+                Master master = _dbcon.Pmaster.FirstOrDefault(p => p.Id == pm.MemberId);
+                AvailTeamMember avail = new AvailTeamMember();
+                avail.MemberId = master.Id;
+                avail.MemberName = master.FirstName + ' ' + master.LastName;
+                foreach (TeamMember tmm in finalmemlist)
+                {
+                    if (pm.MemberId == tmm.MemberId)
+                    {
+                        avail.TeamId = tmm.TeamId;
+                        avail.Id = tmm.id;
+                        break;
+                    }
+                    else
+                    {
+                        avail.TeamId = 0;
+                        avail.Id = 0;
+                    }               
+                }
+                availteam.Add(avail);
+            }
+            return availteam;
+        }
+
         public List<TeamMaster> getTeam(int projectId)
         {
              List<TeamMaster> teamMaster= _teamRepo.getTeam();
@@ -55,54 +96,12 @@ namespace MyNeo4j.Service
             return teamlistbyproject;
         }
 
-        public List<AvailTeamMember> getTeamMember(int teamId)
-        {
-            List<AvailTeamMember> availteam = new List<AvailTeamMember>();
-            List<TeamMember> teammas = _teamRepo.getTeamMember();
-            foreach(TeamMember tm in teammas)
-            {
-                if(tm.TeamId == teamId)
-                {
-                    Master master = _dbcon.Pmaster.FirstOrDefault(p => p.Id == tm.MemberId);
-                    AvailTeamMember avail = new AvailTeamMember();
-                    avail.MemberId = master.Id;
-                    avail.MemberName = master.FirstName +' '+master.LastName;
-                    avail.TeamId = tm.TeamId;
-                    avail.Id = tm.id;
-                    availteam.Add(avail);
-                }
-            }
-            return availteam;
+      
 
+        public void UpdateConnectionId(string connectionid, int memberid)
+        {
+            _teamRepo.UpdateConnectionId(connectionid, memberid);
         }
 
-        public List<AvailableMember> getAvailableMember(int projectId)
-        {
-            List<TeamMember> teammas = _teamRepo.getTeamMember();
-            List<AvailableMember> availteam = new List<AvailableMember>();
-            List<ProjectMember> promas = _teamRepo.getProjectMember();
-            foreach (ProjectMember tm in promas)
-            {
-                if (tm.ProjectId == projectId)
-                {
-                    int count = 0;
-                    foreach (TeamMember t in teammas)
-                    {                   
-                       if(tm.MemberId == t.MemberId)
-                        { count++; break; }
-                    }
-                    if(count == 0)
-                    {
-                        Master master = _dbcon.Pmaster.FirstOrDefault(p => p.Id == tm.MemberId);
-                        AvailableMember avail = new AvailableMember();
-                        avail.MemberId = master.Id;
-                        avail.MemberName = master.FirstName + ' ' + master.LastName;
-
-                        availteam.Add(avail);
-                    }
-                }
-            }
-            return availteam;
-        }
     }
 }

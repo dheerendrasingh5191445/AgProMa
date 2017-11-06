@@ -15,6 +15,7 @@ namespace MyNeo4j.Service
         void Update(int id, EpicMaster res);
         void Delete(int id);
         void SetConnectId(int userId,string conId);
+        List<string> getGroup(int projectId);
     }
 
     public class EpicService:IEpicServices
@@ -41,7 +42,20 @@ namespace MyNeo4j.Service
         return _repository.GetAll(id).ToList();
     }
 
-    public void SetConnectId(int userId,string conId)
+    public List<string> getGroup(int projectId)
+    {
+            List<string> signal = new List<string>();
+            List<ProjectMember> promem = _repository.GetMemberIdList(projectId);
+            foreach(ProjectMember pro in promem)
+            {
+                SignalRMaster entry = _repository.GetConnectIdByMemId(pro.MemberId);
+                if (entry.HubCode == 0 && entry.Online == true)
+                { signal.Add(entry.ConnectionId); }
+            }
+            return signal;
+    }
+
+        public void SetConnectId(int userId,string conId)
     {
         _repository.SetConnectId(userId, conId);        
     }

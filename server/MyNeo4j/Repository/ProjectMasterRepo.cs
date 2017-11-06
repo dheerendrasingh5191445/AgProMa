@@ -18,7 +18,8 @@ namespace MyNeo4j.Repository
     }
     //class used for containing method of this repository
     public class ProjectMasterRepo : IProjectMasterRepo
-    {   //constructor of this method
+    {   
+        //constructor of this method
         Neo4jDbContext _context;
         public ProjectMasterRepo(Neo4jDbContext context)
         {
@@ -30,7 +31,7 @@ namespace MyNeo4j.Repository
             _context.ProjectM.Add(promas);
             _context.SaveChanges();
         }
-
+        //this is to delete the project
         public void DeleteProject(int Id)
         {
             ProjectMaster promas = _context.ProjectM.FirstOrDefault(p => p.ProjectId == Id);
@@ -43,6 +44,7 @@ namespace MyNeo4j.Repository
         {
             return _context.ProjectM.ToList();
         }
+
         //this project is used to update the project
         public void UpdateProject(int Id, ProjectMaster promas)
         {
@@ -52,13 +54,14 @@ namespace MyNeo4j.Repository
             promaster.Name = promas.Name;
             _context.SaveChanges();
         }
+
         //this method is used for Adding leader in project member table
         public void AddProjectMemberL(ProjectMember promem)
         {
             _context.Projectmember.Add(promem);
             _context.SaveChanges();
         }
-
+        //this is to get the role of particular user id
         public List<ProjectMember> GetRoleOf()
         {
             return _context.Projectmember.ToList();

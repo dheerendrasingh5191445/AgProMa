@@ -10,8 +10,9 @@ namespace MyNeo4j.Repository
     public interface ITeamRepo
     {
         List<TeamMaster> getTeam();
-        List<ProjectMember> getProjectMember();
-        List<TeamMember> getTeamMember();
+        List<ProjectMember> getProjectMember(int projectId);
+        void UpdateConnectionId(string connectionid, int memberid);
+        List<TeamMember> getTeamMember(int teamId);
         void addTeam(TeamMaster team);
         void addMembers(TeamMember member);
         void deleteMember(int id);
@@ -42,9 +43,9 @@ namespace MyNeo4j.Repository
             _neo4JDbContext.SaveChanges();
         }
 
-        public List<ProjectMember> getProjectMember()
+        public List<ProjectMember> getProjectMember(int id)
         {
-            return _neo4JDbContext.Projectmember.ToList();
+            return _neo4JDbContext.Projectmember.Where(p => p.ProjectId == id).ToList();
         }
 
         public List<TeamMaster> getTeam()
@@ -52,9 +53,17 @@ namespace MyNeo4j.Repository
             return _neo4JDbContext.Teammaster.ToList();
         }
 
-        public List<TeamMember> getTeamMember()
+        public List<TeamMember> getTeamMember(int id)
         {
-            return _neo4JDbContext.Teammemeber.ToList();
+            return _neo4JDbContext.Teammemeber.Where(p => p.TeamId == id).ToList();
+        }
+
+        public void UpdateConnectionId(string connectionid, int memberid)
+        {
+            SignalRMaster signalr = _neo4JDbContext.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);
+            signalr.ConnectionId = connectionid;
+            signalr.HubCode = HubCode.team;
+            _neo4JDbContext.SaveChanges();
         }
     }
 }

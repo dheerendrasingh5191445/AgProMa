@@ -33,7 +33,7 @@ namespace MyNeo4j.Controllers
                 List<ProjectDetailView> promaster = _service.GetProjectById(id);
                 if (promaster.Count == 0)
                 {
-                    return this.NotFound("There are no Porjects");
+                    return Ok("There are no Porjects");
                 }
                 return Ok(promaster);
             }

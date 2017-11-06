@@ -12,6 +12,7 @@ import { HubConnection } from '@aspnet/signalr-client';
 export class ProjectScreenComponent implements OnInit {
   //variable that are used to manipulate the value in project
   projects:any=Array<ProjectMaster>();
+  data:string;
   connection:HubConnection;
   userId:number;
   constructor(private projectscrservice:ProjectScreenService,private router:Router) { }
@@ -21,8 +22,15 @@ export class ProjectScreenComponent implements OnInit {
       var session = sessionStorage.getItem("id");
       this.userId = parseInt(session);
       this.projectscrservice.getAllProjectOfEmployee(this.userId)
-                            .subscribe(data =>{this.projects = data.json()});
+                            .then(data =>{ 
+                                            if(data != "There are no Porjects")
+                                            {
+                                              this.projects = data;
+                                            }
+                                            else{ this.data = "no project";}
+                            });
   }
+  
   //this is splice the list
   onDelete(Id:number)
   {
@@ -30,11 +38,4 @@ export class ProjectScreenComponent implements OnInit {
     const index = this.projects.indexOf(ele);
     this.projects.splice(index, 1);
   }
-  // example()
-  // {
-  //   this.connection =new HubConnection("apiconnectionurl/promaster");//for connecting with hub
-  //   //registering event handlers
-  //   this.connection.on("addproject",  => console.log("getting data sent by the server"))
-  // }
-  // this.connection.start().then(() => this.connection.invoke("servermethod",parameter));
 }
