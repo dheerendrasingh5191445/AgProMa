@@ -27,7 +27,8 @@ namespace MyNeo4j.Controllers
         [HttpGet("GetAllTaskDetail/{id}")]
         public List<TaskBacklog> GetAllTaskDetail(int id)
         {
-            return task.GetAllTask(id);
+            var resp= task.GetAllTask(id);
+            return resp;
         }
 
         [HttpGet("GetByTeamId/{id}")]

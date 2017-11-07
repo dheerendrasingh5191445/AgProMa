@@ -29,6 +29,7 @@ namespace MyNeo4j.Repository
         //add a new sprint.
         public void Add(SprintBacklog sprint)
         {
+            sprint.ExpectedEndDate = sprint.StartDate.AddDays(sprint.TotalDays-1);
             sprint.Status = SprintStatus.Unplanned;
             _context.Sprintbl.Add(sprint);
             _context.SaveChanges();
