@@ -1,9 +1,9 @@
 <div class="back">
 <div class="invite-card container col-md-6">
   <!-- text shown on page -->
-<h1>Invite People</h1>
-<br />
-<h4>Invite your team to work together on this project</h4>
+<h4 class="heading text-center">Invite People</h4>
+<br>
+<strong>Invite your team to work together on this project</strong>
 
 <div class="card text-center" style="width: 40rem;">
   <div class="card-header">
@@ -26,17 +26,17 @@
           <option *ngFor="let h of data" value="{{h.email}}">
         </option>
         </datalist>
-        <span class="btn btn-success" id="basic-addon2" (click)="inviteMember()">Invite Member</span>
+        <span class="btn invite" id="basic-addon2" (click)="inviteMember()"><span>Invite Member</span><i class="ion-android-arrow-forward"></i></span>
       </div>
   </div>
-  <div class="card-footer text-muted">
+  <div class="card-footer text-center">
     Members already invited to this project
-    <hr />
+    <hr class="line">
     <div>
       <!-- this will show number of people that are present in that team -->
         <div class="chip" *ngFor="let details of memberDetail">
             <!-- this will show logo of man  -->
-            <img src="../../assets/images/man.png" alt="Person" width="96" height="96">
+            <img src="../../assets/images/man.png" alt="Person">
             {{details.memberName}}
         </div>     
     </div> 

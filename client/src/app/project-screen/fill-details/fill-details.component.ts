@@ -27,6 +27,11 @@ export class FillDetailsComponent implements OnInit {
     this.leaderId = parseInt(session);
   }
 
+   //this method is to go back on previous page
+   backOnPrevious(){
+    this.router.navigateByUrl('/app-dashboard/project-screen');
+  }
+
   //this method is used to add new project
   AddProject()
   {
