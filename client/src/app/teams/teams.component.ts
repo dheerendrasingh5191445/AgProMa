@@ -91,7 +91,7 @@ export class TeamsComponent implements OnInit {
   }
 
   //compare whether story exist in sprint or not
-  compareStory(teamId,memteamId) {
+  compareMember(teamId,memteamId) {
     if (teamId == memteamId) {
       return true;          //sprint are available for that particular sprint.
     }

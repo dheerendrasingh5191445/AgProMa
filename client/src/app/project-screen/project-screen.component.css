@@ -1,5 +1,5 @@
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-.snip1566 {
+.addNewProject {
   position: relative;
   display: inline-block;
   margin: 20px;
@@ -12,21 +12,17 @@
   transform: translateZ(0);
 }
 
-h1{
-  font-size:20px;
-}
-
-.snip1566 *,
-.snip1566:before,
-.snip1566:after {
+.addNewProject *,
+.addNewProject:before,
+.addNewProject:after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 
-.snip1566:before,
-.snip1566:after {
+.addNewProject:before,
+.addNewProject:after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 50%;
@@ -41,7 +37,7 @@ h1{
   border-color: transparent #bbb;
 }
 
-.snip1566 img {
+.addNewProject img {
   max-width: 100%;
   backface-visibility: hidden;
   vertical-align: top;
@@ -49,7 +45,7 @@ h1{
   padding: 10px;
 }
 
-.snip1566 figcaption {
+.addNewProject figcaption {
   position: absolute;
   top: 5px;
   bottom: 5px;
@@ -60,7 +56,7 @@ h1{
   border-radius: 50%;
 }
 
-.snip1566 i {
+.addNewProject i {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -70,7 +66,7 @@ h1{
   z-index: 1;
 }
 
-.snip1566 a {
+.addNewProject a {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -79,28 +75,28 @@ h1{
   z-index: 1;
 }
 
-.snip1566:hover figcaption,
-.snip1566.hover figcaption {
+.addNewProject:hover figcaption,
+.addNewProject.hover figcaption {
   opacity: 1;
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
 
-.snip1566:hover:before,
-.snip1566.hover:before,
-.snip1566:hover:after,
-.snip1566.hover:after {
+.addNewProject:hover:before,
+.addNewProject.hover:before,
+.addNewProject:hover:after,
+.addNewProject.hover:after {
   border-width: 10px;
 }
 
-.snip1566:hover:before,
-.snip1566.hover:before {
+.addNewProject:hover:before,
+.addNewProject.hover:before {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
-.snip1566:hover:after,
-.snip1566.hover:after {
+addNewProject:hover:after,
+addNewProject.hover:after {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
@@ -113,3 +109,33 @@ pagination-controls ul li{
 color: black;
 }
 
+.heading {
+  background-color: #460619;
+  color: whitesmoke;
+  height: 50px;
+  padding-top: 9px;
+  padding-left: 3px;
+}
+
+.tool {
+  position: relative;
+  display: inline-block;
+}
+
+.tool .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #2F2E2E;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tool:hover .tooltiptext {
+  visibility: visible;
+}
