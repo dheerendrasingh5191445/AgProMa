@@ -17,7 +17,8 @@ namespace MyNeo4j.model
         taskbl,
         task,
         team,
-        releaseplan
+        releaseplan,
+        projectscreen
     }
     public class SignalRMaster
     {

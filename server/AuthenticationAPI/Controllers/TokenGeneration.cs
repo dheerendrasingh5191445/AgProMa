@@ -28,6 +28,7 @@ namespace AuthenticationAPI.Controllers
         [Route("createtoken")]
         public string TokenGenerationAction([FromBody]User user)
         {
+            Console.WriteLine("hi----", user);
             //creating the user object for the given  user from the frond end app
             User tokenUser = new User { UserName = user.UserName, Email = user.Email };
             //calling the function for the JWT token for respecting user

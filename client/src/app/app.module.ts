@@ -31,6 +31,7 @@ import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
+import { LandingpageComponent } from './landingpage/landingpage.component';
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -52,6 +53,8 @@ import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
+import { DashboardLeaderComponent } from './dashboard-leader/dashboard-leader.component';
+import { DashboardMemberComponent } from './dashboard-member/dashboard-member.component';
 
 //configuration for social  login
 let config = new AuthServiceConfig([
@@ -71,6 +74,7 @@ export function provideConfig() {
 
 @NgModule({
   declarations: [
+    LandingpageComponent,
     TaskAssignComponent,
     TaskAddComponent,
     ChecklistComponent,
@@ -91,7 +95,9 @@ export function provideConfig() {
     SprintComponent,
     LineGraphComponent, 
     KanbanBoardComponent,
-    EfficiencyGraphComponent
+    EfficiencyGraphComponent,
+    DashboardLeaderComponent,
+    DashboardMemberComponent
   ],
   imports: [
     DndModule.forRoot(),

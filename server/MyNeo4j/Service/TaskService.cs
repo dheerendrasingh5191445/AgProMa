@@ -1,4 +1,4 @@
-﻿using MyNeo4j.model;
+using MyNeo4j.model;
 using MyNeo4j.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,12 @@ namespace MyNeo4j.Service
 {
     public interface ITaskServices
     {
-        List<TaskBacklog> GetAll();
-        TaskBacklog Get(int id);
+        List<SignalRMaster> JoinGroup(int projectId);
+        void SetConnectionId(string connectionId,int memberId);
+        List<TaskBacklog> GetAll(int sprintId);
         void Add(TaskBacklog backlog);
         void Update(int id, TaskBacklog res);
-        void Delete(int id);
+        int GetProjectId(int sprintId);
     }
 
     public class TaskService : ITaskServices
@@ -29,23 +30,30 @@ namespace MyNeo4j.Service
             _repository.Add(backlog);
         }
 
-        public void Delete(int id)
+        public List<TaskBacklog> GetAll(int sprintId)
         {
-            _repository.Delete(id);
-        }
-
-        public List<TaskBacklog> GetAll()
-        {
-            return _repository.GetAll().ToList();
-        }
-        public TaskBacklog Get(int id)
-        {
-            return _repository.Get(id);
+            return _repository.GetAll(sprintId).ToList();
         }
 
         public void Update(int id, TaskBacklog res)
         {
             _repository.Update(id, res);
+        }
+
+        public void SetConnectionId(string connectionId,int memberId)
+        {
+            _repository.SetConnectionId(connectionId,memberId);
+        }
+
+        public List<SignalRMaster> JoinGroup(int projectId)
+        {
+            return _repository.JoinGroup(projectId);
+        }
+
+        public int GetProjectId(int sprintId)
+        {
+            SprintBacklog sp = _repository.GetProjectId(sprintId);
+            return sp.ProjectId;
         }
     }
 }

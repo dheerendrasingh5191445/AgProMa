@@ -10,11 +10,11 @@ namespace MyNeo4j.Service
 {
     public interface ITeamService
     {
-        List<TeamMaster> getTeam(int projectId);
-        List<AvailTeamMember> getAvailableMember(int projectId);
-        void addTeam(TeamMaster team);
-        void addMembers(TeamMember member);
-        void deleteMember(int id);
+        List<TeamMaster> GetTeam(int projectId);
+        List<AvailTeamMember> GetAvailableMember(int projectId);
+        void AddTeam(TeamMaster team);
+        void AddMembers(TeamMember member);
+        void DeleteMember(int id);
         void UpdateConnectionId(string connectionid, int memberid);
     }
     public class TeamService : ITeamService
@@ -27,31 +27,35 @@ namespace MyNeo4j.Service
             this._teamRepo = _teamRepo;
             _dbcon = dbcon;
         }
-        public void addMembers(TeamMember member)
+        //this method will add members to a team
+        public void AddMembers(TeamMember member)
         {
-            _teamRepo.addMembers(member);
+            _teamRepo.AddMembers(member);
         }
 
-        public void addTeam(TeamMaster team)
+        //this method will add team to a project
+        public void AddTeam(TeamMaster team)
         {
-            _teamRepo.addTeam(team);
+            _teamRepo.AddTeam(team);
         }
 
-        public void deleteMember(int id)
+        //this method will delete member from a team
+        public void DeleteMember(int id)
         {
-            _teamRepo.deleteMember(id);
+            _teamRepo.DeleteMember(id);
         }
 
-        public List<AvailTeamMember> getAvailableMember(int projectId)
+        //this method will return available members in a project
+        public List<AvailTeamMember> GetAvailableMember(int projectId)
         {
             List<AvailTeamMember> availteam = new List<AvailTeamMember>();
-            List<ProjectMember> promem = _teamRepo.getProjectMember(projectId);
+            List<ProjectMember> promem = _teamRepo.GetProjectMember(projectId);
             List<TeamMember> finalmemlist = new List<TeamMember>();
             List<TeamMember> teammem = new List<TeamMember>();
-            List<TeamMaster> teams = getTeam(projectId);
+            List<TeamMaster> teams = GetTeam(projectId);
             foreach (TeamMaster tm in teams)
             {
-                teammem = _teamRepo.getTeamMember(tm.TeamId);
+                teammem = _teamRepo.GetTeamMember(tm.TeamId);
                  foreach(TeamMember temem in teammem)
                 {
                     finalmemlist.Add(temem);
@@ -68,7 +72,7 @@ namespace MyNeo4j.Service
                     if (pm.MemberId == tmm.MemberId)
                     {
                         avail.TeamId = tmm.TeamId;
-                        avail.Id = tmm.id;
+                        avail.Id = tmm.Id;
                         break;
                     }
                     else
@@ -82,22 +86,21 @@ namespace MyNeo4j.Service
             return availteam;
         }
 
-        public List<TeamMaster> getTeam(int projectId)
+        //this method will return teams of a particular project
+        public List<TeamMaster> GetTeam(int projectId)
         {
-             List<TeamMaster> teamMaster= _teamRepo.getTeam();
-             List<TeamMaster> teamlistbyproject = new List<TeamMaster>();
-             foreach (TeamMaster item in teamMaster)
+            List<TeamMaster> teamMaster = _teamRepo.GetTeam();
+            List<TeamMaster> teamlistbyproject = new List<TeamMaster>();
+            foreach (TeamMaster item in teamMaster)
             {
-                if(item.ProjectId == projectId)
+                if (item.ProjectId == projectId)
                 {
                     teamlistbyproject.Add(item);
                 }
             }
             return teamlistbyproject;
         }
-
-      
-
+        //this method will update connection Id for particular member 
         public void UpdateConnectionId(string connectionid, int memberid)
         {
             _teamRepo.UpdateConnectionId(connectionid, memberid);

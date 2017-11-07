@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MyNeo4j.Migrations
 {
-    public partial class initialstage : Migration
+    public partial class initialcommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,7 +88,8 @@ namespace MyNeo4j.Migrations
                 {
                     SignalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConnectionId = table.Column<int>(type: "int", nullable: false),
+                    ConnectionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HubCode = table.Column<int>(type: "int", nullable: false),
                     MemberId = table.Column<int>(type: "int", nullable: false),
                     Online = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -113,19 +114,6 @@ namespace MyNeo4j.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teammaster",
-                columns: table => new
-                {
-                    TeamId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TeamName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teammaster", x => x.TeamId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Teammemeber",
                 columns: table => new
                 {
@@ -137,6 +125,26 @@ namespace MyNeo4j.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teammemeber", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EpicDb",
+                columns: table => new
+                {
+                    EpicId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EpicDb", x => x.EpicId);
+                    table.ForeignKey(
+                        name: "FK_EpicDb_ProjectM_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "ProjectM",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,13 +207,33 @@ namespace MyNeo4j.Migrations
                     SprintName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    TotalDays = table.Column<TimeSpan>(type: "time", nullable: false)
+                    TotalDays = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sprintbl", x => x.SprintId);
                     table.ForeignKey(
                         name: "FK_Sprintbl_ProjectM_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "ProjectM",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teammaster",
+                columns: table => new
+                {
+                    TeamId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    TeamName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teammaster", x => x.TeamId);
+                    table.ForeignKey(
+                        name: "FK_Teammaster_ProjectM_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "ProjectM",
                         principalColumn: "ProjectId",
@@ -263,6 +291,11 @@ namespace MyNeo4j.Migrations
                 column: "TaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EpicDb_ProjectId",
+                table: "EpicDb",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Productbl_ProjectId",
                 table: "Productbl",
                 column: "ProjectId");
@@ -281,6 +314,11 @@ namespace MyNeo4j.Migrations
                 name: "IX_Taaskbl_SprintId",
                 table: "Taaskbl",
                 column: "SprintId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teammaster_ProjectId",
+                table: "Teammaster",
+                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -293,6 +331,9 @@ namespace MyNeo4j.Migrations
 
             migrationBuilder.DropTable(
                 name: "Commentlog");
+
+            migrationBuilder.DropTable(
+                name: "EpicDb");
 
             migrationBuilder.DropTable(
                 name: "Pmaster");

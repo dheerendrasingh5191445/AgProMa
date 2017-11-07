@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from './../router.animations';
 import { AuthService } from 'angular4-social-login';
+import { LoginService } from '../shared/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,16 +13,22 @@ import { AuthService } from 'angular4-social-login';
 export class DashboardComponent implements OnInit {
   pushRightClass: string = 'push-right';
   session: string;
-  constructor(private authService: AuthService) { }
+  isvalid:string;
+  userId:number;
+
+  constructor(private authService: AuthService,private loginservice: LoginService,private router:Router) { }
   ngOnInit() {
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);
   }
   toggleSidebar() {
     const dom: any = document.querySelector('body');
     dom.classList.toggle(this.pushRightClass);
   }
-  
-  signOut(): void {
-    this.authService.signOut();
-  }
 
+  onLoggedout():void{
+   // this.authService.signOut();
+    this.loginservice.logOut(this.userId)
+                     .then(data => {this.router.navigate(["app-signup"]);})
+  }
 }

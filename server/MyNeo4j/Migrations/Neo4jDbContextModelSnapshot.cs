@@ -183,7 +183,9 @@ namespace MyNeo4j.Migrations
                     b.Property<int>("SignalId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ConnectionId");
+                    b.Property<string>("ConnectionId");
+
+                    b.Property<int>("HubCode");
 
                     b.Property<int>("MemberId");
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,10 +9,11 @@ namespace MyNeo4j.Service
 {
     public interface ICheckListService
     {
+        TaskBacklog GetTaskDetail(int Id);
         List<ChecklistBacklog> Get();
-        ChecklistBacklog Get(int id);
-        void Add_User(ChecklistBacklog addItem);
-        void Update(int id, ChecklistBacklog addItem);
+        List<ChecklistBacklog> Get(int id);
+        void Add_Checklist(ChecklistBacklog addChecklist);
+        void Update(int id, ChecklistBacklog addChecklist);
         void Delete(int id);
 
     }
@@ -23,9 +24,10 @@ namespace MyNeo4j.Service
         {
             _context = con;
         }
-        public void Add_User(ChecklistBacklog addItem) //for adding checklist
+
+        public void Add_Checklist(ChecklistBacklog addChecklist)//for adding checklist
         {
-            _context.Add_User(addItem);
+            _context.Add_Checklist(addChecklist);
         }
 
         public void Delete(int id) //deleting checklist
@@ -38,14 +40,19 @@ namespace MyNeo4j.Service
             return _context.Get().ToList();
         }
 
-        public ChecklistBacklog Get(int id) //getting checklist according to task
+        public List<ChecklistBacklog> Get(int id)
         {
             return _context.Get(id);
         }
 
-        public void Update(int id, ChecklistBacklog addItem) //updating checklist
+        public TaskBacklog GetTaskDetail(int Id)
         {
-            _context.Update(id, addItem);
+            return _context.GetTaskDetail(Id);
+        }
+
+        public void Update(int id, ChecklistBacklog addChecklist) //updating checklist
+        {
+            _context.Update(id, addChecklist);
         }
     }
 }

@@ -10,14 +10,14 @@
              <h1>TASKS</h1>
              <hr>
                 <div index='teamcard' class="team card" *ngFor="let item of AvailTask; let i = index"><!--task cards starts here-->
-                    <div index='teamcard' class="card-header"><!-- card header for tasks-->
+                    <div index='teamcard' class="card-header" (click)="checkPerson(item)"><!-- card header for tasks-->
                         <i class="fa fa-tasks"></i>&nbsp;&nbsp;{{item.taskName}} <!--task name -->
                     </div>
                     <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.taskId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
-                        <div *ngFor="let data of TeamMemberList">
+                        <div *ngFor="let data of names">
                           <ul class="list-group">
                             <li *ngIf="compareTask(item.personId,data.memberId)">
-                            <i class='fa fa-user'></i>{{item.memberName}}</li> <!--names of the person assigned to a particular task-->
+                            <i class='fa fa-user'></i>{{data.memberName}}</li> <!--names of the person assigned to a particular task-->
                           </ul>  <!--bring the person assigned to a particular task-->
                         </div>
                      <ul><li></li> </ul>     <!--list to fill the tasks and members assigned-->                   

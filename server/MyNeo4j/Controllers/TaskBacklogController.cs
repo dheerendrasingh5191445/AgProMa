@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace MyNeo4j.Controllers
 {
     
-    [Authorize]
     [Produces("application/json")]
     [Route("api/TaskBacklog")]
     public class TaskBacklogController : Controller
@@ -52,7 +51,8 @@ namespace MyNeo4j.Controllers
         [HttpGet("GetMemberName/{id}")]
         public string GetMemberName(int id)
         {
-            return task.getName(id);
+            
+            return null;
         }
 
         // PUT: api/TaskBacklog/5

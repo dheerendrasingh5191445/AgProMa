@@ -37,6 +37,12 @@ namespace MyNeo4j.Hubs
             return Clients.Client(Context.ConnectionId).InvokeAsync("getTeamList", teams);
         }
 
+        public Task GetName(int sprintId)
+        {
+            List<AvailableMember> alist= task.GetName(sprintId);
+            return Clients.Client(Context.ConnectionId).InvokeAsync("getName",alist);
+        }
+
         public Task GetTeamMember(int teamId)
         {
             List<AvailTeamMember> availablelist = task.getTeamMember(teamId);

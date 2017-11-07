@@ -24,14 +24,21 @@ import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 import {LineGraphComponent} from './line-graph/line-graph.component'
 import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
 import { EfficiencyGraphComponent } from "./efficiency-graph/efficiency-graph.component";
+import { LandingpageComponent } from './landingpage/landingpage.component';
+import { DashboardLeaderComponent } from './dashboard-leader/dashboard-leader.component';
+import { DashboardMemberComponent } from './dashboard-member/dashboard-member.component';
+
 
 // paths to all the respective pages
 const routes: Routes = [
-    { path: "", redirectTo: 'app-signup', pathMatch: "full" },
+    { path: "", redirectTo: 'landingpage', pathMatch: "full" },
+    { path: 'landingpage', component:LandingpageComponent},
     { path: 'app-signup', component: SignupComponent },
     { path: 'app-register/:id', component: RegisterComponent }, 
     { path: 'app-forget-password', component: ForgetPasswordComponent },
     { path: 'app-register-user-with-new-password/:id', component: RegisterUserWithNewPasswordComponent },
+    { path: 'dashboard-leader',component:DashboardLeaderComponent },
+    { path: 'dashboard-member',component:DashboardMemberComponent },
     { path: 'app-dashboard', component: DashboardComponent,
     children:[
     { path:'',redirectTo:'project-screen', pathMatch:'full'},
@@ -47,7 +54,7 @@ const routes: Routes = [
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},
     { path:'taskassign/:id',component:TaskAssignComponent},
-    {path:'line-graph',component:LineGraphComponent},
+    { path:'line-graph',component:LineGraphComponent},
     { path: 'kanban/:id', component : KanbanBoardComponent},
     { path: 'efficiency', component : EfficiencyGraphComponent}
     ]}

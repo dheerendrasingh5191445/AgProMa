@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import { EpicService } from "../shared/services/epic.service";
 import { Epic } from "../shared/model/epic";
 import { HubConnection } from '@aspnet/signalr-client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-epic',
@@ -13,18 +14,20 @@ import { HubConnection } from '@aspnet/signalr-client';
 })
 export class EpicComponent implements OnInit {
 
-  projectId: number = 12;
+  projectId: number;
   connection: HubConnection;
-  data: Array<any>
+  data: Array<any> //all epics will store in this variable
   userId:number;
 
   model = new Epic(null, ''); //model for adding new epic
-  constructor(private epicService: EpicService) { }
+  constructor(private epicService: EpicService,private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((param) =>
+    this.projectId = +param['id']);
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-    this.connection = new HubConnection("http://localhost:52257/epichub");//for connecting with hub // when this component reload ,it will call this method
+    this.connection = new HubConnection("http://localhost:52258/epichub");//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
     this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
@@ -36,30 +39,30 @@ export class EpicComponent implements OnInit {
     });
   }
 
-addBacklog(story:any, comment:any)//for adding new  epic
-{
-  if (story == "") {
-    swal('Please fill user story','','error');
-  } else {
-    this.model.description = story;
-    this.model.projectId = this.projectId;
-    this.connection.invoke("Post",this.model);
-    this.connection.invoke("Get",this.projectId);
+  addBacklog(story:any, comment:any)//for adding new  epic
+  {
+    if (story == "") {
+      swal('Please fill user story','','error');
+    } 
+    else {
+      this.model.description = story;
+      this.model.projectId = this.projectId;
+      this.connection.invoke("Post",this.model);
+      this.connection.invoke("Get",this.projectId);
+    }
   }
-}
 
-updateBacklog(content:any, item) //for updating  particular epic 
-{
-  if (content == "") {
-    swal('Please fill user story', '', 'error');
+  updateBacklog(content:any, item){ //for updating  particular epic 
+    if (content == "") {
+      swal('Please fill user story', '', 'error');
+    }
+    else{
+      item.description = content;
+      this.connection.invoke("put",item.epicId,item);
+    } 
   }
-  else{
-  item.description = content;
-  this.connection.invoke("put",item.epicId,item);
-}
-}
 
-deleteBacklog(item:any){       //for deleting the epic 
+  deleteBacklog(item:any){       //for deleting the epic 
 
     this.connection.invoke("Delete",item.epicId);
     this.connection.invoke("Get",this.projectId);
