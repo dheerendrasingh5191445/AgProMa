@@ -37,7 +37,7 @@ namespace MyNeo4j.Hubs
         }
 
         //this method will delete a member from a team
-        public Task Delete(int id,int projectId)
+        public Task Delete(int id)
         {
             _service.DeleteMember(id);
             return Clients.Client(Context.ConnectionId).InvokeAsync("whenDeleted", "success");

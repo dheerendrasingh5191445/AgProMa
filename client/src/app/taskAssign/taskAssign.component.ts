@@ -20,7 +20,7 @@ export class TaskAssignComponent {
     TeamMemberList:Members[];
     sprintId:number;
     userId:number;
-    name:string;
+    names:Members[];
     data:TaskBackLog;
     connection:HubConnection;
 
@@ -30,7 +30,6 @@ export class TaskAssignComponent {
         this.route.params.subscribe(param =>this.sprintId = +param['id']);
         var session = sessionStorage.getItem("id");
         this.userId = parseInt(session);
-
         //this is call to connect the hub
         this.connectToHub();
     }
@@ -43,15 +42,17 @@ export class TaskAssignComponent {
         this.connection = new HubConnection("http://localhost:52258/taskbacklog");
         // when this component reload ,it will call this method
         // registering event handlers
-        this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data;console.log(this.AvailTask); });//this will return list of teams
-        this.connection.on("getTeamList",data =>{ this.AvailTeam = data;   });//this will return list of available member
-        this.connection.on("getTeamMember",data => { this.TeamMemberList = data; console.log(this.TeamMemberList);})
+        this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data; });//this will return list of teams
+        this.connection.on("getTeamList",data =>{ this.AvailTeam = data; });//this will return list of available member
+        this.connection.on("getTeamMember",data => { this.TeamMemberList = data;})
+        this.connection.on("getName",data => {this.names = data;console.log(this.names);})
         //sweet alert when task happens following 3
         this.connection.on("whenAssigned",data => { swal('Member Assigned To task', '', 'success') }); 
         this.connection.start().then(() => { 
         this.connection.invoke("SetConnectionId",this.userId);
         this.connection.invoke("GetAllTaskDetail",this.sprintId);//get the list of the tasks in a particular project
         this.connection.invoke("GetTeamList",this.sprintId);//get the team according to the the sprint id
+        this.connection.invoke("GetName",this.sprintId);//filter members from member id and bring member name
         });
       }
 
@@ -62,7 +63,6 @@ export class TaskAssignComponent {
         this.connection.invoke("GetTeamMember",this.myId);
     }
 
-
     //after adding the member to the list the list must be updated with the member name
     teamListupdate($event,id:number){  
        let teamMember:any  = $event.dragData;
@@ -71,15 +71,11 @@ export class TaskAssignComponent {
      
     }
 
-    //method to bring member name from member id
-    getName(task:TaskBackLog):string{
-        return this.TeamMemberList.filter(t=>t["MemberId"]==task.PersonId)[0]["MemberName"];//filter members from member id and bring member name
-     }
-
      //this method is to compare wether a person exist in team or not
-     compareTask(taskblId:number,taskId:number){
-      if(taskId == taskId)return true;
-      else return false;
+     compareTask(personId:number,memberId:number){
+       
+        if(personId == memberId) return true;
+        else return false;
      }
     
 }  

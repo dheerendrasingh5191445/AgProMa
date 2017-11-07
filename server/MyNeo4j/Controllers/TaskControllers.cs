@@ -20,16 +20,14 @@ namespace MyNeo4j.Controllers
         [HttpGet]
         public IEnumerable<TaskBacklog> Get()
         {
-            List<TaskBacklog> data = _service.GetAll();
-            return data;
 
+            return null;
         }
         // GET api/values/5
        [HttpGet("{id}")]
         public TaskBacklog Get(int id)
         {
-            TaskBacklog a = _service.Get(id);
-            return a;
+            return null;
         }
         [HttpPost]
         public void Post([FromBody]TaskBacklog backlog)
@@ -41,13 +39,13 @@ namespace MyNeo4j.Controllers
         [HttpPut("{id}")]
         public void put(int id, [FromBody]TaskBacklog value)
         {
-            _service.Update(id, value);
+          
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _service.Delete(id);
+           
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MyNeo4j.Service
         List<AvailTeamMember> getTeamMember(int teamId);
         void UpdateTask(int memberID, int taskId);
         void UpdateConnectionId(string connectionid, int memberid);
-        string getName(int id);
+        List<AvailableMember> GetName(int id);
     }
     public class TaskBacklogService : ITaskBacklogService
     {
@@ -53,10 +53,20 @@ namespace MyNeo4j.Service
             return teamlistbyproject;
         }
 
-        public string getName(int id)
+        public List<AvailableMember> GetName(int id)
         {
-            Master master = _taskBacklog.Master(id);
-            return master.FirstName + " " + master.LastName;
+            List<AvailableMember> availteam = new List<AvailableMember>();
+            SprintBacklog sprint = _taskBacklog.GetProjectId(id);
+            List<ProjectMember> projectmem = _taskBacklog.AllMember(sprint.ProjectId);
+            foreach (ProjectMember pro in projectmem)
+            {
+                    Master master = _taskBacklog.Master(pro.MemberId);
+                    AvailableMember avail = new AvailableMember();
+                    avail.MemberId = master.Id;
+                    avail.MemberName = master.FirstName + ' ' + master.LastName;
+                    availteam.Add(avail);
+            }
+            return availteam;
         }
 
         public List<AvailTeamMember> getTeamMember(int teamId)

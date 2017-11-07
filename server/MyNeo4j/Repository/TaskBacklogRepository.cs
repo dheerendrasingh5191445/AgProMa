@@ -13,10 +13,12 @@ namespace MyNeo4j.Repository
         List<TeamMaster> getTeamName();
         List<SprintBacklog> AllSprint();
         List<TeamMember> AllTeamMember();
+        SprintBacklog GetProjectId(int Id);
         Master Master(int id);
         void UpdateConnectionId(string connectionid, int memberid);
         List<TaskBacklog> GetAllTaskDetail(int id);
-        void Update(int memberId,int TaskId);
+        void Update(int memberId, int TaskId);
+        List<ProjectMember> AllMember(int projectId);
     }
     public class TaskBacklogRepository : ITaskBacklogReposiory
     {
@@ -70,6 +72,16 @@ namespace MyNeo4j.Repository
             signalr.ConnectionId = connectionid;
             signalr.HubCode = HubCode.taskbl;
             _context.SaveChanges();
+        }
+
+        public List<ProjectMember> AllMember(int projectId)
+        {
+            return _context.Projectmember.Where(p => p.ProjectId == projectId).ToList();
+        }
+
+        public SprintBacklog GetProjectId(int Id)
+        {
+            return _context.Sprintbl.FirstOrDefault(p => p.SprintId == Id);
         }
     }
 }
