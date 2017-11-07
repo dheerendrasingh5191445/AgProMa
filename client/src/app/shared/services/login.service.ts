@@ -19,10 +19,11 @@ export class LoginService {
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
   checkurl='http://localhost:52258/api/Login/Check';
+  logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
 
   token = sessionStorage.getItem("token");
-  headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + this.token });
+  headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
   options = new RequestOptions({ headers: this.headers });
  
  //get all the details of user
@@ -30,6 +31,13 @@ export class LoginService {
    return this.http
    .get(this.url)
    .map((response)=>response.json());
+ }
+//this function is to logout from the system
+ logOut(userId:number){
+  return this.http.post(this.logouturl+userId,"",this.options)
+                  .map((response)=>response.json())
+                  .toPromise()
+                  .catch(this.handleError);
  }
   //get the userid on basis of email
   get(email:string){
@@ -39,7 +47,6 @@ export class LoginService {
 
  //check details of a particular user by emailid and password
   check(userData:IdPassword){
-    console.log(userData);
    return this.http
               .post(this.checkurl,userData,this.options)
               .map((response)=>response.json())

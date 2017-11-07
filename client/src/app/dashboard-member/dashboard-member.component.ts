@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { routerTransition } from './../router.animations';
 import { AuthService } from 'angular4-social-login';
 import { LoginService } from '../shared/services/login.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  animations: [routerTransition()]
+  selector: 'app-dashboard-member',
+  templateUrl: './dashboard-member.component.html',
+  styleUrls: ['./dashboard-member.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardMemberComponent implements OnInit {
+
   pushRightClass: string = 'push-right';
   session: string;
   isvalid:string;
@@ -31,4 +30,5 @@ export class DashboardComponent implements OnInit {
     this.loginservice.logOut(this.userId)
                      .then(data => {this.router.navigate(["app-signup"]);})
   }
+
 }

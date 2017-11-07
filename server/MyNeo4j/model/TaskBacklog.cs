@@ -32,6 +32,8 @@ namespace MyNeo4j.model
 
         public DateTime EndDate { get; set; }
 
+        public DateTime ActualEndDate { get; set; }
+
         [EnumDataType(typeof(TaskBacklogStatus))]
         [JsonConverter(typeof(StringEnumConverter))]
         public TaskBacklogStatus Status { get; set; }

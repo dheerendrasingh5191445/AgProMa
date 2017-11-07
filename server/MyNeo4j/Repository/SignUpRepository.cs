@@ -9,10 +9,12 @@ namespace AgProMa.Repository
     //interface of sign-up
     public interface ISignUpRepository
     {
+
         Master Get(string emailid);
         void Add_User(Master adduser );
         void Update(string emailid, Master user);
         List<Master> GetAllDetails();
+        bool SetLoggedIn(int userId,bool status);
     }
     public class SignUpRepository : ISignUpRepository
     {
@@ -50,6 +52,15 @@ namespace AgProMa.Repository
             sign.FirstName = s.FirstName;
             sign.LastName = s.LastName;
             _context.SaveChanges();
+        }
+        //this is used to set the status
+        public bool SetLoggedIn(int userId, bool status)
+        {
+           SignalRMaster signaldata =  _context.SignalRDb.FirstOrDefault(p => p.MemberId == userId);
+           signaldata.Online = status;
+           signaldata.HubCode = HubCode.projectscreen;
+            _context.SaveChanges();
+            return true;
         }
     }
 }

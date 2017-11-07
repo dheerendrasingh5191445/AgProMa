@@ -10,8 +10,9 @@
                   <span routerLink="/app-dashboard/fill-details/{{Data.projectId}}" class="fa fa-pencil fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project"></span>
                   <span routerLink = "/app-dashboard/app-teams/{{Data.projectId}}" class="fa fa-users fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to view and add members"></span>
                   <span (click)="delete(Data.projectId)" class="fa fa-trash-o fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to delete a project"></span>
-                  <span class="fa fa-sign-in fa-lg" aria-hidden="true"></span>                  
-              </a>
+                  <span ></span>                                 
+                </a>
+              <span (click)="enterProject()" class="fa fa-sign-in fa-lg" aria-hidden="true"></span>
               </div>
               <h1 class="heading">{{Data.name | titlecase }}</h1>             
             </div>

@@ -53,6 +53,8 @@ import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
+import { DashboardLeaderComponent } from './dashboard-leader/dashboard-leader.component';
+import { DashboardMemberComponent } from './dashboard-member/dashboard-member.component';
 
 //configuration for social  login
 let config = new AuthServiceConfig([
@@ -93,7 +95,9 @@ export function provideConfig() {
     SprintComponent,
     LineGraphComponent, 
     KanbanBoardComponent,
-    EfficiencyGraphComponent
+    EfficiencyGraphComponent,
+    DashboardLeaderComponent,
+    DashboardMemberComponent
   ],
   imports: [
     DndModule.forRoot(),

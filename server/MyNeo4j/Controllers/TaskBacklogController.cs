@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace MyNeo4j.Controllers
 {
     
-    [Authorize]
     [Produces("application/json")]
     [Route("api/TaskBacklog")]
     public class TaskBacklogController : Controller
