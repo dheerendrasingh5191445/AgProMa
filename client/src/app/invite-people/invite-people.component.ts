@@ -13,7 +13,7 @@ import { Members } from '../shared/model/members';
 export class InvitePeopleComponent implements OnInit {
 
   data:any[];
-  memberDetail:Members[];
+  memberDetail:Members[]=[];
   //local variable used in this component
   private model={
     projectId:0,

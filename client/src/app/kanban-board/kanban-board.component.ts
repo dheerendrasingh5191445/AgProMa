@@ -11,11 +11,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class KanbanBoardComponent implements OnInit {
 
   //local variable used in backend
-  data : TaskBackLog[];
+  data : TaskBackLog[] =[];
   taskBackLog : TaskBackLog ;
-  SprintId : number = 2;
-
-  constructor(private kanbanService : KanbanService, private route : ActivatedRoute) { }
+  SprintId : number = 1;
+  isDataAvailable=false;
+  constructor(private kanbanService : KanbanService, private route : ActivatedRoute) {
+   }
 
   ngOnInit() {
 
@@ -24,7 +25,7 @@ export class KanbanBoardComponent implements OnInit {
     // this.taskBackLog.SprintId = +param['id']);
 
     //Getting the detail of task backlog
-    this.kanbanService.getTaskDetail(this.SprintId).subscribe(data => {this.data = data});
+    this.kanbanService.getTaskDetail(this.SprintId).subscribe(data => {this.data = data; console.log(this.data); this.isDataAvailable=true;});
   }
 
 }

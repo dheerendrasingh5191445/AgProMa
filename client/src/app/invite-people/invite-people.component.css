@@ -15,6 +15,12 @@
     width: 150px;
 }
 
+.chipData
+{
+    padding-left : 40px;
+    padding-right : 40px;
+}
+
 .chip {
     display: inline-block;
     padding: 0 25px;
@@ -22,8 +28,12 @@
     font-size: 16px;
     line-height: 50px;
     border-radius: 25px;
-    background-color: #f1f1f1;
+    color: white;
+    background-color: #CBC5C5;
+    
 }
+
+
 
 .chip img {
     float: left;

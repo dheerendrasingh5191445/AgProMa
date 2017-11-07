@@ -22,7 +22,6 @@
         <input type="text" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon2" [(ngModel)]="model.email"
         value={{email}} list="channel" >
         <datalist id="channel">
-          <!--  -->
           <option *ngFor="let h of data" value="{{h.email}}">
         </option>
         </datalist>
@@ -32,7 +31,7 @@
   <div class="card-footer text-muted">
     Members already invited to this project
     <hr />
-    <div>
+    <div class ="chipData">
       <!-- this will show number of people that are present in that team -->
         <div class="chip" *ngFor="let details of memberDetail">
             <!-- this will show logo of man  -->

@@ -1,64 +1,63 @@
-<!-- used for kanban board -->
-<div class="container">
-  <div class="task-table row">
-    <div class="table-head">
-			<!--Heading of page -->
-       <h1>Task - Kanban Board</h1> 
-		</div>
-		<!-- Start of table -->
-    <table class="table"> 
-      <thead>
-        <tr>
-					<!-- Header of table -->
-          <th>Unplanned</th>
-          <th>In Progress</th>
-          <th>Complete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-						<!-- Iteration for task backlog -->
-            <div *ngFor="let item of data">
-							<!-- if condition for unplanned -->
-              <ul *ngIf="item.status == 'Unplanned'">
-                <li id="todo">
-                  <a>
-                    <p>{{item.taskName}}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </td>
-          <td>
-            <div *ngFor="let item of data">
-              <ul *ngIf="item.status == 'Inprogress'">
-                <li id="doing">
-                  <a>
-                    <p>{{item.taskName}}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- </div> -->
-          </td>
+<div class="container-fluid" *ngIf="isDataAvailable">
+  <div class="row">
+    <div class="offset-1 col-10">
+      <div class="table-head text-responsive rounded">
+        <h3>Kanban Board</h3>
+        <hr>
+        <h5>Sprint Name : {{data[0].sprintBacklogs.sprintName}} </h5>
+        <h5>Sprint Goal : {{data[0].sprintBacklogs.sprintGoal}}</h5>
+      </div>
 
-          <td>
-            <!-- <div class="complted col-lg-4"> -->
-            <div *ngFor="let item of data">
-              <ul *ngIf="item.status == 'Completed'">
-                <li id="done">
-                  <a>
-                    <p>{{item.taskName}}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- </div> -->
-          </td>
-        </tr>
 
-      </tbody>
-    </table>
+
+      <br>
+      <table class="table table-responsive">
+        <thead class="heading">
+          <tr>
+            <th class="h5 h5-responsive text-center">Unplanned</th>
+            <th class="h5 h5-responsive text-center">In Progress</th>
+            <th class="h5 h5-responsive text-center">Complete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+
+              <div class="border" *ngFor="let item of data">
+                <ul *ngIf="item.status == 'Unplanned'">
+                  <li id="todo" data-toggle="popover" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+                    <p class="h6 text-responsive">{{item.taskName}}</p>
+                  </li>
+                </ul>
+              </div>
+
+            </td>
+            <td>
+
+              <div *ngFor="let item of data">
+                <ul *ngIf="item.status == 'Inprogress'">
+                  <li id="doing" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+                    <p class="h6">{{item.taskName}}</p>
+                  </li>
+                </ul>
+              </div>
+
+            </td>
+
+            <td>
+
+              <div *ngFor="let item of data">
+                <ul *ngIf="item.status == 'Completed'">
+                  <li id="done" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+                    <p class="h6">{{item.taskName}}</p>
+                  </li>
+                </ul>
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
