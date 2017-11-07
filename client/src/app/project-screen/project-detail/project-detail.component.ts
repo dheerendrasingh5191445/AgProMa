@@ -25,4 +25,10 @@ export class ProjectDetailComponent implements OnInit {
     this.projectservice.deleteProject(id)
                        .then(data => {this.onDelete.emit(id)});
   }
+
+  //this method is used for storing role
+  enterProject(){
+    sessionStorage.setItem("role",this.Data["actAs"]);
+    this.router.navigate(["app-dashboard","kanban","Data.projectId"]);
+  }
 }

@@ -19,5 +19,9 @@ namespace MyNeo4j.model
         public string ChecklistName { get; set; }
 
         public bool Status { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
     }
 }

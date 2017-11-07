@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { routerTransition } from './../router.animations';
 import { AuthService } from 'angular4-social-login';
 import { LoginService } from '../shared/services/login.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  animations: [routerTransition()]
+  selector: 'app-dashboard-leader',
+  templateUrl: './dashboard-leader.component.html',
+  styleUrls: ['./dashboard-leader.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardLeaderComponent implements OnInit {
   pushRightClass: string = 'push-right';
   session: string;
   isvalid:string;

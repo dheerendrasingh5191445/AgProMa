@@ -26,6 +26,7 @@ namespace MyNeo4j.Repository
         }
         public void Add_Checklist(ChecklistBacklog addchecklist) //adding checklist
         {
+            addchecklist.StartDate = DateTime.Now;
             _context.Checklistbl.Add(addchecklist);
             _context.SaveChanges();
         }
@@ -57,6 +58,7 @@ namespace MyNeo4j.Repository
             ChecklistBacklog sign = _context.Checklistbl.FirstOrDefault(p => p.ChecklistId == id);
             sign.ChecklistName = checklist.ChecklistName;
             sign.Status = checklist.Status;
+            sign.EndDate = DateTime.Now;
             _context.SaveChanges();
         }
     }
