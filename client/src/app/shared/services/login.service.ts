@@ -18,12 +18,12 @@ export class LoginService {
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://192.168.252.131:8030/api/Login/Check';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  checkurl='http://localhost:52258/api/Login/Check';
+  logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
 
   token = sessionStorage.getItem("token");
-  headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + this.token });
+  headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
   options = new RequestOptions({ headers: this.headers });
  
  //get all the details of user
@@ -46,7 +46,7 @@ export class LoginService {
   }
 
  //check details of a particular user by emailid and password
-  check(data:IdPassword){
+  check(userData:IdPassword){
    return this.http
               .post(this.checkurl,userData,this.options)
               .map((response)=>response.json())
@@ -92,4 +92,3 @@ export class LoginService {
   }
 
 }
-

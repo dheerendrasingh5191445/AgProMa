@@ -33,7 +33,6 @@ export class SignupComponent implements OnInit {
       this.user = user; //checking wheather user variable has data in it or not
       if (this.user != null)
       { this.router.navigateByUrl('app-dashboard') } //if the user is logged in with social account then user can directly moved to dashboard screen
-
     });
   }
 
@@ -44,52 +43,61 @@ export class SignupComponent implements OnInit {
         console.log(data)
         this.authService.authState.subscribe((user) => {
           this.user = user; // data is assigned from gmail to local variable
-          if(this.user != null)
-          { this.router.navigateByUrl('app-dashboard')} //user will be redirected to dashboard screen
-        })});
-    }
-  
-    signInWithFB(): void {
-      //this method is used for social login(facebook)
-      this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then(data =>{ console.log(data)
+          if (this.user != null)
+          { this.router.navigateByUrl('app-dashboard') } //user will be redirected to dashboard screen
+        })
+      });
+  }
+
+  signInWithFB(): void {
+    //this method is used for social login(facebook)
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then(data => {
+        console.log(data)
         this.authService.authState.subscribe((user) => {
           this.user = user; // data is assigned from facebook to local variable
-          if(this.user != null)
-          { this.router.navigateByUrl('app-dashboard')} //user will be redirected to dashboard screen
-        })});
+          if (this.user != null)
+          { this.router.navigateByUrl('app-dashboard') } //user will be redirected to dashboard screen
+        })
+      });
+  }
+
+  signOut(): void {
+    //this method is used to signout with AgProMa project
+    this.authService.signOut();
+  }
+
+
+  login() {
+    let auth: authentication = new authentication("", "");
+    //this method is used to verify user's credentials
+    if (this.email == '' || this.password == '') //if username or password is empty
+    {
+      swal('', "Enter the proper details", "error");
     }
-  
-    signOut(): void {
-      //this method is used to signout with AgProMa project
-      this.authService.signOut();
-    }
-    login(){
-      let auth : authentication  = new authentication("","");
-      //this method is used to verify user's credentials
-      if(this.email=='' || this.password=='') //if username or password is empty
+
+    else {
+
+      let model: IdPassword = new IdPassword(this.email, this.password);
+
+      this.loginservice.check(model).then(data => {
+        this.userCred = data;
+        if (this.userCred["status"] == "success") // if user is register with AgProMa
         {
-           swal('',"Enter the proper details","error"); 
+          //call method for token generation
+          this.loginservice.getToken(this.userCred).then(data => {
+            //debugger;
+            this.tokenData = JSON.parse(data["_body"]).token;
+            sessionStorage.setItem("id", this.userCred["userId"].toString());
+            sessionStorage.setItem("token", this.tokenData);
+        
+          if (this.tokenData)
+          { this.router.navigate(["/app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
+        });
         }
-        else{
-        let model:IdPassword=new IdPassword(this.email,this.password);
-        console.log(model);
-        this.loginservice.check(model).then(data=>{console.log(data);
-        this.data = data;
-        if(this.data["status"] == "success") // if user is register with AgProMa
-          {
-            sessionStorage.setItem("id",this.data["userId"].toString());
-            auth.Name = data.password;
-            auth.Email=data.email;//call method for token generation
-            this.loginservice.getToken(auth).then(data=>
-            {var tokenData = JSON.parse(data["_body"]).token;
-            console.log("tokendat....-----",tokenData);
-            sessionStorage.setItem("token",tokenData)});
-            console.log("get token",sessionStorage.getItem("token"));
-            this.router.navigate(["/app-dashboard"]); //if user's credentials are correct then user will br redirected to dashboard
-          }
-        else if(this.data["status"] == "email"){
-          swal('',"Enter Valid Id or Password","error");
+
+        else if (this.userCred["status"] == "email") {
+          swal('', "Enter Valid Id or Password", "error");
         }
         else {
           //if username or password is incorrect
