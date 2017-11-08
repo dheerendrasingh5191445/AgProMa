@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'angular4-social-login';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../shared/services/login.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard-member',
-  templateUrl: './dashboard-member.component.html',
-  styleUrls: ['./dashboard-member.component.scss']
+  selector: 'app-dashboard-role',
+  templateUrl: './dashboard-role.component.html',
+  styleUrls: ['./dashboard-role.component.scss']
 })
-export class DashboardMemberComponent implements OnInit {
-
+export class DashboardRoleComponent implements OnInit {
   pushRightClass: string = 'push-right';
   session: string;
   isvalid:string;
   userId:number;
+  projectId:number;
+  actAs:number;
 
-  constructor(private authService: AuthService,private loginservice: LoginService,private router:Router) { }
+  constructor(private authService: AuthService,private route:ActivatedRoute,private loginservice: LoginService,private router:Router) { }
   ngOnInit() {
+    this.route.params.subscribe((param) => this.projectId= +param['id']);   
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
+    var temp = sessionStorage.getItem("role");
+    this.actAs = parseInt(temp);
   }
+ 
+ //this is used for toggling the side bar
   toggleSidebar() {
     const dom: any = document.querySelector('body');
     dom.classList.toggle(this.pushRightClass);
@@ -30,5 +36,4 @@ export class DashboardMemberComponent implements OnInit {
     this.loginservice.logOut(this.userId)
                      .then(data => {this.router.navigate(["app-signup"]);})
   }
-
 }

@@ -19,10 +19,10 @@
     <p class="card-text">Invite a person to this project as a member</p>
     <div class="input-group">
       <!-- input box is used to take input -->
-        <input type="text" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon2" [(ngModel)]="model.email"
-        value={{email}} list="channel" >
+        <input type="text" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon2" [(ngModel)]="userDetail.memberName"
+        value={{memberName}} list="channel" >
         <datalist id="channel">
-          <option *ngFor="let h of data" value="{{h.email}}">
+          <option *ngFor="let h of memberDetail" value="{{h.memberName}}">
         </option>
         </datalist>
         <span class="btn invite" id="basic-addon2" (click)="inviteMember()"><span>Invite Member</span><i class="ion-android-arrow-forward"></i></span>

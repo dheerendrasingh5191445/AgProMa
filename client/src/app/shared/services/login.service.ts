@@ -58,11 +58,16 @@ export class LoginService {
               .catch(this.handleError);
 
  }
+<<<<<<< HEAD
 //get userdata by id for view profile
 getById(id:any){
   return this.http.get(this.updateUrl + id).map(data=>data.json());
 }
 
+=======
+
+//this method is used to get the token
+>>>>>>> 9c72872c1bbf2ae367f97382c098b5af989ff265
  getToken(auth:Credential)
  {
   let headers = new Headers({ 'Content-Type': 'application/json'});

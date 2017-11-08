@@ -22,7 +22,7 @@ namespace MyNeo4j.Controllers
         {
             task = tservice;
         }
-      
+
         //this method will return all the task in that same sprint
         [HttpGet("GetAllTaskDetail/{id}")]
         public List<TaskBacklog> GetAllTaskDetail(int id)

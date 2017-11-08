@@ -92,7 +92,7 @@ export class SignupComponent implements OnInit {
             sessionStorage.setItem("token", this.tokenData);
         
           if (this.tokenData)
-          { this.router.navigate(["/app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
+          { this.router.navigate(["app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
         });
         }
 
