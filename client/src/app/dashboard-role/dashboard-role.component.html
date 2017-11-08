@@ -27,21 +27,18 @@
       <div routerLink="/app-dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
         <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' }}
       </div>
-      <div routerLink="/app-dashboard/epic/1" class="list-group-item">
+      <div *ngIf = "actAs == 0" routerLink="/role-dashboard/{{projectId}}/epic/{{projectId}}" class="list-group-item">
         <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'BrainStroming' }}
-      </div>
-      <div routerLink="/app-dashboard/backlog/1" class="list-group-item">
+        </div>
+        <div *ngIf = "actAs == 0 || actAs == 1" routerLink="/role-dashboard/{{projectId}}/backlog/{{projectId}}" class="list-group-item">
         <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Product Backlog' }}
-      </div>
-      <div routerLink="/app-dashboard/releaseplan/1" class="list-group-item">
+        </div>
+        <div *ngIf = "actAs == 0" routerLink="/role-dashboard/{{projectId}}/releaseplan/{{projectId}}" class="list-group-item">
         <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'ReleasePlan' }}
-      </div>
-      <div routerLink="/app-dashboard/app-sprint/1" class="list-group-item">
+        </div>
+        <div *ngIf = "actAs == 0 || actAs == 1" routerLink="/role-dashboard/{{projectId}}/app-sprint/{{projectId}}" class="list-group-item">
         <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Sprint Backlog' }}
-      </div>
-      <div routerLink="/app-dashboard/taskassign/1" class="list-group-item">
-        <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'TasksAssign' }}
-      </div>
+        </div>
     </ul>
     <!-- end side bar -->
   </nav>

@@ -54,5 +54,11 @@ namespace MyNeo4j.Hubs
             task.UpdateTask(member.MemberId, id);
             return Clients.Client(Context.ConnectionId).InvokeAsync("whenAssigned", "success");
         }
+
+        public Task GetProjectId(int sprint)
+        {
+            int n = task.GetProjectId(sprint);
+            return Clients.Client(Context.ConnectionId).InvokeAsync("getProjectId",n);
+        }
     }
 }

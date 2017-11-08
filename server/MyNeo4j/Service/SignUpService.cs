@@ -11,12 +11,16 @@ namespace AgProMa.Services
     //interface for sign-up
     public interface ISignUpService
     {
+
+        void UpdatePassword(int id, Master master);
         string logOut(int userId);
         Creadential Check(IdPassword cread);
         string Add_User(Master favourite);
         void Update(string emailid, Master favourite);
         List<Master> GetAllDetails();
         int GetId(string email);
+       Master GetById(int id);
+
     }
     public class SignUpService : ISignUpService
     {
@@ -89,12 +93,23 @@ namespace AgProMa.Services
             Master master = _context.Get(email);
             return master.Id;
         }
+
+        public Master GetById(int id)
+        {
+            return _context.GetById(id);
+        }
+
+        public void UpdatePassword(int id, Master master)
+        {
+            _context.UpdatePassword(id, master);
+        }
         //this is to logout from the system
         public string logOut(int userId)
         {
            bool response = _context.SetLoggedIn(userId, false);
             if (response == true) { return "success"; }
             else return "failed";
+
         }
     }
 }

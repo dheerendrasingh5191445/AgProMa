@@ -1,0 +1,129 @@
+<!--main container starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="twPc-div">
+            <a class="twPc-bg twPc-block"></a>
+            <div>
+                <!--User image added here-->
+                <a title="userImage" class="twPc-avatarLink">
+                    <img alt="User" src="../../assets/images/man.png"><!--image of user-->
+                  </a>
+                <!--hello user message-->
+                <div class="twPc-divUser">
+                    <div class="twPc-divName">
+                        <a>
+                            <h4>Hello {{details.firstName}} !</h4>
+                        </a>
+                    </div>
+                </div>
+                <!--card containing user information-->
+                <div class="card inverse">
+                    <div class="card-header" id="YourInfo">
+                        Your Info
+                    </div>
+                    <div class="card-body">
+                        <hr style="margin:5px 0 5px 0;">
+                        <!--First name of the user shown-->
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
+                            <div id="firstName" class="col-sm-7 col-xs-6 ">{{details.firstName}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                        <!--Last name of the user shown-->
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
+                            <div id="lastName" class="col-sm-7"> {{details.lastName}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                        <!--Department of the user shown-->
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-6 tital ">Department:</div>
+                            <div id="department" class="col-sm-7"> {{details.department}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                        <!--Organization of the user shown-->
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-6 tital ">Organization:</div>
+                            <div class="col-sm-7"> {{details.organization}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                        <!--Email ID of the user shown-->
+                        <div class="row">
+                            <div  class="col-sm-5 col-xs-6 tital ">Email ID:</div>
+                            <div id="email" class="col-sm-7"> {{details.email}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                        <div class="row">
+                            <!--Change the password of the user-->
+                            <div class="col-sm-5 col-xs-6 tital">
+                                Password:</div>
+                            <div class="col-sm-7">
+                                <div class="btn btn-primary " data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Change Password</div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                        <!-- Modal starts  here-->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!--modal title-->
+                                        <h3>Change Password <span class="extra-title muted"></span></h3>
+                                    </div>
+                                    <div class="modal-body form-horizontal">
+                                        <div class="control-group">
+                                            <!--Enter current password-->
+                                            <label for="current_password" class="control-label">Current Password</label>
+                                            <div class="controls">
+                                                <input type="password" name="current_password" [(ngModel)]="str">
+                                                <p>{{values}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <!--Enter new password-->
+                                            <label for="new_password" class="control-label">New Password</label>
+                                            <div class="controls">
+                                                <input type="password" name="new_password" [(ngModel)]="newPassword">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <!--Last name of the user shown-->
+                                            <label for="confirm_password" class="control-label">Confirm Password</label>
+                                            <div class="controls">
+                                                <input type="password" name="confirm_password" [(ngModel)]="confirmPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!--close the modal-->
+                                        <button href="#" class="btn" (click)="resetOnClose()" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        <button href="#" class="btn btn-primary" id="password_modal_save" (click)="checkPassword()">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 id="eheading">Your Efficiency</h2>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                <efficiency></efficiency>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                <app-line-graph></app-line-graph>
+            </div>
+        </div>
+    </div>
+</div>

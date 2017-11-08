@@ -1,9 +1,6 @@
-<h1>Please Assign Task To Member</h1> <!--main heading-->
- 
+<!--main heading-->
+<h1>Please Assign Task To Member</h1> 
 <hr>
-<div class="tooltip">Hover over me
-        <span class="tooltiptext">Tooltip text</span>
-      </div>
 <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -23,7 +20,7 @@
                      <ul><li></li> </ul>     <!--list to fill the tasks and members assigned-->                   
                     </div>
                 </div>
-                
+            </div>
             </div>
             
             <div class="col-md-4">
@@ -31,23 +28,27 @@
             <h1>TEAM MEMBERS</h1>
             <hr>
                 <div class=" card available"> 
-                    <div class="card-header"> <!--title starts here-->
-                        <select class=" custom-select form-control" [(ngModel)]="myId" (ngModelChange) = "getTeamMember()" name="choice" id="choice"><!--select drop down-->
+                    <!--title starts here-->
+                    <div class="card-header"> 
+                        <!--select drop down-->
+                        <select class=" custom-select form-control" [(ngModel)]="myId" (ngModelChange) = "getTeamMember()" name="choice" id="choice">
                             <option value="undefined" disabled selected hidden>Select Your Choice</option><!--dropdown heading-->
-                            <option  *ngFor="let team of AvailTeam" [ngValue]="team.teamId">{{team.teamName}}</option><!--values for dropdown show the name of the team-->
+                            <!--values for dropdown show the name of the team-->
+                            <option  *ngFor="let team of AvailTeam" [ngValue]="team.teamId">{{team.teamName}}</option>
                       </select>
                     </div>
-                    <div class="card-body"> <!--body for team card-->
+                    <!--body for team card-->
+                    <div class="card-body scroll"> 
                         <ul class="list-group" *ngFor="let item of TeamMemberList; let i = index">
                              <div class="chip">
                             
                             <li  [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item"> <!--team member list-->
                                 <i id="fa-user" class="fa fa-user"></i>
                               <span class="tool">  {{item.memberName}}
-                                    <span class="tooltiptext">Drag and drop members</span>
+                                    <span class="tooltiptext">Drag and drop members </span>
                               </span>
-                                
-                                </li><!--list of team members display here-->
+                                <!--list of team members display here-->
+                                </li>
                                               
                         </div>    
                             <li ></li>
@@ -57,5 +58,3 @@
                 </div>
             </div>
         </div>
-        
-</div>
