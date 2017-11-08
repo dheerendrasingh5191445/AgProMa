@@ -2,8 +2,8 @@
 	<div class="row">
 		<!--team col starts here-->
 		<div class="col-md-8 ">
-			<!--team screen starts here-->
-			<div class="row team_screen">
+			<!--header starts here-->
+			<div class="row header">
 				<div class="col-sm-3 text-responsive"><h3>Teams</h3></div>
 				<!--button for add teams starts here-->
 				<div class="col-1 offset-sm-8">
@@ -15,7 +15,7 @@
 				<!--button for add teams ends here-->
 			</div>
 			<hr>
-			<!--team screen ends here-->
+			<!--header ends here-->
 			<!--team cards starts here-->
 			<div class="row">
 				<div class="col-md-4" *ngFor="let item of teams; let i = index">
@@ -24,19 +24,19 @@
 							<i class="fa fa-users"></i>&nbsp;&nbsp;{{item.teamName}}
 						</div>
 						<!--div for team-members -->
-						<div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info memList">
-							<div *ngFor="let member of teamList">
-							<ul class="list-group">
-								<li  *ngIf=compareMember(item.teamId,member.teamId)>
+						<div dnd-droppable (onDropSuccess)="teamListUpdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info memList">
+							<div *ngFor="let member of getTeamMembers(item.teamId)">
+							<ul class="list-group teamli">
+								<div *ngIf=compareMember(item.teamId,member.teamId)>
 									<i class="fa fa-user icons"></i>
-									&nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
+										&nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
 									<i (click)="delete(member.id)" class="fa fa-close" aria-hidden="true"></i>
-								</li>
+								</div>
 								<li></li>
 							</ul>
 						</div>
-						</div><!--div for team-members ends here -->
-					</div>
+					  </div><!--div for team-members ends here -->
+				  </div>
 				</div>
 			</div>
 			<!--team cards starts here-->
@@ -45,14 +45,18 @@
 
 		<div class="col-md-4">
 			<!--div for available member list starts here-->
-			<div class=" card available">
+			<div class="card available">
 				<div class="card-header">
-					<i class="fa fa-user-plus"></i> &nbsp;&nbsp;Available Members
+					<i class="availablefa fa fa-user-plus"></i> &nbsp;&nbsp;Available Members
 					<!--heading for available card-->
 				</div>
 				<!--available card body starts here-->
 				<div class="card-body availMemList ">
 					<!--list for member list starts here-->
+				  <div class="input-group">
+						<input type="text" (keyup)="filterByName($event)" class="form-control" placeholder="Search project members here..." aria-describedby="basic-addon1">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+				  </div>
 					<ul class="list-group">
 						<div *ngFor="let item of teamList; let i = index" class=" panel panel-default" 
 						dnd-draggable [dragEnabled]="true" [dragData]="item" (onDragSuccess)="removeMember($event)"  [dropZones]="['boxers-zone']">
