@@ -18,7 +18,7 @@ export class LoginService {
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://192.168.252.131:8030/api/Login/Check';
+  checkurl='http://localhost:52258/api/Login/Check';
   updateUrl='http://localhost:52258/api/Login/Details/';
   updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
 //  private headers = new Headers({ 'Content-Type': 'application/json' });
@@ -58,55 +58,51 @@ export class LoginService {
               .catch(this.handleError);
 
  }
-<<<<<<< HEAD
-//get userdata by id for view profile
-getById(id:any){
-  return this.http.get(this.updateUrl + id).map(data=>data.json());
-}
 
-=======
-
-//this method is used to get the token
->>>>>>> 9c72872c1bbf2ae367f97382c098b5af989ff265
- getToken(auth:Credential)
- {
-  let headers = new Headers({ 'Content-Type': 'application/json'});
-  let options = new RequestOptions({ headers: this.headers });
-   return this.http.post("http://localhost:59382/api/TokenGeneration/createtoken",auth,options)
-                    .toPromise();
- }
-
- //post the details of a new user 
-  postLoginDetails(logindetails:Login){
-    return this.http
-                .post(this.url,logindetails,this.options)
-                .toPromise()
-                .catch(this.handleError);
-   
+  //get userdata by id for view profile
+  getById(id:any){
+    return this.http.get(this.updateUrl+id)
+                    .map(data=>data.json());
   }
 
-  //post the details of member with team id
-  postMemberDetails(memberdetails:ProjectMember){
-    console.log(memberdetails);
-    return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
+  //this method is used to get the token
+  getToken(auth:Credential)
+  {
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: this.headers });
+    return this.http.post("http://localhost:59382/api/TokenGeneration/createtoken",auth,options)
+                      .toPromise();
   }
 
-  //update details of a user
-  
+  //post the details of a new user 
+    postLoginDetails(logindetails:Login){
+      return this.http
+                  .post(this.url,logindetails,this.options)
+                  .toPromise()
+                  .catch(this.handleError);
+    
+    }
 
-  //handling the error
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
-   //this is to get the existing member in the project
-  getUserData(projectId:number){
-    return this.http.get(this.invite_url+projectId)
-                    .map(Response=>Response);
-  
-  }
+    //post the details of member with team id
+    postMemberDetails(memberdetails:ProjectMember){
+      console.log(memberdetails);
+      return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
+    }
+    
 
-  updatePassword(id:number,user:any) {
-    this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+    //handling the error
+    private handleError(error: any): Promise<any> {
+      console.error('An error occurred', error);
+      return Promise.reject(error.message || error);
+    }
+    //this is to get the existing member in the project
+    getUserData(projectId:number){
+      return this.http.get(this.invite_url+projectId)
+                      .map(Response=>Response);
+    
+    }
+    //update details of a user
+    updatePassword(id:number,user:any) {
+      this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+    }
   }
-}

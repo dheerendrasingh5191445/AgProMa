@@ -19,6 +19,7 @@ export class TaskAssignComponent {
     TeamMemberList:Members[];
     sprintId:number;
     userId:number;
+    projectId:number;
     names:Members[];
     data:TaskBackLog;
     connection:HubConnection;
@@ -45,8 +46,9 @@ export class TaskAssignComponent {
         // registering event handlers
         this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data;console.log(this.AvailTask); });//this will return list of teams
         this.connection.on("getTeamList",data =>{ this.AvailTeam = data;   });//this will return list of available member
-        this.connection.on("getTeamMember",data => { this.TeamMemberList = data; console.log(this.TeamMemberList);})
-        this.connection.on("getName",data => {this.names= data;})
+        this.connection.on("getTeamMember",data => { this.TeamMemberList = data; console.log(this.TeamMemberList);});
+        this.connection.on("getName",data => {this.names= data;});
+        this.connection.on("getProjectId",data => { this.projectId = data ;})
         //sweet alert when task happens following 3
         this.connection.on("whenAssigned",data => { swal('Member Assigned To task', '', 'success') }); 
         this.connection.start().then(() => { 
@@ -54,6 +56,7 @@ export class TaskAssignComponent {
         this.connection.invoke("GetAllTaskDetail",this.sprintId);//get the list of the tasks in a particular project
         this.connection.invoke("GetTeamList",this.sprintId);//get the team according to the the sprint id
         this.connection.invoke("GetName",this.sprintId);
+        this.connection.invoke("GetProjectId",this.sprintId);
         });
       }
 
@@ -87,7 +90,7 @@ export class TaskAssignComponent {
      //this method is to check wether person who was assigned is accessing the task to do work
      checkPerson(task:any){
          if(task["personId"] == this.userId)
-         { this.router.navigate(["app-dashboard","app-checklist",task.taskId]); }
+         { this.router.navigate(["role-dashboard",this.projectId,"app-checklist",task.taskId]); }
          else
           swal('This task is not assigned to you!!!!','   ','error')
      }

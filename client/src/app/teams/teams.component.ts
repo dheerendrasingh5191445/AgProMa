@@ -89,7 +89,7 @@ export class TeamsComponent implements OnInit {
   }
    
   //this method will get team members 
-  getTeamMebers(teamid:number){
+  getTeamMembers(teamid:number){
     if(this.teamList)
       {
         return this.teamList.filter(t=>t["teamId"]==teamid);
