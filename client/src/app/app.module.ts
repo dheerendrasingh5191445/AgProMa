@@ -10,8 +10,8 @@ import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import {LineGraphComponent} from './line-graph/line-graph.component'
-import{ChartsModule} from 'ng2-charts'
+import { LineGraphComponent} from './user-profile/line-graph/line-graph.component'
+import { ChartsModule} from 'ng2-charts'
 
 //component declaration
 import { SignupComponent } from './signup/signup.component';
@@ -33,7 +33,7 @@ import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { DashboardRoleComponent } from './dashboard-role/dashboard-role.component';
-import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
+import { EfficiencyGraphComponent } from './user-profile/efficiency-graph/efficiency-graph.component';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { UserProfileComponent} from "./user-profile/user-profile.component";
 
@@ -98,7 +98,8 @@ export function provideConfig() {
     LineGraphComponent, 
     KanbanBoardComponent,
     EfficiencyGraphComponent,
-    DashboardRoleComponent
+    DashboardRoleComponent,
+    UserProfileComponent
   ],
   imports: [
     DndModule.forRoot(),

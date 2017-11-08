@@ -10,14 +10,14 @@
                   </a>
                 <!--hello user message-->
                 <div class="twPc-divUser">
-                    <div class="twPc-divName">
+                    <div class="twPc-divName" *ngIf="details">
                         <a>
                             <h4>Hello {{details.firstName}} !</h4>
                         </a>
                     </div>
                 </div>
                 <!--card containing user information-->
-                <div class="card inverse">
+                <div class="card inverse" *ngIf="details">
                     <div class="card-header" id="YourInfo">
                         Your Info
                     </div>
@@ -119,7 +119,7 @@
         <h2 id="eheading">Your Efficiency</h2>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6">
-                <efficiency></efficiency>
+                <efficiency *ngIf="id" (id)="userId"></efficiency>
             </div>
             <div class="col-md-6 col-sm-6 col-lg-6">
                 <app-line-graph></app-line-graph>
