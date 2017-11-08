@@ -17,8 +17,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private loginservice: LoginService,private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((param) => { this.id = +param['id'] });
     // var session = sessionStorage.getItem("id"); //get the information of the user that has logged in
-    this.route.params.subscribe((param) => this.id = +param['id']);
     this.loginservice.getById(this.id) //get the data of the user by the Mastrerid
                      .subscribe(data => { this.details = data; });
 

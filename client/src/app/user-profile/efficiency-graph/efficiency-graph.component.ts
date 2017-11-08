@@ -12,7 +12,6 @@ export class EfficiencyGraphComponent implements OnInit {
   //local variable used in component
   
   data : any;
-
   efficient : number  ;
 
   //Initializing variable for doughnut chaty
@@ -20,12 +19,11 @@ export class EfficiencyGraphComponent implements OnInit {
   doughnutChartData:number[]=[this.data, this.efficient ]; //setting the data to graph
   doughnutChartType:string="doughnut"; //defining type of chart 
 
-  constructor(private efficiencyGraphService : EfficiencyGraphService, private route : ActivatedRoute) {
+  constructor(private efficiencyGraphService : EfficiencyGraphService) {
     
    }
 
   ngOnInit() {
-
     //this will get the data from 
     this.efficiencyGraphService.getEfficiencyDetail(this.userId)
                                .subscribe(data => {this.data = data; console.log("init",this.data);
