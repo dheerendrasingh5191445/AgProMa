@@ -1,63 +1,55 @@
-<div class="container-fluid" *ngIf="isDataAvailable">
-  <div class="row">
-    <div class="offset-1 col-10">
-      <div class="table-head text-responsive rounded">
-        <h3>Kanban Board</h3>
-        <hr>
-        <h5>Sprint Name : {{data[0].sprintBacklogs.sprintName}} </h5>
-        <h5>Sprint Goal : {{data[0].sprintBacklogs.sprintGoal}}</h5>
+<div class="container containerBlock" *ngIf="isDataAvailable" >
+
+    <div class="snip1537">
+        <h1>Kanban</h1>
+        <h6>AGPROMA </h6><br/>
+        <h5>Agile Project Management</h5><br/><i class="ion-star"></i>
       </div>
 
+    <figure class="snip1519">
+        <h3><b>Sprint Name :</b> {{data[0].sprintBacklogs.sprintName}}</h3>
+        <h3><b>Sprint Goal :</b> {{data[0].sprintBacklogs.sprintGoal}}</h3>
+    </figure>
 
 
-      <br>
-      <table class="table table-responsive">
-        <thead class="heading">
-          <tr>
-            <th class="h5 h5-responsive text-center">Unplanned</th>
-            <th class="h5 h5-responsive text-center">In Progress</th>
-            <th class="h5 h5-responsive text-center">Complete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-
-              <div class="border" *ngFor="let item of data">
-                <ul *ngIf="item.status == 'Unplanned'">
-                  <li id="todo" data-toggle="popover" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
-                    <p class="h6 text-responsive">{{item.taskName}}</p>
-                  </li>
-                </ul>
-              </div>
-
-            </td>
-            <td>
-
-              <div *ngFor="let item of data">
-                <ul *ngIf="item.status == 'Inprogress'">
-                  <li id="doing" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
-                    <p class="h6">{{item.taskName}}</p>
-                  </li>
-                </ul>
-              </div>
-
-            </td>
-
-            <td>
-
-              <div *ngFor="let item of data">
-                <ul *ngIf="item.status == 'Completed'">
-                  <li id="done" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
-                    <p class="h6">{{item.taskName}}</p>
-                  </li>
-                </ul>
-              </div>
-
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<table class="table">
+    <thead class="heading">
+        <tr>
+          <th class="h5 h5-responsive text-center">Unplanned</th>
+          <th class="h5 h5-responsive text-center">In Progress</th>
+          <th class="h5 h5-responsive text-center">Complete</th>
+        </tr>
+      </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="tableContent" *ngFor="let item of data">
+              <ul *ngIf="item.status == 'Unplanned'">
+                <li id="todo" data-toggle="popover" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+                  <p  class="h6 text-responsive"> <font size="4">{{item.taskName}}</font></p>
+                </li>
+              </ul>
+            </div>
+        </td>
+        <td>  
+          <div  *ngFor="let item of data">
+              <ul *ngIf="item.status == 'Inprogress'">
+                <li id="doing" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+                  <p class="h6"><font size="4">{{item.taskName}}</font></p>
+                </li>
+              </ul>
+            </div>
+          </td>    
+        <td>
+          <div *ngFor="let item of data">
+              <ul *ngIf="item.status == 'Completed'">
+                <li id="done" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+                  <p class="h6"><font size="4">{{item.taskName}}</font></p>
+                </li>
+              </ul>
+            </div>
+        </td>    
+      </tr>
+    </tbody>
+  </table>
 </div>

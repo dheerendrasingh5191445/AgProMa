@@ -26,6 +26,9 @@ export class KanbanBoardComponent implements OnInit {
 
     //Getting the detail of task backlog
     this.kanbanService.getTaskDetail(this.sprintId).subscribe(data => {this.data = data; this.isDataAvailable = true;});
+
   }
+
+  
 
 }
