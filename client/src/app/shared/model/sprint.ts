@@ -5,7 +5,9 @@ export class Sprint {
         public sprintName: string,
         public totalDays: number,
         public startDate: string,
-        public status: boolean,
+        public status: string,
+        public expectedEndDate : string,
+        public actualEndDate?:string,
         public sprintId?: number,
         public releasePlanId?: number
     ) { }

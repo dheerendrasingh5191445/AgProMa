@@ -18,7 +18,7 @@ export class SprintComponent implements OnInit {
   sprints: Array<Sprint>;
   backlogs: Array<ProductBacklog>;
   connection: HubConnection;
-  newsprint = new Sprint(null, '', '', null, null, null);
+  newsprint = new Sprint(null, '', '', null,null, null, null,);
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {

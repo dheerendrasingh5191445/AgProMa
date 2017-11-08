@@ -110,11 +110,12 @@ color: black;
 }
 
 .heading {
-  background-color: #460619;
-  color: whitesmoke;
+  background-color: #32456d;
+  color: #fff;
   height: 50px;
   padding-top: 9px;
   padding-left: 3px;
+  box-shadow: 5px 5px 7px #1f6d6d ;
 }
 
 .tool {

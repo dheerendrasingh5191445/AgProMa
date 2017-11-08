@@ -6,7 +6,9 @@
   </button>
   <br>
   <hr>
-  <h4 class="text-responsive">Existing Release Plans</h4>
+  <div class="topHead">
+    <h4 class="text-responsive text-center"><strong>Existing Release Plans</strong></h4>
+  </div>
   <br>
   <div class="row container-fluid"><!--container for existing release-->
     <div class="col-md-9">
@@ -60,7 +62,7 @@
         <div class="col-md-10">
           <div class="card">
             <div class="card-header">
-              <strong>Lists of Sprints:</strong>
+              <strong class="text-center">Lists of Sprints:</strong>
             </div>
             <!--drag n drop starts-->
             <div class="card-text" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item">
@@ -80,7 +82,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Release Form</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

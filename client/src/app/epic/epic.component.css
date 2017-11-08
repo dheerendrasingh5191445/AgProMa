@@ -3,11 +3,11 @@
 .container-fluid {
   font-family: 'Raleway', Arial, sans-serif !important;
 }
-button.buttonStyle {
-
-  font-family: 'Raleway', Arial, sans-serif;
+button.buttonStyle
+{
+ font-family: 'Raleway', Arial, sans-serif;
   border: none;
-  background-color: #1f6d6d;
+  background-color: #009999;
   border-radius: 5px;
   color: #ffffff;
   cursor: pointer;
@@ -73,30 +73,22 @@ button.buttonStyle.hover:before {
 button.buttonStyle:active:before {
   background: rgba(255, 255, 255, 0.3);
 }
-button.buttonStyle.blue {
-  background-color: #20638f;
-}
-button.buttonStyle.red {
-  background-color: #962d22;
-}
-button.buttonStyle.yellow {
-  background-color: #a85913;
-}
-
-
 .bklog{
     padding-top: 30px;
     padding-left: 140px;
 }
+.addbtn{
+    background-color:#222;
+    color: #ffffff;
+    margin-left: 0PX;
+}
 .dark_header {
-   background: #460619;
-    padding-left: 20px;
-    margin: 0px;
-    padding: 10px;
-    border-radius: 5px;
+    background: #32456d;
     color: #fff;
-    font-size: 21px;
+    padding-top: 10px;
+    height: 50px; 
     text-align: center;
+    box-shadow: 5px 5px 7px #1f6d6d ;
  }
  fieldset.custom {
     border: 1px solid #ddd;
@@ -122,6 +114,9 @@ button.buttonStyle.yellow {
     background: #f9f9f9 ;
     position: relative;
  }
+ #list {
+   margin-top: 15px;
+   }
  #test_questions_wrapper, .test_q_list_item {
     
     user-select: none;
@@ -139,10 +134,9 @@ button.buttonStyle.yellow {
  .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
  .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
   .modal-header{
-      background-color: #460619;
+      background-color: #32456d;
       color:#ffffff;
   }
-
  #addBtn{
  float: right;
  border-radius: 5px;
@@ -163,7 +157,6 @@ textarea{
     width: 450px;
 }
 body {margin:2rem;}
-
 .form-rounded {
 border-radius: 1rem;
 }
@@ -174,5 +167,80 @@ border-radius: 1rem;
 .w3-button{
     size: 80px;
     float: left;
-
+}
+.priority{
+  width: 69px;
+   height: 40px
+  }
+  .planned{
+    width: 150px;
+    height: 40px;
+  }
+  .unplanned{
+    width: 109px;
+     height: 40px;
+  }
+.projectName{
+  color:#434040;
+  
+}
+  .tool {
+    position: relative;
+    display: inline-block;
+ }
+ 
+ .tool .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    height: 120px;
+    background-color: #D01C1C ;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+ 
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+ }
+ 
+ .tool:hover .tooltiptext {
+    visibility: visible;
+ }
+ .div_details:hover .storyText{
+  -webkit-filter: blur(0.7px);
+}
+ /* .div_details:hover .btnPencil{
+  display:block;
+}
+.div_details .btnPencil{
+  display:none;
+  position:absolute;
+  margin-left:80%;
+  margin-bottom: 50%;
+}
+.div_details:hover .btnDustbin{
+  display:block;
+}
+.div_details .btnDustbin{
+  display:none;
+  position:absolute;
+  margin-left:90%;
+  margin-bottom:50%;
+  
+} */
+.div_details:hover .contentstory{
+  display: block;
+}
+.div_details .contentstory{
+  display: none;
+  float: right;
+  margin-right:18px;
+}
+.div_details:hover .contentstory1{
+  display: table-cell;
+}
+.div_details .contentstory1{
+  display: none;
+  float: right;
 }

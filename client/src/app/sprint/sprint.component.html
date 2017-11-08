@@ -1,10 +1,16 @@
-<div class="container" ng-controller="dateCtrl">
-  <br>
+  <!-- Add Sprint Button -->
+  <button type="button" class="row addButton" data-toggle="modal" data-target="#myModal">
+      <span>Add New Sprint</span> <i class="ion-android-arrow-forward"></i>
+    </button>
+    <hr>
+    <br>
+<!-- End of Add Button -->
+<div class="container-fluid" ng-controller="dateCtrl">
   <div class="row">
     <!-- Sprint container -->
     <div class="sprint col-lg-7 col-sm-7 col-md-7 rounded">
       <div id="header_sprint">
-        <strong class="text-center">Sprints</strong>
+        <h4 class="text-center">Sprints</h4>
       </div>
       <hr>
       <!-- Sprints already present  -->
@@ -35,19 +41,13 @@
           </div>
           <!-- End of drop here for stories -->
         </div>
-        <!-- End of Sprints already present -->
-        <hr>
-      <!-- Add Sprint Button -->
-      <button type="button" class="addButton" data-toggle="modal" data-target="#myModal">
-            <span>Add Sprint</span> <i class="ion-android-arrow-forward"></i>
-          </button>
-      <!-- End of Add Button -->
+        <!-- End of Sprints already present -->      
     </div>
     <!-- End of Sprint Container -->
     <!-- Unassigned Backlogs -->
     <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded">
       <div id="header_backlog_items">
-        <strong>Unassigned Backlog Items</strong>
+        <h4>Unassigned Backlog Items</h4>
       </div>
       <hr>
       <!-- Backlogs that are not assigned -->
@@ -77,7 +77,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Sprint Details</h4>
+        <h4 class="modal-title text-center" id="exampleModalLabel">Sprint Details</h4>
       </div>
       <!-- End of Modal Header -->
       <div class="modal-body container">

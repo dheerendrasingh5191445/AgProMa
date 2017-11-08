@@ -15,5 +15,8 @@ export const ConfigFile =
     },
     KanBanUrls:{
         getTaskUrl : 'http://localhost:52258/api/TaskBacklog/GetAllTaskDetail/'
-    }
+    },
+    TeamUrls:{
+        getTeamUrl:'http://localhost:52258/teamhub'
+       }
 }

@@ -73,6 +73,7 @@ export class ReleasePlanComponent implements OnInit {
       swal('PLEASE FILL ALL DETAILS', '', 'error');
     }
     else {
+      
       var date1 = this.releasePlan.releaseDate.split("-");
       var date2 = this.releasePlan.startDate.split("-");
       if (date2[0] <= date1[0])//year
@@ -82,6 +83,8 @@ export class ReleasePlanComponent implements OnInit {
           if (date2[2] <= date1[2])//date
            {
             this.releasePlan.projectId = this.projectId;
+            this.releasePlan.actualReleaseDate=Date.now().toString();
+            console.log(this.releasePlan);
             this.connection.invoke("AddRelease",this.releasePlan)
                            .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)});
           }
