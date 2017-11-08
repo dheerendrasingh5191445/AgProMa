@@ -35,7 +35,7 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import { DashboardRoleComponent } from './dashboard-role/dashboard-role.component';
 import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
-
+import { UserProfileComponent} from "./user-profile/user-profile.component";
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -55,12 +55,8 @@ import { TaskService } from './shared/services/task.service';
 import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
-<<<<<<< HEAD
-import{UserProfileComponent} from "./user-profile/user-profile.component";
-import { DashboardLeaderComponent } from './dashboard-leader/dashboard-leader.component';
-import { DashboardMemberComponent } from './dashboard-member/dashboard-member.component';
-=======
->>>>>>> 9c72872c1bbf2ae367f97382c098b5af989ff265
+
+
 
 //configuration for social  login
 let config = new AuthServiceConfig([

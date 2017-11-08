@@ -54,10 +54,9 @@
 				<div class="card-body availMemList ">
 					<!--list for member list starts here-->
 					<ul class="list-group">
-						<li *ngFor="let item of teamList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true" [dragData]="item"
-						 class="list-group-item" (onDragSuccess)="removeMember()">
-						 <div class="col-md-12" *ngIf="item.teamId == 0"><i class="fa fa-user icons" ></i>{{item.memberName | titlecase}}</div> </li>
-						<li></li>
+						<div *ngFor="let item of teamList; let i = index" class=" panel panel-default" 
+						dnd-draggable [dragEnabled]="true" [dragData]="item" (onDragSuccess)="removeMember($event)"  [dropZones]="['boxers-zone']">
+						 <li class="col-md-12 list-group-item" *ngIf="item.teamId == 0"><i class="fa fa-user icons" ></i>{{item.memberName | titlecase}}</li></div>
 					</ul>
 					<!--list for member list ends here-->
 				</div>

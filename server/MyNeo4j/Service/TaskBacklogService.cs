@@ -16,6 +16,7 @@ namespace MyNeo4j.Service
         void UpdateTask(int memberID, int taskId);
         void UpdateConnectionId(string connectionid, int memberid);
         List<AvailableMember> GetName(int id);
+        int GetProjectId(int sprint);
     }
     public class TaskBacklogService : ITaskBacklogService
     {
@@ -103,6 +104,12 @@ namespace MyNeo4j.Service
         public void UpdateConnectionId(string connectionid, int memberid)
         {
             _taskBacklog.UpdateConnectionId(connectionid, memberid);
+        }
+
+        public int GetProjectId(int sprint)
+        {
+           SprintBacklog spr = _taskBacklog.GetProjectId(sprint);
+            return spr.ProjectId;
         }
     }
 }
