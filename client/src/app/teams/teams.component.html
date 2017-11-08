@@ -8,13 +8,8 @@
 				<!--button for add teams starts here-->
 				<div class="col-1 offset-sm-8">
 					<button type="button" value="val" class="add btn tool" data-toggle="modal" data-target="#addModal">
-<<<<<<< HEAD
-						<i class="fa fa-plus-circle plus"></i>
-						<span class="tooltiptext">Click to add a new team</span>
-=======
 						 <i class="fa fa-plus-circle plus"></i>
 						 <span class="tooltiptext">click to add a new team</span>
->>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
 					</button>
 				</div>
 				<!--button for add teams ends here-->
@@ -29,15 +24,9 @@
 							<i class="fa fa-users"></i>&nbsp;&nbsp;{{item.teamName}}
 						</div>
 						<!--div for team-members -->
-<<<<<<< HEAD
-						<div dnd-droppable (onDropSuccess)="teamListUpdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info memList">
-							<div *ngFor="let member of getTeamMebers(item.teamId)">
-							<ul class="list-group teamli">
-=======
 						<div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info memList">
 							<div *ngFor="let member of teamList">
 							<ul class="list-group">
->>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
 								<li  *ngIf=compareMember(item.teamId,member.teamId)>
 									<i class="fa fa-user icons"></i>
 										&nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
@@ -62,14 +51,10 @@
 					<!--heading for available card-->
 				</div>
 				<!--available card body starts here-->
-<<<<<<< HEAD
-				<div class="card-body availmemList ">
-=======
 				<div class="card-body availMemList ">
->>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
 					<!--list for member list starts here-->
 				  <div class="input-group">
-						<input type="text"   (keyup)="filterByName($event)" class="form-control" placeholder="Search project members here..." aria-describedby="basic-addon1">
+						<input type="text" (keyup)="filterByName($event)" class="form-control" placeholder="Search project members here..." aria-describedby="basic-addon1">
 						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
 					</div>
 				 		<ul class="list-group" *ngFor="let item of teamList1; let i = index">
