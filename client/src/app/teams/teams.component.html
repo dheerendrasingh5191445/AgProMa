@@ -2,24 +2,20 @@
 	<div class="row">
 		<!--team col starts here-->
 		<div class="col-md-8 ">
-			<!--team screen starts here-->
-			<div class="row team_screen">
-				<div class="col-sm-3 text-responsive">
-					<h3><strong>Teams</strong></h3>
-				</div>
+			<!--header starts here-->
+			<div class="row header">
+				<div class="col-sm-3 text-responsive"><h3>Teams</h3></div>
 				<!--button for add teams starts here-->
 				<div class="col-1 offset-sm-8">
-					<button type="button" value="val" class="add btn" data-toggle="modal" data-target="#addModal">
-           <a data-toggle="tooltip"  title="Add Teams">
-					 	<i class="fa fa-plus-circle plus"></i>
-				  	</a>
+					<button type="button" value="val" class="add btn tool" data-toggle="modal" data-target="#addModal">
+						<i class="fa fa-plus-circle plus"></i>
+						<span class="tooltiptext">Click to add a new team</span>
 					</button>
 				</div>
 				<!--button for add teams ends here-->
 			</div>
 			<hr>
-			<!--team screen ends here-->
-
+			<!--header ends here-->
 			<!--team cards starts here-->
 			<div class="row">
 				<div class="col-md-4" *ngFor="let item of teams; let i = index">
@@ -28,41 +24,44 @@
 							<i class="fa fa-users"></i>&nbsp;&nbsp;{{item.teamName}}
 						</div>
 						<!--div for team-members -->
-						<div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info data">
-							<div *ngFor="let member of teamList">
-								<ul class="list-group">
-									<li *ngIf=compareMember(item.teamId,member.teamId)>
-										<i class="fa fa-user icons"></i> &nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
-										<i (click)="delete(member.id)" class="fa fa-close" aria-hidden="true"></i>
-									</li>
-									<li></li>
-								</ul>
-							</div>
+						<div dnd-droppable (onDropSuccess)="teamListUpdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info memList">
+							<div *ngFor="let member of getTeamMebers(item.teamId)">
+							<ul class="list-group teamli">
+								<li  *ngIf=compareMember(item.teamId,member.teamId)>
+									<i class="fa fa-user icons"></i>
+										&nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
+									<i (click)="delete(member.id)" class="fa fa-close" aria-hidden="true"></i>
+								</li>
+								<li></li>
+							</ul>
 						</div>
-						<!--div for team-members ends here -->
-					</div>
+					  </div><!--div for team-members ends here -->
+				  </div>
 				</div>
 			</div>
 			<!--team cards starts here-->
 		</div>
 		<!--team col ends here-->
-    <div class="col-md-4">
+
+		<div class="col-md-4">
 			<!--div for available member list starts here-->
-			<div class=" card available">
+			<div class="card available">
 				<div class="card-header">
-					<i class="fa fa-user-plus"></i> &nbsp;&nbsp;<strong>Available Members</strong>
+					<i class="availablefa fa fa-user-plus"></i> &nbsp;&nbsp;Available Members
 					<!--heading for available card-->
 				</div>
 				<!--available card body starts here-->
-				<div class="card-body availData ">
+				<div class="card-body availmemList ">
 					<!--list for member list starts here-->
-					<ul class="list-group">
-						<li *ngFor="let item of teamList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true" [dragData]="item"
-						 class="list-group-item" (onDragSuccess)="removeMember()">
-							<div class="col-md-12 availList" *ngIf="item.teamId == 0"><i class="fa fa-user icons"></i>{{item.memberName | titlecase}}</div>
-						</li>
-						<li></li>
-					</ul>
+				  <div class="input-group">
+						<input type="text"   (keyup)="filterByName($event)" class="form-control" placeholder="Search project members here..." aria-describedby="basic-addon1">
+						<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+					</div>
+				 		<ul class="list-group" *ngFor="let item of teamList1; let i = index">
+							<li *ngIf="item.teamId == 0" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true" [dragData]="item"
+								class="list-group-item" (onDragSuccess)="removeMember()"><i class="availablefa fa fa-user icons"></i>{{item.memberName | titlecase}}</li>
+							<li></li>
+						</ul>
 					<!--list for member list ends here-->
 				</div>
 				<!--available card body ends here-->

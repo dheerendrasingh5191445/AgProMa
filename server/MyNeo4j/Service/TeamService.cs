@@ -1,8 +1,10 @@
 ﻿using MyNeo4j.model;
 using MyNeo4j.Repository;
 using MyNeo4j.Viewmodel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MyNeo4j.Service
 {
@@ -19,33 +21,31 @@ namespace MyNeo4j.Service
     {
         private Neo4jDbContext _dbcon;
         private ITeamRepo _teamRepo;
-
-        //remove dbcon and use existing method in others repo
+        //reomve dbcon and use existing method in others repo
         public TeamService(ITeamRepo _teamRepo, Neo4jDbContext dbcon)
         {
             this._teamRepo = _teamRepo;
             _dbcon = dbcon;
         }
-
-        //this method will add member to a team
+        //this method will add members to a team
         public void AddMembers(TeamMember member)
         {
             _teamRepo.AddMembers(member);
         }
 
-        //this method will add team to a particular project
+        //this method will add team to a project
         public void AddTeam(TeamMaster team)
         {
             _teamRepo.AddTeam(team);
         }
 
-        //this method will delete a member from a project
+        //this method will delete member from a team
         public void DeleteMember(int id)
         {
             _teamRepo.DeleteMember(id);
         }
 
-        //this will get list of available members of a project that can be added in teams
+        //this method will return available members in a project
         public List<AvailTeamMember> GetAvailableMember(int projectId)
         {
             List<AvailTeamMember> availteam = new List<AvailTeamMember>();
@@ -86,22 +86,21 @@ namespace MyNeo4j.Service
             return availteam;
         }
 
-        //this method will return teams of a project
+        //this method will return teams of a particular project
         public List<TeamMaster> GetTeam(int projectId)
         {
-             List<TeamMaster> teamMaster= _teamRepo.GetTeam();
-             List<TeamMaster> teamlistbyproject = new List<TeamMaster>();
-             foreach (TeamMaster item in teamMaster)
+            List<TeamMaster> teamMaster = _teamRepo.GetTeam();
+            List<TeamMaster> teamlistbyproject = new List<TeamMaster>();
+            foreach (TeamMaster item in teamMaster)
             {
-                if(item.ProjectId == projectId)
+                if (item.ProjectId == projectId)
                 {
                     teamlistbyproject.Add(item);
                 }
             }
             return teamlistbyproject;
         }
-
-        //this will upadate connection Id for a member
+        //this method will update connection Id for particular member 
         public void UpdateConnectionId(string connectionid, int memberid)
         {
             _teamRepo.UpdateConnectionId(connectionid, memberid);

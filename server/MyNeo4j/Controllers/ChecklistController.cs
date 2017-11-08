@@ -36,8 +36,23 @@ namespace MyNeo4j.Controllers
         {
             try
             {
-                _context.Get(id);
-                return Ok(_context.Get(id));
+                List<ChecklistBacklog> checklist = _context.Get(id);
+                return Ok(checklist);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/GetTaskDetail/{id}")]
+        public IActionResult GetTaskDetail(int id)
+        {
+            try
+            {
+               TaskBacklog taskbl= _context.GetTaskDetail(id);
+                return Ok(taskbl);
             }
             catch
             {

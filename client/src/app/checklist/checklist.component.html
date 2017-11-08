@@ -15,7 +15,7 @@
         <h4 id="taskName"> Task Name : </h4>
       </div>
       <div class="col-md-9" id="taskHeading">
-        <h1 class="card-title" id="Taskname">{{task.taskName | uppercase}}</h1>
+        <h1 class="card-title" id="Taskname" *ngIf="task">{{task.taskName | uppercase}}</h1>
       </div>
 
     </div>

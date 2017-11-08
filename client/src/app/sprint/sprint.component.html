@@ -10,7 +10,7 @@
       <!-- Sprints already present  -->
         <div class="sprints card" *ngFor=" let sprint of sprints">
           <!-- Sprint and Stories in each sprint -->
-          <div class="card-header tool">
+          <div class="card-header tool" routerLink="/app-dashboard/taskadd/{{sprint.sprintId}}">
             <strong>{{sprint.sprintName}}</strong>
             <span class="tooltiptext">Start Date : {{sprint.startDate | date: "dd.MM.y"}}
                 <br>

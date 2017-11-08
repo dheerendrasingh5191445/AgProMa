@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import { EpicService } from "../shared/services/epic.service";
 import { Epic } from "../shared/model/epic";
 import { HubConnection } from '@aspnet/signalr-client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-epic',
@@ -13,15 +14,17 @@ import { HubConnection } from '@aspnet/signalr-client';
 })
 export class EpicComponent implements OnInit {
 
-  projectId: number = 12;
+  projectId: number;
   connection: HubConnection;
   data: Array<any> //all epics will store in this variable
   userId:number;
 
   model = new Epic(null, ''); //model for adding new epic
-  constructor(private epicService: EpicService) { }
+  constructor(private epicService: EpicService,private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((param) =>
+    this.projectId = +param['id']);
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
     this.connection = new HubConnection("http://localhost:52258/epichub");//for connecting with hub // when this component reload ,it will call this method

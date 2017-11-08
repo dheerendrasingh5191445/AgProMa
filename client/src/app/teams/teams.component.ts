@@ -6,6 +6,7 @@ import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
 import { TitleCasePipe } from '@angular/common';
 import { HubConnection } from '@aspnet/signalr-client';
+import { ConfigFile } from '../shared/config'
 
 
 @Component({
@@ -17,31 +18,30 @@ export class TeamsComponent implements OnInit {
    projectId:number;
    teams:TeamMaster[];
    teamList:Members[];
-   myTeamList:Members[];
-   TeamList:any;
+   teamList1:Members[];
    val:string="";
    connection:HubConnection;
    userId:number;
-
+   letter:string;
   constructor(private teamService:TeamsService,private route:ActivatedRoute) {   
   }
 
-  //this will get called on component loading time
   ngOnInit() {
-    this.route.params.subscribe(param =>this.projectId = +param['id']);
-    var session = sessionStorage.getItem("id");
-    this.userId = parseInt(session);
-    this.connectToHub();
+      this.route.params.subscribe(param =>this.projectId = +param['id']);
+      var session = sessionStorage.getItem("id");
+      this.userId = parseInt(session);
+      this.connectToHub();
   }
+
 
   //this is to make connection with the hub
   connectToHub(){
     // for connecting with hub 
-    this.connection = new HubConnection("http://localhost:52258/teamhub");
+    this.connection = new HubConnection(ConfigFile.TeamUrls.getTeamUrl);
     // when this component reload ,it will call this method
     // registering event handlers
     this.connection.on("getTeams",data =>{ this.teams = data });//this will return list of teams
-    this.connection.on("getAvailableMember",data =>{ this.teamList = data });//this will return list of available member
+    this.connection.on("getAvailableMember",data =>{ this.teamList = data; this.teamList.sort(this.sortByName);this.teamList1=data; });//this will return list of available member
     this.connection.on("whenUpdated",data => { swal('Member Added', '', 'success') }); //sweet alert when task happens
     this.connection.on("whenAdded",data => { swal('Team Added', '', 'success') });
     this.connection.on("whenDeleted",data => { swal('Member Removed', '', 'success') });   
@@ -52,32 +52,50 @@ export class TeamsComponent implements OnInit {
     });
   }
 
-  //this will add new  team 
-  addTeam(name:string){
-    if(name==""){
-      swal('Enter valid team name','','warning');
-    }
-    if(name){
-      let mobject:TeamMaster = new TeamMaster(this.projectId,name);
-      this.connection.invoke("AddTeam",mobject)
-                     .then(data => {this.connection.invoke("GetTeams",this.projectId);});
+  //method for dropping members in appropriate order
+  filterByName(event:Event){
+    this.letter=(<HTMLInputElement> event.target).value;
+    this.teamList1=this.teamList1.sort();
+    console.log("team is "+this.teamList1);
+    this.teamList1= this.teamList.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
+  }
 
+  //this will add new team 
+    addTeam(name:string){
+      if(name==""){
+        swal('Enter valid team name','','warning');
       }
+      if(name){
+        let mobject:TeamMaster = new TeamMaster(this.projectId,name);
+        this.connection.invoke("AddTeam",mobject)
+                       .then(data => {this.connection.invoke("GetTeams",this.projectId);});
+        }
     }
 
   //this will remove a particular team member
   removeMember(){
+    console.log("success");
     this.connection.invoke("GetAvailableMember",this.projectId);                   
   }
 
  //this will add member to a particular team
-  teamListupdate($event: any,teamId:number) {
+  teamListUpdate($event: any,teamId:number) {
     if(teamId){
-      let teamMember:any  = $event.dragData;
-      let Id:number=teamMember.memberId;
-      let mobject:Members = new Members(teamId,Id);
-      this.connection.invoke("UpdateteamMember",mobject,this.projectId);
+    let teamMember:any  = $event.dragData;
+    let Id:number=teamMember.memberId;
+    let mobject:Members = new Members(teamId,Id);
+    this.connection.invoke("UpdateteamMember",mobject,this.projectId);
     }
+  }
+   
+  //this method will get team members 
+  getTeamMebers(teamid:number){
+    if(this.teamList)
+      {
+        return this.teamList.filter(t=>t["teamId"]==teamid);
+      }
+    else
+        return null;
   }
 
   //this is for deleting a member from a team
@@ -88,13 +106,26 @@ export class TeamsComponent implements OnInit {
     }
   }
 
-  //compare whether member exist in team or not
+  //compare whether member is in team or not
   compareMember(teamId,memteamId) {
     if (teamId == memteamId) {
-      return true;          //member is present in team
+      return true;          //memnber is present in team.
     }
     else {
-      return false;         //member is not added in team
+      return false;         //member is not present in team.
     }
+  }
+
+  //this method will sort member names
+  sortByName(nameA,nameB){
+    if(nameA.memberName.toLowerCase()<nameB.memberName.toLowerCase()){
+      return -1;             //nameA will be placed before nameB
+    }
+    if(nameA.memberName.toLowerCase()>nameB.memberName.toLowerCase()){
+      return 1;             //nameA will be placed after nameB
+    }
+    
+      return 0;             //unchanged
+    
   }
 }

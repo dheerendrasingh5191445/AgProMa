@@ -9,8 +9,9 @@ namespace MyNeo4j.Service
 {
     public interface ICheckListService
     {
+        TaskBacklog GetTaskDetail(int Id);
         List<ChecklistBacklog> Get();
-        IEnumerable<ChecklistBacklog> Get(int id);
+        List<ChecklistBacklog> Get(int id);
         void Add_Checklist(ChecklistBacklog addChecklist);
         void Update(int id, ChecklistBacklog addChecklist);
         void Delete(int id);
@@ -39,9 +40,14 @@ namespace MyNeo4j.Service
             return _context.Get().ToList();
         }
 
-        public IEnumerable<ChecklistBacklog> Get(int id)
+        public List<ChecklistBacklog> Get(int id)
         {
             return _context.Get(id);
+        }
+
+        public TaskBacklog GetTaskDetail(int Id)
+        {
+            return _context.GetTaskDetail(Id);
         }
 
         public void Update(int id, ChecklistBacklog addChecklist) //updating checklist
