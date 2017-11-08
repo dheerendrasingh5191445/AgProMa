@@ -35,9 +35,9 @@ namespace MyNeo4j.model
 
         public DateTime StartDate { get; set; }
 
-        public DateTime ExpectedEndDate { get; set; }
+        public DateTime? ExpectedEndDate { get; set; }
 
-        public DateTime ActualEndDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
 
         [EnumDataType(typeof(SprintStatus))]
         [JsonConverter(typeof(StringEnumConverter))]

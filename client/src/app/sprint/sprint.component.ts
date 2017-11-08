@@ -43,7 +43,10 @@ export class SprintComponent implements OnInit {
 
     //register getBacklogs and get returned backlogs from backend.
     this.connection.on("getBacklogs", data => {
-      this.backlogs = data
+      this.backlogs = data;
+      this.backlogs.sort(function (a, b) {
+        return a.priority - b.priority;
+      });
     });
 
     //register postSprints Method and push sprint to the sprints.
@@ -85,6 +88,8 @@ export class SprintComponent implements OnInit {
 
   //it will add sprint in the sprint container
   onSaveSprint() {
+   debugger;
+    this.newsprint.status = 0;
     this.newsprint.projectId = this.projectId;
     //invoke Add Sprint method of Backend
     this.connection.invoke("AddSprint", this.newsprint)

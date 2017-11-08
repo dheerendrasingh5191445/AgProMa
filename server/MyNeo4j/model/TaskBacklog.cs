@@ -22,7 +22,7 @@ namespace MyNeo4j.model
 
         public int SprintId { get; set; }
         [ForeignKey("SprintId")]
-        public SprintBacklog SprintBacklog { get; set; }
+        public SprintBacklog SprintBacklogs { get; set; }
 
         public string TaskName { get; set; }
 
