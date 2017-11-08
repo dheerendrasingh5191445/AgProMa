@@ -6,7 +6,7 @@ export class KanbanService {
 
   constructor(private http : Http) { }
   token= sessionStorage.getItem("token");
-  headers = new Headers({'Content-Type':'application/json','Authorization':'Bearer'+this.token});
+  headers = new Headers({'Content-Type':'application/json','Authorization':'Bearer '+this.token});
   options = new RequestOptions({ headers: this.headers});
   //local variable used for storing path which is used to hit API
   url = 'http://localhost:52258/api/TaskBacklog/GetAllTaskDetail/'; 

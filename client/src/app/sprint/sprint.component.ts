@@ -85,7 +85,8 @@ export class SprintComponent implements OnInit {
 
   //it will add sprint in the sprint container
   onSaveSprint() {
-    this.newsprint.status = false;
+   debugger;
+    this.newsprint.status = 0;
     this.newsprint.projectId = this.projectId;
     //invoke Add Sprint method of Backend
     this.connection.invoke("AddSprint", this.newsprint)

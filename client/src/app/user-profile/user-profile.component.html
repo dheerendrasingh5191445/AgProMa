@@ -18,7 +18,7 @@
                 </div>
                 <!--card containing user information-->
                 <div class="card inverse">
-                    <div class="card-header">
+                    <div class="card-header" id="YourInfo">
                         Your Info
                     </div>
                     <div class="card-body">
@@ -26,21 +26,21 @@
                         <!--First name of the user shown-->
                         <div class="row">
                             <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
-                            <div class="col-sm-7 col-xs-6 ">{{details.firstName}}</div>
+                            <div id="firstName" class="col-sm-7 col-xs-6 ">{{details.firstName}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
                         <!--Last name of the user shown-->
                         <div class="row">
                             <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
-                            <div class="col-sm-7"> {{details.lastName}}</div>
+                            <div id="lastName" class="col-sm-7"> {{details.lastName}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
                         <!--Department of the user shown-->
                         <div class="row">
                             <div class="col-sm-5 col-xs-6 tital ">Department:</div>
-                            <div class="col-sm-7"> {{details.department}}</div>
+                            <div id="department" class="col-sm-7"> {{details.department}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
@@ -53,8 +53,8 @@
                         </div>
                         <!--Email ID of the user shown-->
                         <div class="row">
-                            <div class="col-sm-5 col-xs-6 tital ">Email ID:</div>
-                            <div class="col-sm-7"> {{details.email}}</div>
+                            <div  class="col-sm-5 col-xs-6 tital ">Email ID:</div>
+                            <div id="email" class="col-sm-7"> {{details.email}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>

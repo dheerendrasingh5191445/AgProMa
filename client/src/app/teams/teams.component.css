@@ -31,11 +31,11 @@ ul {
 .available .card-header{
     background-color: #1f6d6d;
 }
-.data{
+.memList{
     overflow-y:auto;
     height:100px;
 }
-.availData{
+.availMemList{
     overflow-y:auto;
     height:500px;
 }
@@ -47,6 +47,7 @@ ul {
 .team {
     padding-left:0px;
     background-color:white;
+    height: 400px;
 }
 .team .card-header{
     background-color: #881234;
@@ -164,4 +165,26 @@ ul {
     list-style:none;
 }
 
+
+.tool {
+    position: relative;
+    display: inline-block;
+  }
   
+  .tool .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: #2F2E2E;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tool:hover .tooltiptext {
+    visibility: visible;
+  }

@@ -28,8 +28,9 @@ namespace AuthenticationAPI.Controllers
         [Route("createtoken")]
         public string TokenGenerationAction([FromBody]User user)
         {
+            Console.WriteLine("hi----", user);
             //creating the user object for the given  user from the frond end app
-            User tokenUser = new User { Name = user.Name, Email = user.Email };
+            User tokenUser = new User { UserName = user.UserName, Email = user.Email };
             //calling the function for the JWT token for respecting user
             string value = GetJWT(tokenUser);
             //returning the token to the angular app
@@ -42,7 +43,7 @@ namespace AuthenticationAPI.Controllers
             var claims = new[]
            {
                 
-                new Claim(JwtRegisteredClaimNames.GivenName, tokenUser.Name),
+                new Claim(JwtRegisteredClaimNames.GivenName, tokenUser.UserName),
                 new Claim(JwtRegisteredClaimNames.Email, tokenUser.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
@@ -54,7 +55,7 @@ namespace AuthenticationAPI.Controllers
                 issuer: _settings.Value.Iss,
                 audience: _settings.Value.Aud,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(15),
+                expires: DateTime.UtcNow.AddHours(2),
                 signingCredentials: creds
             );
             //defing the response of the token 

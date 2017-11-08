@@ -33,8 +33,9 @@ namespace AuthenticationAPI
             services.AddCors();
             services.Configure<Audience>(Configuration.GetSection("Audience"));
             services.AddSingleton(Configuration);
-            services.AddMvc();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddMvc();
+            
 
         }
 
@@ -47,7 +48,7 @@ namespace AuthenticationAPI
             }
             app.UseCors(options => {
 
-                options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithHeaders("Content-Type");
+                options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
 
             });
             app.UseMvc();

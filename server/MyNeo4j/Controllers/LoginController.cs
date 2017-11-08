@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AgProMa.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     public class LoginController : Controller
     {
@@ -45,7 +46,7 @@ namespace AgProMa.Controllers
             }
         }
 
-        [AllowAnonymous]
+       
         [HttpGet]
         [Route("api/[controller]/{email}")]
         //this method updates the user details
@@ -53,17 +54,28 @@ namespace AgProMa.Controllers
         {
             return _context.GetId(email);
         }
-        // GET api/values/5
+
+        [AllowAnonymous]
         [HttpPost]
-        [Route("api/[controller]/Check")]
+        [Route("api/[controller]/check")]
         //this method get the details of a particular user
         public IActionResult Check([FromBody]IdPassword modal)
         {
             return Ok(_context.Check(modal));
         }
 
+        [HttpPost]
+        [Route("api/[controller]/SetLogOut/{id}")]
+        //this method get the details of a particular user
+        public IActionResult SetLogOut(int id)
+        {
+            string response = _context.logOut(id);
+            return Ok(response);
+        }
+
+
         // POST api/values
-        
+
         [HttpPost]
         [Route("api/[controller]")]
         //this method adds a user details

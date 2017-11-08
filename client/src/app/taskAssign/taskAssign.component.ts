@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TaskAssignService } from "../shared/services/task-assign.service";
 import { TaskBackLog } from "../shared/model/TaskBacklog";
 import { TeamMaster } from "../shared/model/teamMaster";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import { HubConnection } from '@aspnet/signalr-client';
 import swal from 'sweetalert2';
@@ -19,12 +19,12 @@ export class TaskAssignComponent {
     TeamMemberList:Members[];
     sprintId:number;
     userId:number;
-    name:string;
+    names:Members[];
     data:TaskBackLog;
     connection:HubConnection;
-    myId:number;
+    myId : number;
 
-    constructor(private task: TaskAssignService,private route:ActivatedRoute) { } //inject TaskAssignservices
+    constructor(private task: TaskAssignService,private route:ActivatedRoute,private router:Router) { } //inject TaskAssignservices
     
     ngOnInit(){
         this.route.params.subscribe(param =>this.sprintId = +param['id']);
@@ -46,12 +46,14 @@ export class TaskAssignComponent {
         this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data;console.log(this.AvailTask); });//this will return list of teams
         this.connection.on("getTeamList",data =>{ this.AvailTeam = data;   });//this will return list of available member
         this.connection.on("getTeamMember",data => { this.TeamMemberList = data; console.log(this.TeamMemberList);})
+        this.connection.on("getName",data => {this.names= data;})
         //sweet alert when task happens following 3
         this.connection.on("whenAssigned",data => { swal('Member Assigned To task', '', 'success') }); 
         this.connection.start().then(() => { 
         this.connection.invoke("SetConnectionId",this.userId);
         this.connection.invoke("GetAllTaskDetail",this.sprintId);//get the list of the tasks in a particular project
         this.connection.invoke("GetTeamList",this.sprintId);//get the team according to the the sprint id
+        this.connection.invoke("GetName",this.sprintId);
         });
       }
 
@@ -77,9 +79,17 @@ export class TaskAssignComponent {
      }
 
      //this method is to compare wether a person exist in team or not
-     compareTask(taskblId:number,taskId:number){
-      if(taskId == taskId)return true;
+     compareTask(personId:number,memberId:number){
+      if(personId == memberId)return true;
       else return false;
+     }
+
+     //this method is to check wether person who was assigned is accessing the task to do work
+     checkPerson(task:any){
+         if(task["personId"] == this.userId)
+         { this.router.navigate(["app-dashboard","app-checklist",task.taskId]); }
+         else
+          swal('This task is not assigned to you!!!!','   ','error')
      }
     
 }  

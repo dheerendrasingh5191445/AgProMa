@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace MyNeo4j.model
 {
+    public enum SprintStatus
+    {
+        Unplanned,
+        Inprogress,
+        Completed
+    }
+
     public class SprintBacklog
     {
         [Key]
@@ -28,7 +35,13 @@ namespace MyNeo4j.model
 
         public DateTime StartDate { get; set; }
 
-        public bool Status { get; set; }
+        public DateTime? ExpectedEndDate { get; set; }
+
+        public DateTime? ActualEndDate { get; set; }
+
+        [EnumDataType(typeof(SprintStatus))]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public SprintStatus Status { get; set; }
 
     }
 }

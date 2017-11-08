@@ -4,6 +4,7 @@ import { TaskService } from '../shared/services/task.service';
 import { Task } from '../shared/model/task';
 import swal from 'sweetalert2';
 import { HubConnection } from '@aspnet/signalr-client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-taskadd',
@@ -12,25 +13,29 @@ import { HubConnection } from '@aspnet/signalr-client';
 })
 export class TaskAddComponent implements OnInit {
   //variable declaration
-  sprintId:number = 2;
+  sprintId:number;
   sub: string = "";
   data: any[];
   connection: HubConnection;
   userId:number=1;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService,private route:ActivatedRoute) {
 
   }
   //this will get the task backlog list
   ngOnInit() {
+    this.route.params.subscribe((param) =>{ this.sprintId = +param['id'];});
+    
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);
+
     this.connectToHub();
   }
 
   //this is to make connection with the hub
   connectToHub(){
-    // var session = sessionStorage.getItem("id");
-    // this.userId = parseInt(session);
-    this.connection = new HubConnection("http://192.168.252.125:8030/taskhub");//for connecting with hub // when this component reload ,it will call this method
+    
+    this.connection = new HubConnection("http://localhost:52258/taskhub");//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getTasks",data =>{console.log("backlog called"); this.data = data });//this will return task backlogs
     this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); //sweet alert when task happens
@@ -50,7 +55,7 @@ export class TaskAddComponent implements OnInit {
     //this will work if task name is entered and  add new task to backlog
     if (taskName) {
       let model = new Task(1,this.sprintId,taskName,this.userId,startDate,endDate);
-      this.connection.invoke("PostTask",this.sprintId);
+      this.connection.invoke("PostTask",model,this.sprintId);
       this.connection.invoke("GetTaskBacklogs",this.sprintId);
     }
   }

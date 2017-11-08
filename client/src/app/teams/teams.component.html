@@ -7,10 +7,9 @@
 				<div class="col-sm-3 text-responsive"><h3>Teams</h3></div>
 				<!--button for add teams starts here-->
 				<div class="col-1 offset-sm-8">
-					<button type="button" value="val" class="add btn" data-toggle="modal" data-target="#exampleModal">
-           <a data-toggle="tooltip"  title="Add Teams">
-					 	<i class="fa fa-plus-circle plus"></i>
-				  	</a>
+					<button type="button" value="val" class="add btn tool" data-toggle="modal" data-target="#addModal">
+						 <i class="fa fa-plus-circle plus"></i>
+						 <span class="tooltiptext">click to add a new team</span>
 					</button>
 				</div>
 				<!--button for add teams ends here-->
@@ -25,10 +24,10 @@
 							<i class="fa fa-users"></i>&nbsp;&nbsp;{{item.teamName}}
 						</div>
 						<!--div for team-members -->
-						<div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info data">
+						<div dnd-droppable (onDropSuccess)="teamListupdate($event,item.teamId)" [dropZones]="['boxers-zone']" class="panel panel-info memList">
 							<div *ngFor="let member of teamList">
 							<ul class="list-group">
-								<li  *ngIf=compareStory(item.teamId,member.teamId)>
+								<li  *ngIf=compareMember(item.teamId,member.teamId)>
 									<i class="fa fa-user icons"></i>
 									&nbsp;&nbsp;{{ member.memberName | titlecase }}&nbsp;&nbsp;
 									<i (click)="delete(member.id)" class="fa fa-close" aria-hidden="true"></i>
@@ -52,7 +51,7 @@
 					<!--heading for available card-->
 				</div>
 				<!--available card body starts here-->
-				<div class="card-body availData ">
+				<div class="card-body availMemList ">
 					<!--list for member list starts here-->
 					<ul class="list-group">
 						<li *ngFor="let item of teamList; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true" [dragData]="item"
@@ -69,12 +68,12 @@
 	</div>
 	<!--row div ends here-->
 	<!--modal for adding team starts here-->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<!--modal-header starts here-->
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">New Team</h5>
+					<h5 class="modal-title" id="addModalLabel">New Team</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           	<span aria-hidden="true">&times;</span>
           </button>
