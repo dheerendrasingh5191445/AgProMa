@@ -26,6 +26,7 @@ namespace MyNeo4j.Repository
         //Method for adding a new release
         public void AddRelease(ReleasePlanMaster releasePlan)
         {
+            releasePlan.Status = ReleasePlanStatus.Unplanned;
             _context.Releasepl.Add(releasePlan);
             _context.SaveChanges();
         }
@@ -60,6 +61,8 @@ namespace MyNeo4j.Repository
         public void UpdateReleaseInSprint(int sprintId, int releaseId)
         {
             SprintBacklog sprbl = _context.Sprintbl.FirstOrDefault(p => p.SprintId == sprintId);
+            ReleasePlanMaster replmaster = _context.Releasepl.FirstOrDefault(p => p.ReleasePlanId == releaseId);
+            replmaster.Status = ReleasePlanStatus.Inprogress;
             sprbl.ReleasePlanId = releaseId;
             _context.SaveChanges();
         }

@@ -1,8 +1,12 @@
 <div class="container">
-  <h1>Add New Projects</h1>
+  <br>
+  <div class="heading rounded">
+    <strong>Add New Projects</strong>
+  </div>
   <hr>
-  <div class="row">
-    <figure class="snip1566">
+  <div class="row tool">
+    <figure class="addNewProject">
+        <span class="tooltiptext">Click to add a new project</span>
       <img src="./../assets/images/addproject.png" alt="sq-sample14" />
       <figcaption>
         <i class="ion-android-add">
@@ -11,18 +15,21 @@
       </figcaption>
     </figure>   
   </div>
-  <h1>Existing Projects</h1>
-  <hr>
   <br>
+  <br>
+  <div class="heading">
+    <strong>Existing Projects</strong>
+  </div>
+  <hr>
   <div *ngIf="projects">
     <div class="row">
       <div class="col-lg-4" *ngFor="let item of projects | paginate: { itemsPerPage: 3, currentPage: p }">
-        <app-project-detail *ngIf="item" [Data]="item" (onDelete)="onDelete($event)"></app-project-detail>
+        <app-project-detail *ngIf="item" [Data]="item" (onDelete) = "onDelete($event)"></app-project-detail>
       </div>
     </div>
   </div>
   <div *ngIf="data">
-     <p>There are no existing project,pleasae make new project</p>
+     <p>There are no existing project,please make new project</p>
   </div>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

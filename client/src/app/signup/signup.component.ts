@@ -33,7 +33,6 @@ export class SignupComponent implements OnInit {
       this.user = user; //checking wheather user variable has data in it or not
       if (this.user != null)
       { this.router.navigateByUrl('app-dashboard') } //if the user is logged in with social account then user can directly moved to dashboard screen
-
     });
   }
 
@@ -80,10 +79,8 @@ export class SignupComponent implements OnInit {
     else {
 
       let model: IdPassword = new IdPassword(this.email, this.password);
-      console.log(model);
 
       this.loginservice.check(model).then(data => {
-        console.log('Param kewale =====', data);
         this.userCred = data;
         if (this.userCred["status"] == "success") // if user is register with AgProMa
         {
@@ -91,14 +88,11 @@ export class SignupComponent implements OnInit {
           this.loginservice.getToken(this.userCred).then(data => {
             //debugger;
             this.tokenData = JSON.parse(data["_body"]).token;
-            console.log("tokendat....-----", this.tokenData);
             sessionStorage.setItem("id", this.userCred["userId"].toString());
             sessionStorage.setItem("token", this.tokenData);
-          
-          console.log("get token", sessionStorage.getItem("token"));
         
           if (this.tokenData)
-          { this.router.navigate(["/app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
+          { this.router.navigate(["app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
         });
         }
 

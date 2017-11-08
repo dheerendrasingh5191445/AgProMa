@@ -64,8 +64,18 @@ namespace AgProMa.Controllers
             return Ok(_context.Check(modal));
         }
 
+        [HttpPost]
+        [Route("api/[controller]/SetLogOut/{id}")]
+        //this method get the details of a particular user
+        public IActionResult SetLogOut(int id)
+        {
+            string response = _context.logOut(id);
+            return Ok(response);
+        }
+
+
         // POST api/values
-        
+
         [HttpPost]
         [Route("api/[controller]")]
         //this method adds a user details
@@ -76,8 +86,8 @@ namespace AgProMa.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        [Route("api/[controller]")]
+        [HttpPut]
+        [Route("api/[controller]/{id}")]
         //this method updates the user details
         public IActionResult Put(string emailid, [FromBody]Master user)
         {
@@ -92,6 +102,21 @@ namespace AgProMa.Controllers
                 return Ok("internal server error");
 
             }
+        }
+        //get details for view profile
+        [HttpGet]
+        [Route("api/[controller]/Details/{id}")]
+        //this method updates the user details
+        public IActionResult GetById(int id)
+        {
+            return Ok(_context.GetById(id));
+        }
+        [HttpPut]
+        [Route("api/[controller]/UpdatePassword/{id}")]
+        //update user password
+        public void UpdatePassword(int id,[FromBody]Master user)
+        {
+            _context.UpdatePassword(id, user);
         }
     }
 }

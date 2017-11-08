@@ -29,6 +29,8 @@ namespace MyNeo4j.Repository
         //add a new sprint.
         public void Add(SprintBacklog sprint)
         {
+            sprint.ExpectedEndDate = sprint.StartDate.AddDays(sprint.TotalDays-1);
+            sprint.Status = SprintStatus.Unplanned;
             _context.Sprintbl.Add(sprint);
             _context.SaveChanges();
         }
@@ -57,9 +59,12 @@ namespace MyNeo4j.Repository
         public void Update(int sprintId, ProductBacklog sprint)
         {
             ProductBacklog sprints = _context.Productbl.FirstOrDefault(m => m.StoryId == sprint.StoryId);
+            SprintBacklog sprintbl = _context.Sprintbl.FirstOrDefault(p => p.SprintId == sprintId);
+            sprintbl.Status = SprintStatus.Inprogress;
             sprints.InSprintNo = sprintId;
             _context.SaveChanges();
         }
+
         public void UpdateConnectionId(string connectionid, int memberid)
         {
             SignalRMaster signalr = _context.SignalRDb.FirstOrDefault(m => m.MemberId == memberid);

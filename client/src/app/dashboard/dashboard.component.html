@@ -9,11 +9,11 @@
 
 			<ul class="navbar-nav ml-auto mt-2 mt-md-0">
 				<li class="nav-item dropdown" ngbDropdown>
-					<a (click)="signOut()" href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+					<a (click)="onLoggedout()" href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                       <i  class="fa fa-user"></i> Log-Out <b class="caret"></b>
                   	</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<div class="dropdown-item" [routerLink]="['/']" (click)="onLoggedout()"><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' }} </div>
+						<div class="dropdown-item" (click)="onLoggedout()"><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' }} </div>
 					</div>
 				</li>
 			</ul>
@@ -26,24 +26,6 @@
 	<ul class="list-group">
 		<div routerLink="/app-dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
 			<i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' }}
-		</div>
-		<div routerLink="/app-dashboard/epic/1" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Epics' }}
-		</div>
-		<div routerLink="/app-dashboard/backlog/1" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Product Backlog' }}
-		</div>
-		<div routerLink="/app-dashboard/releaseplan/1" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'ReleasePlan' }}
-		</div>
-		<div routerLink="/app-dashboard/app-sprint/1" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Sprint Backlog' }}
-		</div>
-		<div routerLink="/app-dashboard/app-checklist/:id" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Checklist ' }}
-		</div>
-		<div routerLink="/app-dashboard/taskassign/1" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i>&nbsp;{{ 'TasksAssign' }}
 		</div>
 	</ul>
 	<!-- end side bar -->

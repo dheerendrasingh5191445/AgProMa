@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace AgProMa.Repository
 {
-    //interface of sign-up
+
     public interface ISignUpRepository
     {
+        void UpdatePassword(int id, Master master);
         Master Get(string emailid);
-        void Add_User(Master adduser );
+        void Add_User(Master adduser);
         void Update(string emailid, Master user);
         List<Master> GetAllDetails();
+
+        Master GetById(int id);
+
+        bool SetLoggedIn(int userId, bool status);
+
     }
     public class SignUpRepository : ISignUpRepository
     {
@@ -51,5 +57,27 @@ namespace AgProMa.Repository
             sign.LastName = s.LastName;
             _context.SaveChanges();
         }
+
+        public Master GetById(int id)
+        {
+            return _context.Pmaster.FirstOrDefault(m => m.Id == id);
+        }
+
+        public void UpdatePassword(int id, Master master)
+        {
+            var user = _context.Pmaster.FirstOrDefault(m => m.Id == id);
+            user.Password = master.Password;
+            _context.SaveChanges();
+            //this is used to set the status
+        }
+           public  bool SetLoggedIn(int userId, bool status)
+            {
+                SignalRMaster signaldata = _context.SignalRDb.FirstOrDefault(p => p.MemberId == userId);
+                signaldata.Online = status;
+                signaldata.HubCode = HubCode.projectscreen;
+                _context.SaveChanges();
+                return true;
+            }
+        }
     }
-}
+

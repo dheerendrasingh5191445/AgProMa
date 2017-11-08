@@ -18,11 +18,16 @@ export class LoginService {
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://localhost:52258/api/Login/Check';
+  checkurl='http://192.168.252.131:8030/api/Login/Check';
+  updateUrl='http://localhost:52258/api/Login/Details/';
+  updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
+//  private headers = new Headers({ 'Content-Type': 'application/json' });
+ // checkurl='http://localhost:52258/api/Login/Check';
+  logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
 
   token = sessionStorage.getItem("token");
-  headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + this.token });
+  headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
   options = new RequestOptions({ headers: this.headers });
  
  //get all the details of user
@@ -30,6 +35,13 @@ export class LoginService {
    return this.http
    .get(this.url)
    .map((response)=>response.json());
+ }
+//this function is to logout from the system
+ logOut(userId:number){
+  return this.http.post(this.logouturl+userId,"",this.options)
+                  .map((response)=>response.json())
+                  .toPromise()
+                  .catch(this.handleError);
  }
   //get the userid on basis of email
   get(email:string){
@@ -39,7 +51,6 @@ export class LoginService {
 
  //check details of a particular user by emailid and password
   check(userData:IdPassword){
-    console.log(userData);
    return this.http
               .post(this.checkurl,userData,this.options)
               .map((response)=>response.json())
@@ -47,8 +58,16 @@ export class LoginService {
               .catch(this.handleError);
 
  }
+<<<<<<< HEAD
+//get userdata by id for view profile
+getById(id:any){
+  return this.http.get(this.updateUrl + id).map(data=>data.json());
+}
 
+=======
 
+//this method is used to get the token
+>>>>>>> 9c72872c1bbf2ae367f97382c098b5af989ff265
  getToken(auth:Credential)
  {
   let headers = new Headers({ 'Content-Type': 'application/json'});
@@ -72,6 +91,9 @@ export class LoginService {
     return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
   }
 
+  //update details of a user
+  
+
   //handling the error
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
@@ -84,5 +106,7 @@ export class LoginService {
   
   }
 
+  updatePassword(id:number,user:any) {
+    this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+  }
 }
-

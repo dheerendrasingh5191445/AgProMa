@@ -1,10 +1,9 @@
-body{
+.bod{
     overflow-x: hidden;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Rage Italic'!important;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important; 
 }
-
 li{
     list-style: none;
     display: inline-block
@@ -16,7 +15,6 @@ a{
 a:hover,
 a:active{
     text-decoration: none;
-
 }
 h1,
 h2,
@@ -39,9 +37,7 @@ p{
     background-color: #ededed !important;
     color: #3c3c3c !important;
     border: 1px solid #fff !important;
-
 }
-
 /* navigation */
 .navbar{
     background-color: #222222 !important;
@@ -52,7 +48,6 @@ p{
 .navbar a {
     color: #fff !important;
     opacity: 0.7;
-
 }
 .navbar a:hover{
     opacity: 1;
@@ -160,7 +155,6 @@ p{
 .scrum{
     color:white;
 }
-
 .pricing p{
     color: #fff;
 }
@@ -176,10 +170,6 @@ p{
     background-color: #fff;
     border-radius: 5px;
     margin-top: 30px;
-}
-.packages li{
-    display: block;
-    padding: 5px;
 }
 .packages h4,
 .packages h1,
@@ -246,7 +236,6 @@ p{
 /* clients */
 .clients {
     padding: 50px 0 80px;
-    /* background-color: #BEF479; */
     text-align: center;
     background-image: url("../../assets/images/client.jpg");
     background-position: center;
@@ -262,12 +251,10 @@ p{
 }
 .clients img{
     width: 200px;
-
     cursor: pointer;
     margin: 40px 0;
     transition: all 500ms ease-in-out;
 }
-
 /* contact */
 .contact{
     padding: 50px 0 80px;
@@ -289,8 +276,9 @@ color:white;
 .contact .input-group {
     margin-bottom: 25px;
 }
-.contact .form-control {
+.contact #feedback {
     border-radius: 0 !important;
+    height:120px;
 }
 .contact span {
     border-radius: 0 !important;
@@ -334,7 +322,7 @@ color:white;
     padding: 10px 5px 10px;
     margin: -3px 0 0 5px;
 }
-
+/* getting started button */
 @import url(https://fonts.googleapis.com/css?family=Raleway:600);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 .snip1434 {

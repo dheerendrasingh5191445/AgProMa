@@ -8,11 +8,29 @@
     padding-top : 40px;
    
 }
+.card-footer {
+    background-color: #E5F9F9;
+    color: #000000;
+}
+.heading {
+    background-color: #460619;
+    color: whitesmoke;
+    height: 50px;
+    padding-top: 9px;
+    padding-left: 3px;
+  }
+  
 
 .team-image
 {
     height: 150px;
     width: 150px;
+}
+
+.chipData
+{
+    padding-left : 40px;
+    padding-right : 40px;
 }
 
 .chip {
@@ -22,8 +40,12 @@
     font-size: 16px;
     line-height: 50px;
     border-radius: 25px;
-    background-color: #f1f1f1;
+    color: white;
+    background-color: #CBC5C5;
+    
 }
+
+
 
 .chip img {
     float: left;
@@ -34,4 +56,63 @@
 }
 .closebtn:hover {
     color: #000;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+span.invite {
+  font-family: 'Raleway', Arial, sans-serif;
+  border: none;
+  background-color: #000000;
+  border-radius: 5px;
+  color: whitesmoke;
+  cursor: pointer;
+  padding: 10px 30px;
+  display: inline-block;
+  margin: 2px 5px;
+  text-transform: uppercase;
+  line-height: 1.5em;
+  font-weight: 400;
+  font-size: 1em;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+span.invite span {
+  display: inline-block;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  opacity: 0.8;
+}
+
+span.invite i {
+  font-size: 21px;
+  left: 22px;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+span.invite:hover span,
+span.invite.hover span {
+  -webkit-transform: translate3d(10px, 0px, 0px);
+  transform: translate3d(10px, 0px, 0px);
+  opacity: 1;
+}
+
+span.invite:hover i,
+span.invite.hover i {
+  opacity: 0.8;
+}
+
+span.invite:active span {
+  -webkit-transform: translate3d(14px, 0px, 0px);
+  transform: translate3d(14px, 0px, 0px);
+}
+
+span.invite:active i {
+  left: 18px;
 }

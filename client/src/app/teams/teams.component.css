@@ -33,13 +33,20 @@ ul {
 .available .card-header{
     background-color: #009999;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
 .memList{
     overflow-y:auto;
     height:800px;
 }
+<<<<<<< HEAD
 
 .availmemList{
+=======
+.availMemList{
+>>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
     overflow-y:auto;
     height:800px;
 }
@@ -51,7 +58,10 @@ ul {
 .team {
     background-color:white;
     height: 400px;
+<<<<<<< HEAD
     padding-left:0px;
+=======
+>>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
 }
 
 .team .card-header{
@@ -193,6 +203,10 @@ ul {
     list-style:none;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
 .tool {
     position: relative;
     display: inline-block;
@@ -214,6 +228,7 @@ ul {
   
   .tool:hover .tooltiptext {
     visibility: visible;
+<<<<<<< HEAD
 	}
 	.close {
 		color: #fff;
@@ -224,3 +239,6 @@ ul {
 .availablefa {
 	color: #32456d;
 }
+=======
+  }
+>>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243

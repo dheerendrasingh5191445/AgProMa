@@ -23,9 +23,10 @@ import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 import {LineGraphComponent} from './line-graph/line-graph.component'
 import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
+import {UserProfileComponent} from "./user-profile/user-profile.component"
 import { EfficiencyGraphComponent } from "./efficiency-graph/efficiency-graph.component";
 import { LandingpageComponent } from './landingpage/landingpage.component';
-
+import { DashboardRoleComponent } from './dashboard-role/dashboard-role.component';
 
 // paths to all the respective pages
 const routes: Routes = [
@@ -43,6 +44,9 @@ const routes: Routes = [
     { path:'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},
     { path:'app-teams/:id', component: TeamsComponent },
+    ]},
+    { path:'role-dashboard/:id',component:DashboardRoleComponent,
+children:[
     { path:'epic/:id',component:EpicComponent},
     { path:'backlog/:id',component:BacklogComponent},
     { path:'releaseplan/:id',component:ReleasePlanComponent},
@@ -50,10 +54,10 @@ const routes: Routes = [
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},
     { path:'taskassign/:id',component:TaskAssignComponent},
-    {path:'line-graph',component:LineGraphComponent},
-    { path: 'kanban/:id', component : KanbanBoardComponent},
-    { path: 'efficiency', component : EfficiencyGraphComponent}
-    ]}
+    { path:'line-graph',component:LineGraphComponent},
+    { path:'kanban/:id', component:KanbanBoardComponent},
+    { path:'efficiency', component:EfficiencyGraphComponent}
+]}
 ]
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

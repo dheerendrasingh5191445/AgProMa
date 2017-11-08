@@ -27,6 +27,8 @@ namespace MyNeo4j.model
 
         public string Description { get; set; }
 
+        public DateTime ActualReleaseDate { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         public DateTime StartDate { get; set; }
