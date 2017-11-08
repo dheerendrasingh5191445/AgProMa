@@ -13,12 +13,15 @@ import { TitleCasePipe } from '@angular/common';
 export class ProjectDetailComponent implements OnInit {
  @Input() Data:ProjectMaster[];
  @Output() onDelete = new EventEmitter<number>();
+ @Output() actAs = new EventEmitter<number>();
  projectname:string;
  projectdescription:string;
  technologies:string;
   constructor(private projectservice:ProjectScreenService,private router:Router) { }
 
   ngOnInit() {
+    //used to remove the role from the session storage
+    sessionStorage.removeItem('role');
   }
 //method is calling the service method to delete project
   delete(id:number):void{
@@ -29,6 +32,6 @@ export class ProjectDetailComponent implements OnInit {
   //this method is used for storing role
   enterProject(){
     sessionStorage.setItem("role",this.Data["actAs"]);
-    this.router.navigate(["app-dashboard","kanban","Data.projectId"]);
-  }
+    this.router.navigate(["role-dashboard",this.Data["projectId"],"kanban",this.Data["projectId"]]);
+    }
 }

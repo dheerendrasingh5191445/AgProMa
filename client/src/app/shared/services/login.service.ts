@@ -55,7 +55,7 @@ export class LoginService {
 
  }
 
-
+//this method is used to get the token
  getToken(auth:Credential)
  {
   let headers = new Headers({ 'Content-Type': 'application/json'});
