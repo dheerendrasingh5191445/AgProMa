@@ -19,7 +19,7 @@ export class InvitePeopleComponent implements OnInit {
     projectId:0,
     email:''
   };
-private model1={
+private userDetail={
   memberName:''
 }  
   constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
