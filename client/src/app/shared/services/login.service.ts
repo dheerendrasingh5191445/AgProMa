@@ -61,7 +61,8 @@ export class LoginService {
 
   //get userdata by id for view profile
   getById(id:any){
-    return this.http.get(this.updateUrl + id)
+    console.log(id);
+    return this.http.get(this.updateUrl+id,this.options)
                     .map(data=>data.json());
   }
 

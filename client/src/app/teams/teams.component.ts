@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ TeamsService} from '../shared/services/teams.service';
 import{ TeamMaster} from '../shared/model/teamMaster';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
 import { TitleCasePipe } from '@angular/common';
@@ -23,7 +23,7 @@ export class TeamsComponent implements OnInit {
    connection:HubConnection;
    userId:number;
 
-  constructor(private teamService:TeamsService,private route:ActivatedRoute) {   
+  constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
   }
 
 
@@ -98,5 +98,11 @@ export class TeamsComponent implements OnInit {
     else {
       return false;         //sprint are not available for particular sprint.
     }
+  }
+
+  efficiency(Id:number){
+  
+    this.router.navigate(["role-dashboard",this.projectId,"userprofile",Id]);
+
   }
 }

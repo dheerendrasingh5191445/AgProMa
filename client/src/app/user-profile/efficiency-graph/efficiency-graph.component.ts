@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { EfficiencyGraphService } from "../shared/services/efficiency-graph.service";
+import { Component, OnInit,Input } from '@angular/core';
+import { EfficiencyGraphService } from "./../../shared/services/efficiency-graph.service";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
@@ -8,11 +8,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./efficiency-graph.component.css']
 })
 export class EfficiencyGraphComponent implements OnInit {
-
+@Input() userId:number;
   //local variable used in component
   
   data : any;
-  taskId : number =20;
+
   efficient : number  ;
 
   //Initializing variable for doughnut chaty
@@ -26,12 +26,8 @@ export class EfficiencyGraphComponent implements OnInit {
 
   ngOnInit() {
 
-    // getting task id from route 
-    // this.route.params.subscribe((param) =>
-    // this.taskId = +param['id']);
-
     //this will get the data from 
-    this.efficiencyGraphService.getEfficiencyDetail(this.taskId)
+    this.efficiencyGraphService.getEfficiencyDetail(this.userId)
                                .subscribe(data => {this.data = data; console.log("init",this.data);
 
                                //logic for douhgnut chart
