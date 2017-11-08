@@ -14,10 +14,11 @@ using MyNeo4j.Service;
 
 namespace MyNeo4j
 {
-    public class Startup
+    public partial class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            Configuration = configuration;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -27,7 +28,7 @@ namespace MyNeo4j
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -64,13 +65,14 @@ namespace MyNeo4j
             services.AddScoped<ITaskServices, TaskService>();
             services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
             services.AddScoped<ITaskBacklogService, TaskBacklogService>();
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton(Configuration);
             // Add framework services.
+            ConfigureJwtAuthService(Configuration,services);
             services.AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling
                         = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddMvc();
+           // services.AddMvc();
             
         }
 
@@ -83,8 +85,18 @@ namespace MyNeo4j
             app.UseSignalR(routes =>
             {
                routes.MapHub<EpicHub>("epichub");
+               routes.MapHub<SprintBacklogHub>("sprint");
+               routes.MapHub<ReleasePlanHub>("releaseplan");
+               routes.MapHub<TeamHub>("teamhub");
+               routes.MapHub<TaskBacklogHub>("taskbacklog");
+	           routes.MapHub<BacklogHub>("backlog");
             });
             
+            if(env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="projects == null">
+  <div *ngIf="data">
      <p>There are no existing project,pleasae make new project</p>
   </div>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>

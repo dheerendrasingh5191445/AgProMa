@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using MyNeo4j.Service;
 using MyNeo4j.model;
 using MyNeo4j.Viewmodel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyNeo4j.Controllers
 {
+    
+    [Authorize]
     [Produces("application/json")]
     [Route("api/TaskBacklog")]
     public class TaskBacklogController : Controller
@@ -20,11 +23,12 @@ namespace MyNeo4j.Controllers
         {
             task = tservice;
         }
-
+      
+        //this method will return all the task in that same sprint
         [HttpGet("GetAllTaskDetail/{id}")]
         public List<TaskBacklog> GetAllTaskDetail(int id)
         {
-            return task.getAllTask(id);
+            return task.GetAllTask(id);
         }
 
         [HttpGet("GetByTeamId/{id}")]
@@ -36,7 +40,7 @@ namespace MyNeo4j.Controllers
         [HttpGet("GetTask/{id}")]
         public List<TaskBacklog> GetTask(int id)
         {
-            return task.getByTaskId(id);
+            return null;
         }
 
         [HttpGet("GetTeamMember/{id}")]

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../shared/services/task.service';
 import { Task } from '../shared/model/task';
 import swal from 'sweetalert2';
-
+import { HubConnection } from '@aspnet/signalr-client';
 
 @Component({
   selector: 'app-taskadd',
@@ -11,16 +11,34 @@ import swal from 'sweetalert2';
   styleUrls: ['./taskadd.component.css']
 })
 export class TaskAddComponent implements OnInit {
+  //variable declaration
+  sprintId:number = 2;
   sub: string = "";
   data: any[];
-  model = new Task(null, null, '', null, null, null);
+  connection: HubConnection;
+  userId:number=1;
 
   constructor(private taskService: TaskService) {
 
   }
   //this will get the task backlog list
   ngOnInit() {
-    this.getBacklog();
+    this.connectToHub();
+  }
+
+  //this is to make connection with the hub
+  connectToHub(){
+    // var session = sessionStorage.getItem("id");
+    // this.userId = parseInt(session);
+    this.connection = new HubConnection("http://192.168.252.125:8030/taskhub");//for connecting with hub // when this component reload ,it will call this method
+    //registering event handlers
+    this.connection.on("getTasks",data =>{console.log("backlog called"); this.data = data });//this will return task backlogs
+    this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); //sweet alert when task happens
+    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
+    this.connection.start().then(() => { 
+    this.connection.invoke("SetConnectionId",this.userId);
+    this.connection.invoke("GetTaskBacklogs",this.sprintId);
+    });
   }
 
   //this will add new task to the backlog
@@ -31,15 +49,9 @@ export class TaskAddComponent implements OnInit {
     }
     //this will work if task name is entered and  add new task to backlog
     if (taskName) {
-      this.model.sprintId = 2;
-      this.model.personId = 1;
-      this.model.startDate = startDate;
-      this.model.endDate = endDate;
-      this.model.taskName = taskName;
-      this.model.status = 1;
-      this.taskService.add(this.model).subscribe((f) => {
-                                                          this.getBacklog();
-                                                        });
+      let model = new Task(1,this.sprintId,taskName,this.userId,startDate,endDate);
+      this.connection.invoke("PostTask",this.sprintId);
+      this.connection.invoke("GetTaskBacklogs",this.sprintId);
     }
   }
   //this will uddate task backlog values
@@ -53,24 +65,7 @@ export class TaskAddComponent implements OnInit {
       item.startDate = startDate;
       item.endDate = endDate;
       //this will give alert if task is successfully upadated
-      this.taskService.update(item.taskId, item).subscribe(f => { swal('Task updated Successfully', '', 'success'); });
+      this.connection.invoke("UpdateTask",this.sprintId,item);
     }
   }
-  //this will return task backlog
-  getBacklog() {
-    this.taskService.get().subscribe(data => {
-      this.data = data;
-
-    });
-  }
-  //this will delete task from backlog
-  deleteBacklog(item: any) {
-    if ((this.sub == "")) {
-      swal('Task Deleted Successfully', '', 'error')
-    }
-    this.taskService.delete(item.taskId).subscribe((f) => {
-      this.getBacklog();
-    });
-  }
-
 }

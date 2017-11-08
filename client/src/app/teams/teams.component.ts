@@ -4,6 +4,9 @@ import{ TeamMaster} from '../shared/model/teamMaster';
 import { ActivatedRoute } from "@angular/router";
 import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
+import { TitleCasePipe } from '@angular/common';
+import { HubConnection } from '@aspnet/signalr-client';
+
 
 @Component({
   selector: 'app-teams',
@@ -11,20 +14,44 @@ import swal from 'sweetalert2';
   styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
-   ProjectId:number = 12;
-   Teams:TeamMaster[];
-   TeamList:Members[];
-   MyTeamList:Members[];
+   projectId:number;
+   teams:TeamMaster[];
+   teamList:Members[];
+   myTeamList:Members[];
+   TeamList:any;
    val:string="";
-  constructor(private teamService:TeamsService,private route:ActivatedRoute) { 
-    
+   connection:HubConnection;
+   userId:number;
+
+  constructor(private teamService:TeamsService,private route:ActivatedRoute) {   
   }
+
+
+
   ngOnInit() {
-      // this.route.params.subscribe(param =>this.ProjectId = +param['id']);
-      this.teamService.getTeams(this.ProjectId)
-                      .then(data => {this.Teams = data.json();
-                                     this.teamService.getAvailableList(this.ProjectId)
-                                                     .then(data => {console.log(data.json()),this.TeamList = data.json();})})
+      this.route.params.subscribe(param =>this.projectId = +param['id']);
+      var session = sessionStorage.getItem("id");
+      this.userId = parseInt(session);
+      this.connectToHub();
+  }
+
+
+  //this is to make connection with the hub
+  connectToHub(){
+    // for connecting with hub 
+    this.connection = new HubConnection("http://localhost:52258/teamhub");
+    // when this component reload ,it will call this method
+    // registering event handlers
+    this.connection.on("getTeams",data =>{ this.teams = data });//this will return list of teams
+    this.connection.on("getAvailableMember",data =>{ this.teamList = data });//this will return list of available member
+    this.connection.on("whenUpdated",data => { swal('Member Added', '', 'success') }); //sweet alert when task happens
+    this.connection.on("whenAdded",data => { swal('Team Added', '', 'success') });
+    this.connection.on("whenDeleted",data => { swal('Member Removed', '', 'success') });   
+    this.connection.start().then(() => { 
+    this.connection.invoke("SetConnectionId",this.userId);
+    this.connection.invoke("GetTeams",this.projectId)
+                   .then(data => {this.connection.invoke("GetAvailableMember",this.projectId);});
+    });
   }
 
   //this will add new  team 
@@ -33,33 +60,43 @@ export class TeamsComponent implements OnInit {
         swal('Enter valid task name','','warning');
       }
       if(name){
-      
-     let mobject:TeamMaster = new TeamMaster(this.ProjectId,name);
-     this.teamService.addTeam(mobject)
-                      .then(data => {
-                        this.teamService.getTeams(this.ProjectId)
-                        .then(data => {this.Teams = data.json();})
-                      });
-  }
+        let mobject:TeamMaster = new TeamMaster(this.projectId,name);
+        this.connection.invoke("AddTeam",mobject)
+                       .then(data => {this.connection.invoke("GetTeams",this.projectId);});
+
+      }
     }
+
   //this will remove a particular team member
   removeMember(){
-    this.teamService.getAvailableList(this.ProjectId)
-                    .then(data => {console.log("data json",data.json()),this.TeamList = data.json();}) 
-                  
+    this.connection.invoke("GetAvailableMember",this.projectId);                   
   }
 
  //this will add member to a particular team
   teamListupdate($event: any,teamId:number) {
-    console.log("success");
     if(teamId){
-    
     let teamMember:any  = $event.dragData;
     let Id:number=teamMember.memberId;
     let mobject:Members = new Members(teamId,Id);
-    this.teamService.updateTeammembers(mobject)
-                    .then(data =>{swal('Member added successfully','','success');this.teamService.getTeams(this.ProjectId)
-                                                  .then(data => {this.Teams = data.json();})});
-}
-}
+    this.connection.invoke("UpdateteamMember",mobject,this.projectId);
+    }
+  }
+
+  //this is for deleting a member from a team
+  delete(id: number) {
+    if (id) {
+      this.connection.invoke("Delete",id,this.projectId);
+      this.connection.invoke("GetAvailableMember",this.projectId); 
+    }
+  }
+
+  //compare whether story exist in sprint or not
+  compareStory(teamId,memteamId) {
+    if (teamId == memteamId) {
+      return true;          //sprint are available for that particular sprint.
+    }
+    else {
+      return false;         //sprint are not available for particular sprint.
+    }
+  }
 }

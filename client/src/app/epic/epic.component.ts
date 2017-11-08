@@ -13,7 +13,7 @@ import { HubConnection } from '@aspnet/signalr-client';
 })
 export class EpicComponent implements OnInit {
 
-  projectId: number = 1;
+  projectId: number = 12;
   connection: HubConnection;
   data: Array<any>
   userId:number;
@@ -22,14 +22,17 @@ export class EpicComponent implements OnInit {
   constructor(private epicService: EpicService) { }
 
   ngOnInit() {
-    this.getBacklog(); // when this component reload ,it will call this method
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-    this.connection = new HubConnection("http://localhost:52258/epichub");//for connecting with hub
-    this.connection.on("addproject",data  =>{});  //registering event handlers
-    this.connection.start().then(() => {
-    console.log("donebabyvjdhvkjfdvhkfdvd");
+    this.connection = new HubConnection("http://localhost:52257/epichub");//for connecting with hub // when this component reload ,it will call this method
+    //registering event handlers
+    this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
+    this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
+    this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); 
+    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
+    this.connection.start().then(() => { 
     this.connection.invoke("SetConnectId",this.userId);
+    this.connection.invoke("Get",this.projectId);
     });
   }
 
@@ -39,40 +42,26 @@ addBacklog(story:any, comment:any)//for adding new  epic
     swal('Please fill user story','','error');
   } else {
     this.model.description = story;
-    this.model.projectId = 1;
-    console.log("the value of model", this.model);
-    this.epicService.add(this.model)
-      .subscribe((f) => {
-        swal('Epic Added', '', 'success');
-        this.getBacklog();
-      });
+    this.model.projectId = this.projectId;
+    this.connection.invoke("Post",this.model);
+    this.connection.invoke("Get",this.projectId);
   }
 }
+
 updateBacklog(content:any, item) //for updating  particular epic 
 {
   if (content == "") {
     swal('Please fill user story', '', 'error');
   }
+  else{
   item.description = content;
+  this.connection.invoke("put",item.epicId,item);
+}
+}
 
-  console.log("item value is ", item.storyId);
-  this.epicService.update(item.epicId, item).subscribe(
-    f => { swal('Epic updated', '', 'success'); }
-  );
-}
-getBacklog()//for gettting all epics based on project id 
-{
+deleteBacklog(item:any){       //for deleting the epic 
 
-  this.epicService.get(this.projectId).subscribe(data => {
-    this.data = data;
-    console.log("the vaue of data", data);
-  });
-}
-deleteBacklog(item:any){
-  this.epicService.delete(item.epicId).subscribe((f) => {
-    swal('Epic deleted', '', 'success');
-    this.getBacklog();
-  });
-}
-  
+    this.connection.invoke("Delete",item.epicId);
+    this.connection.invoke("Get",this.projectId);
   }
+}

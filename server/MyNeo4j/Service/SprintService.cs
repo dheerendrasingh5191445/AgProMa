@@ -12,8 +12,10 @@ namespace MyNeo4j.Service
         List<SprintBacklog> GetAll(int projectId);
         SprintBacklog Get(int sprintId);
         void Add(SprintBacklog sprint);
-        void Update(int sprintId,ProductBacklog sprint);
+        void Update(int sprintId, ProductBacklog sprint);
         void Delete(int sprintId);
+        void UpdateConnectionId(string connectionid, int memberid);
+        List<SignalRMaster> CreateGroup(int projectid);
     }
     public class SprintService : ISprintService
     {
@@ -41,10 +43,18 @@ namespace MyNeo4j.Service
         {
             return _repository.GetAll(projectId);
         }
-        
+
         public void Update(int sprintId, ProductBacklog sprint)
         {
             _repository.Update(sprintId, sprint);
+        }
+        public void UpdateConnectionId(string connectionid, int memberid)
+        {
+            _repository.UpdateConnectionId(connectionid, memberid);
+        }
+        public List<SignalRMaster> CreateGroup(int projectid)
+        {
+            return _repository.CreateGroup(projectid);
         }
     }
 }

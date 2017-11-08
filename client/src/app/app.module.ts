@@ -23,18 +23,14 @@ import { FillDetailsComponent } from './project-screen/fill-details/fill-details
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { RegisterUserWithNewPasswordComponent } from './register-user-with-new-password/register-user-with-new-password.component';
 import { InvitePeopleComponent } from './invite-people/invite-people.component';
-import { TeammemberComponent } from './teams/teammember/teammember.component';
 import { TeamsComponent } from './teams/teams.component';
 import { EpicComponent } from './epic/epic.component';
 import { BacklogComponent } from './backlog/backlog.component';
 import { ReleasePlanComponent } from './release-plan/release-plan.component';
-import { NewReleaseFillingDetailsComponent } from './release-plan/new-release-filling-details/new-release-filling-details.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
-import { TaskComponent } from './taskAssign/task/task.component';
-
 
 //service declaration
 import { LoginService } from "./shared/services/login.service";
@@ -55,8 +51,8 @@ import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-
+import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
+import{UserProfileComponent} from "./user-profile/user-profile.component";
 //configuration for social  login
 let config = new AuthServiceConfig([
   {
@@ -76,7 +72,6 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     TaskAssignComponent,
-    TaskComponent,
     TaskAddComponent,
     ChecklistComponent,
     EpicComponent,
@@ -90,13 +85,11 @@ export function provideConfig() {
     ForgetPasswordComponent,
     RegisterUserWithNewPasswordComponent,
     InvitePeopleComponent,
-    TeammemberComponent,
     TeamsComponent,
     BacklogComponent,
     ReleasePlanComponent,
-    NewReleaseFillingDetailsComponent,
-    SprintComponent,LineGraphComponent,
-   
+    SprintComponent,
+    LineGraphComponent, 
     KanbanBoardComponent,
     EfficiencyGraphComponent,
     UserProfileComponent
@@ -128,6 +121,7 @@ export function provideConfig() {
     SprintService,
     TaskService,
     TeamsService,
+    EfficiencyGraphService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

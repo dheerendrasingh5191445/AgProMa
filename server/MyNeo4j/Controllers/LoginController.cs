@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using AgProMa.Services;
 using MyNeo4j.model;
 using MyNeo4j.Viewmodel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgProMa.Controllers
 {
@@ -43,6 +44,8 @@ namespace AgProMa.Controllers
                 return StatusCode(500);
             }
         }
+
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/[controller]/{email}")]
         //this method updates the user details
@@ -87,6 +90,21 @@ namespace AgProMa.Controllers
                 return Ok("internal server error");
 
             }
+        }
+        //get details for view profile
+        [HttpGet]
+        [Route("api/[controller]/Details/{id}")]
+        //this method updates the user details
+        public IActionResult GetById(int id)
+        {
+            return Ok(_context.GetById(id));
+        }
+        [HttpPut]
+        [Route("api/[controller]/UpdatePassword/{id}")]
+        //update user password
+        public void UpdatePassword(int id,[FromBody]Master user)
+        {
+            _context.UpdatePassword(id, user);
         }
     }
 }

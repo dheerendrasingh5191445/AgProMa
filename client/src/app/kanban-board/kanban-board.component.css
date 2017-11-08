@@ -2,6 +2,11 @@
     font-family: 'Raleway', Arial, sans-serif !important;
 }
 
+.table-head
+{
+    margin-bottom: 30px;
+}
+
 *{
     margin:0;
     padding:0;

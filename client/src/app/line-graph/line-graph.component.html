@@ -1,9 +1,9 @@
 <div class="main">
     <div class="card  inverse">
-      <div class="card-header"><h4>Burn-Down Chart</h4><!--chart title-->
+      <div class="card-header"><h2>Burn-Down Chart</h2></div><!--chart title-->
         <hr>
     <div style="display: block;">
-    <canvas baseChart width="300" height="200"
+    <canvas baseChart width="300" height="102"
                 [datasets]="lineChartData"
                 [labels]="lineChartLabels"
                 [options]="lineChartOptions"
@@ -13,7 +13,7 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
     </div>
-    </div>
+    
   <div class="container" style="margin-bottom: 5px">
     <table class="table table-responsive table-condensed"><!--Table for the graph starts-->
       <tr>
@@ -23,7 +23,7 @@
         <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
       </tr>
     </table>
-    <button (click)="randomize()">CLICK</button><!--random function to get random value for the tasks -->
+    <button (click)="randomize()">CHANGE SPRINT</button><!--random function to get random value for the tasks -->
   </div>
 </div>
   </div>

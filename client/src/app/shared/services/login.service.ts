@@ -8,16 +8,18 @@ import { ProjectMember } from "../model/projectMember";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { IdPassword } from '../model/idpassword';
+import { authentication } from "../model/Authentication";
 
 @Injectable()
 export class LoginService {
 
   constructor(private http: Http) { }
-  url = 'http://localhost:52258/api/Login';                 //url for login 
+  url = 'http://192.168.252.131:8030/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://localhost:52258/api/Login/Check';
-  
+  checkurl='http://192.168.252.131:8030/api/Login/Check';
+  updateUrl='http://localhost:52258/api/Login/Details/';
+  updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
  
  //get all the details of user
@@ -41,6 +43,17 @@ export class LoginService {
               .catch(this.handleError);
 
  }
+//get userdata by id for view profile
+getById(id:any){
+  return this.http.get(this.updateUrl + id).map(data=>data.json());
+}
+
+ getToken(auth : authentication)
+ {
+   return this.http.post("http://localhost:59382/api/TokenGeneration/createtoken",auth,{headers:this.headers})
+                    .toPromise();
+ }
+
  //post the details of a new user 
   postLoginDetails(logindetails:Login){
     return this.http
@@ -71,5 +84,8 @@ export class LoginService {
   
   }
 
+  updatePassword(id:number,user:any) {
+    this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+  }
 }
 

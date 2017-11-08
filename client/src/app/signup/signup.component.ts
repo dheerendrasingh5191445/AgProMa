@@ -8,6 +8,7 @@ import swal from 'sweetalert2';
 import { LoginService }from '../shared/services/login.service'
 import { IdPassword } from '../shared/model/idpassword';
 import { Credential } from '../shared/model/credential';
+import { authentication } from "../shared/model/Authentication";
 
 @Component({
   selector: 'app-signup',
@@ -62,6 +63,7 @@ export class SignupComponent implements OnInit {
       this.authService.signOut();
     }
     login(){
+      let auth : authentication  = new authentication("","");
       //this method is used to verify user's credentials
       if(this.email=='' || this.password=='') //if username or password is empty
         {
@@ -72,9 +74,16 @@ export class SignupComponent implements OnInit {
         console.log(model);
         this.loginservice.check(model).then(data=>{console.log(data);
         this.data = data;
-        if(this.data["status"] == "success") // if user is not register with AgProMa
+        if(this.data["status"] == "success") // if user is register with AgProMa
           {
             sessionStorage.setItem("id",this.data["userId"].toString());
+            auth.Name = data.password;
+            auth.Email=data.email;//call method for token generation
+            this.loginservice.getToken(auth).then(data=>
+            {var tokenData = JSON.parse(data["_body"]).token;
+            console.log("tokendat....-----",tokenData);
+            sessionStorage.setItem("token",tokenData)});
+            console.log("get token",sessionStorage.getItem("token"));
             this.router.navigate(["/app-dashboard"]); //if user's credentials are correct then user will br redirected to dashboard
           }
         else if(this.data["status"] == "email"){

@@ -1,122 +1,138 @@
-<!--this button takes you to the previous page-->
-<button (click)=navigateNewRelease() class="btn-lg newRelease"><span>Add a new release</span><i class="ion-checkmark"></i></button>
-<br>
-<hr>
-<h4 class="text-responsive">Existing Release Plans</h4>
-<br>
-<div class="row container" >  <!--main container starts-->
-  <div class="col-md-8">
-    <div class="row">
-      <div class="col" *ngFor = "let list of release"> <!--card starts-->
-        <figure class="card snip1418">
-          <figure class="snip1584">
-            <img src="./assets/images/ReleasePlanNameBackground.jpg"/>
-            <figcaption>
-              <h4>
-                <button class="btn btn-outline-secondary btnrel" data-toggle="modal" data-target="#modalforsprint">{{list.releaseName}}</button>
-              </h4>
-            </figcaption>
-          </figure>
-          <div class="add-to-cart">
-            <i class="ion-android-add"></i>
-            <span>BURNUP CHART</span>
-          </div>
-          <figcaption>
-            <p>Status: {{list.status}}</p>
-              <div class="price">
-                <span>{{list.description}}</span>
-              </div>
-          </figcaption>
-          <div class="card">
-            <div class="card-header">
-              <strong>Release Name:</strong> {{list.releaseName}}
+<!--main-container-->
+<div class="container-fluid" ng-controller="dateCtrl">
+    <!--this button takes you to the page where you can add a new release-->
+    <button class="btn-lg newRelease"  data-toggle="modal" data-target="#add">
+   <span>Add a new release</span><i class="ion-checkmark"></i>
+ </button>
+    <br>
+    <hr>
+    <h4 class="text-responsive">Existing Release Plans</h4>
+    <br>
+    <div class="row container-fluid"><!--container for existing release-->
+        <div class="col-md-9">
+            <!--getting an existing release lists-->
+            <div class="card" *ngFor="let list of release">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="card-header">
+                            <!--release name from bdatabase-->
+                            <strong class="text-responsive">&nbsp;&nbsp;Release Name : {{list.releaseName}}</strong>
+                        </div>
+                        <hr>
+                        <!--status of particular release-->
+                        <h5 class="card-subtitle mb-2">&nbsp;Status: {{list.status}}</h5>
+                        <br>
+                        <div class="row">
+                            <!--release start date-->
+                            <h6 class="card-subtitle col">&nbsp;Start Date : {{list.startDate | date: "dd.MM.y"}}</h6>
+                            <!--release release date-->
+                            <h6 class="card-subtitle col">&nbsp;Release Date : {{list.releaseDate | date: "dd.MM.y"}}</h6>
+                        </div>
+                        <br>
+                        <!--description-->
+                        <p class="card-text">&nbsp;Description : {{list.description}}</p>
+                        <br>
+                    </div>
+                    <div class="col-3 card">
+                        <!--column for adding a sprint into a particular release-->
+                        <div class="text-center card-header sprintsList">
+                            <strong>Add Sprints:</strong>
+                        </div>
+                        <!--dragging and storing a sprints from a sprint list-->
+                        <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.releasePlanId)"  [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
+                            <div class="story" *ngFor="let story of sprints">    
+                                <div class="card-text " id="story_name" *ngIf=compareStory(list.releasePlanId,story.releasePlanId)>
+                                    <p>{{story.sprintId}}:{{story.sprintGoal}}</p>             
+                                </div>
+                            </div>
+                        <ul><li>Drop Here</li></ul>
+                        </div>
+                    </div>
+                    <!--column ends-->
+                </div>
             </div>
-            <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
-              <ul class="list-group">
-                <li *ngFor="let item of listTeamOne; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item.sprintId}} : {{item.sprintGoal}}</li>
-                <li></li>
-              </ul>
-            </div>
-          </div>
-      </figure>
-    </div><!--card ends-->
-  </div>
-  </div>
-
-  <!--drag n drop starts-->
-  <div class="col-md-4">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-md-10">
-        <div class="card">
-          <div class="card-header">
-            <h4>Lists of Sprints:</h4>
-          </div>
-          <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="data">
-            <ul class="list-group">
-              <li *ngFor="let item of data; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item.sprintId}}:{{item.sprintGoal}}</li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!--drag and drop ends-->
-</div>  <!--main container ends-->
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Lists of Sprints:</strong>
+                        </div>
+                        <!--drag n drop starts-->
+                        <div class="card-text" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item">
+                                <!--list of all sprints related to a project id-->
+                                <li class="list-group-item" *ngIf="item.releasePlanId == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
+                        </div>
+                        <!--drag and drop ends-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--contaimer for existing release ends-->
+</div><!--main container ends-->
 
-<!-- Modal-->
-<div class="modal fade" id="modalforsprint" tabindex="-1" role="dialog" aria-labelledby="modalforsprintLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title" id="exampleModalLabel">Details of a release</h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body container" *ngFor = "let details of data">
-        <form>
-          <div class="row">
-            <div class="col-3">
-              <label>
-                <h5 class="text-responsive">Release Name</h5>
-              </label>
-              </div>
-              <div class="col-9">
-                <span>{{details.releaseName}}</span>
-              </div>
+<!-- Modal -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="row">
-              <div class="col-3">
-                <label>
-                  <h5 class="text-responsive">Description</h5>
-                </label>
-              </div>
-              <div class="col-9">
-                <span>{{details.description}}</span>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-3">
-                <h5>Start Date</h5>
-              </label>
-              <div class="col-9">
-                <span>{{details.startDate}}</span>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-3">
-                <h5>Release Date</h5>
-              </label>
-              <div class="col-9">
-                <span>{{details.releaseDate}}</span>
-              </div>
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+            <div class="modal-body">
+                <div class="container jumbotron main">  <!--main container starts-->
+                    <form>  <!--form starts-->
+                        <div class="row">
+                            <div class="col-3">
+                                <label>
+                                    <h5 class="text-responsive" id="relName">Release Name</h5>
+                                </label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" name="releasename" class="form-control" placeholder="Release Name" [(ngModel)]="releasePlan.releaseName">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>
+                                    <h5 class="text-responsive" id="description">Description</h5>
+                                </label>
+                            </div>
+                            <div class="col-9">
+                                <input name="description" [(ngModel)]="releasePlan.description" type="text" class="form-control" placeholder="Description">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label class="col" id="startDate">
+                                <h5>Start Date</h5>
+                            </label>
+                            <div class="col">
+                                <input name="startdate" [(ngModel)]="releasePlan.startDate" class="form-control" type="date" value="" id="example-date-input">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label class="col" id="releaseDate">
+                                <h5>Release Date</h5>
+                            </label>
+                        <div class="col">
+                            <input name="releaseDate" [(ngModel)]="releasePlan.releaseDate" class="form-control" type="date" value="" id="example-date-input">
+                        </div>
+                    </div>
+                </form> <!--form ends-->
+            </div>  <!--main container ends-->
+        </div>
+        <div class="modal-footer">
+            <button (click)="addingNewRelease()" class="snip1099">
+                <span>Add Release</span><i class="ion-android-arrow-forward"></i>
+            </button>
+        </div>
     </div>
-  </div>
-</div><!--modal ends-->
+    </div>
+</div>

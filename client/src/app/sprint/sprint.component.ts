@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SprintService } from '../shared/services/sprint.service';
 import { Sprint } from '../shared/model/sprint';
-import { BacklogService } from '../shared/services/backlog.service';
-
+import { HubConnection } from "@aspnet/signalr-client/dist/src";
+import { ActivatedRoute } from "@angular/router";
+import swal from 'sweetalert2';
+import { ConfigFile } from '../shared/config';
+import { ProductBacklog } from '../shared/model/productBacklog';
 
 @Component({
   selector: 'app-sprint',
@@ -10,66 +12,83 @@ import { BacklogService } from '../shared/services/backlog.service';
   styleUrls: ['./sprint.component.css']
 })
 export class SprintComponent implements OnInit {
-
-  projectId: number=1;
-  sprints: Array<any>;
-  backlogs: any[];
-  unAssignedBacklogs:Array<any>;
-
-  newsprint = new Sprint( null ,'','',null,null,null);
-
-  constructor(private sprintService: SprintService, private backlogService: BacklogService) {  }
+  //variable declaration
+  userId: number;
+  projectId: number;
+  sprints: Array<Sprint>;
+  backlogs: Array<ProductBacklog>;
+  connection: HubConnection;
+  newsprint = new Sprint(null, '', '', null, null, null);
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //get all the sprints according to the project id.
-    this.getSprints();
+    //getting member Id from session
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);
 
-    //get only unassigned user story.
-    this.getUnassignedStory();
+    //getting project id from route
+    this.route.params.subscribe((param) => this.projectId = +param['id']);
 
-    //get all the project backlogs(user story) specific to projectid
-    this.getAllBacklogs();
+    //register connection methods and get all the sprints according to the project id.
+    this.connectBacklogHub();
+  }
+  //this is for connection to hub socket
+  connectBacklogHub() {
+    this.connection = new HubConnection(ConfigFile.SprintUrls.connection);
+
+    //register getSprints method and get returned sprints from backend.
+    this.connection.on("getSprints", data => {
+      this.sprints = data
+    });
+
+    //register getBacklogs and get returned backlogs from backend.
+    this.connection.on("getBacklogs", data => {
+      this.backlogs = data
+    });
+
+    //register postSprints Method and push sprint to the sprints.
+    this.connection.on("postSprints", data => {
+      this.sprints.push(data);
+    });
+
+    //establish the connection and get sprints and backlogs specific to projectId
+    this.connection.start()
+                    .then(() => {
+                      //updates the connection id for the user/
+                      this.connection.invoke("SetConnectionId", this.userId); //member Id
+
+                      //get all the sprints for a particular projectID
+                      this.connection.invoke("GetSprints", this.projectId);
+
+                      //get all the backlogs
+                      this.connection.invoke("GetAllBacklogs", this.projectId);
+                    });
   }
 
-  //get all the sprints according to the project id.
-  getSprints(){
-    this.sprintService.getSprints(this.projectId)
-    .subscribe(sprints =>{this.sprints=sprints ,console.log(this.sprints)});
-  }
-
-  //get only unassigned user story.
-  getUnassignedStory(){
-    this.backlogService.getBacklogs(this.projectId)
-    .subscribe(data=>{this.unAssignedBacklogs=data,console.log(this.unAssignedBacklogs)});
-  }
-
-  //get all user story specific to projectId
-  getAllBacklogs() {
-    this.backlogService.getUserStoryByProjectId(this.projectId)
-    .subscribe(backlogs=>this.backlogs=backlogs)
-  }
-
-  compareStory(sprintId,inSprintNo){
-    if(sprintId == inSprintNo) {
+  //compare whether story exist in sprint or not
+  compareStory(sprintId, inSprintNo) {
+    if (sprintId == inSprintNo) {
       return true;          //sprint are available for that particular sprint.
     }
     else {
       return false;         //sprint are not available for particular sprint.
     }
   }
-  updateSprint($event,Id:number){
-    console.log("successs");
-    let storyData:any  = $event.dragData;
-    console.log(storyData);
-    this.sprintService.updateSprint(storyData,Id) //assign task to particular members
-             .subscribe(data => {this.getAllBacklogs()});
 
+  //assign task to particular members
+  updateStoryInSprint($event, sprintNo: number) {
+    let storyData: any = $event.dragData;
+    //invoke method for updating story in sprint.
+    this.connection.invoke("UpdateStoryInSprint", storyData, sprintNo, this.projectId);
   }
+
+
   //it will add sprint in the sprint container
   onSaveSprint() {
-    this.newsprint.status=false;
-    this.newsprint.projectId=this.projectId;
-    this.sprintService.onSave(this.newsprint)
-    .subscribe((call)=>this.getSprints());
+    this.newsprint.status = false;
+    this.newsprint.projectId = this.projectId;
+    //invoke Add Sprint method of Backend
+    this.connection.invoke("AddSprint", this.newsprint)
+                    .then((notify) => swal('Sprint Added', '', 'success'));
   }
-}
+} 
