@@ -1,41 +1,32 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-.snip1303 {
-  font-family: 'Raleway', Arial, sans-serif;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  cursor: pointer;
-  width: 20px;
-  line-height: 20px;
+.headingtop{
   text-align: center;
-  display: inline-block;
-  margin: 12px 25px;
-  font-weight: 300;
-  outline: none;
-  position: relative;
-  font-size: 38px;
-  background-image: -webkit-linear-gradient(bottom, #262626 0, #333333 100%);
-  background-image: linear-gradient(to top, #262626 0, #333333 100%);
-  box-shadow: 1px 1px 2px -2px rgba(255, 255, 255, 0.8) inset, -1px -1px 2px -2px rgba(255, 255, 255, 0.3) inset, 1px 1px 4px rgba(0, 0, 0, 0.3);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  height: 50px;
+  background-color: #32456d;
+  color: #fff;
+  padding-top: 10px;
+  box-shadow: 5px 5px 7px #1f6d6d ;
 }
-
-.snip1303:hover,
-.snip1303.hover {
-  color: #8493da;
+.heading{
+  text-align: center;
+  height: 50px;
+  background-color: #009999;
+  color: #fff;
+  padding-top: 10px;
 }
-.snip1303:hover:after,
-.snip1303.hover:after {
-  opacity: 1;
+img {
+  margin-left: 10px;
 }
-.snip1303:active {
-  color: #8493da;
+.list {
+  margin-top: 15px;
 }
-.snip1303:active:after {
-  height: 100%;
-  -webkit-transition: 0.05s;
-  transition: 0.05s;
+.name {
+  margin-left: 20px;
+}
+.progress-bar {
+  background-color: #00cc99;
+}
+.form-control {
+  margin-top: -13px;
 }
 .material-switch > input[type="checkbox"] {
     display: none;  
@@ -91,30 +82,21 @@
     background: inherit;
     left: 20px;
 }
-.temo{
-  margin-top: 10px;
-}
-.temo1{
-  margin-top: 20px;
-  margin-left: -55px;
-}
 .crossText{
   text-decoration: line-through;
 }
-
-
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-button.snip1086 {
+button.addChecklist {
   font-family: 'Raleway', Arial, sans-serif;
   border: none;
   background-color: #000000;
   border-radius: 5px;
   color: #ffffff;
   cursor: pointer;
-  padding: 10px 40px;
+  padding: 10px 10px;
   display: inline-block;
-  margin: 15px 30px;
+  margin-top: -13px;
   text-transform: uppercase;
   line-height: 1.5em;
   font-weight: 500;
@@ -125,7 +107,7 @@ button.snip1086 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-button.snip1086 span {
+button.addChecklist span {
   display: inline-block;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -133,7 +115,7 @@ button.snip1086 span {
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }
-button.snip1086 i {
+button.addChecklist i {
   font-size: 28px;
   text-align: center;
   width: 100%;
@@ -149,69 +131,7 @@ button.snip1086 i {
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
-h4{
-  padding-left:50px;
-
-   
-}
-h3{
-    padding-left:45px;
-}
-#taskName{
-  margin-top: -30px;
-}
-#Taskname{
-  margin-left:21%;
-  margin-top: -32px;
- 
-}
-#checklistName{
-  padding-left: 22px;
-  margin-left: 5px;
-  
-}
-#heading{
-  margin-left: 3%;
-}
-#taskHeading{
-  padding-left: 135px;
-}
-#progressTitle{
-padding-left: 50px;
-padding-top: 14px;
-padding-bottom: 20px;
-}
-#progress{
-  padding-top: 20px;
-  padding-left: 0;
-  
-}
-
-#listofchecklist{
-   /* margin-left: 30%; */
-  /* position: absolute;  */
-}
-#addChecklist{
-  padding-left: 0;
-}
-#aboveHeading{
-  padding-top: 30px;
-}
-#Listofchecklist{
-  margin-left: 19%;
-}
-#addCHECKLIST{
-  margin-top: 0%;
-}
-#aligncenter{
-  margin-top: 0.5%;
-  
-}
-.right{
- float: right;
-}
-
-button.snip1086:before {
+button.addChecklist:before {
   content: '';
   top: 0;
   left: 50%;
@@ -224,63 +144,27 @@ button.snip1086:before {
   -webkit-transition-delay: 0.15s;
   transition-delay: 0.15s;
 }
-button.snip1086:hover span,
-button.snip1086.hover span {
+button.addChecklist:hover span,
+button.addChecklist.hover span {
   opacity: 0;
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
-button.snip1086:hover i,
-button.snip1086.hover i {
+button.addChecklist:hover i,
+button.addChecklist.hover i {
   opacity: 1;
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;
 }
-button.snip1086:hover:before,
-button.snip1086.hover:before {
+button.addChecklist:hover:before,
+button.addChecklist.hover:before {
   left: 0;
   right: 0;
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
-button.snip1086:active:before {
+button.addChecklist:active:before {
   background: rgba(255, 255, 255, 0.3);
-}
-button.snip1086.blue {
-  background-color: #20638f;
-}
-button.snip1086.red {
-  background-color: #962d22;
-}
-button.snip1086.yellow {
-  background-color: #a85913;
-}
-.card {
-  font-size: 1em;
-  background-color: rgba(49, 50, 51, 0.2);
-  overflow: hidden;
-  padding: 0;
-  border: none;
-  border-radius: .28571429rem;
-  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  
-}
-.card-block {
-  font-size: 1em;
-  opacity: 1;
-  position: relative;
-  margin: 0;
-  padding: 1em;
-  border: none;
-  border-top: 1px solid rgba(34, 36, 38, .1);
-  box-shadow: none;
-}
-.card-title {
-  opacity: 1;
-  font-size: 1.28571429em;
-  font-weight: 700;
-  line-height: 1.2857em;
-  
 }
 /*--------------------------------------------------------------------------------------*/
 
@@ -288,7 +172,6 @@ li {
  list-style: none;
  margin: 0;
  padding: 0;
-
 }
 
 .tgl {
@@ -359,12 +242,12 @@ li {
 }
 .tgl-flip + .tgl-btn:after {
  content: attr(data-tg-on);
- background: #02C66F ;
+ background: #4DD107 ;
  -webkit-transform: rotateY(180deg);
          transform: rotateY(180deg);
 }
 .tgl-flip + .tgl-btn:before {
- background: #FF3A19 ;
+ background: #ED1D20 ;
  content: attr(data-tg-off);
 }
 .tgl-flip + .tgl-btn:active:before {
@@ -379,7 +262,7 @@ li {
  -webkit-transform: rotateY(0);
          transform: rotateY(0);
  left: 0;
- background: #7FC6A6 ;
+ background: #4DD107 ;
 }
 .tgl-flip:checked + .tgl-btn:active:after {
  -webkit-transform: rotateY(90deg);

@@ -19,5 +19,4 @@ export const ConfigFile =
     TeamUrls:{
         getTeamUrl:'http://localhost:52258/teamhub'
        }
-
 }

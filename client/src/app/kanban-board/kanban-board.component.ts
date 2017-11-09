@@ -21,8 +21,7 @@ export class KanbanBoardComponent implements OnInit {
   ngOnInit() {
 
     // getting sprint id from route 
-    // this.route.params.subscribe((param) =>
-    // this.sprintId = +param['id']);
+    this.route.params.subscribe((param) =>{this.sprintId = +param['id']});
 
     //Getting the detail of task backlog
     this.kanbanService.getTaskDetail(this.sprintId).subscribe(data => {this.data = data; this.isDataAvailable = true;});
