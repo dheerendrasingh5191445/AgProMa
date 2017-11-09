@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import{ TeamsService} from '../shared/services/teams.service';
-import{ TeamMaster} from '../shared/model/teamMaster';
+import { TeamsService } from '../shared/services/teams.service';
+import { TeamMaster } from '../shared/model/teamMaster';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
