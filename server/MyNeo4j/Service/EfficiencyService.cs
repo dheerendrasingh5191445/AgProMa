@@ -29,8 +29,12 @@ namespace MyNeo4j.Service
             //get expected time and actual time for all the tasks assigned to single user only.
             foreach (var task in tasks)
             {
-                expectedTime += task.EndDate.Subtract(task.StartDate).Days;
-                actualTime += task.ActualEndDate.Subtract(task.StartDate).Days;
+                expectedTime += Convert.ToInt32(task.EndDate.Subtract(task.StartDate).TotalHours);
+                actualTime += Convert.ToInt32(task.ActualEndDate.Subtract(task.StartDate).TotalHours);
+            }
+            if(tasks==null)
+            {
+                return 0;
             }
             return (expectedTime / actualTime) * 100;
         }
