@@ -11,7 +11,6 @@ ul {
     color:black;
     border-color:transparent;
 }
-
     li::before{
         content:"\2022";
         color:transparent
@@ -37,11 +36,10 @@ ul {
     overflow-y:auto;
     height:800px;
 }
-.availMemList{
+.availmemList{
     overflow-y:auto;
     height:800px;
 }
-
 .icons{
     margin-right: 3%;
 }
@@ -55,7 +53,6 @@ ul {
 .team .card-header{
     background-color: #32456d;
 }
-
 .header{
     font-weight: bold;
 }
@@ -74,27 +71,22 @@ ul {
     text-align: center;
     margin-bottom: 0px;
 }
-
 .teamli li{
-	text-align: center;
+    text-align: center;
 }
-
 .add{
     background-color: #32456d;
     float:right;
     margin-left: 3%;
     color:white
 }
-
 .modal-header{
     background-color:#32456d ;
     color:white;
 }
-
 .button .close{
     color:white !important;
 }
-
 .remove{
     background-color: transparent;
 }
@@ -118,8 +110,8 @@ button.addTeam {
     opacity: 1;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
-	}
-	
+    }
+    
   button.addTeam span {
     display: inline-block;
     -webkit-transition: all 0.3s;
@@ -127,8 +119,8 @@ button.addTeam {
     opacity: 0.8;
     -webkit-transition-delay: 0.3s;
     transition-delay: 0.3s;
-	}
-	
+    }
+    
   button.addTeam i {
     font-size: 28px;
     text-align: center;
@@ -144,8 +136,8 @@ button.addTeam {
     transition: all 0.3s;
     -webkit-transition-delay: 0s;
     transition-delay: 0s;
-	}
-	
+    }
+    
   button.addTeam:before {
     content: '';
     top: 0;
@@ -158,30 +150,30 @@ button.addTeam {
     transition: all 0.3s;
     -webkit-transition-delay: 0.15s;
     transition-delay: 0.15s;
-	}
-	
+    }
+    
   button.addTeam:hover span,
   button.addTeam.hover span {
     opacity: 0;
     -webkit-transition-delay: 0s;
     transition-delay: 0s;
-	}
-	
+    }
+    
   button.addTeam:hover i,
   button.addTeam.hover i {
     opacity: 1;
     -webkit-transition-delay: 0.2s;
     transition-delay: 0.2s;
-	}
-	
+    }
+    
   button.addTeam:hover:before,
   button.addTeam.hover:before {
     left: 0;
     right: 0;
     -webkit-transition-delay: 0s;
     transition-delay: 0s;
-	}
-	
+    }
+    
   .list-group li{
     color:black;
     border-color:transparent;
@@ -211,13 +203,13 @@ ul {
   
   .tool:hover .tooltiptext {
     visibility: visible;
-	}
-	.close {
-		color: #fff;
-	}
+    }
+    .close {
+        color: #fff;
+    }
 .fa {
-	color: #00cc99;
+    color: #00cc99;
 }
 .availablefa {
-	color: #32456d;
+    color: #32456d;
 }

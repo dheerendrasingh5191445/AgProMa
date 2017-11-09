@@ -3,7 +3,7 @@
   <!-- text shown on page -->
 <h4 class="heading text-center">Invite People</h4>
 <br>
-<strong>Invite your team to work together on this project</strong>
+<span class="text-center">Invite your team to work together on this project</span>
 
 <div class="card text-center" style="width: 40rem;">
   <div class="card-header">
@@ -29,16 +29,14 @@
       </div>
   </div>
   <div class="card-footer text-center">
-    Members already invited to this project
-    <hr />
-    <div class ="chipData">
+    <h6>Members already invited to this project</h6>
     <hr class="line">
-    <div>
+    <div class="row">
       <!-- this will show number of people that are present in that team -->
-        <div class="chip" *ngFor="let details of memberDetail">
+        <div class="chip col-lg-6 col-lg-6" *ngFor="let details of memberDetail">
             <!-- this will show logo of man  -->
             <img src="../../assets/images/man.png" alt="Person">
-            {{details.memberName}}
+            <p>{{details.memberName}}</p>
         </div>     
     </div> 
   </div> 

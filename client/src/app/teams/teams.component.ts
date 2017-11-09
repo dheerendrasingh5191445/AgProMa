@@ -26,15 +26,12 @@ export class TeamsComponent implements OnInit {
 
   constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
   }
-
   ngOnInit() {
       this.route.params.subscribe(param =>this.projectId = +param['id']);
       var session = sessionStorage.getItem("id");
       this.userId = parseInt(session);
       this.connectToHub();
   }
-
-
   //this is to make connection with the hub
   connectToHub(){
     // for connecting with hub 
@@ -52,14 +49,12 @@ export class TeamsComponent implements OnInit {
                    .then(data => {this.connection.invoke("GetAvailableMember",this.projectId);});
     });
   }
-
   //method for dropping members in appropriate order
   filterByName(event:Event){
     this.letter=(<HTMLInputElement> event.target).value;
     this.teamList1=this.teamList1.sort();
     this.teamList1= this.teamList.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
   }
-
   //this will add new team 
     addTeam(name:string){
       if(name==""){
@@ -71,13 +66,11 @@ export class TeamsComponent implements OnInit {
                        .then(data => {this.connection.invoke("GetTeams",this.projectId);});
         }
     }
-
   //this will remove a particular team member
   removeMember(){
     console.log("success");
     this.connection.invoke("GetAvailableMember",this.projectId);                   
   }
-
  //this will add member to a particular team
   teamListUpdate($event: any,teamId:number) {
     if(teamId){
@@ -97,7 +90,6 @@ export class TeamsComponent implements OnInit {
     else
         return null;
   }
-
   //this is for deleting a member from a team
   delete(id: number) {
     if (id) {
@@ -116,7 +108,6 @@ export class TeamsComponent implements OnInit {
       return false;         //member is not present in team.
     }
   }
-
   //this method will sort member names
   sortByName(nameA,nameB){
     if(nameA.memberName.toLowerCase()<nameB.memberName.toLowerCase()){
