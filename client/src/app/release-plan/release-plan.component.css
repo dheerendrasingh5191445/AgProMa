@@ -90,18 +90,19 @@ button.newRelease:active:before {
  font-family: 'Raleway', Arial, sans-serif;
 }
 .card-title {
- background-color: #460619 ;
+ background-color: #32456d ;
  color: whitesmoke;
 }
 .card-header {
- background-color: #460619 ;
+ background-color: #32456d ;
  color: whitesmoke;
+ text-align: center;
 }
 .card:hover {
  box-shadow: 0 0 11px rgba(33,33,33,1);
 }
 .sprintsList {
- background-color: #1f6d6d ;
+ background-color: #00cc99 ;
  color: whitesmoke;
 }
 
@@ -112,14 +113,19 @@ div.sprintPortion {
 ul{
     list-style: none;
 }
-
+.topHead {
+  background-color: #009999;
+  color: whitesmoke;
+  padding-top: 10px; 
+  height: 50px;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 button.snip1099 {
   font-family: 'Raleway', Arial, sans-serif;
   border: none;
-  background-color: #1f6d6d;
+  background-color: #32456d;
   border-radius: 5px;
   color: #ffffff;
   cursor: pointer;
@@ -173,6 +179,6 @@ button.snip1099:active i {
   left: 18px;
 }
 .modal-header {
-    background-color: #460619;
+    background-color: #009999;
     color: whitesmoke;
 }
