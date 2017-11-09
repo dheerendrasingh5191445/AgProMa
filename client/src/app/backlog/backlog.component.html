@@ -6,7 +6,7 @@
     </div>
     <!--card for product backlog starts here-->
     <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="stories">
-      <div class="test_q_list_item" *ngFor="let item of stories;let i = index">
+      <div class="test_q_list_item" id="list" *ngFor="let item of stories;let i = index">
         <!--div for backlog details starts here-->
         <div class="div_details">
           <!--button for delete starts here-->
@@ -45,7 +45,7 @@
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input"><strong>Remarks</strong></label>
                     <div class="col-md-10">
-                      <textarea class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt>{{item.comments}}</textarea>
+                      <textarea   class="form-control form-rounded" rows="8"readonly>{{item.comments}}</textarea>
                     </div>
                     <label class="col-md-10 col-form-label" for="text-input">
                       <strong>Priority:</strong>
@@ -86,11 +86,11 @@
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input"><strong>User Story</strong></label>
                     <div class="col-md-10">
-                      <textarea class="form-control form-rounded" type="text-area" placeholder="Write" #story>{{item.storyName}}</textarea>
+                      <textarea  class="form-control form-rounded" type="text-area" placeholder="Write" #story>{{item.storyName}}</textarea>
                     </div>
                     <label class="col-md-3 col-form-label" for="text-input"><strong>Remarks</strong></label>
                     <div class="col-md-10">
-                      <textarea class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt>{{item.comments}}</textarea>
+                      <textarea  class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt>{{item.comments}}</textarea>
                     </div>
                     <label class="col-md-3 col-form-label" for="text-input"><strong>Priority</strong></label>
                     <div class="col-md-10">
@@ -131,11 +131,11 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="text-input"><strong>User Story</strong></label>
                   <div class="col-md-10">
-                    <textarea class="form-control form-rounded" type="text-area" placeholder="Write" #story></textarea>
+                    <textarea  class="form-control form-rounded" type="text-area" placeholder="Write" #story></textarea>
                   </div>
                   <label class="col-md-3 col-form-label" for="text-input"><strong>Remarks</strong></label>
                   <div class="col-md-10">
-                    <textarea class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt> </textarea>
+                    <textarea  class="form-control form-rounded" type="text-area" rows="3" placeholder="Write" #cmnt> </textarea>
                   </div>
                 </div>
                 <label class="col-md-3 col-form-label " for="text-input"><strong>Priority</strong></label>
@@ -159,3 +159,4 @@
   </div>
   <!--div for product backlog starts here-->
 </div>
+

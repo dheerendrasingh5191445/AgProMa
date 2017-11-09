@@ -23,14 +23,11 @@ export class BacklogComponent implements OnInit {
     //get the id for the user.
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-
     //getting project id from route
     this.route.params.subscribe((param) => this.projectId = +param['id']);
-
     //register and invoke connection
     this.connectBacklogHub();
   }
-
   connectBacklogHub() {
     this.connection = new HubConnection('http://localhost:52258/backlog');
     //register to get Backlogs from the backend.

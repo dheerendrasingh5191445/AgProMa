@@ -15,7 +15,7 @@ export class EfficiencyGraphComponent implements OnInit {
 
   //Initializing variable for doughnut chaty
   doughnutChartLabels:string[]=['Efficient', 'Remaining']; //setting names on graph
-  doughnutChartData:number[]=[this.data, this.efficient ]; //setting the data to graph
+  doughnutChartData:number[]=[this.data, this.efficient ]; //setting the data to grap
   doughnutChartType:string="doughnut"; //defining type of chart 
 
   constructor(private efficiencyGraphService : EfficiencyGraphService) {

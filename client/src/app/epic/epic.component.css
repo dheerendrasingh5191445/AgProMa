@@ -93,6 +93,7 @@ button.buttonStyle:active:before {
     padding-top: 10px;
     height: 50px; 
     text-align: center;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
  }
  fieldset.custom {
     border: 1px solid #ddd;
@@ -125,6 +126,9 @@ button.buttonStyle:active:before {
  .div_with_left_icon {
     position: relative;
     min-height: 50px;
+ }
+ #list{
+   margin:13px;
  }
  li{
     display: inline;
