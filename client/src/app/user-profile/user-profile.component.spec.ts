@@ -78,5 +78,25 @@ describe('UserProfileComponent', () => {
     let el = de.nativeElement;
     expect(el.textContent).toEqual(" Bootcamp");
   }));
+  it('should bind property toDate to the correct input', fakeAsync(() => {
+    fixture.detectChanges();
+    component.details.password="123";
+    component.str="12345";
+    component.newPassword="1234";
+    component.confirmPassword="1234";
+    spyOn(window,'alert')
+    fixture.detectChanges();
+    tick();  
+    // component.model.toDate = '2017-09-09';
+    // fixture.detectChanges();
+     let element = fixture.debugElement.queryAll(By.css('#password_modal_save'));
+    // element.dispatchEvent(new Event('input'));
+     component.checkPassword();
+     tick();
+     fixture.detectChanges();
+     expect(window.alert).toHaveBeenCalledWith("enter correct password");
+    // ).toContain(component.model.toDate);
+
+  }));
 
 })

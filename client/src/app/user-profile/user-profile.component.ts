@@ -36,7 +36,8 @@ export class UserProfileComponent implements OnInit {
       this.updatePassword();
     }
     else {
-      swal('','Enter Correct Current Password',"error") //if entered password does not matches
+    //  swal('','Enter Correct Current Password',"error") //if entered password does not matches
+    alert("enter correct password");
     }
   }
   }
