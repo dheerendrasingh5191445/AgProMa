@@ -27,6 +27,9 @@
 		<div routerLink="/app-dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
 			<i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' }}
 		</div>
+		<div routerLink="/app-dashboard/userprofile/{{userId}}" class="list-group-item">
+			<i class="fa fa-fw fa-user"></i>&nbsp;{{ 'User Profile' }}
+		</div>
 	</ul>
 	<!-- end side bar -->
 </nav>

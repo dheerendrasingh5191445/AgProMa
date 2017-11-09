@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ TeamsService} from '../shared/services/teams.service';
 import{ TeamMaster} from '../shared/model/teamMaster';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
 import { TitleCasePipe } from '@angular/common';
@@ -22,8 +22,9 @@ export class TeamsComponent implements OnInit {
    val:string="";
    connection:HubConnection;
    userId:number;
-   letter:string;
-  constructor(private teamService:TeamsService,private route:ActivatedRoute) {   
+   letter:any;
+
+  constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
   }
 
   ngOnInit() {
@@ -56,7 +57,6 @@ export class TeamsComponent implements OnInit {
   filterByName(event:Event){
     this.letter=(<HTMLInputElement> event.target).value;
     this.teamList1=this.teamList1.sort();
-    console.log("team is "+this.teamList1);
     this.teamList1= this.teamList.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
   }
 
@@ -128,5 +128,11 @@ export class TeamsComponent implements OnInit {
     
       return 0;             //unchanged
     
+  }
+
+  efficiency(Id:number){
+  
+    this.router.navigate(["role-dashboard",this.projectId,"userprofile",Id]);
+
   }
 }

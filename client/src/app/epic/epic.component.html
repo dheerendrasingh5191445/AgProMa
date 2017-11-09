@@ -6,7 +6,7 @@
     </div>
     <!--card for epic  starts here-->
     <div class="card-text" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="data">
-      <div class="test_q_list_item" *ngFor="let item of data; let i = index">
+      <div class="test_q_list_item" id="list"*ngFor="let item of data; let i = index">
         <!--div for backlog details starts here-->
         <div class="div_details">
           <!--delete button-->

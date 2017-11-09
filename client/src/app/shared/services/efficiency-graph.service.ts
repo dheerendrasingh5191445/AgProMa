@@ -7,14 +7,13 @@ export class EfficiencyGraphService {
   constructor(private http : Http) { }
 
   //local variable used for storing path which is used to hit API
-  url = 'http://localhost:52258/api/EfficiencyForTask/'; 
+  url = 'http://localhost:52258/api/Efficiency/'; 
   
 
-  getEfficiencyDetail(taskId : number){
+  getEfficiencyDetail(userId : number){
     //This method will get the details for Efficiency
-    console.log(taskId);
-    return this.http.get(this.url + taskId)
-                    .map(response => response.json() );
+    return this.http.get(this.url+userId)
+                    .map(response => response.json());
               
   }
 

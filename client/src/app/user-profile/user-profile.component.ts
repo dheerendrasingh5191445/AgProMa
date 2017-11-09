@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from "../shared/services/login.service";
 import swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,18 +9,22 @@ import swal from 'sweetalert2';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  id = 2;
+  id:number;
   details: any; //user details
   str = '';//current password entered
   confirmPassword = ''; //for password conformation
   newPassword = '';//to update new password
-  constructor(private loginservice: LoginService) { }
+  userId:number;
+  
+  constructor(private loginservice: LoginService,private route:ActivatedRoute) { }
 
   ngOnInit() {
-    // var session = sessionStorage.getItem("id"); //get the information of the user that has logged in
+    this.route.params.subscribe((param) => { this.id = +param['id'] });
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);//get the information of the user that has logged in
     this.loginservice.getById(this.id) //get the data of the user by the Mastrerid
-      .subscribe(data => { this.details = data; });
-
+                     .subscribe(data => { this.details = data; });
+    console.log("the id is",this.id);
   }
 
   checkPassword() {
