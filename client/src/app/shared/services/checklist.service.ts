@@ -13,7 +13,8 @@ export class ChecklistService {
   constructor(private http: Http) { }
   //localhost address
   getTaskUrl:string="http://localhost:52258/api/Checklist/GetTaskDetail/";
-  private checkListUrl = 'http://localhost:52258/api/Checklist/';
+  checkListUrl = 'http://localhost:52258/api/Checklist/';
+  efficiencyUrl = 'http://localhost:52258/api/Efficiency/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   //method used to add checklist
   addCheckList(checklist: Checklist) {
@@ -30,15 +31,14 @@ getById(id){
 
   //method used to get checklist by task id
   getCheckList(id) {
-    console.log('i am in service using getCheckList');
     return this.http.get(this.checkListUrl + id)
       .map(Response => Response.json());
   }
+
   //method used to update status of checklist
   completionStatus(id, checklist) {
-    console.log("hhhhhhhhhhhhhhhhhhhhhhhhh", id, checklist)
     return this.http
-      .put(this.checkListUrl + id, checklist, { headers: this.headers })
+      .put(this.efficiencyUrl + id, checklist, { headers: this.headers })
       .map((Response) => Response)
       .catch((error: any) => {
         return Observable.throw(error);

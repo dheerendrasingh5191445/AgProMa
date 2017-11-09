@@ -27,7 +27,7 @@ export class EfficiencyGraphComponent implements OnInit {
     this.efficiencyGraphService.getEfficiencyDetail(this.userId)
                                .subscribe(data => {this.data = data;
                                //logic for douhgnut chart
-                               if(this.data>100)
+                               if(this.data > 100)
                                {
                                  this.efficient=100;
                                  this.doughnutChartData = [  this.data, 0];

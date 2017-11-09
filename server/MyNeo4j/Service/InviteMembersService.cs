@@ -64,7 +64,7 @@ namespace MyNeo4j.Service
                 {
                     Master master = _repository.AllData(pm.MemberId);
                     InviteExistingMember am = new InviteExistingMember();
-                    am.MemberId = master.Id;
+                    am.ProjectId = master.Id;
                     am.Email = master.Email;
                     am.MemberName = master.FirstName + " " + master.LastName;
                     myMember.Add(am);
