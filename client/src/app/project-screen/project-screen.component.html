@@ -1,10 +1,12 @@
 <div class="container">
   <br>
-  <div class="heading rounded">
-    <h4>Add New Projects</h4>
-  </div>
+  
+  <button class="btn newProject"><span>Add new project</span><i class="ion-checkmark"></i></button>
+  <!-- <div class="heading rounded">
+    <h4 class="text-center">Add New Projects</h4>
+  </div> -->
   <hr>
-  <div class="row tool">
+  <!-- <div class="row tool">
     <figure class="addNewProject">
         <span class="tooltiptext">Click to add a new project</span>
       <img src="./../assets/images/addproject.png" alt="sq-sample14" />
@@ -13,12 +15,11 @@
           <a id="subbtn" class=" info col-4 btn-responsive" routerLink="/app-dashboard/fill-details/id"></a>
         </i>
       </figcaption>
-    </figure>   
-  </div>
-  <br>
+    </figure>
+  </div>    -->
   <br>
   <div class="heading">
-    <h4>Existing Projects</h4>
+    <h4 class="text-center">Existing Projects</h4>
   </div>
   <hr>
   <div *ngIf="projects">

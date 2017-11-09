@@ -43,6 +43,9 @@ p {
     height: 50px;
     text-align: center;
 }
+a {
+  color: whitesmoke;
+}
 
 .card-header {
   background-color: #32456d;
