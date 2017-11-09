@@ -7,6 +7,8 @@ import swal from 'sweetalert2';
 import { TitleCasePipe } from '@angular/common';
 import { HubConnection } from '@aspnet/signalr-client';
 import { ConfigFile } from '../shared/config'
+
+
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
@@ -66,6 +68,7 @@ export class TeamsComponent implements OnInit {
     }
   //this will remove a particular team member
   removeMember(){
+    console.log("success");
     this.connection.invoke("GetAvailableMember",this.projectId);                   
   }
  //this will add member to a particular team
@@ -79,7 +82,7 @@ export class TeamsComponent implements OnInit {
   }
    
   //this method will get team members 
-  getTeamMebers(teamid:number){
+  getTeamMembers(teamid:number){
     if(this.teamList)
       {
         return this.teamList.filter(t=>t["teamId"]==teamid);
@@ -94,7 +97,9 @@ export class TeamsComponent implements OnInit {
       this.connection.invoke("GetAvailableMember",this.projectId); 
     }
   }
+
   //compare whether member is in team or not
+  //compare whether story exist in sprint or not
   compareMember(teamId,memteamId) {
     if (teamId == memteamId) {
       return true;          //memnber is present in team.

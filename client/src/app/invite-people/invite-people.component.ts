@@ -13,13 +13,15 @@ import { Members } from '../shared/model/members';
 export class InvitePeopleComponent implements OnInit {
 
   data:any[];
-  memberDetail:Members[];
+  memberDetail:Members[]=[];
   //local variable used in this component
   private model={
     projectId:0,
     email:''
   };
-  
+private userDetail={
+  memberName:''
+}  
   constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class InvitePeopleComponent implements OnInit {
      this.route.params.subscribe((param) =>
               this.model.projectId = +param['id']);
     this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),console.log(this.memberDetail)});
+ 
   }
 
   inviteMember()

@@ -63,7 +63,7 @@ namespace MyNeo4j.Repository
         //this method will return all the task in that same sprint from database
         public List<TaskBacklog> GetAllTaskDetail(int SprintId)
         {
-            return _context.Taaskbl.Where(p => p.SprintId == SprintId).ToList();
+            return _context.Taaskbl.Include(f=>f.SprintBacklogs).Where(p => p.SprintId == SprintId).ToList();
         }
 
         public void UpdateConnectionId(string connectionid, int memberid)

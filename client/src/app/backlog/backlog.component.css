@@ -73,6 +73,8 @@ button.buttonStyle.hover:before {
 button.buttonStyle:active:before {
   background: rgba(255, 255, 255, 0.3);
 }
+
+
 .bklog{
     padding-top: 30px;
     padding-left: 140px;
@@ -209,8 +211,28 @@ border-radius: 1rem;
     visibility: visible;
  }
  .div_details:hover .storyText{
+   filter: blur (0.7px);
   -webkit-filter: blur(0.7px);
 }
+ /* .div_details:hover .btnPencil{
+  display:block;
+}
+.div_details .btnPencil{
+  display:none;
+  position:absolute;
+  margin-left:80%;
+  margin-bottom: 50%;
+}
+.div_details:hover .btnDustbin{
+  display:block;
+}
+.div_details .btnDustbin{
+  display:none;
+  position:absolute;
+  margin-left:90%;
+  margin-bottom:50%;
+  
+} */
 .div_details:hover .contentstory{
   display: block;
 }

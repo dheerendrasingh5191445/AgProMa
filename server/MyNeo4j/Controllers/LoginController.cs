@@ -86,8 +86,8 @@ namespace AgProMa.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        [Route("api/[controller]")]
+        [HttpPut]
+        [Route("api/[controller]/{id}")]
         //this method updates the user details
         public IActionResult Put(string emailid, [FromBody]Master user)
         {
@@ -102,6 +102,21 @@ namespace AgProMa.Controllers
                 return Ok("internal server error");
 
             }
+        }
+        //get details for view profile
+        [HttpGet]
+        [Route("api/[controller]/Details/{id}")]
+        //this method updates the user details
+        public IActionResult GetById(int id)
+        {
+            return Ok(_context.GetById(id));
+        }
+        [HttpPut]
+        [Route("api/[controller]/UpdatePassword/{id}")]
+        //update user password
+        public void UpdatePassword(int id,[FromBody]Master user)
+        {
+            _context.UpdatePassword(id, user);
         }
     }
 }

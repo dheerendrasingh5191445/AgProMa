@@ -1,8 +1,6 @@
 textarea{
     height: 80px;
   }
-  input,textarea{
-  }
 .heading{
       background-color: #32456d;
       color: #fff;
@@ -10,8 +8,7 @@ textarea{
       padding-top: 10px;
       box-shadow: 5px 5px 7px #1f6d6d ;
   }
-  .form-control:focus {
-}@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+  @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 button.update {
   font-family: 'Raleway', Arial, sans-serif;

@@ -33,7 +33,6 @@ export class SignupComponent implements OnInit {
       this.user = user; //checking wheather user variable has data in it or not
       if (this.user != null)
       { this.router.navigateByUrl('app-dashboard') } //if the user is logged in with social account then user can directly moved to dashboard screen
-
     });
   }
 
@@ -93,7 +92,7 @@ export class SignupComponent implements OnInit {
             sessionStorage.setItem("token", this.tokenData);
         
           if (this.tokenData)
-          { this.router.navigate(["/app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
+          { this.router.navigate(["app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
         });
         }
 

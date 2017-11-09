@@ -28,6 +28,7 @@ ul {
     text-align: center;
     height:700px;
 }
+
 .available .card-header{
     background-color: #009999;
 }
@@ -42,23 +43,28 @@ ul {
 .icons{
     margin-right: 3%;
 }
+
 .team {
     background-color:white;
     height: 400px;
     padding-left:0px;
 }
+
 .team .card-header{
     background-color: #32456d;
 }
 .header{
     font-weight: bold;
 }
+
 .card{
    margin-bottom: 5%;
 }
+
 .card:hover{
     box-shadow: 0 0 11px rgba(33,33,33,1); 
 }
+
 .card-header{
     
     color:white;
@@ -84,6 +90,7 @@ ul {
 .remove{
     background-color: transparent;
 }
+
 button.addTeam {
     font-family: 'Raleway', Arial, sans-serif;
     border: none;
@@ -171,6 +178,7 @@ button.addTeam {
     color:black;
     border-color:transparent;
 }
+
 ul {
     list-style:none;
 }

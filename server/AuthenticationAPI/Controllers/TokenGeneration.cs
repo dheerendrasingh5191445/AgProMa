@@ -55,7 +55,7 @@ namespace AuthenticationAPI.Controllers
                 issuer: _settings.Value.Iss,
                 audience: _settings.Value.Aud,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(15),
+                expires: DateTime.UtcNow.AddHours(2),
                 signingCredentials: creds
             );
             //defing the response of the token 

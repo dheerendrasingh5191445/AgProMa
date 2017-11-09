@@ -24,7 +24,7 @@
   <div *ngIf="projects">
     <div class="row">
       <div class="col-lg-4" *ngFor="let item of projects | paginate: { itemsPerPage: 3, currentPage: p }">
-        <app-project-detail *ngIf="item" [Data]="item"></app-project-detail>
+        <app-project-detail *ngIf="item" [Data]="item" (onDelete) = "onDelete($event)"></app-project-detail>
       </div>
     </div>
   </div>

@@ -17,9 +17,9 @@ namespace MyNeo4j.Hubs
             _service = service;
         }
 
+        //call method to add memberinfo into db with connectionid and memberid
         public void SetConnectionId(int Memberid)
         {
-            //call method to add memberinfo into db with connectionid and memberid
             _service.UpdateConnectionId(Context.ConnectionId, Memberid);
         }
 

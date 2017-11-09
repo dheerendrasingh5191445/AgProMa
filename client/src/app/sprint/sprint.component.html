@@ -16,8 +16,11 @@
       <!-- Sprints already present  -->
         <div class="sprints card" *ngFor=" let sprint of sprints">
           <!-- Sprint and Stories in each sprint -->
-          <div class="card-header tool" routerLink="/app-dashboard/taskadd/{{sprint.sprintId}}">
-            <strong>{{sprint.sprintName}}</strong>
+          <div class="card-header tool" >
+            <strong >{{sprint.sprintName}}</strong>
+            <span routerLink = "/role-dashboard/{{projectId}}/taskadd/{{sprint.sprintId}}" class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to add task"></span>
+            <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project details"></span>
+            <span  class="fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to view and add members"></span>
             <span class="tooltiptext">Start Date : {{sprint.startDate | date: "dd.MM.y"}}
                 <br>
                 No. of days : {{sprint.totalDays}}

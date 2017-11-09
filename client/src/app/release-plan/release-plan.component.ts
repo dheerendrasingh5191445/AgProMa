@@ -29,7 +29,7 @@ export class ReleasePlanComponent implements OnInit {
     this.connection = new HubConnection("http://localhost:52258/releaseplan");
     this.connection.on("whenAdded", data => { swal('ADDED','','success' );});
     this.connection.on("getreleaseplans", data => {this.release = data });
-    this.connection.on("getsprints", sprint =>{console.log(sprint);this.sprints=sprint});
+    this.connection.on("getsprints", sprint =>{this.sprints=sprint});
     this.connection.start().then(() => {
     this.connection.invoke("SetConnectionId",3);
     this.connection.invoke("GetReleasePlans",this.projectId)
@@ -50,10 +50,7 @@ export class ReleasePlanComponent implements OnInit {
 
   //method for updating a release in sprint
   updateReleaseInSprint($event,releaseId:number){
-    console.log("successs");
     let sprintData: any = $event.dragData;
-    console.log($event.dragData);
-    console.log("dhiru"+releaseId);
     this.connection.invoke("UpdateReleaseInSprint",sprintData,releaseId);
   }
 

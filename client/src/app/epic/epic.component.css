@@ -1,5 +1,7 @@
+
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+
 .container-fluid {
   font-family: 'Raleway', Arial, sans-serif !important;
 }
@@ -73,10 +75,12 @@ button.buttonStyle.hover:before {
 button.buttonStyle:active:before {
   background: rgba(255, 255, 255, 0.3);
 }
+
 .bklog{
     padding-top: 30px;
     padding-left: 140px;
 }
+
 .addbtn{
     background-color:#222;
     color: #ffffff;
@@ -208,6 +212,7 @@ border-radius: 1rem;
     visibility: visible;
  }
  .div_details:hover .storyText{
+   filter: blur(0.7px);
   -webkit-filter: blur(0.7px);
 }
  /* .div_details:hover .btnPencil{
