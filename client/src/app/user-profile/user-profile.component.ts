@@ -14,14 +14,17 @@ export class UserProfileComponent implements OnInit {
   str = '';//current password entered
   confirmPassword = ''; //for password conformation
   newPassword = '';//to update new password
+  userId:number;
+  
   constructor(private loginservice: LoginService,private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((param) => { this.id = +param['id'] });
-    // var session = sessionStorage.getItem("id"); //get the information of the user that has logged in
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);//get the information of the user that has logged in
     this.loginservice.getById(this.id) //get the data of the user by the Mastrerid
                      .subscribe(data => { this.details = data; });
-
+    console.log("the id is",this.id);
   }
 
   checkPassword() {

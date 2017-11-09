@@ -42,6 +42,7 @@ const routes: Routes = [
     { path:'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},
     { path:'app-teams/:id', component: TeamsComponent },
+    { path:'userprofile/:id', component:UserProfileComponent}
     ]},
     { path:'role-dashboard/:id',component:DashboardRoleComponent,
 children:[

@@ -33,4 +33,6 @@ export class DashboardComponent implements OnInit {
     this.loginservice.logOut(this.userId)
                      .then(data => {this.router.navigate(["app-signup"]);})
   }
+
+  
 }

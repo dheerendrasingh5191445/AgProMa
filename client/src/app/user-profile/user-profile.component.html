@@ -58,13 +58,14 @@
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="userId == id">
                             <!--Change the password of the user-->
                             <div class="col-sm-5 col-xs-6 tital">
                                 Password:</div>
                             <div class="col-sm-7">
-                                <div class="btn btn-primary " data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Change Password</div>
+                                <button  class="btn btn-primary " data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Change Password</button>
                             </div>
+
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
