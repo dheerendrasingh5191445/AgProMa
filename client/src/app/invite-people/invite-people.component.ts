@@ -17,7 +17,8 @@ export class InvitePeopleComponent implements OnInit {
   //local variable used in this component
   private model={
     projectId:0,
-    email:''
+    email:'',
+    memberName:''
   };
 private userDetail={
   memberName:''

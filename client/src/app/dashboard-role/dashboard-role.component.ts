@@ -32,7 +32,7 @@ export class DashboardRoleComponent implements OnInit {
   }
 
   onLoggedout():void{
-   // this.authService.signOut();
+    this.authService.signOut();
     this.loginservice.logOut(this.userId)
                      .then(data => {this.router.navigate(["app-signup"]);})
   }
