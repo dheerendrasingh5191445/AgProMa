@@ -10,10 +10,9 @@ export class EfficiencyGraphService {
   url = 'http://localhost:52258/api/EfficiencyForTask/'; 
   
 
-  getEfficiencyDetail(taskId : number){
+  getEfficiencyDetail(userId : number){
     //This method will get the details for Efficiency
-    console.log(taskId);
-    return this.http.get(this.url + taskId)
+    return this.http.get(this.url+userId)
                     .map(response => response.json() );
               
   }

@@ -15,7 +15,7 @@ namespace MyNeo4j.Service
     public interface IinviteMembersService
     {
         void EmailForInvitation(InvitePeople people);
-        List<AvailableMember> GetMemberName(int id);
+        List<InviteExistingMember> GetMemberName(int id);
     }
 
     public class InviteMembersService : IinviteMembersService
@@ -54,17 +54,18 @@ namespace MyNeo4j.Service
                     }          
         }
 
-        public List<AvailableMember> GetMemberName(int id)
+        public List<InviteExistingMember> GetMemberName(int id)
         {
-            List<AvailableMember> myMember = new List<AvailableMember>();
+            List<InviteExistingMember> myMember = new List<InviteExistingMember>();
             List<ProjectMember> member = _repository.GetMemberName();
             foreach (ProjectMember pm in member)
             {
                 if (pm.ProjectId == id)
                 {
                     Master master = _repository.AllData(pm.MemberId);
-                    AvailableMember am = new AvailableMember();
+                    InviteExistingMember am = new InviteExistingMember();
                     am.MemberId = master.Id;
+                    am.Email = master.Email;
                     am.MemberName = master.FirstName + " " + master.LastName;
                     myMember.Add(am);
                 }

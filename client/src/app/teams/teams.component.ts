@@ -22,6 +22,7 @@ export class TeamsComponent implements OnInit {
    val:string="";
    connection:HubConnection;
    userId:number;
+   letter:any;
 
   constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
   }
