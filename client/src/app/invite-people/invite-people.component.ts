@@ -4,6 +4,7 @@ import swal from 'sweetalert2';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { LoginService } from '../shared/services/login.service';
 import { Members } from '../shared/model/members';
+import { Master } from "../shared/model/master";
 
 @Component({
   selector: 'app-invite-people',
@@ -12,12 +13,13 @@ import { Members } from '../shared/model/members';
 })
 export class InvitePeopleComponent implements OnInit {
 
-  data:any[];
+  data:Master[];
   memberDetail:Members[]=[];
   //local variable used in this component
+
   private model={
     projectId:0,
-    email:''
+    email:'',
   };
 private userDetail={
   memberName:''
@@ -26,10 +28,10 @@ private userDetail={
 
   ngOnInit() {
     //this is method is get the id from project screen component
-    this.loginservice.getAll().subscribe(data=>{this.data=data});
-     this.route.params.subscribe((param) =>
+    this.invitePeople.getAll().subscribe(data=>{this.data=data});
+    this.route.params.subscribe((param) =>
               this.model.projectId = +param['id']);
-    this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),console.log(this.memberDetail)});
+    this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),console.log("sadsad",this.memberDetail)});
  
   }
 
