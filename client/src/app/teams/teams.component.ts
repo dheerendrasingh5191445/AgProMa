@@ -23,6 +23,7 @@ export class TeamsComponent implements OnInit {
    connection:HubConnection;
    userId:number;
    letter:any;
+
   constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
   }
 
@@ -56,7 +57,6 @@ export class TeamsComponent implements OnInit {
   filterByName(event:Event){
     this.letter=(<HTMLInputElement> event.target).value;
     this.teamList1=this.teamList1.sort();
-    console.log("team is "+this.teamList1);
     this.teamList1= this.teamList.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
   }
 

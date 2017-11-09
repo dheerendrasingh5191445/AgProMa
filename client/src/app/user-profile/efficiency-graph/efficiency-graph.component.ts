@@ -10,7 +10,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class EfficiencyGraphComponent implements OnInit {
 @Input() userId:number;
   //local variable used in component
-  
   data : any;
   efficient : number  ;
 
@@ -26,8 +25,7 @@ export class EfficiencyGraphComponent implements OnInit {
   ngOnInit() {
     //this will get the data from 
     this.efficiencyGraphService.getEfficiencyDetail(this.userId)
-                               .subscribe(data => {this.data = data; console.log("init",this.data);
-
+                               .subscribe(data => {this.data = data;
                                //logic for douhgnut chart
                                this.efficient=100 -this.data;
                                this.doughnutChartData = [  this.data, this.efficient];

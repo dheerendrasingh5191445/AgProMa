@@ -119,7 +119,7 @@
         <h2 id="eheading">Your Efficiency</h2>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6">
-                <efficiency *ngIf="id" (id)="userId"></efficiency>
+                <efficiency *ngIf="id" [userId]="id"></efficiency>
             </div>
             <div class="col-md-6 col-sm-6 col-lg-6">
                 <app-line-graph></app-line-graph>
