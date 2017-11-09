@@ -7,7 +7,7 @@ namespace MyNeo4j.Viewmodel
 {
     public class InviteExistingMember
     {
-        public int MemberId { get; set; }
+        public int ProjectId { get; set; }
 
         public string MemberName { get; set; }
 

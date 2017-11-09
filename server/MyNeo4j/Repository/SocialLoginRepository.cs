@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyNeo4j.Repository
 {
-    
+
     public interface ISocialLoginRepository
     {
         void AddSocialUser(SocialSignupMaster socialmaster);
@@ -31,7 +31,7 @@ namespace MyNeo4j.Repository
         public SocialSignupMaster GetSocialDetails(string email)
         {
             SocialSignupMaster socialdetails = _context.Socialsm.FirstOrDefault(m => m.Email == email);
-            return 
+            return socialdetails;
         }
     }
 }
