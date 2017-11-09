@@ -65,6 +65,8 @@ namespace MyNeo4j
             services.AddScoped<ITaskServices, TaskService>();
             services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
             services.AddScoped<ITaskBacklogService, TaskBacklogService>();
+            services.AddScoped<IEfficiencyService, EfficiencyService>();
+            services.AddScoped<IEfficiencyRepository, EfficiencyRepository>();
             services.AddSingleton(Configuration);
             // Add framework services.
             ConfigureJwtAuthService(Configuration,services);
