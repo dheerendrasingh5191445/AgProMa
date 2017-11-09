@@ -1,7 +1,10 @@
 
 <div class="card text-center">
-    <div class="card-header">
+    <div class="card-header" *ngIf="data > 0">
      <h2> Efficiency - {{data | number:'2.1-2'}} %</h2><span *ngIf="data >= 100" class="fa fa-star">star performer</span>
+    </div>
+    <div class="card-header" *ngIf="data == 0">
+      <h2>No Data Exist</h2>
     </div>
     <div class="card-body">
         <div class='efficiency' >
@@ -15,6 +18,6 @@
           </div>
     </div>
     <div class="card-footer ">
-      **Efficiency Of A Member According**
+      **Efficiency Of A Member According To Task**
     </div>
   </div>

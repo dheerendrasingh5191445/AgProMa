@@ -20,7 +20,7 @@
             <strong >{{sprint.sprintName}}</strong>
             <span routerLink = "/role-dashboard/{{projectId}}/taskadd/{{sprint.sprintId}}" class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to add task"></span>
             <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project details"></span>
-            <a class="fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="false" aria-controls="collapseExample"></a>
+            <a class="fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="true" aria-controls="collapseExample"></a>
             <span class="tooltiptext">Start Date : {{sprint.startDate | date: "dd.MM.y"}}
                 <br>
                 No. of days : {{sprint.totalDays}}
@@ -30,9 +30,9 @@
             <p class="date"><strong>Start Date : </strong>{{sprint.startDate | date: "dd.MM.y"}}</p>
           </div>
           <!-- Drop here for Stories -->
-          <div dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" class="panel panel-info">
+          <div id="collapseExample{{i}}" dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" class="collapsed panel panel-info">
             <!-- backlogs in each sprint -->
-            <div class="collapsed story" *ngFor="let story of backlogs" id="collapseExample{{i}}">
+            <div class="story" *ngFor="let story of backlogs" >
               <div class="card-text" id="story_name" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
                 <p class="stories_Sprint">{{story.storyName}}</p>
               </div>
