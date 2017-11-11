@@ -23,9 +23,10 @@ export class InvitePeopleComponent implements OnInit {
     projectId:0,
     email:'',
   };
-private userDetail={
-  memberName:''
-}  
+  private userDetail={
+    memberName:''
+  }  
+  
   constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
 
   ngOnInit() {
@@ -34,7 +35,6 @@ private userDetail={
     this.route.params.subscribe((param) =>
     this.model.projectId = +param['id']);
     this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),this.inviteList = this.memberDetail});
- 
   }
     //method for dropping members in appropriate order
     filterByName(event:Event){
@@ -52,10 +52,6 @@ private userDetail={
     else{
     this.invitePeople.emailto(this.model)
                .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
+    }
   }
-<<<<<<< HEAD
-  }
- 
-=======
->>>>>>> 7985d56d543ec9cdd1c6caf9cbbe216816ed579a
 }
