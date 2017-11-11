@@ -28,7 +28,7 @@ export class ReleasePlanComponent implements OnInit {
 
   //Method for recieving a data from backend 
   connectReleasePlanHub() {
-    this.connection = new HubConnection("http://localhost:52258/releaseplan");
+    this.connection = new HubConnection(ConfigFile.ReleasePlanUrls.connection);
     this.connection.on("whenAdded", data => { swal('ADDED','','success' );});
     this.connection.on("getreleaseplans", data => {this.release = data });
     this.connection.on("getsprints", sprint =>{this.sprints=sprint});
@@ -51,7 +51,7 @@ export class ReleasePlanComponent implements OnInit {
 
   //this method is to go back on previous page
   navigateNewRelease(){
-    this.router.navigateByUrl('/app-dashboard/newreleasedetail/1');
+    this.router.navigateByUrl(ConfigFile.ReleasePlanUrls.navigateNewRrelease);
   }
 
   //method for updating a release in sprint

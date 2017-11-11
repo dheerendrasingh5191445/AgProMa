@@ -13,24 +13,26 @@ import { Master } from "../shared/model/master";
 })
 export class InvitePeopleComponent implements OnInit {
 
-  data: Master[];
-  memberDetail: Members[] = [];
+
+    //local variable used in this component
+  data:Master[];
+  memberDetail:Members[]=[];
   inviteList: Members[];
   letter: any;
-  //local variable used in this component
 
   private model = {
     projectId: 0,
     email: '',
   };
-  private userDetail = {
-    memberName: ''
-  }
-  constructor(private invitePeople: InvitePeopleService, private loginservice: LoginService, private route: ActivatedRoute) { }
+private userDetail={
+  memberName:''
+}  
+
+  constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
 
   ngOnInit() {
-    //this is method is get the id from project screen component
-    this.loginservice.getAll().subscribe(data => { this.data = data });
+    //this is method is get the id from project screen component and show it
+    this.loginservice.getAll().subscribe(data=>{this.data=data});
     this.route.params.subscribe((param) =>
       this.model.projectId = +param['id']);
     this.loginservice.getUserData(this.model.projectId).subscribe(data => { this.memberDetail = data.json(), this.inviteList = this.memberDetail });

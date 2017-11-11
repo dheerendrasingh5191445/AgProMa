@@ -7,8 +7,8 @@
       </div>
 
     <figure class="snip1519">
-        <h3><b>Sprint Name :</b> {{data[0].sprintBacklogs.sprintName}}</h3>
-        <h3><b>Sprint Goal :</b> {{data[0].sprintBacklogs.sprintGoal}}</h3>
+        <h3><b>Sprint Name :</b> {{taskbacklog[0].sprintBacklogs.sprintName}}</h3>
+        <h3><b>Sprint Goal :</b> {{taskbacklog[0].sprintBacklogs.sprintGoal}}</h3>
     </figure>
 
 
@@ -23,7 +23,7 @@
     <tbody>
       <tr>
         <td>
-          <div class="tableContent" *ngFor="let item of data">
+          <div class="tableContent" *ngFor="let item of taskbacklog">
               <ul *ngIf="item.status == 'Unplanned'">
                 <li id="todo" data-toggle="popover" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
                   <p  class="h6 text-responsive"> <font size="4">{{item.taskName}}</font></p>
@@ -32,7 +32,7 @@
             </div>
         </td>
         <td>  
-          <div  *ngFor="let item of data">
+          <div  *ngFor="let item of taskbacklog">
               <ul *ngIf="item.status == 'Inprogress'">
                 <li id="doing" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
                   <p class="h6"><font size="4">{{item.taskName}}</font></p>
@@ -41,7 +41,7 @@
             </div>
           </td>    
         <td>
-          <div *ngFor="let item of data">
+          <div *ngFor="let item of taskbacklog">
               <ul *ngIf="item.status == 'Completed'">
                 <li id="done" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
                   <p class="h6"><font size="4">{{item.taskName}}</font></p>
