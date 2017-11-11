@@ -13,49 +13,44 @@ import { Master } from "../shared/model/master";
 })
 export class InvitePeopleComponent implements OnInit {
 
-  data:Master[];
-  memberDetail:Members[]=[];
+  data: Master[];
+  memberDetail: Members[] = [];
   inviteList: Members[];
   letter: any;
   //local variable used in this component
 
-  private model={
-    projectId:0,
-    email:'',
+  private model = {
+    projectId: 0,
+    email: '',
   };
-private userDetail={
-  memberName:''
-}  
-  constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
+  private userDetail = {
+    memberName: ''
+  }
+  constructor(private invitePeople: InvitePeopleService, private loginservice: LoginService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     //this is method is get the id from project screen component
-    this.loginservice.getAll().subscribe(data=>{this.data=data});
+    this.loginservice.getAll().subscribe(data => { this.data = data });
     this.route.params.subscribe((param) =>
-    this.model.projectId = +param['id']);
-    this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),this.inviteList = this.memberDetail});
- 
-  }
-    //method for dropping members in appropriate order
-    filterByName(event:Event){
-      this.letter=(<HTMLInputElement> event.target).value;
-      this.inviteList= this.memberDetail.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
-    }
+      this.model.projectId = +param['id']);
+    this.loginservice.getUserData(this.model.projectId).subscribe(data => { this.memberDetail = data.json(), this.inviteList = this.memberDetail });
 
-  inviteMember()
-  {
+  }
+  //method for dropping members in appropriate order
+  filterByName(event: Event) {
+    this.letter = (<HTMLInputElement>event.target).value;
+    this.inviteList = this.memberDetail.filter(t => t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
+  }
+
+  inviteMember() {
     //this method will first check whether the user has accounnt with AgProMa
     //if not then an email will be trigged to that user
-    if(!this.model.email.includes('@' && '.')){
-      swal('',"please enter valid email address","error");
+    if (!this.model.email.includes('@' && '.')) {
+      swal('', "please enter valid email address", "error");
     }
-    else{
-    this.invitePeople.emailto(this.model)
-               .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
+    else {
+      this.invitePeople.emailto(this.model)
+        .then(data => swal('E-mail Sent!', 'Please check your email and verify yourself', 'success'));
+    }
   }
-<<<<<<< HEAD
-  }
- 
-=======
->>>>>>> 7985d56d543ec9cdd1c6caf9cbbe216816ed579a
 }
