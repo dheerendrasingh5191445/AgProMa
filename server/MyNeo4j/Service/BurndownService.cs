@@ -34,6 +34,7 @@ namespace MyNeo4j.Service
             tasks.ForEach(m => {
                 UserBurnDown userbd = new UserBurnDown();
                 userbd.TaskId = m.TaskId;
+                userbd.TaskName = m.TaskName;
                 userbd.ExpectedDate = m.EndDate.Subtract(m.StartDate).TotalHours;
                 userbd.ActualDate = m.ActualEndDate.Subtract(m.StartDate).TotalHours;
                 dropdown.Add(userbd);

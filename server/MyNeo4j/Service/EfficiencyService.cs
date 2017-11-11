@@ -32,7 +32,7 @@ namespace MyNeo4j.Service
                 expectedTime += Convert.ToInt32(task.EndDate.Subtract(task.StartDate).TotalHours);
                 actualTime += Convert.ToInt32(task.ActualEndDate.Subtract(task.StartDate).TotalHours);
             }
-            if(tasks==null)
+            if(tasks.Count()== 0)
             {
                 return 0;
             }

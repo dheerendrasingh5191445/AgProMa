@@ -9,14 +9,14 @@ export class KanbanService {
   headers = new Headers({'Content-Type':'application/json','Authorization':'Bearer '+this.token});
   options = new RequestOptions({ headers: this.headers});
   //local variable used for storing path which is used to hit API
-  url = 'http://localhost:52258/api/TaskBacklog/GetAllTaskDetail/'; 
+  url = 'http://localhost:52258/api/Burndown/GetProjectData/'; 
 
 
-  getTaskDetail(sprintID : number)
+  getTaskDetail(projectId:number)
   {
     //This method will get the details for kanban
     return this.http
-               .get(this.url+ sprintID,this.options)
+               .get(this.url+projectId)
                .map((response)=>response.json());
   }
 
