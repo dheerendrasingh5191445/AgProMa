@@ -1,4 +1,5 @@
-﻿using MyNeo4j.model;
+﻿using Microsoft.EntityFrameworkCore;
+using MyNeo4j.model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace MyNeo4j.Repository
 {
     public interface IBurndownRepository
     {
+        List<ReleasePlanMaster> GetProjectData(int projectId);
         List<TaskBacklog> GetTasks(int userId);
-        List<SprintBacklog> GetSprints(int projectId);
     }
     public class BurndownRepository : IBurndownRepository
     {
@@ -19,15 +20,16 @@ namespace MyNeo4j.Repository
                 _context=context;
         }
 
-        public List<SprintBacklog> GetSprints(int projectId)
+        //get project details for a project.
+        public List<ReleasePlanMaster> GetProjectData(int projectId)
         {
-            return _context.Sprintbl.Where(m => m.ProjectId == projectId && m.Status==SprintStatus.Completed).ToList();
+            return _context.Releasepl.Include(m=>m.Sprints).ThenInclude(m=>m.Tasks).Where(m => m.ProjectId == projectId).ToList();
         }
 
         //get all tasks assigned to a user
         public List<TaskBacklog> GetTasks(int userId)
         {
-            return _context.Taaskbl.Where(m => m.PersonId == userId && m.Status==TaskBacklogStatus.Completed).ToList();
+            return _context.Taaskbl.Include(n=>n.SprintBacklogs.ProjectMaster).Where(m => m.PersonId == userId && m.Status==TaskBacklogStatus.Completed).ToList();
         }
     }
 }

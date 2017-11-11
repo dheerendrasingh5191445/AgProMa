@@ -81,7 +81,7 @@ export class ReleasePlanComponent implements OnInit {
           if (date2[2] <= date1[2])//date
            {
             this.releasePlan.projectId = this.projectId;
-            this.releasePlan.actualReleaseDate=Date.now().toString();
+            this.releasePlan.actualReleaseDate=ConfigFile.ActualEndDate;
             console.log(this.releasePlan);
             this.connection.invoke("AddRelease",this.releasePlan)
                            .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)});

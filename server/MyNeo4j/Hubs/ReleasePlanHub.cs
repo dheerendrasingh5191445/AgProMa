@@ -92,6 +92,7 @@ namespace MyNeo4j.Hubs
                 CreateGroup(sprintbl.ProjectId);
                 _service.UpdateReleaseInSprint(sprintbl, releaseId);
                 GetAllSprints(sprintbl.ProjectId);
+                GetReleasePlans(sprintbl.ProjectId);
             }
             catch(Exception e)
             {

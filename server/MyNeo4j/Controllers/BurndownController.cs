@@ -29,16 +29,18 @@ namespace MyNeo4j.Controllers
         // GET api/values/5
         [HttpGet]
         [Route("api/[controller]/GetTasks/{id}")]
+        //get all tasks assigned to a user.
         public List<UserBurnDown> GetTasks(int id)
         {
             return _service.GetTasks(id);
         }
-
+        
         [HttpGet]
-        [Route("api/[controller]/GetSprints/{id}")]
-        public List<SprintBacklog> GetSprints(int id)
+        [Route("api/[controller]/GetProjectData/{id}")]
+        //get all project details for a project.
+        public List<ReleasePlanMaster> GetProjectData(int id)
         {
-            return _service.GetSprints(id);
+            return _service.GetProjectData(id);
         }
 
         // POST api/values
