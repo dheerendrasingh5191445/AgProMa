@@ -76,7 +76,7 @@ export class BacklogComponent implements OnInit {
         this.model.priority = priority;
         //invoke backend post method
         this.connection.invoke("PostBacklog", this.model)
-                      .then(data=>{swal('User story deleted', '', 'success');
+                      .then(data=>{swal('User Story Added', '', 'success');
       
                       });
         this.connection.invoke("GetBacklog", this.projectId)
@@ -97,7 +97,7 @@ export class BacklogComponent implements OnInit {
       item.comments = comment;
       item.priority = priority;
       this.connection.invoke("UpdateBacklog", item.storyId, item)
-                    .then(data=>{swal('User story updated', '', 'success')});
+                    .then(data=>{swal('User Story Updated', '', 'success')});
       this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{this.stories.sort(function (a, b) {
                       return a.priority - b.priority;
@@ -109,7 +109,7 @@ export class BacklogComponent implements OnInit {
   //delete a backlog
   deleteBacklog(item: any) {
     this.connection.invoke("DeleteBacklog", item.storyId, this.projectId)
-                    .then(data=>{ swal('User story deleted', '', 'success')});
+                    .then(data=>{ swal('User Story Deleted', '', 'success')});
     this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{ this.stories.sort(function (a, b) {
                        return a.priority - b.priority;
