@@ -11,7 +11,7 @@ import { ForgetServiceService } from "../shared/services/forget-service.service"
 })
 export class ForgetPasswordComponent implements OnInit {
 
-   //local variable used in this component
+  //local variable used in this component
   forgetData : any;
   email:string;
 
@@ -29,13 +29,12 @@ export class ForgetPasswordComponent implements OnInit {
                .then(data => 
                 {
                   if(data.json() == true) //if email is correct and register with AgProMa
-                { 
-                  swal('E-mail Sent!','Please check your email and verify yourself','success')
-                } 
-                else{ //if email is not register with the AgProMa
-                  swal('E-mail Not Register!','Sorry! Email is not Register with us','error')
-                }
+                  { 
+                    swal('E-mail Sent!','Please check your email and verify yourself','success')
+                  } 
+                  else{ //if email is not register with the AgProMa
+                    swal('E-mail Not Register!','Sorry! Email is not Register with us','error')
+                  }
                 });
-               
   }
 }

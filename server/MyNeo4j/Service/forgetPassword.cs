@@ -18,10 +18,10 @@ namespace ForgetPassword.service
 
     public class forgetPassword : IforgetPassword
     {
-        private ISignUpRepository _repo;
-        private IConfiguration _config;
+        private ISignUpRepository _repo;       
+        private readonly IConfiguration _config;
+        public forgetPassword(IConfiguration config,ISignUpRepository repo)
 
-        public forgetPassword(ISignUpRepository repo, IConfiguration config)
         {
             _repo = repo;
             _config = config;

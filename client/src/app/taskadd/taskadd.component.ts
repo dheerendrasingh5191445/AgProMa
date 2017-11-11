@@ -5,6 +5,7 @@ import { Task } from '../shared/model/task';
 import swal from 'sweetalert2';
 import { HubConnection } from '@aspnet/signalr-client';
 import { ActivatedRoute } from '@angular/router';
+import { ConfigFile } from './../shared/config';
 
 @Component({
   selector: 'app-taskadd',
@@ -35,7 +36,7 @@ export class TaskAddComponent implements OnInit {
   //this is to make connection with the hub
   connectToHub(){
     
-    this.connection = new HubConnection("http://localhost:52258/taskhub");//for connecting with hub // when this component reload ,it will call this method
+    this.connection = new HubConnection(ConfigFile.TaskAddUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getTasks",data =>{console.log("backlog called"); this.data = data });//this will return task backlogs
     this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); //sweet alert when task happens

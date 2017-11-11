@@ -1,4 +1,3 @@
-//import all the dependencies
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'angular4-social-login';
@@ -10,6 +9,7 @@ import swal from 'sweetalert2';
 import { LoginService } from '../shared/services/login.service'
 import { ProjectMember } from "../shared/model/projectMember";
 import { IdPassword } from '../shared/model/idpassword';
+import { ConfigFile } from './../shared/config';
 
 @Component({
   selector: 'app-register',
@@ -75,13 +75,10 @@ export class RegisterComponent implements OnInit {
                             { 
                               //if data is present then redirect to dashboard
                               sessionStorage.setItem("id",this.userId.toString());
-                              this.router.navigateByUrl('app-dashboard');
+                              this.router.navigateByUrl(ConfigFile.RegisterUrls.dashboardNavigation);
                             }
                             else
-                            { 
-                              //if not then redirect to register page
-                              this.router.navigate(["app-register/:id"]); 
-                            }
+                            { this.router.navigate([ConfigFile.RegisterUrls.registerNavigationById]); }
                           });
                 })          
 
@@ -100,26 +97,22 @@ export class RegisterComponent implements OnInit {
           { 
              //to generate token for user who is logged in with social login
             this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
-              //storing data in session storage
               this.tokenData = JSON.parse(data["_body"]).token;
               sessionStorage.setItem("id", this.user["id"].toString());
               sessionStorage.setItem("token", this.tokenData);
 
-                //to get the details of user with the help of email
-            this.loginservice.get(this.user.email)
-                             .subscribe(data => {this.userId=data.json();
-                             if(this.userId!=null)
-                              {
-                                 //if data is present then redirect to dashboard
-                                sessionStorage.setItem("id",this.userId.toString());
-                                this.router.navigateByUrl('app-dashboard');
-                              }
-                              else
+              this.loginservice.get(this.user.email)
+                               .subscribe(data => {this.userId=data.json(); console.log(this.userId)
+                               if(this.userId!=null)
                                 {
-                                     //if not then redirect to register page
-                                  this.router.navigate(["app-register/:id"]);
+                                  sessionStorage.setItem("id",this.userId.toString());
+                                  this.router.navigateByUrl(ConfigFile.RegisterUrls.dashboardNavigation);
                                 }
-                             })
+                                else
+                                {
+                                  this.router.navigate([ConfigFile.RegisterUrls.registerNavigationById]);
+                                }
+                              })
                             })  
           } 
         })
@@ -132,7 +125,6 @@ export class RegisterComponent implements OnInit {
 
     this.index = this.details.find((m) => m.email == this.model.Email);  //find the details of a particular user 
 
-
     if (this.model.Department == '' || this.model.Email == '' || this.model.FirstName == '' || this.model.LastName == '' || this.model.Organization == '' || this.model.Password == '') {
       swal('', 'Enter the Required fields', 'error');             //if any entry is empty then show the alert 
     }
@@ -143,7 +135,6 @@ export class RegisterComponent implements OnInit {
       swal('', 'confirm password does not match the password', 'error')    //if confirm and password is not equal then show password does not match
     }
 
-
     else if (this.model.Password == this.ConfirmPassword) {
       if (this.projectmember.ProjectId) {
         this.projectmember.ActAs = 1;
@@ -152,11 +143,11 @@ export class RegisterComponent implements OnInit {
             let response = data.json();
             if (response == "success") {
               this.loginservice.get(this.model.Email)
-                .subscribe(detail => {  //posting the details of user 
+                  .subscribe(detail => {  //posting the details of user 
                   this.projectmember.MemberId = detail.json();  //then calling the get method to find the user unique id 
                   this.loginservice.postMemberDetails(this.projectmember) //then posting the user id and team id
                   swal('', 'Your account has been created', 'success');
-                  this.router.navigateByUrl('/app-signup/:id');     //navigate to the signup page
+                  this.router.navigateByUrl(ConfigFile.RegisterUrls.signupNavigationById);     //navigate to the signup page
                 }
                 )
             }
@@ -171,15 +162,13 @@ export class RegisterComponent implements OnInit {
           .then(data => {
             if (data.json() == "success") {
               swal('', 'Your account has been created', 'success');
-              this.router.navigateByUrl('/app-signup');      //navigate to the signup page
+              this.router.navigateByUrl(ConfigFile.RegisterUrls.signupNavigation);      //navigate to the signup page
             }
             else {
               swal('', 'Email Already Exists', 'error')      //if enter id matches with the existing id in database 
             }
           })
       }
-
-
     }
   }
 

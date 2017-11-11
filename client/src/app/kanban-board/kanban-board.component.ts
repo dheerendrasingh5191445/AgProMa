@@ -24,10 +24,7 @@ export class KanbanBoardComponent implements OnInit {
     this.route.params.subscribe((param) =>{this.sprintId = +param['id']});
 
     //Getting the detail of task backlog
-    this.kanbanService.getTaskDetail(this.sprintId).subscribe(data => {this.taskbacklog = data; console.log(this.taskbacklog); this.isDataAvailable = true;});
+    this.kanbanService.getTaskDetail(this.sprintId).subscribe(data => {this.taskbacklog = data;  this.isDataAvailable = true;});
 
   }
-
-  
-
 }

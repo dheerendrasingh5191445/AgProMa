@@ -6,6 +6,7 @@ import { EpicService } from "../shared/services/epic.service";
 import { Epic } from "../shared/model/epic";
 import { HubConnection } from '@aspnet/signalr-client';
 import { ActivatedRoute } from '@angular/router';
+import { ConfigFile } from '../shared/config';
 
 @Component({
   selector: 'app-epic',
@@ -27,7 +28,7 @@ export class EpicComponent implements OnInit {
     this.projectId = +param['id']);
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-    this.connection = new HubConnection("http://localhost:52258/epichub");//for connecting with hub // when this component reload ,it will call this method
+    this.connection = new HubConnection(ConfigFile.EpicUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
     this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
@@ -63,7 +64,6 @@ export class EpicComponent implements OnInit {
   }
 
   deleteBacklog(item:any){       //for deleting the epic 
-
     this.connection.invoke("Delete",item.epicId);
     this.connection.invoke("Get",this.projectId);
   }
