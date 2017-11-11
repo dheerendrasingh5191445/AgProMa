@@ -25,6 +25,8 @@ namespace MyNeo4j.model
         [ForeignKey("ProjectId")]
         public ProjectMaster ProjectMaster { get; set; }
 
+        public List<TaskBacklog> Tasks { get; set; }
+
         public string SprintName { get; set; }
 
         public string SprintGoal { get; set; }

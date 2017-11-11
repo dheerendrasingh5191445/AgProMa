@@ -1,10 +1,18 @@
-﻿namespace MyNeo4j.Viewmodel
+﻿using MyNeo4j.model;
+
+namespace MyNeo4j.Viewmodel
 {
     public class UserBurnDown
     {
         public int TaskId { get; set; }
 
         public string TaskName { get; set; }
+
+        public string ProjectName { get; set; }
+
+        public string SprintName { get; set; }
+
+        public int ProjectId { get; set; }
 
         public double ActualDate { get; set; }
 

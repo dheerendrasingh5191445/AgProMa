@@ -30,7 +30,7 @@ import { DashboardRoleComponent } from './dashboard-role/dashboard-role.componen
 const routes: Routes = [
     { path: "", redirectTo: 'landingpage', pathMatch: "full" },
     { path: 'landingpage', component:LandingpageComponent},
-    { path: 'app-signup', component: SignupComponent },
+    { path: 'app-signup/:id', component: SignupComponent },
     { path: 'app-register/:id', component: RegisterComponent }, 
     { path: 'app-forget-password', component: ForgetPasswordComponent },
     { path: 'app-register-user-with-new-password/:id', component: RegisterUserWithNewPasswordComponent },

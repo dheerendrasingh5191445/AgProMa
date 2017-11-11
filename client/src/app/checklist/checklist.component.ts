@@ -4,9 +4,9 @@ import { NgStyle } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { Checklist } from './../shared/model/checklist'
-import { ChecklistService } from './../shared/services/checklist.service'
-import { TaskService } from './../shared/services/task.service'
+import { Checklist } from './../shared/model/checklist';
+import { ChecklistService } from './../shared/services/checklist.service';
+import { TaskService } from './../shared/services/task.service';
 // import ends
 @Component({
   selector: 'app-checklist',
@@ -39,11 +39,9 @@ export class ChecklistComponent implements OnInit {
 
   //this method is for filling data on start up of project
   onStartComponent(){
-
     this.checkListService.getById(this.model.taskId).subscribe((tasks => {
       this.task = tasks;
     }));
-     
     this.checkListService.getCheckList(this.model.taskId)
       .subscribe(data => {
         this.details = data; 
@@ -88,12 +86,10 @@ export class ChecklistComponent implements OnInit {
         .subscribe(result => {
           this.msg = "Incomplete"
         })
-
     }
     this.checklistStatus = (((this.countChecklist) / (this.totalCount)) * 100);
     this.statusInPer = (this.checklistStatus + '%')
     this.StatusStyle = { 'width': this.statusInPer };
-
   }
   
 
@@ -108,6 +104,5 @@ export class ChecklistComponent implements OnInit {
         this.onStartComponent();
         this.msg = "deleted";
       });
-
   }
 }

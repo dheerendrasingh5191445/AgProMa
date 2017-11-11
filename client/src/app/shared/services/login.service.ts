@@ -10,9 +10,14 @@ import 'rxjs/add/operator/toPromise';
 import { IdPassword } from '../model/idpassword';
 import { authentication } from "../model/Authentication";
 import { Credential } from "../model/credential";
+import { SocialUser } from "angular4-social-login";
+import { SocialUserLogin } from "../model/socialLogin";
 
 @Injectable()
 export class LoginService {
+
+  //local variable used in login service
+  user: SocialUser;
 
   constructor(private http: Http) { }
   url = 'http://localhost:52258/api/Login';                 //url for login 
@@ -21,10 +26,9 @@ export class LoginService {
   checkurl='http://localhost:52258/api/Login/Check';
   DetailUrl='http://localhost:52258/api/Login/Details/';
   updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
-//  private headers = new Headers({ 'Content-Type': 'application/json' });
- // checkurl='http://localhost:52258/api/Login/Check';
   logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
+
 
   token = sessionStorage.getItem("token");
   headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
@@ -48,6 +52,8 @@ export class LoginService {
     return this.http.get(this.url+"/"+email)
                     .map(data => data);
   }
+
+ 
 
  //check details of a particular user by emailid and password
   check(userData:IdPassword){
@@ -74,6 +80,16 @@ export class LoginService {
                       .toPromise();
   }
 
+  //to get the token for facebook and gmail from API
+  getTokenForFbandGoogle(user : SocialUser)
+  {
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: this.headers });
+    return this.http.post("http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/"+user.email,options)
+                      .toPromise();
+
+  }
+
   //post the details of a new user 
     postLoginDetails(logindetails:Login){
       return this.http
@@ -85,20 +101,20 @@ export class LoginService {
 
     //post the details of member with team id
     postMemberDetails(memberdetails:ProjectMember){
-      console.log(memberdetails);
       return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
     }
     
 
     //handling the error
     private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error);
+ 
       return Promise.reject(error.message || error);
     }
     //this is to get the existing member in the project
     getUserData(projectId:number){
       return this.http.get(this.invite_url+projectId)
                       .map(Response=>Response);
+                      // .toPromise().catch(this.handleError);
     
     }
     //update details of a user

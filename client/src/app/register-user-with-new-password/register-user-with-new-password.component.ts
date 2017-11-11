@@ -9,6 +9,7 @@ import { Master } from "./../shared/model/master";
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { RegisterUserWithNewPasswordService } from "../shared/services/register-user-with-new-password.service";
+import { ConfigFile } from './../shared/config';
 
 @Component({
   selector: 'app-register-user-with-new-password',
@@ -38,7 +39,7 @@ export class RegisterUserWithNewPasswordComponent implements OnInit {
     if(this.password==this.confirmpassword){
     this.registerUser.updatePassword(this.userDetail);             //updating the password by calling the update
       swal('',"Password updated successfully","success");           //password function ofbRegisterwithnew password service 
-      this.router.navigateByUrl('/app-signup');                 //navigate to the signup page
+      this.router.navigateByUrl(ConfigFile.RegisterUserWithNewPasswordUrls.signupNavigation);                 //navigate to the signup page
   }
   else
     {

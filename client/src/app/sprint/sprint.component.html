@@ -10,13 +10,13 @@
     <!-- Sprint container -->
     <div class="sprint col-lg-7 col-sm-7 col-md-7 rounded">
       <div id="header_sprint">
-        <h4 class="text-center">Sprints</h4>
+        <h5 class="text-center">Sprints</h5>
       </div>
       <hr>
       <!-- Sprints already present  -->
         <div class="sprints card" *ngFor=" let sprint of sprints;let i=index">
           <!-- Sprint and Stories in each sprint -->
-          <div class="card-header tool" >
+          <div class="card-header tool">
             <strong >{{sprint.sprintName}}</strong>
             <span routerLink = "/role-dashboard/{{projectId}}/taskadd/{{sprint.sprintId}}" class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to add task"></span>
             <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project details"></span>
@@ -30,9 +30,9 @@
             <p class="date"><strong>Start Date : </strong>{{sprint.startDate | date: "dd.MM.y"}}</p>
           </div>
           <!-- Drop here for Stories -->
-          <div id="collapseExample{{i}}" dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" class="collapsed panel panel-info">
+          <div dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" id="collapseExample{{i}}" class="collapsed panel panel-info">
             <!-- backlogs in each sprint -->
-            <div class="story" *ngFor="let story of backlogs" >
+            <div class="story" *ngFor="let story of backlogs">
               <div class="card-text" id="story_name" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
                 <p class="stories_Sprint">{{story.storyName}}</p>
               </div>
@@ -50,7 +50,7 @@
     <!-- Unassigned Backlogs -->
     <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded">
       <div id="header_backlog_items">
-        <h4>Unassigned Backlog Items</h4>
+        <h5>Unassigned Backlog Items</h5>
       </div>
       <hr>
       <!-- Backlogs that are not assigned -->

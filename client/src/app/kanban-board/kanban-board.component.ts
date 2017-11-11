@@ -11,11 +11,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class KanbanBoardComponent implements OnInit {
 
   //local variable used in backend
-  data : TaskBackLog[] =[];
+  taskbacklog : TaskBackLog[] =[];
   taskBackLog : TaskBackLog ;
   projectId : number = 1;
   isDataAvailable = false;
-
+  data:any;
   constructor(private kanbanService : KanbanService, private route : ActivatedRoute) { }
 
   ngOnInit() {
@@ -28,7 +28,4 @@ export class KanbanBoardComponent implements OnInit {
                       .subscribe(data => {this.data = data; this.isDataAvailable = true;});
 
   }
-
-  
-
 }

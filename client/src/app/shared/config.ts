@@ -18,5 +18,44 @@ export const ConfigFile =
     },
     TeamUrls:{
         getTeamUrl:'http://localhost:52258/teamhub'
-       }
+    },
+    TaskAssignUrls:{
+        connection:'http://localhost:52258/taskbacklog'
+    },
+    TaskAddUrls:{
+        connection:'http://localhost:52258/taskhub'
+    },
+    ReleasePlanUrls:{
+        connection:'http://localhost:52258/releaseplan',
+        navigateNewRrelease:'/app-dashboard/newreleasedetail/1'
+    },
+    ProductBacklog:{
+        connection:'http://localhost:52258/backlog'
+    },
+    DashboardUrls:{
+        onLoggedOut:'app-signup'
+    },
+    DashboardRoleUrls:{
+        onLoggedOut:'app-signup/:id'
+    },
+    EpicUrls:{
+        connection:'http://localhost:52258/epichub'
+    },
+    FillDetailsUrls:{
+        backOnPrevious:'/app-dashboard/project-screen',
+        dashboardNavigation:'app-dashboard'
+    },
+    ProjectDetailUrls:{
+        navigation:'role-dashboard'
+    },
+    RegisterUrls:{
+        registerNavigationById:'app-register/:id',
+        dashboardNavigation:'app-dashboard',
+        signupNavigation:'/app-signup',
+        signupNavigationById:'/app-signup/:id'
+    },
+    RegisterUserWithNewPasswordUrls:{
+        signupNavigation:'/app-signup/:id'
+    },
+    ActualEndDate: "10/10/1970"
 }

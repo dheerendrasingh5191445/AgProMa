@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using AgProMa.Repository;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MyNeo4j.model;
@@ -17,22 +18,18 @@ namespace ForgetPassword.service
 
     public class forgetPassword : IforgetPassword
     {
-        private IMasterRepository _repo;
-        public IConfiguration _config;
+        private ISignUpRepository _repo;       
+        private readonly IConfiguration _config;
+        public forgetPassword(IConfiguration config,ISignUpRepository repo)
 
-        public forgetPassword(IMasterRepository repo, IConfiguration config)
         {
             _repo = repo;
             _config = config;
 
         }
-
-
-
-
         public bool EmailForResetPassword(string email)
         {
-            List<Master> master = _repo.getAll();
+            List<Master> master = _repo.GetAllDetails();
             foreach (Master mast in master)
             {
                 if (mast.Email == email)
@@ -54,12 +51,10 @@ namespace ForgetPassword.service
                         client.Send(message);
                         client.Disconnect(true);
                     }
-
                     return true;
                 }
             }
             return false;
-
         }
     }
 }

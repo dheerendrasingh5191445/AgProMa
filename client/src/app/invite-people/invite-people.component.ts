@@ -13,35 +13,46 @@ import { Master } from "../shared/model/master";
 })
 export class InvitePeopleComponent implements OnInit {
 
+
+    //local variable used in this component
   data:Master[];
   memberDetail:Members[]=[];
-  //local variable used in this component
+  inviteList: Members[];
+  letter: any;
 
-  private model={
-    projectId:0,
-    email:'',
+  private model = {
+    projectId: 0,
+    email: '',
   };
 private userDetail={
   memberName:''
 }  
+
   constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
 
   ngOnInit() {
-    //this is method is get the id from project screen component
-    this.invitePeople.getAll().subscribe(data=>{this.data=data});
+    //this is method is get the id from project screen component and show it
+    this.loginservice.getAll().subscribe(data=>{this.data=data});
     this.route.params.subscribe((param) =>
-              this.model.projectId = +param['id']);
-    this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),console.log("sadsad",this.memberDetail)});
- 
+      this.model.projectId = +param['id']);
+    this.loginservice.getUserData(this.model.projectId).subscribe(data => { this.memberDetail = data.json(), this.inviteList = this.memberDetail });
+
+  }
+  //method for dropping members in appropriate order
+  filterByName(event: Event) {
+    this.letter = (<HTMLInputElement>event.target).value;
+    this.inviteList = this.memberDetail.filter(t => t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
   }
 
-  inviteMember()
-  {
+  inviteMember() {
     //this method will first check whether the user has accounnt with AgProMa
     //if not then an email will be trigged to that user
-    this.invitePeople.emailto(this.model)
-               .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
+    if (!this.model.email.includes('@' && '.')) {
+      swal('', "please enter valid email address", "error");
+    }
+    else {
+      this.invitePeople.emailto(this.model)
+        .then(data => swal('E-mail Sent!', 'Please check your email and verify yourself', 'success'));
+    }
   }
-
- 
 }

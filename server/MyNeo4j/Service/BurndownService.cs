@@ -10,8 +10,8 @@ namespace MyNeo4j.Service
 {
     public interface IBurndownService
     {
+        List<ReleasePlanMaster> GetProjectData(int projectId);
         List<UserBurnDown> GetTasks(int userId);
-        List<SprintBacklog> GetSprints(int projectId);
     }
 
     public class BurndownService : IBurndownService
@@ -22,12 +22,8 @@ namespace MyNeo4j.Service
             _repository = repository;
         }
 
-        public List<SprintBacklog> GetSprints(int projectId)
-        {
-            return _repository.GetSprints(projectId);
-        }
-
-        public List<UserBurnDown>  GetTasks(int userId)
+        //get all tasks assign to a user
+        public List<UserBurnDown> GetTasks(int userId)
         {
             List<UserBurnDown> dropdown = new List<UserBurnDown>();
             List<TaskBacklog> tasks= _repository.GetTasks(userId);
@@ -37,9 +33,19 @@ namespace MyNeo4j.Service
                 userbd.TaskName = m.TaskName;
                 userbd.ExpectedDate = m.EndDate.Subtract(m.StartDate).TotalHours;
                 userbd.ActualDate = m.ActualEndDate.Subtract(m.StartDate).TotalHours;
+                userbd.ProjectId =m.SprintBacklogs.ProjectId;
+                userbd.ProjectName = m.SprintBacklogs.ProjectMaster.Name;
+                userbd.SprintName=m.SprintBacklogs.SprintName;
                 dropdown.Add(userbd);
             });
             return dropdown;
+        }
+
+        //get all project details specific to a project.
+        public List<ReleasePlanMaster> GetProjectData(int projectId)
+        {
+            var projectData= _repository.GetProjectData(projectId);
+            return projectData;
         }
     }
 }

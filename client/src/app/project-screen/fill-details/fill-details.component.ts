@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectMaster } from '../../shared/model/ProjectMaster';
 import { ProjectScreenService } from '../project-screen.service';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ConfigFile } from './../../shared/config';
 
 @Component({
   selector: 'app-fill-details',
@@ -27,9 +28,9 @@ export class FillDetailsComponent implements OnInit {
     this.leaderId = parseInt(session);
   }
 
-   //this method is to go back on previous page
-   backOnPrevious(){
-    this.router.navigateByUrl('/app-dashboard/project-screen');
+  //this method is to go back on previous page
+  backOnPrevious(){
+    this.router.navigateByUrl(ConfigFile.FillDetailsUrls.backOnPrevious);
   }
 
   //this method is used to add new project
@@ -37,9 +38,9 @@ export class FillDetailsComponent implements OnInit {
   {
     if(this.projectdescription != null && this.projectname !=null && this.technologies != null)
     {
-    let projectitem = new ProjectMaster(this.projectname,this.leaderId,this.projectdescription,this.technologies);
-    this.projectscrservice.addNewProject(projectitem)
-                          .then(data => this.router.navigate(["app-dashboard"]));
+      let projectitem = new ProjectMaster(this.projectname,this.leaderId,this.projectdescription,this.technologies);
+      this.projectscrservice.addNewProject(projectitem)
+                            .then(data => this.router.navigate([ConfigFile.FillDetailsUrls.dashboardNavigation]));
     }
     else
     {
@@ -52,9 +53,9 @@ export class FillDetailsComponent implements OnInit {
   {
     if(this.projectdescription != null && this.projectname !=null && this.technologies != null)
     {
-    let projectitem = new ProjectMaster(this.projectname,this.updateId,this.projectdescription,this.technologies);
-    this.projectscrservice.updateProject(this.updateId,projectitem)
-                          .then(data => this.router.navigate(["app-dashboard"]));
+      let projectitem = new ProjectMaster(this.projectname,this.updateId,this.projectdescription,this.technologies);
+      this.projectscrservice.updateProject(this.updateId,projectitem)
+                            .then(data => this.router.navigate([ConfigFile.FillDetailsUrls.dashboardNavigation]));
     }
     else
     {
