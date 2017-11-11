@@ -1,16 +1,6 @@
-.back
-{
-   
-    padding-left: auto;
-}
-.invite-card
-{
-    padding-top : 40px;
-   
-}
 .card-footer {
-    background-color: #E5F9F9;
     color: #000000;
+    text-align: left;
 }
 .heading {
     background-color: #32456d;
@@ -19,14 +9,14 @@
     padding-top: 9px;
     padding-left: 3px;
   }
-  
-
 .team-image
 {
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
 }
-
+.fa {
+    color: #00cc99;
+}
 .chipData
 {
     padding-left : 40px;
@@ -35,23 +25,18 @@
 
 .chip {
     display: inline-block;
-    padding: 0 25px;
-    height: 50px;
-    font-size: 16px;
-    line-height: 50px;
+    padding: auto;
+    height: auto;
     border-radius: 25px;
-    color: white;
-    background-color: #CBC5C5;
-    
+    color: #050404;
+    background-color: #D1CFCF;
+    word-wrap: break-word;
 }
-
-
-
 .chip img {
     float: left;
     margin: 0 10px 0 -25px;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
 }
 .closebtn:hover {
@@ -115,4 +100,11 @@ span.invite:active span {
 
 span.invite:active i {
   left: 18px;
+}
+.list {
+    margin-top: 8px;
+}
+.scroll {
+    overflow-y: auto;
+    height:auto;
 }

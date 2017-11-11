@@ -1,8 +1,6 @@
 .container-fluid {
   font-family: 'Raleway', Arial, sans-serif !important;
 }
-
-
 .containerBlock
 {
   text-align: center;
@@ -217,7 +215,7 @@ body {
   text-align: center;
 }
 .heading {
-  background-color: #460619;
+  background-color: #32456d;
   color: whitesmoke;
   width: 100%;
 

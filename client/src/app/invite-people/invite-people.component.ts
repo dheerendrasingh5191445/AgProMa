@@ -15,6 +15,8 @@ export class InvitePeopleComponent implements OnInit {
 
   data:Master[];
   memberDetail:Members[]=[];
+  inviteList: Members[];
+  letter: any;
   //local variable used in this component
 
   private model={
@@ -28,12 +30,17 @@ private userDetail={
 
   ngOnInit() {
     //this is method is get the id from project screen component
-    this.invitePeople.getAll().subscribe(data=>{this.data=data});
+    this.loginservice.getAll().subscribe(data=>{this.data=data});
     this.route.params.subscribe((param) =>
-              this.model.projectId = +param['id']);
-    this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),console.log("sadsad",this.memberDetail)});
+    this.model.projectId = +param['id']);
+    this.loginservice.getUserData(this.model.projectId).subscribe(data => {this.memberDetail=data.json(),this.inviteList = this.memberDetail});
  
   }
+    //method for dropping members in appropriate order
+    filterByName(event:Event){
+      this.letter=(<HTMLInputElement> event.target).value;
+      this.inviteList= this.memberDetail.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
+    }
 
   inviteMember()
   {
@@ -42,6 +49,4 @@ private userDetail={
     this.invitePeople.emailto(this.model)
                .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
   }
-
- 
 }

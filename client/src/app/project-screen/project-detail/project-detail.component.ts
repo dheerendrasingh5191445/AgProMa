@@ -3,7 +3,7 @@ import { ProjectMaster } from './../../shared/model/ProjectMaster';
 import { ProjectScreenService } from "./../project-screen.service";
 import { Router} from  '@angular/router';
 import { TitleCasePipe } from '@angular/common';
-
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-project-detail',
@@ -25,10 +25,17 @@ export class ProjectDetailComponent implements OnInit {
   }
 //method is calling the service method to delete project
   delete(id:number):void{
-    this.projectservice.deleteProject(id)
-                       .then(data => {this.onDelete.emit(id)});
+    swal('Are you sure?','Once deleted, you will not be able to recover this project!','warning')
+    .then((willDelete) => {
+      if (willDelete) {
+        this.projectservice.deleteProject(id)
+        .then(data => { this.onDelete.emit(id);
+                        swal("Poof! Your Project has been deleted!"," ","success");});
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
   }
-
   //this method is used for storing role
   enterProject(){
     sessionStorage.setItem("role",this.Data["actAs"]);
