@@ -19,6 +19,7 @@ import { IdPassword } from '../shared/model/idpassword';
 export class RegisterComponent implements OnInit {
 
   user: SocialUser;
+  tokenData: any;
   userId: number;
   details: any[] = [];
   index: Login;
@@ -41,10 +42,7 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private loginservice: LoginService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      if (this.user != null) { this.router.navigate(["app-dashboard"]) }
-    });
+ 
     this.loginservice.getAll().subscribe(details => {         //calling getall function of loginservice 
       this.details = details;                                 //and return details of all users
     })
@@ -53,25 +51,71 @@ export class RegisterComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)   //calling signIn function of authoservice
+    //this method is used for social login(gmail)
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(data => {
         this.authService.authState.subscribe((user) => {
-          this.user = user;
-          if (this.user != null) { this.router.navigate(["app-dashboard"]) }
-        })
+          this.user = user; // data is assigned from gmail to local variable
+
+          if (this.user != null) //user will be redirected to dashboard screen
+          {
+
+            this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
+                          this.tokenData = JSON.parse(data["_body"]).token;
+                          sessionStorage.setItem("id", this.user["id"].toString());
+                          sessionStorage.setItem("token", this.tokenData);
+            
+        
+          this.loginservice.get(this.user.email)
+                           .subscribe(data => {this.userId=data.json();
+
+                            if(this.userId!=null)
+                            { 
+                           
+                              sessionStorage.setItem("id",this.userId.toString());
+                              this.router.navigateByUrl('app-dashboard');
+                            }
+                            else
+                            { this.router.navigate(["app-register/:id"]); }
+                          });
+                })          
+
+          }});
       });
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)    //calling signIn function from authservice
+    //this method is used for social login(facebook)
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then(data => {
         this.authService.authState.subscribe((user) => {
-          this.user = user;
-          if (this.user != null) { this.router.navigate(["app-dashboard"]) }
+          this.user = user; // data is assigned from facebook to local variable
+
+          if (this.user != null)
+          { 
+            this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
+              
+              this.tokenData = JSON.parse(data["_body"]).token;
+              sessionStorage.setItem("id", this.user["id"].toString());
+              sessionStorage.setItem("token", this.tokenData);
+
+            this.loginservice.get(this.user.email)
+                             .subscribe(data => {this.userId=data.json(); console.log(this.userId)
+                             if(this.userId!=null)
+                              {
+                                sessionStorage.setItem("id",this.userId.toString());
+                                this.router.navigateByUrl('app-dashboard');
+                              }
+                              else
+                                {
+                                  this.router.navigate(["app-register/:id"]);
+                                }
+                             })
+                            })  
+          } 
         })
       });
   }
-
   signOut(): void {
     this.authService.signOut();
   }
@@ -95,18 +139,16 @@ export class RegisterComponent implements OnInit {
     else if (this.model.Password == this.ConfirmPassword) {
       if (this.projectmember.ProjectId) {
         this.projectmember.ActAs = 1;
-        console.log("sdfdsvds");
         this.loginservice.postLoginDetails(this.model)
           .then(data => {
             let response = data.json();
             if (response == "success") {
               this.loginservice.get(this.model.Email)
                 .subscribe(detail => {  //posting the details of user 
-                  console.log(detail.json());
                   this.projectmember.MemberId = detail.json();  //then calling the get method to find the user unique id 
                   this.loginservice.postMemberDetails(this.projectmember) //then posting the user id and team id
                   swal('', 'Your account has been created', 'success');
-                  this.router.navigateByUrl('/app-signup');     //navigate to the signup page
+                  this.router.navigateByUrl('/app-signup/:id');     //navigate to the signup page
                 }
                 )
             }
@@ -131,6 +173,9 @@ export class RegisterComponent implements OnInit {
 
 
     }
+  }
+  alreadyExistingUser(){
+
   }
 }
 

@@ -90,8 +90,15 @@ namespace AgProMa.Services
         //this is to get  user id according to email
         public int GetId(string email)
         {
-            Master master = _context.Get(email);
-            return master.Id;
+            try
+            {
+                Master master = _context.Get(email);
+                return master.Id;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public Master GetById(int id)

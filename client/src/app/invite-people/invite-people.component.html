@@ -16,7 +16,7 @@
     <p class="card-text">Invite a person to this project as a member</p>
     <div class="input-group">
       <!-- input box is used to take input -->
-        <input type="text" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon2" [(ngModel)]="model.email"
+        <input type="email" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon2" [(ngModel)]="model.email"
         value={{email}} list="channel" >
         <datalist id="channel">
           <option *ngFor="let h of data" value="{{h.email}}">
