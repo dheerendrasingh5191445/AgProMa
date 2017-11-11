@@ -4,6 +4,7 @@ import { ReleasePlanService } from "../shared/services/release-plan.service";
 import { HubConnection } from "@aspnet/signalr-client/dist/src";
 import { ReleasePlan } from '../shared/model/release-plan';
 import swal from 'sweetalert2';
+import { ConfigFile } from '../shared/config';
 
 @Component({
   selector: 'app-release-plan',
@@ -80,7 +81,7 @@ export class ReleasePlanComponent implements OnInit {
           if (date2[2] <= date1[2])//date
            {
             this.releasePlan.projectId = this.projectId;
-            this.releasePlan.actualReleaseDate=Date.now().toString();
+            this.releasePlan.actualReleaseDate=ConfigFile.ActualEndDate;
             console.log(this.releasePlan);
             this.connection.invoke("AddRelease",this.releasePlan)
                            .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)});
