@@ -11,7 +11,6 @@ namespace MyNeo4j.Service
         ProjectMember getMemberDetails(int id);
         void Add_MemberDetails(ProjectMember member);
        
-
     }
     public class ProjectMemberService : IProjectMemberService
     {

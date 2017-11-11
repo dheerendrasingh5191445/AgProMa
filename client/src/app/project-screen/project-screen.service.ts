@@ -30,6 +30,7 @@ export class ProjectScreenService {
    return this.http.delete(ConfigFile.ProjectMasterUrls.deleteProject+Id,{headers: new Headers({ 'Content-Type': 'application/json'})})
                   .toPromise()
                   .then(Response => Response);
+                  
   }
 //this is to update the project detail in database 
  updateProject(Id:number,projectitem:ProjectMaster):Promise<any>{

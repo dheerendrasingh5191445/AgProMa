@@ -19,7 +19,7 @@ namespace AgProMa.Services
         void Update(string emailid, Master favourite);
         List<Master> GetAllDetails();
         int GetId(string email);
-       Master GetById(int id);
+        Master GetById(int id);
 
     }
     public class SignUpService : ISignUpService
