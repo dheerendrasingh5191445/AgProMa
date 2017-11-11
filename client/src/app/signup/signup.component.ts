@@ -53,24 +53,29 @@ export class SignupComponent implements OnInit {
 
           if (this.user != null) //user will be redirected to dashboard screen
           {
-
+            //to generate token for user who is logged in with social login
             this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
+                          //storing data in session storage
                           this.tokenData = JSON.parse(data["_body"]).token;
                           sessionStorage.setItem("id", this.user["id"].toString());
                           sessionStorage.setItem("token", this.tokenData);
             
-        
+          //to get the details of user with the help of email
           this.loginservice.get(this.user.email)
                            .subscribe(data => {this.userId=data.json();
 
+                            
                             if(this.userId!=null)
                             { 
-                           
+                              //if data is present then redirect to dashboard
                               sessionStorage.setItem("id",this.userId.toString());
                               this.router.navigateByUrl('app-dashboard');
                             }
                             else
-                            { this.router.navigate(["app-register/:id"]); }
+                            { 
+                              //if not then redirect to register page
+                              this.router.navigate(["app-register/:id"]); 
+                            }
                           });
                 })          
 
@@ -79,6 +84,8 @@ export class SignupComponent implements OnInit {
   }
 
   signInWithFB(): void {
+
+    try{
     //this method is used for social login(facebook)
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then(data => {
@@ -87,21 +94,25 @@ export class SignupComponent implements OnInit {
 
           if (this.user != null)
           { 
+             //to generate token for user who is logged in with social login
             this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
-              
+              //storing data in session storage
               this.tokenData = JSON.parse(data["_body"]).token;
               sessionStorage.setItem("id", this.user["id"].toString());
               sessionStorage.setItem("token", this.tokenData);
 
+                //to get the details of user with the help of email
             this.loginservice.get(this.user.email)
-                             .subscribe(data => {this.userId=data.json(); console.log(this.userId)
+                             .subscribe(data => {this.userId=data.json(); 
                              if(this.userId!=null)
                               {
+                                 //if data is present then redirect to dashboard
                                 sessionStorage.setItem("id",this.userId.toString());
                                 this.router.navigateByUrl('app-dashboard');
                               }
                               else
                                 {
+                                     //if not then redirect to register page
                                   this.router.navigate(["app-register/:id"]);
                                 }
                              })
@@ -109,6 +120,12 @@ export class SignupComponent implements OnInit {
           } 
         })
       });
+    }
+    catch(error)
+    {
+      
+    }  
+    
   }
 
 
@@ -136,7 +153,6 @@ export class SignupComponent implements OnInit {
         {
           //call method for token generation
           this.loginservice.getToken(this.userCred).then(data => {
-            console.log("data about data--------------",data)
             this.tokenData = JSON.parse(data["_body"]).token;
             sessionStorage.setItem("id", this.userCred["userId"].toString());
             sessionStorage.setItem("token", this.tokenData);
@@ -144,7 +160,6 @@ export class SignupComponent implements OnInit {
           if (this.tokenData)
           { 
             if(this.projectmember.ProjectId){
-              console.log("hellooooooo",this.projectmember.ProjectId);
               this.projectmember.ActAs=1;
               this.projectmember.MemberId=this.userCred.userId;
               this.loginservice.postMemberDetails(this.projectmember).then(()=>this.loginservice.getUserData(this.projectmember.ProjectId).subscribe(userdata=>this.userdata=userdata))

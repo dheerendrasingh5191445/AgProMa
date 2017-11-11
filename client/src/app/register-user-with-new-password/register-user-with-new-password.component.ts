@@ -38,7 +38,7 @@ export class RegisterUserWithNewPasswordComponent implements OnInit {
     if(this.password==this.confirmpassword){
     this.registerUser.updatePassword(this.userDetail);             //updating the password by calling the update
       swal('',"Password updated successfully","success");           //password function ofbRegisterwithnew password service 
-      this.router.navigateByUrl('/app-signup');                 //navigate to the signup page
+      this.router.navigateByUrl('/app-signup/:id');                 //navigate to the signup page
   }
   else
     {

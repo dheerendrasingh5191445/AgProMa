@@ -1,5 +1,4 @@
 //import all the dependencies
-
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'angular4-social-login';
@@ -7,6 +6,7 @@ import { SocialUser } from 'angular4-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import { Login } from './../shared/model/login';
 import swal from 'sweetalert2';
+
 import { LoginService } from '../shared/services/login.service'
 import { ProjectMember } from "../shared/model/projectMember";
 import { IdPassword } from '../shared/model/idpassword';
@@ -59,24 +59,29 @@ export class RegisterComponent implements OnInit {
 
           if (this.user != null) //user will be redirected to dashboard screen
           {
-
+            //to generate token for user who is logged in with social login
             this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
+                          //storing data in session storage
                           this.tokenData = JSON.parse(data["_body"]).token;
                           sessionStorage.setItem("id", this.user["id"].toString());
                           sessionStorage.setItem("token", this.tokenData);
             
-        
+          //to get the details of user with the help of email
           this.loginservice.get(this.user.email)
                            .subscribe(data => {this.userId=data.json();
 
+                            
                             if(this.userId!=null)
                             { 
-                           
+                              //if data is present then redirect to dashboard
                               sessionStorage.setItem("id",this.userId.toString());
                               this.router.navigateByUrl('app-dashboard');
                             }
                             else
-                            { this.router.navigate(["app-register/:id"]); }
+                            { 
+                              //if not then redirect to register page
+                              this.router.navigate(["app-register/:id"]); 
+                            }
                           });
                 })          
 
@@ -93,21 +98,25 @@ export class RegisterComponent implements OnInit {
 
           if (this.user != null)
           { 
+             //to generate token for user who is logged in with social login
             this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
-              
+              //storing data in session storage
               this.tokenData = JSON.parse(data["_body"]).token;
               sessionStorage.setItem("id", this.user["id"].toString());
               sessionStorage.setItem("token", this.tokenData);
 
+                //to get the details of user with the help of email
             this.loginservice.get(this.user.email)
-                             .subscribe(data => {this.userId=data.json(); console.log(this.userId)
+                             .subscribe(data => {this.userId=data.json();
                              if(this.userId!=null)
                               {
+                                 //if data is present then redirect to dashboard
                                 sessionStorage.setItem("id",this.userId.toString());
                                 this.router.navigateByUrl('app-dashboard');
                               }
                               else
                                 {
+                                     //if not then redirect to register page
                                   this.router.navigate(["app-register/:id"]);
                                 }
                              })
@@ -116,11 +125,10 @@ export class RegisterComponent implements OnInit {
         })
       });
   }
-  signOut(): void {
-    this.authService.signOut();
-  }
 
-  CreateAccount() {                        //registering the user
+
+
+  CreateAccount() {  //registering the user
 
     this.index = this.details.find((m) => m.email == this.model.Email);  //find the details of a particular user 
 
@@ -174,8 +182,6 @@ export class RegisterComponent implements OnInit {
 
     }
   }
-  alreadyExistingUser(){
 
-  }
 }
 

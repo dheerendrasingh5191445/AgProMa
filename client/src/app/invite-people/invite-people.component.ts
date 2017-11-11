@@ -13,11 +13,12 @@ import { Master } from "../shared/model/master";
 })
 export class InvitePeopleComponent implements OnInit {
 
+
+    //local variable used in this component
   data:Master[];
   memberDetail:Members[]=[];
   inviteList: Members[];
   letter: any;
-  //local variable used in this component
 
   private model={
     projectId:0,
@@ -26,10 +27,11 @@ export class InvitePeopleComponent implements OnInit {
 private userDetail={
   memberName:''
 }  
+
   constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
 
   ngOnInit() {
-    //this is method is get the id from project screen component
+    //this is method is get the id from project screen component and show it
     this.loginservice.getAll().subscribe(data=>{this.data=data});
     this.route.params.subscribe((param) =>
     this.model.projectId = +param['id']);
@@ -50,12 +52,10 @@ private userDetail={
       swal('',"please enter valid email address","error");
     }
     else{
+      //this method will send email to that user
     this.invitePeople.emailto(this.model)
                .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
   }
-<<<<<<< HEAD
   }
  
-=======
->>>>>>> 7985d56d543ec9cdd1c6caf9cbbe216816ed579a
 }
