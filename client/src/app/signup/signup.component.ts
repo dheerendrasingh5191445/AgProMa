@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'angular4-social-login';
 import { SocialUser } from 'angular4-social-login';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
 import swal from 'sweetalert2';
 
@@ -9,6 +9,9 @@ import { LoginService } from '../shared/services/login.service'
 import { IdPassword } from '../shared/model/idpassword';
 import { Credential } from '../shared/model/credential';
 import { authentication } from "../shared/model/Authentication";
+import { ProjectMember } from "../shared/model/projectMember";
+import { SocialUserLogin } from "../shared/model/socialLogin";
+import { Login } from "../shared/model/login";
 
 @Component({
   selector: 'app-signup',
@@ -18,36 +21,60 @@ import { authentication } from "../shared/model/Authentication";
 export class SignupComponent implements OnInit {
 
   //local variable used in this component
+  userdata:any;
   user: SocialUser;
   email: string = '';
   password: string = '';
   userCred: Credential;
   tokenData: any;
+  userId:number = 0;
+  projectmember: ProjectMember = {               //object type of Projectmember
+    ProjectId: null,
+    MemberId: null,
+    ActAs: null
+  }
 
-  constructor(private authService: AuthService, private router: Router, private loginservice: LoginService) { }
+  constructor(private authService: AuthService, private router: Router, private loginservice: LoginService,private route:ActivatedRoute) { }
 
   ngOnInit() {
     //this method will run when the page is loaded
     //this method will check wheather the user is logged in with social account or not then the user can be moved to according screens
-    this.authService.authState.subscribe((user) => {
-      this.user = user; //checking wheather user variable has data in it or not
-      if (this.user != null)
-      { 
-        //this.router.navigateByUrl('app-dashboard') 
-      } //if the user is logged in with social account then user can directly moved to dashboard screen
-    });
+    this.route.params.subscribe((param) =>
+    this.projectmember.ProjectId = +param['id']);               //getting project id from route
+
   }
 
   signInWithGoogle(): void {
     //this method is used for social login(gmail)
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(data => {
-        console.log(data)
         this.authService.authState.subscribe((user) => {
           this.user = user; // data is assigned from gmail to local variable
-          if (this.user != null)
-          { this.router.navigateByUrl('app-dashboard') } //user will be redirected to dashboard screen
-        })
+
+          if (this.user != null) //user will be redirected to dashboard screen
+          {
+
+            this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
+                          this.tokenData = JSON.parse(data["_body"]).token;
+                          sessionStorage.setItem("id", this.user["id"].toString());
+                          sessionStorage.setItem("token", this.tokenData);
+            
+        
+          this.loginservice.get(this.user.email)
+                           .subscribe(data => {this.userId=data.json();
+
+                            if(this.userId!=null)
+                            { 
+                           
+                              sessionStorage.setItem("id",this.userId.toString());
+                              this.router.navigateByUrl('app-dashboard');
+                            }
+                            else
+                            { this.router.navigate(["app-register/:id"]); }
+                          });
+                })          
+
+          }});
       });
   }
 
@@ -55,14 +82,35 @@ export class SignupComponent implements OnInit {
     //this method is used for social login(facebook)
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then(data => {
-        console.log(data)
         this.authService.authState.subscribe((user) => {
           this.user = user; // data is assigned from facebook to local variable
+
           if (this.user != null)
-          { this.router.navigateByUrl('app-dashboard') } //user will be redirected to dashboard screen
+          { 
+            this.loginservice.getTokenForFbandGoogle(this.user).then(data => {
+              
+              this.tokenData = JSON.parse(data["_body"]).token;
+              sessionStorage.setItem("id", this.user["id"].toString());
+              sessionStorage.setItem("token", this.tokenData);
+
+            this.loginservice.get(this.user.email)
+                             .subscribe(data => {this.userId=data.json(); console.log(this.userId)
+                             if(this.userId!=null)
+                              {
+                                sessionStorage.setItem("id",this.userId.toString());
+                                this.router.navigateByUrl('app-dashboard');
+                              }
+                              else
+                                {
+                                  this.router.navigate(["app-register/:id"]);
+                                }
+                             })
+                            })  
+          } 
         })
       });
   }
+
 
   signOut(): void {
     //this method is used to signout with AgProMa project
@@ -88,13 +136,24 @@ export class SignupComponent implements OnInit {
         {
           //call method for token generation
           this.loginservice.getToken(this.userCred).then(data => {
-            //debugger;
+            console.log("data about data--------------",data)
             this.tokenData = JSON.parse(data["_body"]).token;
             sessionStorage.setItem("id", this.userCred["userId"].toString());
             sessionStorage.setItem("token", this.tokenData);
         
           if (this.tokenData)
-          { this.router.navigate(["app-dashboard"]); } //if user's credentials are correct then user will br redirected to dashboard
+          { 
+            if(this.projectmember.ProjectId){
+              console.log("hellooooooo",this.projectmember.ProjectId);
+              this.projectmember.ActAs=1;
+              this.projectmember.MemberId=this.userCred.userId;
+              this.loginservice.postMemberDetails(this.projectmember).then(()=>this.loginservice.getUserData(this.projectmember.ProjectId).subscribe(userdata=>this.userdata=userdata))
+            .then(()=>this.router.navigate(["app-dashboard"]))
+           
+          }
+           
+            else{
+            this.router.navigate(["app-dashboard"]);} } //if user's credentials are correct then user will br redirected to dashboard
         });
         }
 

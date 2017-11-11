@@ -39,9 +39,13 @@ private userDetail={
   {
     //this method will first check whether the user has accounnt with AgProMa
     //if not then an email will be trigged to that user
+    if(!this.model.email.includes('@' && '.')){
+      swal('',"please enter valid email address","error");
+    }
+    else{
     this.invitePeople.emailto(this.model)
                .then(data =>  swal('E-mail Sent!','Please check your email and verify yourself','success'));
   }
-
+  }
  
 }

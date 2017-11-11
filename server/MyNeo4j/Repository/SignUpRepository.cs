@@ -39,12 +39,23 @@ namespace AgProMa.Repository
         {
             _context.Pmaster.Add(adduser);
             _context.SaveChanges();
+            Master m = Get(adduser.Email);
+            SignalRMaster master=new SignalRMaster();
+
+            master.MemberId = m.Id;
+            master.Online = false;
+            master.HubCode = HubCode.projectscreen;
+           
+            _context.SignalRDb.Add(master);
+            _context.SaveChanges();
         }
         //this method get the details of a particular user    
         public Master Get(string emailid)
         {
-            Master s = _context.Pmaster.FirstOrDefault(p => p.Email == emailid);
-            return s;
+      
+                Master s = _context.Pmaster.FirstOrDefault(p => p.Email == emailid);
+                return s;
+            
         }
         //this method updates the details of particular user
         public void Update(string emailid, Master s)

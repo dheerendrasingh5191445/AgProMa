@@ -10,6 +10,8 @@ import 'rxjs/add/operator/toPromise';
 import { IdPassword } from '../model/idpassword';
 import { authentication } from "../model/Authentication";
 import { Credential } from "../model/credential";
+import { SocialUser } from "angular4-social-login";
+import { SocialUserLogin } from "../model/socialLogin";
 
 @Injectable()
 export class LoginService {
@@ -25,6 +27,7 @@ export class LoginService {
  // checkurl='http://localhost:52258/api/Login/Check';
   logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
+  user: SocialUser;
 
   token = sessionStorage.getItem("token");
   headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
@@ -48,6 +51,8 @@ export class LoginService {
     return this.http.get(this.url+"/"+email)
                     .map(data => data);
   }
+
+ 
 
  //check details of a particular user by emailid and password
   check(userData:IdPassword){
@@ -74,6 +79,19 @@ export class LoginService {
                       .toPromise();
   }
 
+  getTokenForFbandGoogle(user : SocialUser)
+  {
+    console.log("hello======",user);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    console.log("hao");
+    console.log(headers);
+    let options = new RequestOptions({ headers: this.headers });
+    console.log("hao1");
+    return this.http.post("http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/"+user.email,options)
+                      .toPromise();
+
+  }
+
   //post the details of a new user 
     postLoginDetails(logindetails:Login){
       return this.http
@@ -85,7 +103,6 @@ export class LoginService {
 
     //post the details of member with team id
     postMemberDetails(memberdetails:ProjectMember){
-      console.log(memberdetails);
       return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
     }
     
@@ -99,6 +116,7 @@ export class LoginService {
     getUserData(projectId:number){
       return this.http.get(this.invite_url+projectId)
                       .map(Response=>Response);
+                      // .toPromise().catch(this.handleError);
     
     }
     //update details of a user
