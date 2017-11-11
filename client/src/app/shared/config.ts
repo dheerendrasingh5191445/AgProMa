@@ -56,5 +56,6 @@ export const ConfigFile =
     },
     RegisterUserWithNewPasswordUrls:{
         signupNavigation:'/app-signup'
-    }
+    },
+    ActualEndDate: "10/10/1970"
 }
