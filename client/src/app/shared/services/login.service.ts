@@ -34,7 +34,7 @@ export class LoginService {
  getAll(){
    return this.http
    .get(this.url)
-   .map((response)=>response.json());
+   .map(response=>response.json());
  }
 //this function is to logout from the system
  logOut(userId:number){

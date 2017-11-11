@@ -23,14 +23,9 @@ namespace ForgetPassword.service
         public forgetPassword(ISignUpRepository repo)
         {
             _repo = repo;
-            var builder = new ConfigurationBuilder() //config file for the email method
-           .AddJsonFile("config.json", optional: false, reloadOnChange: true);
-            Configuration = builder.Build();// config file for email id
+            _config = config;
+
         }
-        public IConfigurationRoot Configuration { get; }
-
-
-
         public bool EmailForResetPassword(string email)
         {
             List<Master> master = _repo.GetAllDetails();
@@ -38,11 +33,10 @@ namespace ForgetPassword.service
             {
                 if (mast.Email == email)
                 {
-
                     var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress(Configuration["Title"], Configuration["FromEmail"])); //Mail title and mail from(Email)
+                    message.From.Add(new MailboxAddress(_config["EmailConfig:Title"], _config["EmailConfig:FromEmail"])); //mail title and mail from(Email)
                     message.To.Add(new MailboxAddress(email)); // Mail to(Email)
-                    message.Subject = Configuration["SubjectForEmailReset"]; //Mail's Subject
+                    message.Subject = _config["EmailConfig:SubjectForEmailReset"]; //mail subject
                     var bodyBuilder = new BodyBuilder();
                     //body of the mail
                     bodyBuilder.HtmlBody = "Click here to reset your password-  http://localhost:4200/app-register-user-with-new-password/" + 1;
@@ -50,18 +44,16 @@ namespace ForgetPassword.service
 
                     using (var client = new SmtpClient())
                     {
-			//details required for mail
-                        client.Connect(Configuration["Domain"], 587, false);
-                        client.Authenticate(Configuration["FromEmail"], Configuration["Password"]);
+                        //required field for email
+                        client.Connect(_config["EmailConfig:Domain"], 587, false);
+                        client.Authenticate(_config["EmailConfig:FromEmail"], _config["EmailConfig:Password"]);
                         client.Send(message);
                         client.Disconnect(true);
                     }
-
                     return true;
                 }
             }
             return false;
-
         }
     }
 }

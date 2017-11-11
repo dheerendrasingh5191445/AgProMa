@@ -83,7 +83,8 @@ export class TaskAssignComponent {
 
      //this method is to compare wether a person exist in team or not
      compareTask(personId:number,memberId:number){
-      if(personId == memberId)return true;
+
+      if(personId == memberId){return true;}
       else return false;
      }
 

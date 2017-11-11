@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import { async, ComponentFixture, TestBed,inject,fakeAsync,tick} from '@angular/core/testing';
 // import { TeamsComponent } from './teams.component';
 // import{ TeamsService} from '../shared/services/teams.service';
@@ -54,5 +53,3 @@
 //   expect(csoSpy.calls.any()).toBe(true); //check that service is called
 // }))
 // });
-=======
->>>>>>> 989faa7a97be025792be5eb1a68e861e51e58243
