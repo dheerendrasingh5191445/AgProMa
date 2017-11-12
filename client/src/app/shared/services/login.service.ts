@@ -12,14 +12,16 @@ import { authentication } from "../model/Authentication";
 import { Credential } from "../model/credential";
 import { SocialUser } from "angular4-social-login";
 import { SocialUserLogin } from "../model/socialLogin";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class LoginService {
 
   //local variable used in login service
   user: SocialUser;
+  errorMsg : any;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router : Router) { }
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
@@ -38,7 +40,10 @@ export class LoginService {
  getAll(){
    return this.http
    .get(this.url)
-   .map(response=>response.json());
+   .map(response=>response.json())
+   .catch((error: any) => {
+    return Observable.throw(this.router.navigate(['/app-error/']));
+  });
  }
 //this function is to logout from the system
  logOut(userId:number){
@@ -50,7 +55,10 @@ export class LoginService {
   //get the userid on basis of email
   get(email:string){
     return this.http.get(this.url+"/"+email)
-                    .map(data => data);
+                    .map(data => data)
+                    .catch((error: any) => {
+                      return Observable.throw(this.router.navigate(['/app-error/']));
+                    });;
   }
 
  
@@ -68,7 +76,10 @@ export class LoginService {
   //get userdata by id for view profile
   getById(id:any){
     return this.http.get(this.DetailUrl+id,this.options)
-                    .map(data=>data.json());
+                    .map(data=>data.json())
+                    .catch((error: any) => {
+                      return Observable.throw(this.router.navigate(['/app-error/']));
+                    });;
   }
 
   //this method is used to get the token
@@ -86,7 +97,12 @@ export class LoginService {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: this.headers });
     return this.http.post("http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/"+user.email,options)
-                      .toPromise();
+                      .toPromise()
+                      .catch(
+                        error=>{
+                          this.errorMsg = error; this.router.navigate(['/app-error/'])
+                        }
+                      );
 
   }
 
@@ -108,17 +124,20 @@ export class LoginService {
     //handling the error
     private handleError(error: any): Promise<any> {
  
-      return Promise.reject(error.message || error);
+      return Promise.reject(this.router.navigate(['/app-error/']));
     }
     //this is to get the existing member in the project
     getUserData(projectId:number){
       return this.http.get(this.invite_url+projectId)
-                      .map(Response=>Response);
-                      // .toPromise().catch(this.handleError);
+                      .map(Response=>Response)
+                      .catch((error: any) => {
+                        return Observable.throw(this.router.navigate(['/app-error/']));
+                      });
     
     }
     //update details of a user
     updatePassword(id:number,user:any) {
-      this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+      this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers})
+              .subscribe();
     }
   }

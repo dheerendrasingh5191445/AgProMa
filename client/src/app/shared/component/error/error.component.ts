@@ -12,7 +12,7 @@ export class ErrorComponent implements OnInit {
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit() {
-
+    console.log("In error page");
     this.route.params.subscribe(params=>this.error = params.id),{}
 
   }

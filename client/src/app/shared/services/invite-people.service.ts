@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class InvitePeopleService {
 
   invite_url='http://localhost:52258/api/InviteMembers'; //used for calling Invite People controller in API
   
-  constructor(private http:Http) { }
+  //local variable used in service
+  errorMsg : any;
+
+  constructor(private http:Http, private router : Router) { }
 
 
  getAll(){
@@ -21,13 +25,13 @@ export class InvitePeopleService {
     let headers=new Headers({ 'Content-Type': 'application/json' });
     let options=new RequestOptions({headers:headers});
     return this.http.post(this.invite_url,projectdetails,options)
-    .toPromise().catch(this.handleError);
+    .toPromise()
+    .catch(
+      error=>{
+        this.errorMsg = error; this.router.navigate(['/app-error/'])
+      }
+    );
   }
-  
-  //Used for error handling
-    private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
+ 
   
 }

@@ -25,11 +25,13 @@ import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
 import { UserProfileComponent} from "./user-profile/user-profile.component"
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { DashboardRoleComponent } from './dashboard-role/dashboard-role.component';
+import { ErrorComponent } from "./shared/component/error/error.component";
 
 // paths to all the respective pages
 const routes: Routes = [
     { path: "", redirectTo: 'landingpage', pathMatch: "full" },
     { path: 'landingpage', component:LandingpageComponent},
+    { path: 'app-error', component : ErrorComponent},
     { path: 'app-signup/:id', component: SignupComponent },
     { path: 'app-register/:id', component: RegisterComponent }, 
     { path: 'app-forget-password', component: ForgetPasswordComponent },

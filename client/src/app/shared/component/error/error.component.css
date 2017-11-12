@@ -1,8 +1,18 @@
 
 .error {
-   margin: 0 auto;
+
+   margin: 40px auto;
    text-align: center;
+   
  }
+
+ 
+.error-image {
+  height: 400px;
+  width: 600px;
+
+  margin-top: 10px;
+}
  
  .error-code {
    bottom: 60%;

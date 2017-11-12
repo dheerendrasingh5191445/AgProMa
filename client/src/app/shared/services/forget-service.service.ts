@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class ForgetServiceService {
 
-  constructor(private http:Http) { }
+  errorMsg : any ;
+
+  constructor(private http:Http, private router : Router) { }
 
   emailto(emailId : string) : Promise<any>
   {
@@ -12,6 +15,10 @@ export class ForgetServiceService {
     let headers=new Headers({ 'Content-Type': 'application/json' });
     let options=new RequestOptions({headers:headers});
     return this.http.post("http://localhost:52258/api/forgetpassword?email="+emailId,null,options)
-    .toPromise();
+    .toPromise().catch(
+      error=>{
+        this.errorMsg = error; this.router.navigate(['/app-error/'])
+      }
+    );
   }
 }

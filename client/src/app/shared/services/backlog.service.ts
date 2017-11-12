@@ -18,7 +18,8 @@ export class BacklogService {
 
   get(id)//for getting all user story based on product id 
   {
-    return this.http.get(this.getStoryUrl + '/' + id).map((res: Response) => res.json());
+    return this.http.get(this.getStoryUrl + '/' + id)
+                    .map((res: Response) => res.json())
   }
   add(item) // for adding new user story
   {

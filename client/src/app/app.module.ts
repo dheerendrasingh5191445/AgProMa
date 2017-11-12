@@ -56,6 +56,7 @@ import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
 import { BurndownService } from './shared/services/burndown.service';
+import { ErrorComponent } from "./shared/component/error/error.component";
 
 
 
@@ -94,6 +95,7 @@ export function provideConfig() {
     InvitePeopleComponent,
     TeamsComponent,
     BacklogComponent,
+    ErrorComponent,
     ReleasePlanComponent,
     SprintComponent,
     LineGraphComponent, 
