@@ -1,22 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BurndownService } from '../../shared/services/burndown.service';
+import { Burndown } from '../../shared/model/burndown';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-line-graph',
   templateUrl: './line-graph.component.html',
   styleUrls: ['./line-graph.component.css']
 })
-export class LineGraphComponent  {
-  title = 'app';
-  public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Given Time'},//time data for given time
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Actual Time'},//time data for actual time
-  
+export class LineGraphComponent implements OnInit {
+  @Input() userId: number;
+  //declaration of variables
+  taskData: Array<Burndown>;
+  reversetaskData: Array<Burndown>;
+  expectedTime: any[] = [];
+  actualTime: any[] = [];
+  tasks: any[] = [];
+  lineChartLabels: Array<any> = []//task lists
+  lineChartData: Array<any> = [
+    { data: [], label: 'Planned Hours' },
+    { data: [], label: 'Actual Hours' },
   ];
-  public lineChartLabels:Array<any> = ['Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5', 'Task 6', 'Task 7'];//task lists
-  public lineChartOptions:any = {
+  startindex: number = 0;
+  endindex: number = 8;
+  length: number;
+  status:string;
+
+
+  constructor(private burndownService: BurndownService) {
+
+  }
+
+  ngOnInit() {
+
+    this.burndownService.getTaskTimes(29)
+      .subscribe(data => {
+        this.taskData = data;
+        this.reversetaskData = this.taskData.reverse();
+        this.length = this.reversetaskData.length;
+        this.fillData(this.startindex, this.endindex);
+        console.log(this.taskData);
+      });
+  }
+
+
+
+
+
+  public lineChartOptions: any = {
     responsive: true
   };
-  public lineChartColors:Array<any> = [
+
+  //color scheme
+  public lineChartColors: Array<any> = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -42,20 +78,107 @@ export class LineGraphComponent  {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  public lineChartLegend:boolean = true;
-  public lineChartType:string = 'line';
- //Random function for bringing the random values for tasks
-  public randomize():void { 
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+  public lineChartLegend: boolean
+  = true;
+  public lineChartType: string = 'line';
+
+
+  //this is to fill the data in chart forwarding manner
+  forward() {
+    this.status = '';
+    this.startindex += 8;
+    this.endindex += 8;
+    if (this.length % 8 == 0) {
+      if (this.startindex >= this.length) {
+        this.startindex = 0;
+        this.endindex = 8;
       }
     }
-    this.lineChartData = _lineChartData;
+    else {
+      if (this.startindex == this.length) {
+        this.startindex = this.length;
+        this.endindex = this.length;
+        this.status = "last";
+      }
+      if (this.startindex > this.length) {
+        this.startindex = 0;
+        this.endindex = 8;
+      }
+    }
+    this.fillData(this.startindex,this.endindex);
   }
- 
- 
+
+  //this is to fill the data in chart backwarding manner
+  backward() {
+    this.status = '';
+    this.startindex -= 8;
+    this.endindex -= 8;
+    if (this.length % 8 == 0) {
+      if (this.startindex <= 0) {
+        this.startindex = this.length - 8;
+        this.endindex = this.length;
+      }
+    }
+    else {
+      console.log(this.startindex,this.endindex);
+      if(this.endindex == 1 && this.startindex < 0)
+      {
+        this.status = 'first';
+      }
+      if(this.endindex > 0 && this.startindex < 0)
+      {
+        this.startindex = 0;
+      }
+      if(this.endindex <= 0 )
+      {
+        this.startindex = this.length - 8;
+        this.endindex = this.length;
+      }
+    }
+    console.log(this.startindex,this.endindex);
+    this.fillData(this.startindex, this.endindex);
+  }
+
+  //this is to print the graph in chart
+  fillData(starti: number, endi: number) {
+    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
+    let expectedDate: Array<number> = [];
+    let actualDate: Array<number> = [];
+    let taskName: Array<string> = [];
+
+    if (this.status =="last" && this.length%8 != 0) {
+      expectedDate.push(this.reversetaskData[this.length - 1].expectedDate);
+      actualDate.push(this.reversetaskData[this.length - 1].actualDate);
+      taskName.push(this.reversetaskData[this.length - 1].taskName);
+    }
+    else if (this.status =="first" && this.length%8 != 0) {
+      expectedDate.push(this.reversetaskData[0].expectedDate);
+      actualDate.push(this.reversetaskData[0].actualDate);
+      taskName.push(this.reversetaskData[0].taskName);
+    }
+    else {
+      this.reversetaskData.slice(starti, endi).forEach(p => expectedDate.push(p.expectedDate));
+      this.reversetaskData.slice(starti, endi).forEach(p => actualDate.push(p.actualDate));
+      this.reversetaskData.slice(starti, endi).forEach(p => taskName.push(p.taskName));
+
+    }
+
+
+    this.lineChartLabels = taskName;
+    _lineChartData[0] = { data: expectedDate, label: this.lineChartData[0].label };
+    _lineChartData[1] = { data: actualDate, label: this.lineChartData[1].label };
+    this.lineChartData = _lineChartData;
+
+  }
+
+  // event on click to graph
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  // event on hovering on chart
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
 
 }

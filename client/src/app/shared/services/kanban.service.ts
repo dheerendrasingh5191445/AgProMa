@@ -6,6 +6,8 @@ import { ConfigFile } from "../config";
 export class KanbanService {
 
   constructor(private http : Http) { }
+
+  //header
   token= sessionStorage.getItem("token");
   headers = new Headers({'Content-Type':'application/json','Authorization':'Bearer '+this.token});
   options = new RequestOptions({ headers: this.headers});

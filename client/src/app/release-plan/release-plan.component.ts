@@ -22,6 +22,7 @@ export class ReleasePlanComponent implements OnInit {
   sprints:any[];
   data: any;
   connection:HubConnection;
+  errorMsg: string;
 
   constructor(private router:Router, private releasePlanService: ReleasePlanService,private route:ActivatedRoute) { }
 
@@ -35,6 +36,10 @@ export class ReleasePlanComponent implements OnInit {
     this.connection.invoke("SetConnectionId",3);
     this.connection.invoke("GetReleasePlans",this.projectId)
                    .then(()=>this.connection.invoke("GetAllSprints",this.projectId));
+    })
+    .catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/'+this.errorMsg]);
     });
   }
 
@@ -52,7 +57,10 @@ export class ReleasePlanComponent implements OnInit {
   //method for updating a release in sprint
   updateReleaseInSprint($event,releaseId:number){
     let sprintData: any = $event.dragData;
-    this.connection.invoke("UpdateReleaseInSprint",sprintData,releaseId);
+    this.connection.invoke("UpdateReleaseInSprint",sprintData,releaseId).catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/'+this.errorMsg]);
+    });
   }
 
   //Method for comparing a release plan
@@ -84,7 +92,11 @@ export class ReleasePlanComponent implements OnInit {
             this.releasePlan.actualReleaseDate=ConfigFile.ActualEndDate;
             console.log(this.releasePlan);
             this.connection.invoke("AddRelease",this.releasePlan)
-                           .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)});
+                           .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)})
+                           .catch(err=>{                        
+                            this.errorMsg=err;
+                            this.router.navigate(['/app-error/'+this.errorMsg]);
+                          });
           }
           else {
             swal('enter valid date', '', 'error') //alert for a date

@@ -56,7 +56,7 @@ export const ConfigFile =
         signupNavigationById:'/app-signup/:id'
     },
     RegisterUserWithNewPasswordUrls:{
-        signupNavigation:'/app-signup'
+        signupNavigation:'/app-signup/:id'
     },
     ActualEndDate: "10/10/1970"
 }

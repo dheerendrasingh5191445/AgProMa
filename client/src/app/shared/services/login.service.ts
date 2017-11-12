@@ -16,18 +16,19 @@ import { SocialUserLogin } from "../model/socialLogin";
 @Injectable()
 export class LoginService {
 
+  //local variable used in login service
+  user: SocialUser;
+
   constructor(private http: Http) { }
   url = 'http://localhost:52258/api/Login';                 //url for login 
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
   checkurl='http://localhost:52258/api/Login/Check';
-  updateUrl='http://localhost:52258/api/Login/Details/';
+  DetailUrl='http://localhost:52258/api/Login/Details/';
   updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
-//  private headers = new Headers({ 'Content-Type': 'application/json' });
- // checkurl='http://localhost:52258/api/Login/Check';
   logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
-  user: SocialUser;
+
 
   token = sessionStorage.getItem("token");
   headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
@@ -66,7 +67,7 @@ export class LoginService {
 
   //get userdata by id for view profile
   getById(id:any){
-    return this.http.get(this.updateUrl+id,this.options)
+    return this.http.get(this.DetailUrl+id,this.options)
                     .map(data=>data.json());
   }
 
@@ -79,14 +80,11 @@ export class LoginService {
                       .toPromise();
   }
 
+  //to get the token for facebook and gmail from API
   getTokenForFbandGoogle(user : SocialUser)
   {
-    console.log("hello======",user);
     let headers = new Headers({ 'Content-Type': 'application/json'});
-    console.log("hao");
-    console.log(headers);
     let options = new RequestOptions({ headers: this.headers });
-    console.log("hao1");
     return this.http.post("http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/"+user.email,options)
                       .toPromise();
 
@@ -109,7 +107,7 @@ export class LoginService {
 
     //handling the error
     private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error);
+ 
       return Promise.reject(error.message || error);
     }
     //this is to get the existing member in the project

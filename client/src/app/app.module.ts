@@ -55,6 +55,7 @@ import { TaskService } from './shared/services/task.service';
 import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
+import { BurndownService } from './shared/services/burndown.service';
 
 
 
@@ -128,6 +129,7 @@ export function provideConfig() {
     SprintService,
     TaskService,
     TeamsService,
+    BurndownService,
     EfficiencyGraphService,
     {
       provide: AuthServiceConfig,
