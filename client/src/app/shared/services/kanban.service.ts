@@ -15,12 +15,11 @@ export class KanbanService {
   //local variable used for storing path which is used to hit API
 
 
-
-  getTaskDetail(sprintID : number)
+  getTaskDetail(projectId:number)
   {
     //This method will get the details for kanban
     return this.http
-               .get(ConfigFile.KanBanUrls.getTaskUrl+ sprintID,this.options)
+               .get(ConfigFile.KanBanUrls.getTaskUrl+projectId,this.options)
                .map((response)=>response.json());
   }
 

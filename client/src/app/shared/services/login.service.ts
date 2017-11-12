@@ -24,7 +24,7 @@ export class LoginService {
   memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
   invite_url='http://localhost:52258/api/InviteMembers/';
   checkurl='http://localhost:52258/api/Login/Check';
-  updateUrl='http://localhost:52258/api/Login/Details/';
+  DetailUrl='http://localhost:52258/api/Login/Details/';
   updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
   logouturl="http://localhost:52258/api/Login/SetLogOut/";
  
@@ -67,7 +67,7 @@ export class LoginService {
 
   //get userdata by id for view profile
   getById(id:any){
-    return this.http.get(this.updateUrl+id,this.options)
+    return this.http.get(this.DetailUrl+id,this.options)
                     .map(data=>data.json());
   }
 

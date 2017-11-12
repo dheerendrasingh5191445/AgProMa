@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);//get the information of the user that has logged in
     this.loginservice.getById(this.id) //get the data of the user by the Mastrerid
-                     .subscribe(data => { this.details = data;console.log(this.details) });
+                     .subscribe(data => { this.details = data;});
   }
 
   checkPassword() {

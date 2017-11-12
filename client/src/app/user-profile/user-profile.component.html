@@ -125,7 +125,7 @@
                 <efficiency *ngIf="id" [userId]="id"></efficiency>
             </div>
             <div class="col-md-6 col-sm-6 col-lg-6">
-                <app-line-graph></app-line-graph>
+                <app-line-graph  *ngIf="id" [userId]="id"></app-line-graph>
             </div>
         </div>
       </div>
