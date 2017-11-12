@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TaskAssignService } from "../shared/services/task-assign.service";
 import { TaskBackLog } from "../shared/model/TaskBacklog";
 import { TeamMaster } from "../shared/model/teamMaster";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -26,7 +25,7 @@ export class TaskAssignComponent {
     connection:HubConnection;
     myId : number;
 
-    constructor(private task: TaskAssignService,private route:ActivatedRoute,private router:Router) { } //inject TaskAssignservices
+    constructor(private route:ActivatedRoute,private router:Router) { } //inject TaskAssignservices
     
     ngOnInit(){
         this.route.params.subscribe(param =>this.sprintId = +param['id']);

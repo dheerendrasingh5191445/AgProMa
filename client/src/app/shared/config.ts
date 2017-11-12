@@ -58,5 +58,34 @@ export const ConfigFile =
     RegisterUserWithNewPasswordUrls:{
         signupNavigation:'/app-signup/:id'
     },
-    ActualEndDate: "10/10/1970"
+    ActualEndDate: "10/10/1970",
+    ChecklistServiceUrl:{
+        getTaskUrl:"http://localhost:52258/api/Checklist/GetTaskDetail/",
+        checkListUrl:'http://localhost:52258/api/Checklist/',
+        efficiencyUrl:'http://localhost:52258/api/Efficiency/'
+    },
+    BurndownServiceUrl:{
+        burndownUrl:'http://localhost:52258/api/Burndown/GetTasks/'
+    },
+    EfficiencyService:{
+        efficiencyurl:'http://localhost:52258/api/Efficiency/'
+    },
+    ForgetServiceUrl:{
+       forgeturl:"http://localhost:52258/api/forgetpassword?email="
+    },
+    InvitePeopleServiceUrl:{
+        invite_url:'http://localhost:52258/api/InviteMembers' //used for calling Invite People controller in API
+    },
+    LoginServiceUrl:{
+        url: 'http://localhost:52258/api/Login',                //url for login 
+        memberUrl:'http://localhost:52258/api/ProjectMember',   //url for project members 
+        invite_url:'http://localhost:52258/api/InviteMembers/',
+        checkurl:'http://localhost:52258/api/Login/Check',
+        detailUrl:'http://localhost:52258/api/Login/Details/',
+        updatePasswordUrl:'http://localhost:52258/api/Login/UpdatePassword/',
+        logouturl:"http://localhost:52258/api/Login/SetLogOut/"
+    },
+    RegisterUserServiceUrls:{
+        registernewpassword:"http://localhost:52258/api/Master/"
+    }
 }

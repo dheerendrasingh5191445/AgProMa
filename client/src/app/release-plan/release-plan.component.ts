@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { ReleasePlanService } from "../shared/services/release-plan.service";
 import { HubConnection } from "@aspnet/signalr-client/dist/src";
 import { ReleasePlan } from '../shared/model/release-plan';
 import swal from 'sweetalert2';
@@ -24,7 +23,7 @@ export class ReleasePlanComponent implements OnInit {
   connection:HubConnection;
   errorMsg: string;
 
-  constructor(private router:Router, private releasePlanService: ReleasePlanService,private route:ActivatedRoute) { }
+  constructor(private router:Router,private route:ActivatedRoute) { }
 
   //Method for recieving a data from backend 
   connectReleasePlanHub() {

@@ -4,7 +4,7 @@ import { Http, Headers, Response,RequestOptions } from '@angular/http';
 import { Login } from '../model/login';
 import { Observable } from "rxjs";
 import { ProjectMember } from "../model/projectMember";
-
+import { ConfigFile } from "../config";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { IdPassword } from '../model/idpassword';
@@ -20,15 +20,6 @@ export class LoginService {
   user: SocialUser;
 
   constructor(private http: Http) { }
-  url = 'http://localhost:52258/api/Login';                 //url for login 
-  memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
-  invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://localhost:52258/api/Login/Check';
-  DetailUrl='http://localhost:52258/api/Login/Details/';
-  updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
-  logouturl="http://localhost:52258/api/Login/SetLogOut/";
- 
-
 
   token = sessionStorage.getItem("token");
   headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
@@ -37,19 +28,19 @@ export class LoginService {
  //get all the details of user
  getAll(){
    return this.http
-   .get(this.url)
+   .get(ConfigFile.LoginServiceUrl.url)
    .map(response=>response.json());
  }
 //this function is to logout from the system
  logOut(userId:number){
-  return this.http.post(this.logouturl+userId,"",this.options)
+  return this.http.post(ConfigFile.LoginServiceUrl.logouturl+userId,"",this.options)
                   .map((response)=>response.json())
                   .toPromise()
                   .catch(this.handleError);
  }
   //get the userid on basis of email
   get(email:string){
-    return this.http.get(this.url+"/"+email)
+    return this.http.get(ConfigFile.LoginServiceUrl.url+"/"+email)
                     .map(data => data);
   }
 
@@ -58,7 +49,7 @@ export class LoginService {
  //check details of a particular user by emailid and password
   check(userData:IdPassword){
    return this.http
-              .post(this.checkurl,userData,this.options)
+              .post(ConfigFile.LoginServiceUrl.checkurl,userData,this.options)
               .map((response)=>response.json())
               .toPromise()
               .catch(this.handleError);
@@ -67,7 +58,7 @@ export class LoginService {
 
   //get userdata by id for view profile
   getById(id:any){
-    return this.http.get(this.DetailUrl+id,this.options)
+    return this.http.get(ConfigFile.LoginServiceUrl.detailUrl+id,this.options)
                     .map(data=>data.json());
   }
 
@@ -93,7 +84,7 @@ export class LoginService {
   //post the details of a new user 
     postLoginDetails(logindetails:Login){
       return this.http
-                  .post(this.url,logindetails,this.options)
+                  .post(ConfigFile.LoginServiceUrl.url,logindetails,this.options)
                   .toPromise()
                   .catch(this.handleError);
     
@@ -101,7 +92,7 @@ export class LoginService {
 
     //post the details of member with team id
     postMemberDetails(memberdetails:ProjectMember){
-      return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
+      return this.http.post(ConfigFile.LoginServiceUrl.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
     }
     
 
@@ -112,13 +103,13 @@ export class LoginService {
     }
     //this is to get the existing member in the project
     getUserData(projectId:number){
-      return this.http.get(this.invite_url+projectId)
+      return this.http.get(ConfigFile.LoginServiceUrl.invite_url+projectId)
                       .map(Response=>Response);
                       // .toPromise().catch(this.handleError);
     
     }
     //update details of a user
     updatePassword(id:number,user:any) {
-      this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+      this.http.put(ConfigFile.LoginServiceUrl.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
     }
   }

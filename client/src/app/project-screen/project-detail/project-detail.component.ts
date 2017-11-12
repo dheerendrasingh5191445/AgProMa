@@ -1,6 +1,6 @@
 import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { ProjectMaster } from './../../shared/model/ProjectMaster';
-import { ProjectScreenService } from "./../project-screen.service";
+import { ProjectScreenService } from "./../../shared/services/project-screen.service";
 import { Router} from  '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -40,6 +40,8 @@ export class ProjectDetailComponent implements OnInit {
       }
     });
   }
+
+  
   //this method is used for storing role
   enterProject(){
     sessionStorage.setItem("role",this.Data["actAs"]);

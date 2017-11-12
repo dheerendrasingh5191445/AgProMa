@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BacklogService } from '../shared/services/backlog.service';
 import { ProductBacklog } from '../shared/model/productBacklog';
 import swal from 'sweetalert2';
-import { EpicService } from "../shared/services/epic.service";
 import { Epic } from "../shared/model/epic";
 import { HubConnection } from '@aspnet/signalr-client';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +19,7 @@ export class EpicComponent implements OnInit {
   userId:number;
 
   model = new Epic(null, ''); //model for adding new epic
-  constructor(private epicService: EpicService,private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((param) =>
