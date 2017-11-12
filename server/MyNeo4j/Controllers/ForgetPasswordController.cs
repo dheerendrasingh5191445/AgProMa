@@ -35,7 +35,7 @@ namespace ForgetPassword.Controllers
                 Console.WriteLine(e.StackTrace);//handling bad request
                 return BadRequest();
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return StatusCode(500); //internal server error
             }

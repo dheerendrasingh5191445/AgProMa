@@ -8,7 +8,7 @@ namespace MyNeo4j.Service
 {
     public interface IProjectMemberService
     {
-        ProjectMember getMemberDetails(int id);
+        ProjectMember GetMemberDetails(int id);
         void Add_MemberDetails(ProjectMember member);
        
 
@@ -21,10 +21,10 @@ namespace MyNeo4j.Service
             _repo = repo;
         }
 
-        public ProjectMember getMemberDetails(int id)
+        public ProjectMember GetMemberDetails(int id)
         {
             
-            return _repo.getMemberDetails(id);
+            return _repo.GetMemberDetails(id);
         }
         public void Add_MemberDetails(ProjectMember details)
         {

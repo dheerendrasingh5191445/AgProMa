@@ -11,6 +11,8 @@ using MyNeo4j.Hubs;
 using MyNeo4j.model;
 using MyNeo4j.Repository;
 using MyNeo4j.Service;
+using Serilog;
+using System.IO;
 
 namespace MyNeo4j
 {
@@ -26,6 +28,12 @@ namespace MyNeo4j
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+            Log.Logger = new LoggerConfiguration()
+                        .MinimumLevel.Error()
+                        .Enrich.FromLogContext()
+                        .WriteTo.RollingFile(Path.Combine(env.ContentRootPath, "log-{Date}.txt"))
+                        .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -79,6 +87,7 @@ namespace MyNeo4j
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddSerilog();
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());

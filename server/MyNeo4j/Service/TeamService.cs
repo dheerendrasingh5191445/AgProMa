@@ -19,13 +19,11 @@ namespace MyNeo4j.Service
     }
     public class TeamService : ITeamService
     {
-        private Neo4jDbContext _dbcon;
         private ITeamRepo _teamRepo;
         //reomve dbcon and use existing method in others repo
-        public TeamService(ITeamRepo _teamRepo, Neo4jDbContext dbcon)
+        public TeamService(ITeamRepo _teamRepo)
         {
             this._teamRepo = _teamRepo;
-            _dbcon = dbcon;
         }
         //this method will add members to a team
         public void AddMembers(TeamMember member)
@@ -48,7 +46,7 @@ namespace MyNeo4j.Service
         //this method will return available members in a project
         public List<AvailTeamMember> GetAvailableMember(int projectId)
         {
-            List<AvailTeamMember> availteam = new List<AvailTeamMember>();
+            List<AvailTeamMember> availTeam = new List<AvailTeamMember>();
             List<ProjectMember> promem = _teamRepo.GetProjectMember(projectId);
             List<TeamMember> finalmemlist = new List<TeamMember>();
             List<TeamMember> teammem = new List<TeamMember>();
@@ -63,7 +61,7 @@ namespace MyNeo4j.Service
             }
             foreach (ProjectMember pm in promem)
             {
-                Master master = _dbcon.Pmaster.FirstOrDefault(p => p.Id == pm.MemberId);
+                Master master = _teamRepo.Master(pm.MemberId);
                 AvailTeamMember avail = new AvailTeamMember();
                 avail.MemberId = master.Id;
                 avail.MemberName = master.FirstName + ' ' + master.LastName;
@@ -81,9 +79,9 @@ namespace MyNeo4j.Service
                         avail.Id = 0;
                     }               
                 }
-                availteam.Add(avail);
+                availTeam.Add(avail);
             }
-            return availteam;
+            return availTeam;
         }
 
         //this method will return teams of a particular project

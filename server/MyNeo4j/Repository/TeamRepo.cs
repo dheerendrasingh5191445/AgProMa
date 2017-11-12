@@ -7,6 +7,7 @@ namespace MyNeo4j.Repository
     public interface ITeamRepo
     {
         List<TeamMaster> GetTeam();
+        Master Master(int Id);
         List<ProjectMember> GetProjectMember(int projectId);
         void UpdateConnectionId(string connectionid, int memberid);
         List<TeamMember> GetTeamMember(int teamId);
@@ -59,6 +60,11 @@ namespace MyNeo4j.Repository
         public List<TeamMember> GetTeamMember(int id)
         {
             return _neo4JDbContext.Teammemeber.Where(p => p.TeamId == id).ToList();
+        }
+
+        public Master Master(int Id)
+        {
+            return _neo4JDbContext.Pmaster.FirstOrDefault(p => p.Id == Id);
         }
 
         //this method will update connection id of a member
