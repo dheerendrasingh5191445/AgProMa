@@ -7,6 +7,7 @@ namespace MyNeo4j.Repository
     public interface ITeamRepo
     {
         List<TeamMaster> GetTeam();
+        Master Master(int Id);
         List<ProjectMember> GetProjectMember(int projectId);
         void UpdateConnectionId(string connectionid, int memberid);
         List<TeamMember> GetTeamMember(int teamId);
@@ -39,7 +40,7 @@ namespace MyNeo4j.Repository
         public void DeleteMember(int id)
         {
             TeamMember member = _neo4JDbContext.Teammemeber.FirstOrDefault(m => m.Id == id);
-           _neo4JDbContext.Teammemeber.Remove(member);
+            _neo4JDbContext.Teammemeber.Remove(member);
             _neo4JDbContext.SaveChanges();
         }
 
@@ -49,7 +50,7 @@ namespace MyNeo4j.Repository
             return _neo4JDbContext.Projectmember.Where(p => p.ProjectId == id).ToList();
         }
 
-        //this method will return teams 
+        //this method will return teams
         public List<TeamMaster> GetTeam()
         {
             return _neo4JDbContext.Teammaster.ToList();
@@ -59,6 +60,11 @@ namespace MyNeo4j.Repository
         public List<TeamMember> GetTeamMember(int id)
         {
             return _neo4JDbContext.Teammemeber.Where(p => p.TeamId == id).ToList();
+        }
+
+        public Master Master(int Id)
+        {
+            return _neo4JDbContext.Pmaster.FirstOrDefault(p => p.Id == Id);
         }
 
         //this method will update connection id of a member
