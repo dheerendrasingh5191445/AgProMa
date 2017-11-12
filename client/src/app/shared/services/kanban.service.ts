@@ -13,8 +13,6 @@ export class KanbanService {
   options = new RequestOptions({ headers: this.headers});
 
   //local variable used for storing path which is used to hit API
-
-
   getTaskDetail(projectId:number)
   {
     //This method will get the details for kanban
