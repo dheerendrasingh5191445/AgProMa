@@ -12,13 +12,12 @@ export class KanbanService {
   headers = new Headers({'Content-Type':'application/json','Authorization':'Bearer '+this.token});
   options = new RequestOptions({ headers: this.headers});
 
-  //local variable used for storing path which is used to hit API
-  getTaskDetail(projectId:number)
-  {
-    //This method will get the details for kanban
-    return this.http
-               .get(ConfigFile.KanBanUrls.getTaskUrl+projectId,this.options)
-               .map((response)=>response.json());
+
+  getProjectDetails(projectId:number) {
+
+    //this method is to bring all the details related to the particular project
+    return this.http.get(ConfigFile.KanBanUrls.getProjectData+projectId)
+                      .map(Response=>Response.json());
   }
 
 }

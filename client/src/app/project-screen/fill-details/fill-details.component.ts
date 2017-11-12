@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectMaster } from '../../shared/model/ProjectMaster';
-import { ProjectScreenService } from '../project-screen.service';
+import { ProjectScreenService } from './../../shared/services/project-screen.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ConfigFile } from './../../shared/config';
 

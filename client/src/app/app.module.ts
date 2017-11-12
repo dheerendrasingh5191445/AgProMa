@@ -44,18 +44,12 @@ import { ForgetServiceService } from "./shared/services/forget-service.service";
 import { RegisterUserWithNewPasswordService } from "./shared/services/register-user-with-new-password.service";
 import { AuthService } from "angular4-social-login";
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
-import { ProjectScreenService } from './project-screen/project-screen.service';
-import { TeamsService } from './shared/services/teams.service';
-import { EpicService } from './shared/services/epic.service';
-import { BacklogService } from './shared/services/backlog.service';
-import { ReleasePlanService } from './shared/services/release-plan.service';
-import { SprintService} from './shared/services/sprint.service';
+import { ProjectScreenService } from './shared/services/project-screen.service';
 import { ChecklistService } from './shared/services/checklist.service';
-import { TaskService } from './shared/services/task.service';
-import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
 import { BurndownService } from './shared/services/burndown.service';
+import { ErrorComponent } from "./shared/component/error/error.component";
 
 
 
@@ -94,6 +88,7 @@ export function provideConfig() {
     InvitePeopleComponent,
     TeamsComponent,
     BacklogComponent,
+    ErrorComponent,
     ReleasePlanComponent,
     SprintComponent,
     LineGraphComponent, 
@@ -115,20 +110,13 @@ export function provideConfig() {
   ],
   providers: [
     KanbanService,
-    TaskAssignService,
     ChecklistService,
-    ReleasePlanService,
-    BacklogService,
     ProjectScreenService,
     AuthService,
     ForgetServiceService,
     InvitePeopleService,
     RegisterUserWithNewPasswordService,
     LoginService,
-    EpicService,
-    SprintService,
-    TaskService,
-    TeamsService,
     BurndownService,
     EfficiencyGraphService,
     {

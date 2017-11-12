@@ -4,7 +4,7 @@ import { Http, Headers, Response,RequestOptions } from '@angular/http';
 import { Login } from '../model/login';
 import { Observable } from "rxjs";
 import { ProjectMember } from "../model/projectMember";
-
+import { ConfigFile } from "../config";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { IdPassword } from '../model/idpassword';
@@ -12,23 +12,16 @@ import { authentication } from "../model/Authentication";
 import { Credential } from "../model/credential";
 import { SocialUser } from "angular4-social-login";
 import { SocialUserLogin } from "../model/socialLogin";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class LoginService {
 
   //local variable used in login service
   user: SocialUser;
+  errorMsg : any;
 
-  constructor(private http: Http) { }
-  url = 'http://localhost:52258/api/Login';                 //url for login 
-  memberUrl='http://localhost:52258/api/ProjectMember';     //url for project members 
-  invite_url='http://localhost:52258/api/InviteMembers/';
-  checkurl='http://localhost:52258/api/Login/Check';
-  DetailUrl='http://localhost:52258/api/Login/Details/';
-  updatePasswordUrl='http://localhost:52258/api/Login/UpdatePassword/';
-  logouturl="http://localhost:52258/api/Login/SetLogOut/";
- 
-
+  constructor(private http: Http, private router : Router) { }
 
   token = sessionStorage.getItem("token");
   headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token });
@@ -37,20 +30,30 @@ export class LoginService {
  //get all the details of user
  getAll(){
    return this.http
-   .get(this.url)
-   .map(response=>response.json());
+   .get(ConfigFile.LoginServiceUrl.url)
+   .map(response=>response.json())
+   .catch((error: any) => {
+    return Observable.throw(this.router.navigate(['/app-error/']));
+  });
  }
+
+
 //this function is to logout from the system
  logOut(userId:number){
-  return this.http.post(this.logouturl+userId,"",this.options)
+  return this.http.post(ConfigFile.LoginServiceUrl.logouturl+userId,"",this.options)
                   .map((response)=>response.json())
                   .toPromise()
                   .catch(this.handleError);
  }
+
+ 
   //get the userid on basis of email
   get(email:string){
-    return this.http.get(this.url+"/"+email)
-                    .map(data => data);
+    return this.http.get(ConfigFile.LoginServiceUrl.url+"/"+email)
+                    .map(data => data)
+                    .catch((error: any) => {
+                      return Observable.throw(this.router.navigate(['/app-error/']));
+                    });;
   }
 
  
@@ -58,7 +61,7 @@ export class LoginService {
  //check details of a particular user by emailid and password
   check(userData:IdPassword){
    return this.http
-              .post(this.checkurl,userData,this.options)
+              .post(ConfigFile.LoginServiceUrl.checkurl,userData,this.options)
               .map((response)=>response.json())
               .toPromise()
               .catch(this.handleError);
@@ -67,8 +70,11 @@ export class LoginService {
 
   //get userdata by id for view profile
   getById(id:any){
-    return this.http.get(this.DetailUrl+id,this.options)
-                    .map(data=>data.json());
+    return this.http.get(ConfigFile.LoginServiceUrl.detailUrl+id,this.options)
+                    .map(data=>data.json())
+                    .catch((error: any) => {
+                      return Observable.throw(this.router.navigate(['/app-error/']));
+                    });;
   }
 
   //this method is used to get the token
@@ -86,14 +92,19 @@ export class LoginService {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: this.headers });
     return this.http.post("http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/"+user.email,options)
-                      .toPromise();
+                      .toPromise()
+                      .catch(
+                        error=>{
+                          this.errorMsg = error; this.router.navigate(['/app-error/'])
+                        }
+                      );
 
   }
 
   //post the details of a new user 
     postLoginDetails(logindetails:Login){
       return this.http
-                  .post(this.url,logindetails,this.options)
+                  .post(ConfigFile.LoginServiceUrl.url,logindetails,this.options)
                   .toPromise()
                   .catch(this.handleError);
     
@@ -101,24 +112,29 @@ export class LoginService {
 
     //post the details of member with team id
     postMemberDetails(memberdetails:ProjectMember){
-      return this.http.post(this.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
+      return this.http.post(ConfigFile.LoginServiceUrl.memberUrl,memberdetails,this.options).toPromise().catch(this.handleError);
     }
     
 
     //handling the error
     private handleError(error: any): Promise<any> {
  
-      return Promise.reject(error.message || error);
+      return Promise.reject(this.router.navigate(['/app-error/']));
     }
     //this is to get the existing member in the project
     getUserData(projectId:number){
-      return this.http.get(this.invite_url+projectId)
-                      .map(Response=>Response);
-                      // .toPromise().catch(this.handleError);
+      return this.http.get(ConfigFile.LoginServiceUrl.invite_url+projectId)
+                      .map(Response=>Response)
+                      .catch((error: any) => {
+                        return Observable.throw(this.router.navigate(['/app-error/']));
+                      });
     
     }
+
+    
     //update details of a user
     updatePassword(id:number,user:any) {
-      this.http.put(this.updatePasswordUrl+id,user,{headers:this.headers}).subscribe();
+      this.http.put(ConfigFile.LoginServiceUrl.updatePasswordUrl+id,user,{headers:this.headers})
+              .subscribe();
     }
   }

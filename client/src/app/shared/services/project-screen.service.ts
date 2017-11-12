@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers,Response} from '@angular/http';
-import { ProjectMaster } from './../shared/model/ProjectMaster';
-import { ConfigFile } from './../shared/config';
+import { ProjectMaster } from './../model/ProjectMaster';
+import { ConfigFile } from './../config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

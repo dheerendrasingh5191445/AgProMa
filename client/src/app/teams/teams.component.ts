@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamsService } from '../shared/services/teams.service';
 import { TeamMaster } from '../shared/model/teamMaster';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
@@ -24,7 +23,7 @@ export class TeamsComponent implements OnInit {
    userId:number;
    letter:any;
 
-  constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
+  constructor(private route:ActivatedRoute,private router:Router) {   
   }
   ngOnInit() {
       this.route.params.subscribe(param =>this.projectId = +param['id']);

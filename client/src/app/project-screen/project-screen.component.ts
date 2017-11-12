@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectMaster } from './../shared/model/ProjectMaster';
-import { ProjectScreenService } from "./project-screen.service";
+import { ProjectScreenService } from "./../shared/services/project-screen.service";
 import { Router} from  '@angular/router';
 import { HubConnection } from '@aspnet/signalr-client';
 
