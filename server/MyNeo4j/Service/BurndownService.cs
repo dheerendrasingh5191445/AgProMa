@@ -26,6 +26,7 @@ namespace MyNeo4j.Service
         public List<UserBurnDown> GetTasks(int userId)
         {
             List<UserBurnDown> dropdown = new List<UserBurnDown>();
+            //get all tasks for a user
             List<TaskBacklog> tasks= _repository.GetTasks(userId);
             tasks.ForEach(m => {
                 UserBurnDown userbd = new UserBurnDown();
@@ -36,6 +37,7 @@ namespace MyNeo4j.Service
                 userbd.ProjectId =m.SprintBacklogs.ProjectId;
                 userbd.ProjectName = m.SprintBacklogs.ProjectMaster.Name;
                 userbd.SprintName=m.SprintBacklogs.SprintName;
+                //Add each task details for a user
                 dropdown.Add(userbd);
             });
             return dropdown;
