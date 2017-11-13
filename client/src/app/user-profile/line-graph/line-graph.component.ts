@@ -16,9 +16,10 @@ export class LineGraphComponent implements OnInit {
   expectedTime: any[] = [];
   actualTime: any[] = [];
   tasks: any[] = [];
-  lineChartLabels: Array<any> = []//task lists
+  lineChartLabels: Array<any> = [];
+  //task lists
   lineChartData: Array<any> = [
-    { data: [], label: 'Planned Hours' },
+    { data: [],label: 'Planned Hours' },
     { data: [], label: 'Actual Hours' },
   ];
   startindex: number = 0;
@@ -33,13 +34,12 @@ export class LineGraphComponent implements OnInit {
 
   ngOnInit() {
 
-    this.burndownService.getTaskTimes(29)
+    this.burndownService.getTaskTimes(this.userId)
       .subscribe(data => {
         this.taskData = data;
         this.reversetaskData = this.taskData.reverse();
         this.length = this.reversetaskData.length;
         this.fillData(this.startindex, this.endindex);
-        console.log(this.taskData);
       });
   }
 
@@ -120,7 +120,6 @@ export class LineGraphComponent implements OnInit {
       }
     }
     else {
-      console.log(this.startindex,this.endindex);
       if(this.endindex == 1 && this.startindex < 0)
       {
         this.status = 'first';
@@ -135,7 +134,6 @@ export class LineGraphComponent implements OnInit {
         this.endindex = this.length;
       }
     }
-    console.log(this.startindex,this.endindex);
     this.fillData(this.startindex, this.endindex);
   }
 
@@ -145,6 +143,8 @@ export class LineGraphComponent implements OnInit {
     let expectedDate: Array<number> = [];
     let actualDate: Array<number> = [];
     let taskName: Array<string> = [];
+    let projectName: Array<string> = [];
+    let sprintName: Array<string> = [];
 
     if (this.status =="last" && this.length%8 != 0) {
       expectedDate.push(this.reversetaskData[this.length - 1].expectedDate);
@@ -154,31 +154,33 @@ export class LineGraphComponent implements OnInit {
     else if (this.status =="first" && this.length%8 != 0) {
       expectedDate.push(this.reversetaskData[0].expectedDate);
       actualDate.push(this.reversetaskData[0].actualDate);
-      taskName.push(this.reversetaskData[0].taskName);
+      taskName.push(this.reversetaskData[0].taskId.toString());
+      sprintName.push(this.reversetaskData[0].sprintName);
+      projectName.push(this.reversetaskData[0].projectName);
     }
     else {
       this.reversetaskData.slice(starti, endi).forEach(p => expectedDate.push(p.expectedDate));
       this.reversetaskData.slice(starti, endi).forEach(p => actualDate.push(p.actualDate));
-      this.reversetaskData.slice(starti, endi).forEach(p => taskName.push(p.taskName));
+      this.reversetaskData.slice(starti, endi).forEach(p => taskName.push(p.taskId.toString()));
+      this.reversetaskData.slice(starti, endi).forEach(p => projectName.push(p.projectName));
+      this.reversetaskData.slice(starti, endi).forEach(p => sprintName.push(p.sprintName));
 
     }
 
 
     this.lineChartLabels = taskName;
-    _lineChartData[0] = { data: expectedDate, label: this.lineChartData[0].label };
-    _lineChartData[1] = { data: actualDate, label: this.lineChartData[1].label };
+    _lineChartData[0] = { data: expectedDate , label: this.lineChartData[0].label };
+    _lineChartData[1] = { data: actualDate , label: this.lineChartData[1].label };
     this.lineChartData = _lineChartData;
 
   }
 
   // event on click to graph
   public chartClicked(e: any): void {
-    console.log(e);
   }
 
   // event on hovering on chart
   public chartHovered(e: any): void {
-    console.log(e);
   }
 
 }

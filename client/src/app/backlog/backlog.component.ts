@@ -120,16 +120,25 @@ export class BacklogComponent implements OnInit {
 
   //delete a backlog
   deleteBacklog(item: any) {
-    this.connection.invoke("DeleteBacklog", item.storyId, this.projectId)
-                    .then(data=>{ swal('User Story Deleted', '', 'success')})
-                    .catch(err=>{                        
-                      this.errorMsg=err;
-                      this.router.navigate(['/app-error/']);
-                    });
-    this.connection.invoke("GetBacklog", this.projectId)
-                    .then(data=>{ this.stories.sort(function (a, b) {
-                        return a.priority - b.priority;
-                      });
-                    });
+    swal('Are you sure?','Once deleted, you will not be able to recover this brainstorming!','warning')
+    .then((willDelete) => {
+      if (willDelete) {
+        this.connection.invoke("DeleteBacklog", item.storyId, this.projectId)
+        .then(data=>{ swal('User Story Deleted', '', 'success')})
+        .catch(err=>{                        
+          this.errorMsg=err;
+          this.router.navigate(['/app-error/']);
+        });
+        this.connection.invoke("GetBacklog", this.projectId)
+                .then(data=>{ this.stories.sort(function (a, b) {
+                    return a.priority - b.priority;
+                  });
+                });
+       
+      }
+      else {
+        swal("Your brainstorming is safe!");
+      }
+    });
   }
 }

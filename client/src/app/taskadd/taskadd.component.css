@@ -260,7 +260,7 @@ transition-delay: 0s;
   color: #fff;
 }
 }
-#example-date-input{
+#start-date-input,#end-date-input{
 width:250px;
 }
 #scroll{

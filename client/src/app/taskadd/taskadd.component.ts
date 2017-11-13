@@ -35,8 +35,8 @@ export class TaskAddComponent implements OnInit {
     this.connection = new HubConnection(ConfigFile.TaskAddUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("gettask",data=>{this.data = data;});//this will return task backlogs
-    this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); //sweet alert when task happens
-    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
+    this.connection.on("whenUpdated",data => { swal('Task Updated', '', 'success') }); //sweet alert when task happens
+    this.connection.on("whenAdded",data => { swal('Task Added', '', 'success') });   
     this.connection.start().then(() => { 
     this.connection.invoke("SetConnectionId",this.userId);
     this.connection.invoke("GetTaskBacklogs",this.sprintId);
@@ -44,14 +44,14 @@ export class TaskAddComponent implements OnInit {
   }
 
   //this will add new task to the backlog
-  addBacklog(taskName: string, comment: any, startDate: any, endDate: any) {
+  addBacklog(taskName: string, startDate: any, endDate: any) {
     //this will give alert if nothing is entered as task
     if ((taskName == "")) {
       swal('Task Cannot Be Empty ', '', 'warning')
     }
     //this will work if task name is entered and  add new task to backlog
     if (taskName) {
-      let model = new Task(0,this.sprintId,taskName,0,startDate,endDate);
+      let model = new Task(0,this.sprintId,taskName,0,startDate,endDate,new Date(ConfigFile.ActualEndDate));
       this.connection.invoke("PostTask",model,this.sprintId)
       this.connection.invoke("GetTaskBacklogs",this.sprintId);
     }

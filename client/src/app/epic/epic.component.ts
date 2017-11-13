@@ -30,9 +30,9 @@ export class EpicComponent implements OnInit {
     this.connection = new HubConnection(ConfigFile.EpicUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
     this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
-    this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
-    this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); 
-    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
+    this.connection.on("whenDeleted",data => { swal('Brainstorming deleted', '', 'success') });  //sweet alerts
+    this.connection.on("whenUpdated",data => { swal('Brainstorming updated', '', 'success') }); 
+    this.connection.on("whenAdded",data => { swal('Brainstorming Added', '', 'success') });   
     this.connection.start().then(() => { 
     this.connection.invoke("SetConnectId",this.userId);
     this.connection.invoke("Get",this.projectId);
@@ -75,11 +75,19 @@ export class EpicComponent implements OnInit {
   }
 
   deleteBacklog(item:any){       //for deleting the epic 
-    this.connection.invoke("Delete",item.epicId)
-    .catch(err=>{                        
-      this.errorMsg=err;
-      this.router.navigate(['/app-error/']);
-    });;
-    this.connection.invoke("Get",this.projectId);
+    swal('Are you sure?','Once deleted, you will not be able to recover this brainstorming!','warning')
+    .then((willDelete) => {
+      if (willDelete) {
+        this.connection.invoke("Delete",item.epicId)
+        .catch(err=>{                        
+          this.errorMsg=err;
+          this.router.navigate(['/app-error/']);
+        });;
+        this.connection.invoke("Get",this.projectId);
+      }
+      else {
+        swal("Your brainstorming is safe!");
+      }
+    });
   }
 }

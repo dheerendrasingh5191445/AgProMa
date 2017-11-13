@@ -55,6 +55,10 @@ namespace MyNeo4j.Controllers
                     {
                         return Ok(checklist); // returns a OK response if checklist returned are 0
                     }
+                    else if(checklist.Count == 0)
+                    {
+                        return Ok("no data");
+                    }
                     else
                     {
                         return NotFound(); // returns a response code 404 to the client

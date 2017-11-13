@@ -68,7 +68,7 @@ namespace MyNeo4j.Repository
             }
             catch (Exception)
             {
-                //throw new Exception();
+                throw new Exception();
             }
             
         }
@@ -112,7 +112,7 @@ namespace MyNeo4j.Repository
             }
             catch (Exception)
             {
-                //throw;
+                throw new Exception();
             }
         }
 
