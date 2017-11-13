@@ -45,6 +45,7 @@ export class ChecklistComponent implements OnInit {
       .subscribe(data => {
         this.details = data; 
         this.totalCount = 0;
+        this.countChecklist=0;
         for (let i in this.details) {
           if (this.details[i]["status"]) {
             this.countChecklist++;
@@ -67,6 +68,7 @@ export class ChecklistComponent implements OnInit {
       error => {
         this.msg = "Something Went Wrong, Please Try Again Later";
       });
+      this.model.checklistName="";
   }
 
 

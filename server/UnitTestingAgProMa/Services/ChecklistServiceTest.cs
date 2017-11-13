@@ -78,19 +78,7 @@ namespace MyNeo4j_Test_Cases.Service
             Assert.NotNull(res);
             Assert.Equal(tasks, res);
         }
-        [Fact]
-        public void Checklist_Service_Update_Method_To_Update_Checklist()
-        {
-            //Arrange
-            ChecklistBacklog checklist = new ChecklistBacklog();
-            var mockrepo = new Mock<ICheckListRepository>();
-            mockrepo.Setup(x => x.Update(1, checklist)).Throws(new NullReferenceException());
-            ChecklistService obj = new ChecklistService(mockrepo.Object);
-            //Act
-            var exception = Record.Exception(() => obj.Update(1, checklist));
-            //Assert
-            Assert.IsType<NullReferenceException>(exception);
-        }
+
         [Fact]
         public void Checklist_Service_Delete_Method_To_delete_Checklist()
         {
