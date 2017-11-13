@@ -27,7 +27,9 @@ export class InvitePeopleService {
     .toPromise()
     .catch(
       error=>{
-        this.errorMsg = error; this.router.navigate(['/app-error/'])
+        this.errorMsg = error; 
+        //this.router.navigate(['/app-error/'])
+        throw error;
       }
     );
   }
