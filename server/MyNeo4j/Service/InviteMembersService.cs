@@ -62,7 +62,8 @@ namespace MyNeo4j.Service
                         client.Authenticate(_config["EmailConfig:FromEmail"], _config["EmailConfig:Password"]);
                         client.Send(message);
                         client.Disconnect(true);
-                    }          
+                    } 
+        
         }
 
         public List<InviteExistingMember> GetMemberName(int id)

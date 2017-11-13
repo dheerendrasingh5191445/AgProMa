@@ -18,7 +18,7 @@ export class ChecklistComponent implements OnInit {
   totalCount:number;
   check: any;
   task: any;
-  checklistStatus: number;
+  checklistStatus: number = 0;
   statusInPer;
   countChecklist: number = 0;
   details: Checklist[];
@@ -45,8 +45,13 @@ export class ChecklistComponent implements OnInit {
       .subscribe(data => {
         this.details = data; 
         this.totalCount = 0;
-        this.details.forEach(p => { this.totalCount++; });
-        this.details.forEach(p => { if (p["status"] == true) { this.countChecklist++ } });
+        this.countChecklist=0;
+        for (let i in this.details) {
+          if (this.details[i]["status"]) {
+            this.countChecklist++;
+          }
+        }
+        for (var i in this.details) { if (i != null) { this.totalCount++; } }
         this.checklistStatus = (((this.countChecklist) / (this.totalCount)) * 100);
         this.statusInPer = (this.checklistStatus + '%')
         this.StatusStyle = { 'width': this.statusInPer };
@@ -63,6 +68,7 @@ export class ChecklistComponent implements OnInit {
       error => {
         this.msg = "Something Went Wrong, Please Try Again Later";
       });
+      this.model.checklistName="";
   }
 
 

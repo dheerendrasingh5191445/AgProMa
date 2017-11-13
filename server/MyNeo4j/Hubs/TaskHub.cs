@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using MyNeo4j.model;
 using MyNeo4j.Service;
+using MyNeo4j.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,8 @@ namespace MyNeo4j.Hubs
         {
             int projectId = _service.GetProjectId(sprintId);
             JoinGroup(projectId);
-            var tasks = _service.GetAll(sprintId);
-            return Clients.Group("TaskGroup").InvokeAsync("getTasks", tasks);
+            List<TaskBacklogView> tasks = _service.GetAll(sprintId);
+            return Clients.Group("TaskGroup").InvokeAsync("gettask", tasks);
         }
         //Add a task to the DB.
         public Task PostTask(TaskBacklog task, int sprintId)

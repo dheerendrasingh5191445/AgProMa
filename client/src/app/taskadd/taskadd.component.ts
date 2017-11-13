@@ -15,9 +15,9 @@ export class TaskAddComponent implements OnInit {
   //variable declaration
   sprintId:number;
   sub: string = "";
-  data: any[];
+  data: Task[]=[];
   connection: HubConnection;
-  userId:number=1;
+  userId:number;
 
   constructor(private route:ActivatedRoute) {
 
@@ -25,19 +25,16 @@ export class TaskAddComponent implements OnInit {
   //this will get the task backlog list
   ngOnInit() {
     this.route.params.subscribe((param) =>{ this.sprintId = +param['id'];});
-    
-    var session = sessionStorage.getItem("id");
-    this.userId = parseInt(session);
-
     this.connectToHub();
   }
 
   //this is to make connection with the hub
   connectToHub(){
-    
+    var session = sessionStorage.getItem("id");
+    this.userId = parseInt(session);
     this.connection = new HubConnection(ConfigFile.TaskAddUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
-    this.connection.on("getTasks",data =>{console.log("backlog called"); this.data = data });//this will return task backlogs
+    this.connection.on("gettask",data=>{this.data = data;});//this will return task backlogs
     this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); //sweet alert when task happens
     this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
     this.connection.start().then(() => { 
@@ -54,8 +51,8 @@ export class TaskAddComponent implements OnInit {
     }
     //this will work if task name is entered and  add new task to backlog
     if (taskName) {
-      let model = new Task(1,this.sprintId,taskName,this.userId,startDate,endDate);
-      this.connection.invoke("PostTask",model,this.sprintId);
+      let model = new Task(0,this.sprintId,taskName,0,startDate,endDate);
+      this.connection.invoke("PostTask",model,this.sprintId)
       this.connection.invoke("GetTaskBacklogs",this.sprintId);
     }
   }

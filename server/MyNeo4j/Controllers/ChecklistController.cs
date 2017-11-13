@@ -11,8 +11,8 @@ using MyNeo4j.model;
 namespace MyNeo4j.Controllers
 {
     [Produces("application/json")]
-   
-    public class ChecklistController : Controller 
+
+    public class ChecklistController : Controller
     {
         private ICheckListService _context; // creating service instance
         public ChecklistController(ICheckListService context)
@@ -23,10 +23,17 @@ namespace MyNeo4j.Controllers
         // GET: api/values
         [HttpGet]
         [Route("api/[controller]")]
-        public List<ChecklistBacklog> Get()
+        public IActionResult Get()
         {
-            List<ChecklistBacklog> f = _context.Get(); //getting checklist
-            return f;
+            try
+            {
+                List<ChecklistBacklog> f = _context.Get(); //getting checklist
+                return Ok(f);//return ok Response
+            }
+            catch
+            {
+                return BadRequest();// returns a response code of 400 if Exception
+            }
         }
 
         // GET api/values/5
@@ -36,52 +43,83 @@ namespace MyNeo4j.Controllers
         {
             try
             {
-                List<ChecklistBacklog> checklist = _context.Get(id);
-                return Ok(checklist);
+                if (id == null)
+                {
+                    return NoContent();
+                }
+                else
+                {
+
+                    List<ChecklistBacklog> checklist = _context.Get(id);
+                    if (checklist.Count != 0)
+                    {
+                        return Ok(checklist); // returns a OK response if checklist returned are 0
+                    }
+                    else if(checklist.Count == 0)
+                        {
+                        return Ok("no data");
+                    }
+                    else
+                    {
+                        return NotFound(); // returns a response code 404 to the client
+                    }
+                }
             }
             catch
             {
-                return BadRequest();
+                return StatusCode(500);
             }
         }
 
         [HttpGet]
         [Route("api/[controller]/GetTaskDetail/{id}")]
-        public IActionResult GetTaskDetail(int id)
+        public IActionResult GetTaskDetail(int id) //Method for getting checklist by Id
         {
             try
             {
-               TaskBacklog taskbl= _context.GetTaskDetail(id);
-                return Ok(taskbl);
+
+                TaskBacklog taskbl = _context.GetTaskDetail(id);
+                return Ok(taskbl);// returns a response code of 200
             }
             catch
             {
-                return BadRequest();
+                return BadRequest();// returns a response code of 400 if Exception
             }
+
         }
 
         // POST api/values
         [HttpPost]
         [Route("api/[controller]")]
-        public void Post([FromBody]ChecklistBacklog value) //adding checklist
+        public IActionResult Post([FromBody]ChecklistBacklog value) //adding checklist
         {
-            _context.Add_Checklist(value);
-        }
+            try
+            {
+                _context.Add_Checklist(value); //Call to service to checklist object
+                return StatusCode(200, Ok());   // returns a response code of 200
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(500);//returns 500 status when Exception
+            }
 
-        // PUT api/values/5
-        //[HttpPut]
-        //[Route("api/[controller]/{id}")]
-        //public void Put(int id,[FromBody]ChecklistBacklog value) //update checklist
-        //{
-        //    _context.Update(id, value);           
-        //}
+        }
 
         // DELETE api/values/5
         [HttpDelete]
-        [Route("api/[controller]/{id}")] 
-        public void Delete(int id) //delete checklist
+        [Route("api/[controller]/{id}")]
+        public IActionResult Delete(int id) //delete checklist
         {
-            _context.Delete(id);
+            try
+            {
+                _context.Delete(id);  //Call to delete method with defined id
+                return NoContent();  // returns a response code of 200
+            }
+            catch
+            {
+                return BadRequest();    //Returns 400 when Exception
+            }
         }
     }
 }
+

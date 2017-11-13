@@ -21,12 +21,6 @@ namespace MyNeo4j.model
         [Key]
         public int SprintId { get; set; }
 
-        public int ProjectId { get; set; }
-        [ForeignKey("ProjectId")]
-        public ProjectMaster ProjectMaster { get; set; }
-
-        public List<TaskBacklog> Tasks { get; set; }
-
         public string SprintName { get; set; }
 
         public string SprintGoal { get; set; }
@@ -45,5 +39,10 @@ namespace MyNeo4j.model
         [JsonConverter(typeof(StringEnumConverter))]
         public SprintStatus Status { get; set; }
 
+        public int ProjectId { get; set; }
+        [ForeignKey("ProjectId")]
+        public ProjectMaster ProjectMaster { get; set; }
+
+        public virtual List<TaskBacklog> Tasks { get; set; }
     }
 }

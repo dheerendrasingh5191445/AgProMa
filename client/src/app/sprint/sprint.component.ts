@@ -66,7 +66,7 @@ export class SprintComponent implements OnInit {
                       this.connection.invoke("GetSprints", this.projectId);
 
                       //get all the backlogs
-                      this.connection.invoke("GetAllBacklogs", this.projectId);
+                      this.connection.invoke("GetAllBacklogs",this.projectId);
                     });
   }
 

@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace XUnitTestProject1.Services
+
+namespace UnitTestingAgProMa.Services
 {
     public class ReleasePlanServiceTest
     {
@@ -98,8 +99,8 @@ namespace XUnitTestProject1.Services
             sprintList.Add(sprint);
             var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
             var mockSprintRepository = new Mock<ISprintRepository>();
-            mockReleasePlanRepo.Setup(x => x.GetAllSprints(It.IsAny<int>())).Returns(sprintList);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            mockSprintRepository.Setup(x => x.GetAll(It.IsAny<int>())).Returns(sprintList);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object,mockSprintRepository.Object);
 
             //Act
             List<SprintBacklog> result = service.GetAllSprints(It.IsAny<int>());
@@ -233,7 +234,7 @@ namespace XUnitTestProject1.Services
             //assert
             Assert.NotNull(ex);
         }
-        
+
         //Eleventh Test Case
         [Fact]
         public void Test_for_Checking_UpdateReleaseInSprint_Should_Be_NotNull()

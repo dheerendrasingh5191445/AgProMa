@@ -9,7 +9,7 @@ namespace MyNeo4j.Service
     public interface IProjectMemberService
     {
         List<ProjectMember> getMemberDetails(int id);
-        void Add_MemberDetails(ProjectMember member);
+        int Add_MemberDetails(ProjectMember member);
        
     }
     public class ProjectMemberService : IProjectMemberService
@@ -26,25 +26,21 @@ namespace MyNeo4j.Service
             return _repo.getMemberDetails(memberid).ToList();
         }
 
-        public void Add_MemberDetails(ProjectMember details)
+        public int Add_MemberDetails(ProjectMember details)
         {
             List<ProjectMember> projectmem = getMemberDetails(details.MemberId);
             foreach (var member in projectmem)
             {
-                if ( member.MemberId== details.MemberId && member.ProjectId == details.ProjectId)
+                if ( member.MemberId == details.MemberId && member.ProjectId == details.ProjectId)
                 {
-                   
-                }
-                else
-                {
-                    _repo.Add_MemberDetails(details);
-                    break;
-                }
-
+                    return 0;
+                }                    
             }
-           
-            
-            
+            _repo.Add_MemberDetails(details);
+            return 1;
+
+
+
         }
 
     }

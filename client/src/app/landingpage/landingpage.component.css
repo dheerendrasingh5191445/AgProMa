@@ -71,16 +71,21 @@ p{
     width: 550px;
     margin: 70px 0 0 40px;
 }
+#bar-button{
+    color:white;
+}
 .header h1{
     font-size: 40px;
     font-weight: 700;
     padding-top: 30px;
+    font-family: 'Segoe Print';
 }
 .header h1,
 .header p,
 .header button {
     margin-top: 20px;
     color:white;
+    font-family: 'Segoe Print'
 }
 .header .btn {
     border-radius: 0;
@@ -122,11 +127,13 @@ p{
 .services h4{
     color: black;
     margin: 20px 0 20px;
+    font-family: 'Segoe Print';
 }
 .services p{
     color: black;
     font-size: 14px;
     padding-bottom:40px; 
+    font-family: 'Segoe Print';
 }
 .services i{
     height: 80px;
@@ -154,15 +161,19 @@ p{
 }
 .scrum{
     color:white;
+    font-family: 'Segoe Print';
 }
 .pricing p{
     color: #fff;
 }
 .pricing p {
     padding-bottom: 40px;
+    font-family: 'Segoe Print';
 }
 .pricing #management{
-    color: #4c4c4c; 
+    color:black;
+    font-family: 'Segoe Print';
+ 
 }
 .pricing .packages{
     padding: 30px;
@@ -170,15 +181,22 @@ p{
     background-color: #fff;
     border-radius: 5px;
     margin-top: 30px;
+    height:500px;
 }
 .packages h4,
 .packages h1,
 .packages b{
     color: #4c4c4c; 
+    font-family: 'Segoe Print';
+}
+.packages h2{
+    color:black;
+    font-family:'Segoe Print';
 }
 .packages p,
 .packages li{
     color: #737373;
+    font-family: 'Segoe Print';
 }
 .packages button {
     margin-top: 10px;
@@ -208,11 +226,11 @@ p{
 .team h4{
     margin: 20px 0 20px;
     color: white;
-    
+    font-family: 'Segoe Print';
 }
 .team p{
     color: white;
-    
+    font-family: 'Segoe Print';
 }
 .team img{
     height: 150px;
@@ -245,9 +263,11 @@ p{
 }
 .clients h2{
     color: black;
+    font-family: 'Segoe Print';
 }
 .clients p{
     padding-bottom: 40px;
+    font-family: 'Segoe Print';
 }
 .clients img{
     width: 200px;
@@ -268,10 +288,12 @@ p{
 .contact p{
     padding-bottom: 80px;
 color:white;
+font-family: 'Segoe Print';
 }
 .contact h2{
     color: white;
     margin: 20px 0 20px;
+    font-family: 'Segoe Print';
 }
 .contact .input-group {
     margin-bottom: 25px;

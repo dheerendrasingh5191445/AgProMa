@@ -1,6 +1,6 @@
 <div class="main">
     <div class="card  inverse">
-      <div class="card-header"><h2>Burn-Down Chart</h2></div><!--chart title-->
+      <div class="card-header"><h2>Performance Chart</h2></div><!--chart title-->
         <hr>
     <div style="display: block;" *ngIf="taskData">
     <canvas baseChart width="300" height="102"
@@ -24,8 +24,8 @@
       </tr>
     </tbody>
     </table>
-    <button class="changebutton" (click)="forward()">Next</button><!--random function to get forward  value for the tasks -->
     <button class="changebutton" (click)="backward()">Previous</button><!--random function to get backward value for the tasks -->    
+    <button class="changebutton" (click)="forward()">Next</button><!--random function to get forward  value for the tasks --> 
   </div>
 </div>
   </div>
