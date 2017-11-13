@@ -83,7 +83,9 @@ export const ConfigFile =
         checkurl:'http://localhost:52258/api/Login/Check',
         detailUrl:'http://localhost:52258/api/Login/Details/',
         updatePasswordUrl:'http://localhost:52258/api/Login/UpdatePassword/',
-        logouturl:"http://localhost:52258/api/Login/SetLogOut/"
+        logouturl:"http://localhost:52258/api/Login/SetLogOut/",
+        getToken: 'http://localhost:59382/api/TokenGeneration/createtoken',
+        getTokenForFbandGoogle:'http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/'
     },
     RegisterUserServiceUrls:{
         registernewpassword:"http://localhost:52258/api/Master/"

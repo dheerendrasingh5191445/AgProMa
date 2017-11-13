@@ -1,5 +1,5 @@
 export class Login{
-     public FirstName:string
+      public FirstName:string
       public LastName:string  
       public Organization:string  
       public Department:string 
