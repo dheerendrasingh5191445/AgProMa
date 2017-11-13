@@ -53,7 +53,7 @@ namespace MyNeo4j.Service
            foreach(ProjectMember pro in promem)
            {
              SignalRMaster entry = _repository.GetConnectIdByMemId(pro.MemberId);
-             if (entry.HubCode == 0 && entry.Online == true)
+             if (entry.HubCode == HubCode.epic && entry.Online == true)
              { signal.Add(entry.ConnectionId); }
            }
             return signal;

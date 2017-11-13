@@ -1,23 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using MyNeo4j.model;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyNeo4j.model
+namespace MyNeo4j.Viewmodel
 {
-    public enum TaskBacklogStatus
+    public class TaskBacklogView
     {
-        Unplanned,
-        Inprogress,
-        Completed
-    }
-    public class TaskBacklog
-    {
-        [Key]
         public int TaskId { get; set; }
 
         public string TaskName { get; set; }
@@ -35,7 +28,5 @@ namespace MyNeo4j.model
         public TaskBacklogStatus Status { get; set; }
 
         public int SprintId { get; set; }
-        [ForeignKey("SprintId")]
-        public virtual SprintBacklog SprintBacklogs { get; set; }
     }
 }

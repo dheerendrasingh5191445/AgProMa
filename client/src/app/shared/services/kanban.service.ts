@@ -17,7 +17,7 @@ export class KanbanService {
 
     //this method is to bring all the details related to the particular project
     return this.http.get(ConfigFile.KanBanUrls.getProjectData+projectId)
-                      .map(Response=>Response.json());
+                    .map(Response=>Response.json());
   }
 
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MyNeo4j.Migrations
 {
-    public partial class initialcommit : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,21 +68,6 @@ namespace MyNeo4j.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Projectmember",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ActAs = table.Column<int>(type: "int", nullable: false),
-                    MemberId = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projectmember", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SignalRDb",
                 columns: table => new
                 {
@@ -111,20 +96,6 @@ namespace MyNeo4j.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Socialsm", x => x.SignId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Teammemeber",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MemberId = table.Column<int>(type: "int", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teammemeber", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,11 +143,33 @@ namespace MyNeo4j.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Projectmember",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActAs = table.Column<int>(type: "int", nullable: false),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projectmember", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Projectmember_ProjectM_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "ProjectM",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Releasepl",
                 columns: table => new
                 {
                     ReleasePlanId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActualReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -201,12 +194,14 @@ namespace MyNeo4j.Migrations
                 {
                     SprintId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActualEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpectedEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
                     ReleasePlanId = table.Column<int>(type: "int", nullable: false),
                     SprintGoal = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SprintName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -246,6 +241,7 @@ namespace MyNeo4j.Migrations
                 {
                     TaskId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActualEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PersonId = table.Column<int>(type: "int", nullable: false),
                     SprintId = table.Column<int>(type: "int", nullable: false),
@@ -265,12 +261,34 @@ namespace MyNeo4j.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Teammemeber",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teammemeber", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teammemeber_Teammaster_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teammaster",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Checklistbl",
                 columns: table => new
                 {
                     ChecklistId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChecklistName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     TaskId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -301,6 +319,11 @@ namespace MyNeo4j.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Projectmember_ProjectId",
+                table: "Projectmember",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Releasepl_ProjectId",
                 table: "Releasepl",
                 column: "ProjectId");
@@ -319,6 +342,11 @@ namespace MyNeo4j.Migrations
                 name: "IX_Teammaster_ProjectId",
                 table: "Teammaster",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teammemeber_TeamId",
+                table: "Teammemeber",
+                column: "TeamId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -354,13 +382,13 @@ namespace MyNeo4j.Migrations
                 name: "Socialsm");
 
             migrationBuilder.DropTable(
-                name: "Teammaster");
-
-            migrationBuilder.DropTable(
                 name: "Teammemeber");
 
             migrationBuilder.DropTable(
                 name: "Taaskbl");
+
+            migrationBuilder.DropTable(
+                name: "Teammaster");
 
             migrationBuilder.DropTable(
                 name: "Sprintbl");

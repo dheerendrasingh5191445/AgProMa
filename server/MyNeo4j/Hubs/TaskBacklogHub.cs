@@ -27,7 +27,7 @@ namespace MyNeo4j.Hubs
         //this method will return all the task in that same sprint
         public Task GetAllTaskDetail(int id)
         {
-            List<TaskBacklog> tasks = task.GetAllTask(id);
+            List<TaskBacklogView> tasks = task.GetAllTask(id);
             return Clients.Client(Context.ConnectionId).InvokeAsync("getAllTaskDetail", tasks);
         }
 

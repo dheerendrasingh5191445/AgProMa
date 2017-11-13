@@ -39,11 +39,9 @@
         <td>
           <div class="tableContent" *ngFor="let item of showList">
             <ul *ngIf="item.status == 'Unplanned'">
-              <li id="todo" data-toggle="popover" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+              <li id="todo" data-toggle="popover" data-placement="top" title="">
                 <p class="h6 text-responsive">
                   <font size="4">{{item.releaseName}}{{item.sprintName}}{{item.taskName}}</font>
-                  <p>
-                    <font size="3">{{item.description}}</font>
                   </p>
               </li>
             </ul>
@@ -52,7 +50,7 @@
         <td>
           <div *ngFor="let item of showList">
             <ul *ngIf="item.status == 'Inprogress'">
-              <li id="doing" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+              <li id="doing" data-toggle="tooltip" data-placement="top" title="">
                 <p class="h6">
                   <font size="4">{{item.releaseName}}{{item.sprintName}}{{item.taskName}}</font>
                 </p>
@@ -63,7 +61,7 @@
         <td>
           <div *ngFor="let item of showList">
             <ul *ngIf="item.status == 'Release' || item.status == 'Completed'">
-              <li id="done" data-toggle="tooltip" data-placement="top" title="total checklists: 10 &nbsp; remaining: 2 &nbsp; inprogress: 5 &nbsp; completed: 8">
+              <li id="done" data-toggle="tooltip" data-placement="top" title="">
                 <p class="h6">
                   <font size="4">{{item.releaseName}}{{item.sprintName}}{{item.taskName}}</font>
                 </p>

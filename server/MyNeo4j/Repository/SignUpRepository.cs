@@ -34,6 +34,7 @@ namespace AgProMa.Repository
         {
             return _context.Pmaster.ToList();
         }
+
         //this method adds a particular user
         public void Add_User(Master adduser)
         {

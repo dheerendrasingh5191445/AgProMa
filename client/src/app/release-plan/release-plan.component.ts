@@ -22,17 +22,20 @@ export class ReleasePlanComponent implements OnInit {
   data: any;
   connection:HubConnection;
   errorMsg: string;
+  userId:number;
 
   constructor(private router:Router,private route:ActivatedRoute) { }
 
   //Method for recieving a data from backend 
   connectReleasePlanHub() {
+    var session = sessionStorage.getItem("id");//this is to fetch the user id
+    this.userId = parseInt(session);
     this.connection = new HubConnection(ConfigFile.ReleasePlanUrls.connection);
     this.connection.on("whenAdded", data => { swal('ADDED','','success' );});
     this.connection.on("getreleaseplans", data => {this.release = data });
     this.connection.on("getsprints", sprint =>{this.sprints=sprint});
     this.connection.start().then(() => {
-    this.connection.invoke("SetConnectionId",3);
+    this.connection.invoke("SetConnectionId",this.userId);
     this.connection.invoke("GetReleasePlans",this.projectId)
                    .then(()=>this.connection.invoke("GetAllSprints",this.projectId));
     })
