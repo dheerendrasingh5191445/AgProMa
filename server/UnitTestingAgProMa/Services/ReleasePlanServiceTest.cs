@@ -1,0 +1,275 @@
+﻿using Moq;
+using MyNeo4j.model;
+using MyNeo4j.Repository;
+using MyNeo4j.Service;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Xunit;
+
+
+namespace UnitTestingAgProMa.Services
+{
+    public class ReleasePlanServiceTest
+    {
+        //First Test Case
+        [Fact]
+        public void Test_For_Checking_The_GetReleasePlan_Should_Be_NotNull()
+        {
+            //Arrange
+            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
+            var releaseModel = new ReleasePlanMaster()
+            {
+                ReleasePlanId = 1
+            };
+            releasePlan.Add(releaseModel);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(x => x.GetAllRelease(It.IsAny<int>())).Returns(releasePlan);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+
+            //Act
+            List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
+
+            //Assert
+            Assert.NotNull(result);
+        }
+
+        //Second Test Case
+        [Fact]
+        public void Test_For_Checking_The_GetReleasePlan_Is_Of_ReleasePlanMaster()
+        {
+            //Arrange
+            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
+            var releaseModel = new ReleasePlanMaster()
+            {
+                ReleasePlanId = 1
+            };
+            releasePlan.Add(releaseModel);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(x => x.GetAllRelease(It.IsAny<int>())).Returns(releasePlan);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+
+            //Act
+            List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
+
+            //Assert
+            Assert.IsType<List<ReleasePlanMaster>>(result);
+        }
+
+        //Third Test Case
+        [Fact]
+        public void Test_For_Checking_The_GetReleasePlan_Is_Not_Of_Any_Other_Model()
+        {
+            //Arrange
+            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
+            var releaseModel = new ReleasePlanMaster()
+            {
+                ReleasePlanId = 1
+            };
+            releasePlan.Add(releaseModel);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(x => x.GetAllRelease(It.IsAny<int>())).Returns(releasePlan);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+
+            //Act
+            List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
+
+            //Assert
+            Assert.IsNotType<SprintBacklog>(result);
+            Assert.IsNotType<EpicMaster>(result);
+            Assert.IsNotType<ProductBacklog>(result);
+            Assert.IsNotType<ChecklistBacklog>(result);
+            Assert.IsNotType<TaskBacklog>(result);
+            Assert.IsNotType<TeamMaster>(result);
+        }
+
+        //Fourth Test Case
+        [Fact]
+        public void Test_For_GetAllSprints()
+        {
+            //Arrange
+            List<SprintBacklog> sprintList = new List<SprintBacklog>();
+            var sprint = new SprintBacklog()
+            {
+                SprintId = 1
+            };
+            sprintList.Add(sprint);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(x => x.GetAllSprints(It.IsAny<int>())).Returns(sprintList);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+
+            //Act
+            List<SprintBacklog> result = service.GetAllSprints(It.IsAny<int>());
+
+            //Assert
+            Assert.NotNull(result);
+        }
+
+        //Fifth Test Case
+        [Fact]
+        public void Test_For_SignalR_Should_Be_Not_Null()
+        {
+            //Arrange
+            List<SignalRMaster> signal = new List<SignalRMaster>();
+            var signalR = new SignalRMaster()
+            {
+                SignalId = 1
+            };
+            signal.Add(signalR);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(x => x.CreateGroup(It.IsAny<int>())).Returns(signal);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+
+            //Act
+            List<SignalRMaster> result = service.CreateGroup(1);
+
+            //Assert
+            Assert.NotNull(result);
+        }
+
+        //Sixth Test Case
+        [Fact]
+        public void Test_For_SignalR_Should_Be_Of_SignalRMaster()
+        {
+            //Arrange
+            List<SignalRMaster> signal = new List<SignalRMaster>();
+            var signalR = new SignalRMaster()
+            {
+                SignalId = 1
+            };
+            signal.Add(signalR);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(x => x.CreateGroup(It.IsAny<int>())).Returns(signal);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+
+            //Act
+            List<SignalRMaster> result = service.CreateGroup(1);
+
+            //Assert
+            Assert.IsType<List<SignalRMaster>>(result);
+        }
+
+        //Seventh Test Case
+        [Fact]
+        public void Test_for_Checking_AddRelease()
+        {
+            //arrange
+            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
+            var releaseModel = new ReleasePlanMaster()
+            {
+                ReleasePlanId = 1
+            };
+            releasePlan.Add(releaseModel);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(m => m.AddRelease(It.IsAny<ReleasePlanMaster>())).Throws(new NullReferenceException());
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            //act
+            var ex = Record.Exception(() => service.AddRelease(releaseModel));
+            //assert
+            Assert.IsType<NullReferenceException>(ex);
+        }
+
+        //Eight Test Case
+        [Fact]
+        public void Test_for_Checking_AddRelease_Should_Be_NotNull()
+        {
+            //arrange
+            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
+            var releaseModel = new ReleasePlanMaster()
+            {
+                ReleasePlanId = 1
+            };
+            releasePlan.Add(releaseModel);
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(m => m.AddRelease(It.IsAny<ReleasePlanMaster>())).Throws(new NullReferenceException());
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            //act
+            var ex = Record.Exception(() => service.AddRelease(releaseModel));
+            //assert
+            Assert.NotNull(ex);
+        }
+
+        //Ninth Test Case
+        [Fact]
+        public void Test_for_Checking_UpdateConnectionId()
+        {
+            //arrange
+            SignalRMaster signalR = new SignalRMaster()
+            {
+                SignalId = 1
+            };
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(m => m.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new NullReferenceException());
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            //act
+            var ex = Record.Exception(() => service.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>()));
+            //assert
+            Assert.IsType<NullReferenceException>(ex);
+        }
+
+        //Tenth Test Case
+        [Fact]
+        public void Test_for_Checking_UpdateConnectionId_Should_Be_NotNull()
+        {
+            //arrange
+            SignalRMaster signalR = new SignalRMaster()
+            {
+                SignalId = 1
+            };
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(m => m.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new NullReferenceException());
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            //act
+            var ex = Record.Exception(() => service.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>()));
+            //assert
+            Assert.NotNull(ex);
+        }
+
+        //Eleventh Test Case
+        [Fact]
+        public void Test_for_Checking_UpdateReleaseInSprint_Should_Be_NotNull()
+        {
+            //arrange
+            SprintBacklog sprint = new SprintBacklog()
+            {
+                SprintId = 1
+            };
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(m => m.UpdateReleaseInSprint(It.IsAny<int>(), It.IsAny<int>())).Throws(new NullReferenceException());
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            //act
+            var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<SprintBacklog>(), It.IsAny<int>()));
+            //assert
+            Assert.NotNull(ex);
+        }
+        //Twelfth Test Case
+        [Fact]
+        public void Test_for_Checking_UpdateReleaseInSprint()
+        {
+            //arrange
+            SprintBacklog sprint = new SprintBacklog()
+            {
+                SprintId = 1
+            };
+            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockSprintRepository = new Mock<ISprintRepository>();
+            mockReleasePlanRepo.Setup(m => m.UpdateReleaseInSprint(It.IsAny<int>(), It.IsAny<int>())).Throws(new NullReferenceException());
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            //act
+            var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<SprintBacklog>(), It.IsAny<int>()));
+            //assert
+            Assert.IsType<NullReferenceException>(ex);
+        }
+    }
+}

@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { Checklist } from './../shared/model/checklist';
 import { ChecklistService } from './../shared/services/checklist.service';
-import { TaskService } from './../shared/services/task.service';
 // import ends
 @Component({
   selector: 'app-checklist',
@@ -29,7 +28,7 @@ export class ChecklistComponent implements OnInit {
   status: false
   };
   msg: string;
-  constructor(private checkListService: ChecklistService, private taskService: TaskService, private route: ActivatedRoute) { }
+  constructor(private checkListService: ChecklistService,private route: ActivatedRoute) { }
   // for taking data from backend
   ngOnInit() {
     this.route.params.subscribe((param) => this.model.taskId = +param['id']);

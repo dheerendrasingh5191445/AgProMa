@@ -1,6 +1,5 @@
 
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../shared/services/task.service';
 import { Task } from '../shared/model/task';
 import swal from 'sweetalert2';
 import { HubConnection } from '@aspnet/signalr-client';
@@ -20,7 +19,7 @@ export class TaskAddComponent implements OnInit {
   connection: HubConnection;
   userId:number=1;
 
-  constructor(private taskService: TaskService,private route:ActivatedRoute) {
+  constructor(private route:ActivatedRoute) {
 
   }
   //this will get the task backlog list

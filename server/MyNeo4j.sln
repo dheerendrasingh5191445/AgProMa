@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyNeo4j", "MyNeo4j\MyNeo4j.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationAPI", "AuthenticationAPI\AuthenticationAPI.csproj", "{BADE2402-E0A9-4739-802F-B740A1DE00F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{6800945B-4FDA-4A9F-BFA5-4C7A626C1685}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingAgProMa", "UnitTestingAgProMa\UnitTestingAgProMa.csproj", "{4F01EEF4-F5F9-47B1-86CF-3C0E8C3F7E69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{BADE2402-E0A9-4739-802F-B740A1DE00F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BADE2402-E0A9-4739-802F-B740A1DE00F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BADE2402-E0A9-4739-802F-B740A1DE00F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6800945B-4FDA-4A9F-BFA5-4C7A626C1685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6800945B-4FDA-4A9F-BFA5-4C7A626C1685}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6800945B-4FDA-4A9F-BFA5-4C7A626C1685}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6800945B-4FDA-4A9F-BFA5-4C7A626C1685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F01EEF4-F5F9-47B1-86CF-3C0E8C3F7E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F01EEF4-F5F9-47B1-86CF-3C0E8C3F7E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F01EEF4-F5F9-47B1-86CF-3C0E8C3F7E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F01EEF4-F5F9-47B1-86CF-3C0E8C3F7E69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

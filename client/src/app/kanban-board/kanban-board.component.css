@@ -8,7 +8,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-.snip1519 {
+.SprintDetail {
   font-family: 'Roboto', Arial, sans-serif;
   position: relative;
   float: left;
@@ -25,19 +25,19 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
-.snip1519 *,
-.snip1519 *:before {
+.SprintDetail *,
+.SprintDetail *:before {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
 }
 
-.snip1519 figcaption {
+.SprintDetail figcaption {
   padding: 12% 10% 14%;
 }
 
-.snip1519 i {
+.SprintDetail i {
   font-size: 54px;
   color: #fff;
   width: 80px;
@@ -50,7 +50,7 @@
   display: inline-block;
 }
 
-.snip1519 h3 {
+.SprintDetail h3 {
   color: #3c3c3c;
   font-size: 20px;
   font-weight: 300;
@@ -58,13 +58,13 @@
   margin: 10px 0;
 }
 
-.snip1519 p {
+.SprintDetail p {
   font-size: 0.9em;
   font-weight: 300;
   margin: 0 0 20px;
 }
 
-.snip1519 .button {
+.SprintDetail .button {
   text-decoration: none;
   color: #777;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -75,7 +75,7 @@
   z-index: 1;
 }
 
-.snip1519 .button:before {
+.SprintDetail .button:before {
   background-color: #d2652d;
   position: absolute;
   top: 100%;
@@ -87,11 +87,11 @@
   opacity: 0;
 }
 
-.snip1519 .button:hover {
+.SprintDetail .button:hover {
   color: #fff;
 }
 
-.snip1519 .button:hover:before {
+.SprintDetail .button:hover:before {
   top: 0;
   opacity: 1;
 }
@@ -106,7 +106,7 @@ body {
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:500);
 @import url(https://fonts.googleapis.com/css?family=Teko:700);
-.snip1537 {
+.KanbanLogo {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
   display: inline-block;
@@ -120,13 +120,13 @@ body {
   box-sizing: content-box;
 }
 
-.snip1537 h1,
-.snip1537 h5 {
+.KanbanLogo h1,
+.KanbanLogo h5 {
   margin: 0;
   text-transform: uppercase;
 }
 
-.snip1537 h1 {
+.KanbanLogo h1 {
   font-family: 'Teko', Arial, sans-serif;
   font-weight: 700;
   font-size: 54px;
@@ -136,7 +136,7 @@ body {
   line-height: 27px;
 }
 
-.snip1537 h5 {
+.KanbanLogo h5 {
   background-color: #ABABAB;
   color: #212121;
   display: inline-block;
@@ -147,8 +147,8 @@ body {
   position: relative;
 }
 
-.snip1537 h5:before,
-.snip1537 h5:after {
+.KanbanLogo h5:before,
+.KanbanLogo h5:after {
   content: '';
   position: absolute;
   width: 0;
@@ -160,25 +160,25 @@ body {
 }
 
 
-.snip1537 h5:before {
+.KanbanLogo h5:before {
   right: 100%;
   border-color: #bdbdbd #bdbdbd #bdbdbd transparent;
 }
 
-.snip1537 h5:after {
+.KanbanLogo h5:after {
   left: 100%;
   border-color: #bdbdbd transparent #bdbdbd #bdbdbd;
 }
 
-.snip1537 h6 {
+.KanbanLogo h6 {
   margin: 0;
   display: inline-block;
   position: relative;
   text-transform: uppercase;
 }
 
-.snip1537 h6:before,
-.snip1537 h6:after {
+.KanbanLogo h6:before,
+.KanbanLogo h6:after {
   position: absolute;
   height: 2px;
   content: '';
@@ -190,15 +190,15 @@ body {
   transform: translateY(-50%);
 }
 
-.snip1537 h6:before {
+.KanbanLogo h6:before {
   left: -35px;
 }
 
-.snip1537 h6:after {
+.KanbanLogo h6:after {
   right: -35px;
 }
 
-.snip1537 i {
+.KanbanLogo i {
   font-size: 22px;
   line-height: 36px;
 }
@@ -321,6 +321,7 @@ p {
   border: 1px solid #fce29f;
   border-radius: .25em;
 }
+
 
 
 
