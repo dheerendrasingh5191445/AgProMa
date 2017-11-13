@@ -34,7 +34,7 @@ export const ConfigFile =
         connection:'http://localhost:52258/backlog'
     },
     DashboardUrls:{
-        onLoggedOut:'app-signup'
+        onLoggedOut:'app-signup/:id'
     },
     DashboardRoleUrls:{
         onLoggedOut:'app-signup/:id'

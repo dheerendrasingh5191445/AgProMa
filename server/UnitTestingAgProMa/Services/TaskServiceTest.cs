@@ -2,6 +2,7 @@
 using MyNeo4j.model;
 using MyNeo4j.Repository;
 using MyNeo4j.Service;
+using MyNeo4j.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace UnitTestingAgProMa.Services
         public void Task_Service_GetAll_Method_To_GetAll_Request()
         {
             //Arrange
+            List<TaskBacklogView> taskv = new List<TaskBacklogView>() { new TaskBacklogView() { SprintId = 1 } };
             List<TaskBacklog> requests = new List<TaskBacklog>();
             var request = new TaskBacklog();
             request.SprintId = 1;
@@ -28,7 +30,11 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAll(1);
             //Assert
             Assert.NotNull(res);
-            Assert.Equal(requests, res);
+<<<<<<< HEAD
+            Assert.Equal(requests.ToString(), res.ToString());
+=======
+            Assert.Equal(taskv[0].SprintId, res[0].SprintId);
+>>>>>>> 24add5c1e7963a28f24aba69b3ef5c57dbee17bf
         }
 
         [Fact]
@@ -48,7 +54,7 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAll(1);
 
             //Assert
-            Assert.IsType<List<TaskBacklog>>(res);
+            Assert.IsType<List<TaskBacklogView>>(res);
         }
         [Fact]
         public void Task_Service_JoinGroup_Method_To_See_Changes_Made()

@@ -13,7 +13,6 @@ namespace MyNeo4j.Repository
         List<ChecklistBacklog> Get();
         List<ChecklistBacklog> Get(int id);
         void Add_Checklist(ChecklistBacklog addchecklist);
-        void Update(int id, ChecklistBacklog checklist);
         void Delete(int id);
     }
     public class ChecklistRepository : ICheckListRepository 
@@ -53,13 +52,5 @@ namespace MyNeo4j.Repository
             return _context.Taaskbl.FirstOrDefault(p => p.TaskId == Id);
         }
 
-        public void Update(int id, ChecklistBacklog checklist) //update checklist
-        {
-            ChecklistBacklog sign = _context.Checklistbl.FirstOrDefault(p => p.ChecklistId == id);
-            sign.ChecklistName = checklist.ChecklistName;
-            sign.Status = checklist.Status;
-            sign.EndDate = DateTime.Now;
-            _context.SaveChanges();
-        }
     }
 }

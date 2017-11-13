@@ -189,14 +189,17 @@ namespace UnitTestingAgProMa.Services
             //List<Master> requests = new List<Master>();
             Master re = new Master();
             re.Id = 1;
+            re.Email = "dhiru5195@gmail.com";
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
-            mockRepoReq.Setup(x => x.Add_User(It.IsAny<Master>())).Throws(new FormatException());
+            mockRepoReq.Setup(x => x.Add_User(re)).Throws(new FormatException());
             SignUpService obj = new SignUpService(mockRepoReq.Object);
             //Act
-            var exception = Record.Exception(() => obj.Add_User(It.IsAny<Master>()));
+            var exception = Record.Exception(() => obj.Add_User(re));
             //Assert
             Assert.IsType<FormatException>(exception);
         }
+
+
         [Fact]
         public void SignUp_Service_Check_Method_To_Get_Details()
         {
@@ -226,7 +229,10 @@ namespace UnitTestingAgProMa.Services
             var res = obj.Check(idPass);
             //Assert
             Assert.NotNull(res);
-            Assert.Equal(creadential, res);
+            Assert.Equal(creadential.Email, res.Email);
+            Assert.Equal(creadential.Status,res.Status);
+            Assert.Equal(creadential.UserName,res.UserName);
+            Assert.Equal(creadential.UserId,res.UserId);
         }
     }
 }
