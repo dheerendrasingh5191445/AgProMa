@@ -30,11 +30,8 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAll(1);
             //Assert
             Assert.NotNull(res);
-<<<<<<< HEAD
-            Assert.Equal(requests.ToString(), res.ToString());
-=======
             Assert.Equal(taskv[0].SprintId, res[0].SprintId);
->>>>>>> 24add5c1e7963a28f24aba69b3ef5c57dbee17bf
+
         }
 
         [Fact]
