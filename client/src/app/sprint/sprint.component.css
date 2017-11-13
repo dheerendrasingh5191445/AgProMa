@@ -330,10 +330,8 @@ ul {
     }
     .panel {
       overflow-y: auto;
-      height: 500px;
     }
     .sprints {
-      height: 300px;
       text-align: justify;
     }
     .card:hover {
