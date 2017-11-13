@@ -3,7 +3,7 @@ import { ProductBacklog } from '../shared/model/productBacklog';
 import swal from 'sweetalert2';
 import { Epic } from "../shared/model/epic";
 import { HubConnection } from '@aspnet/signalr-client';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router} from '@angular/router';
 import { ConfigFile } from '../shared/config';
 
 @Component({
@@ -17,9 +17,10 @@ export class EpicComponent implements OnInit {
   connection: HubConnection;
   data: Array<any> //all epics will store in this variable
   userId:number;
+  errorMsg:string;
 
   model = new Epic(null, ''); //model for adding new epic
-  constructor(private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((param) =>
@@ -35,6 +36,10 @@ export class EpicComponent implements OnInit {
     this.connection.start().then(() => { 
     this.connection.invoke("SetConnectId",this.userId);
     this.connection.invoke("Get",this.projectId);
+    })
+    .catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/']);
     });
   }
 
@@ -46,7 +51,11 @@ export class EpicComponent implements OnInit {
     else {
       this.model.description = story;
       this.model.projectId = this.projectId;
-      this.connection.invoke("Post",this.model);
+      this.connection.invoke("Post",this.model)
+      .catch(err=>{                        
+        this.errorMsg=err;
+        this.router.navigate(['/app-error/']);
+      });
       this.connection.invoke("Get",this.projectId);
     }
   }
@@ -57,12 +66,20 @@ export class EpicComponent implements OnInit {
     }
     else{
       item.description = content;
-      this.connection.invoke("put",item.epicId,item);
+      this.connection.invoke("put",item.epicId,item)
+      .catch(err=>{                        
+        this.errorMsg=err;
+        this.router.navigate(['/app-error/']);
+      });;
     } 
   }
 
   deleteBacklog(item:any){       //for deleting the epic 
-    this.connection.invoke("Delete",item.epicId);
+    this.connection.invoke("Delete",item.epicId)
+    .catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/']);
+    });;
     this.connection.invoke("Get",this.projectId);
   }
 }
