@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvitePeopleService } from "../shared/services/invite-people.service";
 import swal from 'sweetalert2';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LoginService } from '../shared/services/login.service';
 import { Members } from '../shared/model/members';
 import { Master } from "../shared/model/master";
@@ -28,7 +28,7 @@ private userDetail={
   memberName:''
 }  
 
-  constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute) { }
+  constructor(private invitePeople : InvitePeopleService,private loginservice:LoginService, private route : ActivatedRoute, private router : Router) { }
 
   ngOnInit() {
     //this is method is get the id from project screen component and show it
@@ -52,7 +52,7 @@ private userDetail={
     }
     else {
       this.invitePeople.emailto(this.model)
-        .then(data => swal('E-mail Sent!', 'Please check your email and verify yourself', 'success'));
+        .then(data => swal('E-mail Sent!', 'Please check your email and verify yourself', 'success'),error=>this.router.navigate(['/app-error/']));
     }
   }
 }
