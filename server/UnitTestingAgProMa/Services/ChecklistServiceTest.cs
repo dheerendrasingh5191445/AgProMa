@@ -1,18 +1,18 @@
-﻿using Moq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Moq;
+using MyNeo4j.Controllers;
 using MyNeo4j.model;
-using MyNeo4j.Repository;
 using MyNeo4j.Service;
+using MyNeo4j.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-
-namespace UnitTestingAgProMa.Services
+namespace MyNeo4j_Test_Cases.Service
 {
-   public  class ChecklistServiceTest
+    public class ChecklistServiceUnitTest
     {
-
         [Fact]
         public void Checklist_Service_Get_Method_To_GetAll_Checklist()
         {
@@ -64,20 +64,6 @@ namespace UnitTestingAgProMa.Services
             Assert.IsType<NullReferenceException>(exception);
         }
         [Fact]
-        public void Checklist_Serive_AddChecklist_method_throw_argument_null_exception_with_invalid_value_type()
-        {
-            //Arrange
-            ChecklistBacklog checklist1 = new ChecklistBacklog();
-            checklist1.ChecklistId = 1;
-            var mockrepo = new Mock<ICheckListRepository>();
-            mockrepo.Setup(x => x.Add_Checklist(checklist1)).Throws(new ArgumentNullException());
-            ChecklistService obj = new ChecklistService(mockrepo.Object);
-            //Act
-            var exception = Record.Exception(() => obj.Add_Checklist(checklist1));
-            //Assert
-            Assert.IsType<ArgumentNullException>(exception);
-        }
-        [Fact]
         public void Checklist_Service_GetTaskDetail()
         {
             //Arrange
@@ -92,19 +78,7 @@ namespace UnitTestingAgProMa.Services
             Assert.NotNull(res);
             Assert.Equal(tasks, res);
         }
-        [Fact]
-        public void Checklist_Service_Update_Method_To_Update_Checklist()
-        {
-            //Arrange
-            ChecklistBacklog checklist = new ChecklistBacklog();
-            var mockrepo = new Mock<ICheckListRepository>();
-            mockrepo.Setup(x => x.Update(1, checklist)).Throws(new NullReferenceException());
-            ChecklistService obj = new ChecklistService(mockrepo.Object);
-            //Act
-            var exception = Record.Exception(() => obj.Update(1, checklist));
-            //Assert
-            Assert.IsType<NullReferenceException>(exception);
-        }
+
         [Fact]
         public void Checklist_Service_Delete_Method_To_delete_Checklist()
         {
@@ -118,5 +92,7 @@ namespace UnitTestingAgProMa.Services
             //Assert
             Assert.IsType<NullReferenceException>(exception);
         }
+
+
     }
 }

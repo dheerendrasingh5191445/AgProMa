@@ -17,6 +17,7 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             List<TaskBacklog> tasks = new List<TaskBacklog>();
+            List<TaskBacklogView> taskv = new List<TaskBacklogView>();
             var task = new TaskBacklog() { TaskId = 1 };
             tasks.Add(task);
             var mockRepoTask = new Mock<ITaskBacklogReposiory>();
@@ -25,8 +26,7 @@ namespace UnitTestingAgProMa.Services
             //Act
             var res = obj.GetAllTask(1);
             //Assert
-            Assert.NotNull(res);
-            Assert.Equal(tasks, res);
+            Assert.Equal(1, res.Count);
 
         }
         [Fact]
@@ -34,16 +34,13 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             List<TaskBacklog> tasks = new List<TaskBacklog>();
-            tasks = null;
             var mockRepoTask = new Mock<ITaskBacklogReposiory>();
             mockRepoTask.Setup(x => x.GetAllTaskDetail(1)).Returns(tasks);
             TaskBacklogService obj = new TaskBacklogService(mockRepoTask.Object);
             //Act
             var res = obj.GetAllTask(1);
             //Assert
-            Assert.Null(res);
-
-
+            Assert.Equal(0, res.Count);
         }
         [Fact]
         public void SignUpServiceUnitTest_to_GetTeamMember_for_NotNull()

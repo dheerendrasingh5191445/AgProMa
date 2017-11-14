@@ -33,6 +33,10 @@ namespace AgProMa.Controllers
                 {
                     return Ok(list);
                 }
+                else if(list.Count == 0)
+                {
+                    return Ok("no data found");
+                }
                 else
                 {
                     return StatusCode(404);

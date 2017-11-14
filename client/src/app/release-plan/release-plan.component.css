@@ -182,3 +182,7 @@ button.snip1099:active i {
     background-color: #009999;
     color: whitesmoke;
 }
+.card-body {
+  word-wrap:break-word;
+
+}

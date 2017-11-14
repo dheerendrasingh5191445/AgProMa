@@ -16,8 +16,8 @@
                 <a class="contentstory" data-toggle="modal" href=#mymodal{{i}} >
                 <i class="fa fa-pencil" id="edit" aria-hidden="true"></i> 
                 </a>
-        <span routerLink = "/app-dashboard/app-checklist/{{item.sprintId}}" class="fa fa-check-square-o" id="checklist"></span>
-        <span style="text-align: justify;"dnd-sortable [sortableIndex]="i">{{item.taskName}}</span>
+        <span  *ngIf = "item.status == 'Completed'"class="fa fa-check-square-o" id="checklist"></span>
+        <span style="text-align: justify;" dnd-sortable [sortableIndex]="i">{{item.taskName}}</span>
         <!--div for task details ends  -->
         </div>
         <!--div for modal starts here-->
@@ -42,9 +42,9 @@
         <!-- datepicker for start and end dates -->
         <div class="row">
             <div class="col-md-6">
-        Start Date<input class="form-control-1" type="date" value="2011-08-19" id="example-date-input" #start></div>
+        Start Date<input class="form-control-1" type="date"  id="example-date-input" #start></div>
         <div class="col-md-6">
-        End Date<input class="form-control-1" type="date" value="2011-08-19" id="example-date-input" #end></div>
+        End Date<input class="form-control-1" type="date"  id="example-date-input" #end></div>
         </div><br>
         
         
@@ -97,16 +97,16 @@
         <!-- datepicker for start and end dates -->
         <div class="row">
             <div class="col-md-6">
-        Start Date<input class="form-control-1" type="date" value="2011-08-19" id="example-date-input"#start>
+        Start Date<input class="form-control-1" type="date"  id="start-date-input" #start>
             </div>
             
             <div class="col-md-6">
-        End Date<input class="form-control-1" type="date" value="2011-08-19" id="example-date-input"#end></div>
-        </div><br>
+        End Date<input class="form-control-1" type="date"  id="end-date-input" #end></div>
+           </div><br>
         <!-- div for content inside modal starts -->
         <div class="form-group">
-                <label for="exampleInputEmail1">Add Task task</label>
-                <textarea input type="text-input" class="form-control"   placeholder="Write here to add your task"#task></textarea>
+                <label for="exampleInputEmail1">Add New Task</label>
+                <textarea input type="text-input" class="form-control"   placeholder="Write here to add your task" #tasks></textarea>
                 
               </div>
         <!-- <div class="form-group row"> -->

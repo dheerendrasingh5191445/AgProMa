@@ -59,7 +59,7 @@
                     <br>
                     <label class="col-md-10 col-form-label" for="text-input">
                   <strong>Project Name:</strong>
-                <strong class="projectName"> &nbsp; {{item.projectMaster.name}}</strong>
+                  <strong class="projectName" *ngIf="item.projectMaster != undefine"> &nbsp; {{item.projectMaster.name}}</strong>
                     </label>
                   </div>
                 </form>

@@ -10,7 +10,7 @@ namespace MyNeo4j.Service
 {
     public interface ITaskBacklogService
     {
-        List<TaskBacklog> GetAllTask(int id);
+        List<TaskBacklogView> GetAllTask(int id);
         List<TeamMaster> GetByTeamId(int SprintId);
         List<AvailTeamMember> getTeamMember(int teamId);
         void UpdateTask(int memberID, int taskId);
@@ -96,9 +96,24 @@ namespace MyNeo4j.Service
         }
 
         //this method will return all the task in that same sprint
-        public List<TaskBacklog> GetAllTask(int id)
+        public List<TaskBacklogView> GetAllTask(int id)
         {
-            return _taskBacklog.GetAllTaskDetail(id);
+            List<TaskBacklogView> taskblv = new List<TaskBacklogView>();
+            List<TaskBacklog> taskbacklog = _taskBacklog.GetAllTaskDetail(id);
+            foreach (TaskBacklog tb in taskbacklog)
+            {
+                TaskBacklogView tblv = new TaskBacklogView();
+                tblv.TaskId = tb.TaskId;
+                tblv.TaskName = tb.TaskName;
+                tblv.PersonId = tb.PersonId;
+                tblv.SprintId = tb.SprintId;
+                tblv.StartDate = tb.StartDate;
+                tblv.ActualEndDate = tb.ActualEndDate;
+                tblv.EndDate = tb.EndDate;
+                tblv.Status = tb.Status;
+                taskblv.Add(tblv);
+            }
+            return taskblv;
         }
 
         public void UpdateConnectionId(string connectionid, int memberid)

@@ -82,7 +82,7 @@ export class LoginService {
   {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: this.headers });
-    return this.http.post("http://localhost:59382/api/TokenGeneration/createtoken",auth,options)
+    return this.http.post(ConfigFile.LoginServiceUrl.getToken,auth,options)
                       .toPromise();
   }
 
@@ -91,7 +91,7 @@ export class LoginService {
   {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: this.headers });
-    return this.http.post("http://localhost:59382/api/TokenGeneration/createtokenforfbandgoogle/"+user.email,options)
+    return this.http.post(ConfigFile.LoginServiceUrl.getTokenForFbandGoogle+user.email,options)
                       .toPromise()
                       .catch(
                         error=>{

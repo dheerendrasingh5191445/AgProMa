@@ -18,38 +18,21 @@ namespace MyNeo4j.Controllers
         {
             _service = service;
         }
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-
-            return new string[] { "value1", "value2" };
-        }
 
         // GET api/values/5
         [HttpGet("{UserId}")]
+        //get efficiency for a user.
         public float Get(int userId)
         {
            return _service.GetEfficiencyForUser(userId);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
         // PUT api/values/5
         [HttpPut("{id}")]
+        //update the checklist item for a task
         public void Put(int id, [FromBody]ChecklistBacklog checklist)
         {
             _service.Update(id, checklist);
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
