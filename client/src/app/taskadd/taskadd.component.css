@@ -8,14 +8,13 @@
   margin-left: 0PX;
 }
 .dark_header {
-  background-color:#460619;
-  border-radius: 5px;
+  background-color:#32456d;
   color: white;
   /* width: 800px; */
   text-align: center;
-  height: 50px;
-  margin-top: 10PX;
-  padding-top: 15px;
+  height: 40px;
+  padding-top: 10px;
+  box-shadow: 5px 5px 7px #1f6d6d ;
 }
 fieldset.custom {
   border: 1px solid #ddd;
@@ -26,6 +25,9 @@ fieldset.custom {
   background-color: #fbfbfb ;
   border-radius: 5px;
   
+}
+#task{
+  color: #00cc99;
 }
 .no-margin {
   margin: 0 !important;
@@ -53,8 +55,6 @@ fieldset.custom {
 }
 li{
   display: inline;
-  width: 10px;
-  
 }
 .container-fluid{
   color: grey;
@@ -70,11 +70,9 @@ li{
 }
 .modal-header{
   
-   background-color:#1f6d6d;
-   height: 100px; 
-   margin-top: 60px;
-   font-size: 40px;
+   background-color:#32456d;
    color: white;
+   height: 50px;
    text-align: center;   
 }
 .modal-body{
@@ -83,8 +81,21 @@ li{
    background: white;
    
 }
+#list{
+  margin-top: 10px;
+}
+.close{
+  color: #fff;
+}
+#checklist{
+  float: right;
+}
+#edit{
+  float: right;
+  margin-left: 10px;
+}
 #closeBtn{
-  background-color:white;  
+  background-color:#00cc99;  
 }
 .div_details:hover{
    opacity:0.5;
@@ -93,10 +104,10 @@ li{
 .mdl{
   box-shadow: rgba(0,0,0, 0.3) 20px 20px 20px;
 }
-textarea{
+/* textarea{
  border-color: black;
  border-radius:400px;
-}
+} */
 .contentstory{
   text-decoration: none;
   color: black;
@@ -143,29 +154,38 @@ textarea{
   padding: 5px;
   border-radius: 1rem;
 }
-.form-rounded {
+/* .form-rounded {
 border-radius: 2rem;
 color: black;
 margin-left: 30px;
 width: 400px;
 height:100px;
-}
+} */
 #icon{
   margin-left: 30px;
 }
 #icon1{
-  width: 200px;
-  margin-left: 30px;
+  width: 80px;
+  /* margin-left: 30px; */
+  margin-top: 20px;
+  background:#009999;
+  float:left;
 }
 #icon3{
    background:#1f6d6d;
-  margin-top: 40px;
+  margin-top: 10px;
+}
+#numbers {
+  background-color: #b6cee2;
+}
+#edittask{
+  margin-left: 100px;
 }
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 button.snip0059 {
 font-family: 'Raleway', Arial, sans-serif;
 border: none;
-background-color: #1f6d6d;
+background-color: #009999;
 border-radius: 5px;
 color: rgba(255, 255, 255, 0.7);
 cursor: pointer;
@@ -178,6 +198,8 @@ font-size: 1em;
 outline: none;
 position: relative;
 overflow: hidden;
+width: 80px;
+margin-top:30px;
 }
 button.snip0059:before {
 content: '';
@@ -242,6 +264,31 @@ transition-delay: 0s;
 width:250px;
 }
 #scroll{
+  margin-top: 10px;
   overflow-y: auto;
-  height: 300px;
+  height: 400px;
+}
+
+.tool {
+  position: relative;
+  display: inline-block;
+}
+
+.tool .tooltiptext {
+  visibility: hidden;
+  width: 230px;
+  height: 35px;
+  background-color: #2F2E2E;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tool:hover .tooltiptext {
+  visibility: visible;
 }

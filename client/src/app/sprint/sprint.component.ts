@@ -18,7 +18,7 @@ export class SprintComponent implements OnInit {
   sprints: Array<Sprint>;
   backlogs: Array<ProductBacklog>;
   connection: HubConnection;
-  newsprint = new Sprint(null, '', '', null, null, null);
+  newsprint = new Sprint(null,'','',null,null,0);
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -44,6 +44,7 @@ export class SprintComponent implements OnInit {
     //register getBacklogs and get returned backlogs from backend.
     this.connection.on("getBacklogs", data => {
       this.backlogs = data;
+      //sort the backlogs according to user story priority
       this.backlogs.sort(function (a, b) {
         return a.priority - b.priority;
       });
@@ -51,6 +52,7 @@ export class SprintComponent implements OnInit {
 
     //register postSprints Method and push sprint to the sprints.
     this.connection.on("postSprints", data => {
+      swal('Sprint Added', '', 'success');
       this.sprints.push(data);
     });
 
@@ -88,11 +90,8 @@ export class SprintComponent implements OnInit {
 
   //it will add sprint in the sprint container
   onSaveSprint() {
-   debugger;
-    this.newsprint.status = 0;
     this.newsprint.projectId = this.projectId;
     //invoke Add Sprint method of Backend
-    this.connection.invoke("AddSprint", this.newsprint)
-                    .then((notify) => swal('Sprint Added', '', 'success'));
+    this.connection.invoke("AddSprint",this.newsprint);
   }
 } 

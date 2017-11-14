@@ -1,5 +1,5 @@
 <div class="col-lg-6"><!--this is start of particular project related to to user that login-->
-        <div class="button">
+        <div class="main">
         <div class="card-one">
           <div class="top">
             <div class="wrapper">
@@ -14,7 +14,7 @@
                 </a>
               <span (click)="enterProject()" class="fa fa-sign-in fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to view project details"></span>
               </div>
-              <h1 class="heading">{{Data.name | titlecase }}</h1>             
+              <h1 class="heading" (click)="enterProject()">{{Data.name | titlecase }}</h1>             
             </div>
           </div>
         </div>

@@ -3,7 +3,8 @@ export class ReleasePlan {
     public  description: string;
     public  releaseDate: string;
     public startDate: string;
-    public status: number;
+    public status: string;
     public projectId : number;
+    public actualReleaseDate?:string;
     public releasePlanId ?: number   
 }

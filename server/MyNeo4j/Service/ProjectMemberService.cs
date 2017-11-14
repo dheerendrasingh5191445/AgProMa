@@ -8,27 +8,43 @@ namespace MyNeo4j.Service
 {
     public interface IProjectMemberService
     {
-        ProjectMember GetMemberDetails(int id);
+        List<ProjectMember> getMemberDetails(int id);
         void Add_MemberDetails(ProjectMember member);
        
-
     }
     public class ProjectMemberService : IProjectMemberService
     {
-        public IProjectMemberRepository _repo;
+        private IProjectMemberRepository _repo;
         public ProjectMemberService(IProjectMemberRepository repo)
         {
             _repo = repo;
         }
 
-        public ProjectMember GetMemberDetails(int id)
+        public List<ProjectMember> getMemberDetails(int memberid)
         {
             
-            return _repo.GetMemberDetails(id);
+            return _repo.getMemberDetails(memberid).ToList();
         }
+
         public void Add_MemberDetails(ProjectMember details)
         {
-            _repo.Add_MemberDetails(details);
+            List<ProjectMember> projectmem = getMemberDetails(details.MemberId);
+            foreach (var member in projectmem)
+            {
+                if ( member.MemberId== details.MemberId && member.ProjectId == details.ProjectId)
+                {
+                   
+                }
+                else
+                {
+                    _repo.Add_MemberDetails(details);
+                    break;
+                }
+
+            }
+           
+            
+            
         }
 
     }

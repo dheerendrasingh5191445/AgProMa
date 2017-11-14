@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import{ TeamsService} from '../shared/services/teams.service';
 import{ TeamMaster} from '../shared/model/teamMaster';
+=======
+import { TeamsService } from '../shared/services/teams.service';
+import { TeamMaster } from '../shared/model/teamMaster';
+>>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
 import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
@@ -21,8 +26,14 @@ export class TeamsComponent implements OnInit {
    val:string="";
    connection:HubConnection;
    userId:number;
+<<<<<<< HEAD
    letter:string;
   constructor(private teamService:TeamsService,private route:ActivatedRoute, private router : Router) {   
+=======
+   letter:any;
+
+  constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
+>>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
   }
   ngOnInit() {
       this.route.params.subscribe(param =>this.projectId = +param['id']);
@@ -51,17 +62,18 @@ export class TeamsComponent implements OnInit {
                    });
     });
   }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
   //method for dropping members in appropriate order
   filterByName(event:Event){
     this.letter=(<HTMLInputElement> event.target).value;
     this.teamList1=this.teamList1.sort();
-    console.log("team is "+this.teamList1);
     this.teamList1= this.teamList.filter(t=>t["memberName"].toLowerCase().startsWith(this.letter.toLowerCase()));
   }
-
   //this will add new team 
     addTeam(name:string){
       if(name==""){
@@ -76,8 +88,12 @@ export class TeamsComponent implements OnInit {
                         });
         }
     }
+<<<<<<< HEAD
   
     //this will remove a particular team member
+=======
+  //this will remove a particular team member
+>>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
   removeMember(){
     this.connection.invoke("GetAvailableMember",this.projectId)
                    .catch(error=>{
@@ -139,4 +155,14 @@ export class TeamsComponent implements OnInit {
     return 0;             //unchanged
     
   }
+<<<<<<< HEAD
 }
+=======
+
+  efficiency(Id:number){
+  
+    this.router.navigate(["role-dashboard",this.projectId,"userprofile",Id]);
+
+  }
+}
+>>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1

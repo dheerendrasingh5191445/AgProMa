@@ -12,14 +12,12 @@ export class RegisterUserWithNewPasswordService {
 
   getUserDetails(id : string)
   {
-    console.log("http://localhost:52258/api/Master/"+id);
     return this.http.get("http://localhost:52258/api/Master/"+id)
                     .map(Response =>Response);
   }
 
   updatePassword(userDetail : Master):Promise<any>
   {
-    console.log("assdsadsads",userDetail.password);
     return this.http.put('http://localhost:52258/api/Master/'+ userDetail.id,userDetail,{headers: new Headers({'Content-Type':'application/json'})})
                     .toPromise();
   }

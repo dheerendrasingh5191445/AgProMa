@@ -23,16 +23,13 @@ export class BacklogComponent implements OnInit {
     //get the id for the user.
     var session = sessionStorage.getItem("id");
     this.userId = parseInt(session);
-
     //getting project id from route
     this.route.params.subscribe((param) => this.projectId = +param['id']);
-
     //register and invoke connection
     this.connectBacklogHub();
   }
-
   connectBacklogHub() {
-    this.connection = new HubConnection('http://localhost:52258/backlog');
+    this.connection = new HubConnection(ConfigFile.ProductBacklog.connection);
     //register to get Backlogs from the backend.
     this.connection.on("getbacklog", backlogs => {
       this.stories = backlogs;
@@ -44,7 +41,6 @@ export class BacklogComponent implements OnInit {
 
     //get the added backlog return data with socket
     this.connection.on("postBacklog", data => {
-      console.log(data);
       this.stories.push(data);
     });
 
@@ -79,11 +75,11 @@ export class BacklogComponent implements OnInit {
         this.model.priority = priority;
         //invoke backend post method
         this.connection.invoke("PostBacklog", this.model)
-                      .then(data=>{swal('User story deleted', '', 'success');
+                      .then(data=>{swal('User Story Added', '', 'success');
       
                       });
-        this.connection.invoke("GetBacklog", this.projectId)
-                      .then(data=>{this.stories.sort(function (a, b) {
+      this.connection.invoke("GetBacklog", this.projectId)
+                     .then(data=>{this.stories.sort(function (a, b) {
                         return a.priority - b.priority;
                         });
                       });
@@ -100,7 +96,7 @@ export class BacklogComponent implements OnInit {
       item.comments = comment;
       item.priority = priority;
       this.connection.invoke("UpdateBacklog", item.storyId, item)
-                    .then(data=>{swal('User story updated', '', 'success')});
+                    .then(data=>{swal('User Story Updated', '', 'success')});
       this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{this.stories.sort(function (a, b) {
                       return a.priority - b.priority;
@@ -112,10 +108,11 @@ export class BacklogComponent implements OnInit {
   //delete a backlog
   deleteBacklog(item: any) {
     this.connection.invoke("DeleteBacklog", item.storyId, this.projectId)
-                    .then(data=>{ swal('User story deleted', '', 'success')});
+                    .then(data=>{ swal('User Story Deleted', '', 'success')});
     this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{ this.stories.sort(function (a, b) {
-                       return a.priority - b.priority;
-                    });});
+                        return a.priority - b.priority;
+                      });
+                    });
   }
 }

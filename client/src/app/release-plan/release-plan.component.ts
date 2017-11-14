@@ -4,6 +4,7 @@ import { ReleasePlanService } from "../shared/services/release-plan.service";
 import { HubConnection } from "@aspnet/signalr-client/dist/src";
 import { ReleasePlan } from '../shared/model/release-plan';
 import swal from 'sweetalert2';
+import { ConfigFile } from '../shared/config';
 
 @Component({
   selector: 'app-release-plan',
@@ -21,12 +22,13 @@ export class ReleasePlanComponent implements OnInit {
   sprints:any[];
   data: any;
   connection:HubConnection;
+  errorMsg: string;
 
   constructor(private router:Router, private releasePlanService: ReleasePlanService,private route:ActivatedRoute) { }
 
   //Method for recieving a data from backend 
   connectReleasePlanHub() {
-    this.connection = new HubConnection("http://localhost:52258/releaseplan");
+    this.connection = new HubConnection(ConfigFile.ReleasePlanUrls.connection);
     this.connection.on("whenAdded", data => { swal('ADDED','','success' );});
     this.connection.on("getreleaseplans", data => {this.release = data });
     this.connection.on("getsprints", sprint =>{this.sprints=sprint});
@@ -34,6 +36,10 @@ export class ReleasePlanComponent implements OnInit {
     this.connection.invoke("SetConnectionId",3);
     this.connection.invoke("GetReleasePlans",this.projectId)
                    .then(()=>this.connection.invoke("GetAllSprints",this.projectId));
+    })
+    .catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/'+this.errorMsg]);
     });
   }
 
@@ -45,13 +51,16 @@ export class ReleasePlanComponent implements OnInit {
 
   //this method is to go back on previous page
   navigateNewRelease(){
-    this.router.navigateByUrl('/app-dashboard/newreleasedetail/1');
+    this.router.navigateByUrl(ConfigFile.ReleasePlanUrls.navigateNewRrelease);
   }
 
   //method for updating a release in sprint
   updateReleaseInSprint($event,releaseId:number){
     let sprintData: any = $event.dragData;
-    this.connection.invoke("UpdateReleaseInSprint",sprintData,releaseId);
+    this.connection.invoke("UpdateReleaseInSprint",sprintData,releaseId).catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/'+this.errorMsg]);
+    });
   }
 
   //Method for comparing a release plan
@@ -70,6 +79,7 @@ export class ReleasePlanComponent implements OnInit {
       swal('PLEASE FILL ALL DETAILS', '', 'error');
     }
     else {
+      
       var date1 = this.releasePlan.releaseDate.split("-");
       var date2 = this.releasePlan.startDate.split("-");
       if (date2[0] <= date1[0])//year
@@ -79,8 +89,14 @@ export class ReleasePlanComponent implements OnInit {
           if (date2[2] <= date1[2])//date
            {
             this.releasePlan.projectId = this.projectId;
+            this.releasePlan.actualReleaseDate=ConfigFile.ActualEndDate;
+            console.log(this.releasePlan);
             this.connection.invoke("AddRelease",this.releasePlan)
-                           .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)});
+                           .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)})
+                           .catch(err=>{                        
+                            this.errorMsg=err;
+                            this.router.navigate(['/app-error/'+this.errorMsg]);
+                          });
           }
           else {
             swal('enter valid date', '', 'error') //alert for a date

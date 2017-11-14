@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import { HubConnection } from '@aspnet/signalr-client';
 import swal from 'sweetalert2';
+import { ConfigFile } from '../shared/config'
 
 @Component({
     selector: 'multi',
@@ -36,12 +37,10 @@ export class TaskAssignComponent {
         this.connectToHub();
     }
 
-
-
     //this is to set connection from hub
     connectToHub(){
         // for connecting with hub 
-        this.connection = new HubConnection("http://localhost:52258/taskbacklog");
+        this.connection = new HubConnection(ConfigFile.TaskAssignUrls.connection);
         // when this component reload ,it will call this method
         // registering event handlers
         this.connection.on("getAllTaskDetail",data =>{ this.AvailTask = data;console.log(this.AvailTask); });//this will return list of teams
@@ -60,13 +59,10 @@ export class TaskAssignComponent {
         });
       }
 
-
-
     //get the list of the team members according to their teams in a particular project
     getTeamMember(){
         this.connection.invoke("GetTeamMember",this.myId);
     }
-
 
     //after adding the member to the list the list must be updated with the member name
     teamListupdate($event,id:number){  
@@ -83,16 +79,16 @@ export class TaskAssignComponent {
 
      //this method is to compare wether a person exist in team or not
      compareTask(personId:number,memberId:number){
-      if(personId == memberId)return true;
+
+      if(personId == memberId){return true;}
       else return false;
      }
 
      //this method is to check wether person who was assigned is accessing the task to do work
-     checkPerson(task:any){
-         if(task["personId"] == this.userId)
-         { this.router.navigate(["role-dashboard",this.projectId,"app-checklist",task.taskId]); }
-         else
-          swal('This task is not assigned to you!!!!','   ','error')
-     }
-    
+    checkPerson(task:any){
+        if(task["personId"] == this.userId)
+        { this.router.navigate(["role-dashboard",this.projectId,"app-checklist",task.taskId]); }
+        else
+            swal('This task is not assigned to you!!!!','   ','error')
+    }
 }  

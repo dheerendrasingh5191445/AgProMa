@@ -10,8 +10,8 @@ import { DndModule } from 'ng2-dnd';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Http, HttpModule } from '@angular/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import {LineGraphComponent} from './line-graph/line-graph.component'
-import{ChartsModule} from 'ng2-charts'
+import { LineGraphComponent} from './user-profile/line-graph/line-graph.component'
+import { ChartsModule} from 'ng2-charts'
 
 //component declaration
 import { SignupComponent } from './signup/signup.component';
@@ -33,7 +33,7 @@ import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { DashboardRoleComponent } from './dashboard-role/dashboard-role.component';
-import { EfficiencyGraphComponent } from './efficiency-graph/efficiency-graph.component';
+import { EfficiencyGraphComponent } from './user-profile/efficiency-graph/efficiency-graph.component';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { UserProfileComponent} from "./user-profile/user-profile.component";
 
@@ -56,6 +56,7 @@ import { TaskAssignService } from './shared/services/task-assign.service';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
 import { ErrorComponent } from './shared/component/error/error.component';
+import { BurndownService } from './shared/services/burndown.service';
 
 
 
@@ -67,7 +68,7 @@ let config = new AuthServiceConfig([
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("1942249056044697")
+    provider: new FacebookLoginProvider("362127810880411")
   }
 ]);
 
@@ -100,7 +101,8 @@ export function provideConfig() {
     KanbanBoardComponent,
     EfficiencyGraphComponent,
     DashboardRoleComponent,
-    ErrorComponent
+    ErrorComponent,
+    UserProfileComponent
   ],
   imports: [
     DndModule.forRoot(),
@@ -129,6 +131,7 @@ export function provideConfig() {
     SprintService,
     TaskService,
     TeamsService,
+    BurndownService,
     EfficiencyGraphService,
     {
       provide: AuthServiceConfig,

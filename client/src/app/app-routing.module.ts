@@ -21,10 +21,8 @@ import { SprintComponent } from './sprint/sprint.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { TaskAddComponent } from './taskadd/taskadd.component';
 import { TaskAssignComponent } from './taskAssign/taskAssign.component';
-import {LineGraphComponent} from './line-graph/line-graph.component'
 import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
-import {UserProfileComponent} from "./user-profile/user-profile.component"
-import { EfficiencyGraphComponent } from "./efficiency-graph/efficiency-graph.component";
+import { UserProfileComponent} from "./user-profile/user-profile.component"
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { DashboardRoleComponent } from './dashboard-role/dashboard-role.component';
 import { ErrorComponent } from "./shared/component/error/error.component";
@@ -35,6 +33,7 @@ const routes: Routes = [
     { path: 'landingpage', component:LandingpageComponent},
     { path : 'app-error/:id', component : ErrorComponent},
     { path: 'app-signup', component: SignupComponent },
+    { path: 'app-signup/:id', component: SignupComponent },
     { path: 'app-register/:id', component: RegisterComponent }, 
     { path: 'app-forget-password', component: ForgetPasswordComponent },
     { path: 'app-register-user-with-new-password/:id', component: RegisterUserWithNewPasswordComponent },
@@ -46,6 +45,7 @@ const routes: Routes = [
     { path:'project-detail', component:ProjectDetailComponent },
     { path:'fill-details/:id',component:FillDetailsComponent},
     { path:'app-teams/:id', component: TeamsComponent },
+    { path:'userprofile/:id', component:UserProfileComponent}
     ]},
     { path:'role-dashboard/:id',component:DashboardRoleComponent,
 children:[
@@ -56,9 +56,8 @@ children:[
     { path:'app-checklist/:id',component:ChecklistComponent},
     { path:'taskadd/:id',component:TaskAddComponent},
     { path:'taskassign/:id',component:TaskAssignComponent},
-    { path:'line-graph',component:LineGraphComponent},
     { path:'kanban/:id', component:KanbanBoardComponent},
-    { path:'efficiency', component:EfficiencyGraphComponent}
+    { path:'userprofile/:id', component:UserProfileComponent}
 ]}
 ]
 @NgModule({

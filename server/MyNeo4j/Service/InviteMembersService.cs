@@ -1,3 +1,4 @@
+using AgProMa.Services;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
@@ -15,18 +16,20 @@ namespace MyNeo4j.Service
     public interface IinviteMembersService
     {
         void EmailForInvitation(InvitePeople people);
-        List<AvailableMember> GetMemberName(int id);
+        List<InviteExistingMember> GetMemberName(int id);
     }
 
     public class InviteMembersService : IinviteMembersService
     {
-        public IConfiguration _config;
-        public IInviteRepository _repository;
-        public InviteMembersService(IInviteRepository repository,IConfiguration config)
+        private IConfiguration _config;
+        private IInviteRepository _repository;
+        private ISignUpService _signup;
+        public InviteMembersService(IInviteRepository repository,IConfiguration config, ISignUpService signup )
         { 
            
             _repository = repository;
             _config = config;
+            _signup = signup;
         }
         
 
@@ -34,15 +37,23 @@ namespace MyNeo4j.Service
 
         public void EmailForInvitation(InvitePeople people)
         {
-            
+            int user = _signup.GetId(people.Email);
+
                     var message = new MimeMessage();
                     message.From.Add(new MailboxAddress(_config["EmailConfig:Title"], _config["EmailConfig:FromEmail"])); //mail title and mail from(Email)
                     message.To.Add(new MailboxAddress(people.Email)); //mail to(client)
                     message.Subject = _config["EmailConfig:SubjectForInvitation"]; //mail subject
                     var bodyBuilder = new BodyBuilder();
-                    //body of the mail
-                    bodyBuilder.HtmlBody = "Click here to join project-  http://localhost:4200/app-register/" + people.ProjectId; //link sent in mail
-                    message.Body = bodyBuilder.ToMessageBody();
+            //body of the mail
+            if (user!=0)
+            {
+                bodyBuilder.HtmlBody = "Click here to join project-  http://localhost:4200/app-signup/" + people.ProjectId; //link sent in mail
+            }
+            else
+            {
+                bodyBuilder.HtmlBody = "Click here to join project-  http://localhost:4200/app-register/" + people.ProjectId; //link sent in mail
+            }
+                message.Body = bodyBuilder.ToMessageBody();
 
                     using (var client = new SmtpClient())
                     {
@@ -54,17 +65,18 @@ namespace MyNeo4j.Service
                     }          
         }
 
-        public List<AvailableMember> GetMemberName(int id)
+        public List<InviteExistingMember> GetMemberName(int id)
         {
-            List<AvailableMember> myMember = new List<AvailableMember>();
+            List<InviteExistingMember> myMember = new List<InviteExistingMember>();
             List<ProjectMember> member = _repository.GetMemberName();
             foreach (ProjectMember pm in member)
             {
                 if (pm.ProjectId == id)
                 {
                     Master master = _repository.AllData(pm.MemberId);
-                    AvailableMember am = new AvailableMember();
-                    am.MemberId = master.Id;
+                    InviteExistingMember am = new InviteExistingMember();
+                    am.ProjectId = master.Id;
+                    am.Email = master.Email;
                     am.MemberName = master.FirstName + " " + master.LastName;
                     myMember.Add(am);
                 }

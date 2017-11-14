@@ -2,22 +2,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="twPc-div">
-            <a class="twPc-bg twPc-block"></a>
-            <div>
+            <a class="twPc-bg twPc-block"></a>  <!--Cover image added here-->
+           
                 <!--User image added here-->
                 <a title="userImage" class="twPc-avatarLink">
                     <img alt="User" src="../../assets/images/man.png"><!--image of user-->
                   </a>
                 <!--hello user message-->
                 <div class="twPc-divUser">
-                    <div class="twPc-divName">
+                    <div class="twPc-divName" *ngIf="details">
                         <a>
                             <h4>Hello {{details.firstName}} !</h4>
                         </a>
                     </div>
                 </div>
+            </div>
                 <!--card containing user information-->
-                <div class="card inverse">
+                <div class="card inverse col-md-12" *ngIf="details">
                     <div class="card-header" id="YourInfo">
                         Your Info
                     </div>
@@ -25,46 +26,47 @@
                         <hr style="margin:5px 0 5px 0;">
                         <!--First name of the user shown-->
                         <div class="row">
-                            <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
-                            <div id="firstName" class="col-sm-7 col-xs-6 ">{{details.firstName}}</div>
-                            <div class="clearfix"></div>
-                            <div class="bot-border"></div>
+                            <div class="col-sm-6 col-md-5  tital "><strong>First Name:</strong></div>
+                            <div id="firstName" class="col-sm-6 col-md-6  "> {{details.firstName | uppercase }}</div>
+            
                         </div>
                         <!--Last name of the user shown-->
                         <div class="row">
-                            <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
-                            <div id="lastName" class="col-sm-7"> {{details.lastName}}</div>
-                            <div class="clearfix"></div>
-                            <div class="bot-border"></div>
+                            <div class=" col-xs-6 col-sm-5 ">
+                                <strong>Last Name:</strong>
+                            </div>
+                            <div  class="col-xs-6 col-sm-6" id="lastName"> {{details.lastName | uppercase }}</div>
+     
                         </div>
                         <!--Department of the user shown-->
                         <div class="row">
-                            <div class="col-sm-5 col-xs-6 tital ">Department:</div>
+                            <div class="col-sm-5 col-xs-6 tital "><strong>Department:</strong></div>
                             <div id="department" class="col-sm-7"> {{details.department}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
                         <!--Organization of the user shown-->
                         <div class="row">
-                            <div class="col-sm-5 col-xs-6 tital ">Organization:</div>
+                            <div class="col-sm-5 col-xs-6 tital "><strong>Organization:</strong></div>
                             <div class="col-sm-7"> {{details.organization}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
                         <!--Email ID of the user shown-->
                         <div class="row">
-                            <div  class="col-sm-5 col-xs-6 tital ">Email ID:</div>
+                            <div  class="col-sm-5 col-xs-6 tital "><strong>Email ID:</strong></div>
                             <div id="email" class="col-sm-7"> {{details.email}}</div>
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="userId == id">
                             <!--Change the password of the user-->
                             <div class="col-sm-5 col-xs-6 tital">
-                                Password:</div>
+                              <strong>Password:</strong></div>
                             <div class="col-sm-7">
-                                <div class="btn btn-primary " data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Change Password</div>
+                                <button  class="btn btn-primary " data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Change Password</button>
                             </div>
+
                             <div class="clearfix"></div>
                             <div class="bot-border"></div>
                         </div>
@@ -110,20 +112,23 @@
                                 </div>
                             </div>
 
-
+                        </div>  
                         </div>
-                    </div>
+            
                 </div>
-            </div>
-        </div>
+           
+      <div class="row">
+            <div class="twPc-div">
         <h2 id="eheading">Your Efficiency</h2>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6">
-                <efficiency></efficiency>
+                <efficiency *ngIf="id" [userId]="id"></efficiency>
             </div>
             <div class="col-md-6 col-sm-6 col-lg-6">
-                <app-line-graph></app-line-graph>
+                <app-line-graph  *ngIf="id" [userId]="id"></app-line-graph>
             </div>
         </div>
+      </div>
     </div>
+</div>
 </div>

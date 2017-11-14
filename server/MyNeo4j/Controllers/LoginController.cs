@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AgProMa.Controllers
 {
-    [Authorize]
+   
     [Produces("application/json")]
     public class LoginController : Controller
     {
@@ -107,7 +107,7 @@ namespace AgProMa.Controllers
         [HttpGet]
         [Route("api/[controller]/Details/{id}")]
         //this method updates the user details
-        public IActionResult GetById(int id)
+        public IActionResult Details(int id)
         {
             return Ok(_context.GetById(id));
         }

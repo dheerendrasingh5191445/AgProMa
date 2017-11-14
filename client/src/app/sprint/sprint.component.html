@@ -1,20 +1,26 @@
-<div class="container" ng-controller="dateCtrl">
-  <br>
+  <!-- Add Sprint Button -->
+  <button type="button" class="row addButton" data-toggle="modal" data-target="#myModal">
+      <span>Add New Sprint</span> <i class="ion-android-arrow-forward"></i>
+    </button>
+    <hr>
+    <br>
+<!-- End of Add Button -->
+<div class="container-fluid" ng-controller="dateCtrl">
   <div class="row">
     <!-- Sprint container -->
     <div class="sprint col-lg-7 col-sm-7 col-md-7 rounded">
       <div id="header_sprint">
-        <strong class="text-center">Sprints</strong>
+        <h5 class="text-center">Sprints</h5>
       </div>
       <hr>
       <!-- Sprints already present  -->
-        <div class="sprints card" *ngFor=" let sprint of sprints">
+        <div class="sprints card" *ngFor=" let sprint of sprints;let i=index">
           <!-- Sprint and Stories in each sprint -->
-          <div class="card-header tool" >
+          <div class="card-header tool">
             <strong >{{sprint.sprintName}}</strong>
             <span routerLink = "/role-dashboard/{{projectId}}/taskadd/{{sprint.sprintId}}" class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to add task"></span>
             <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project details"></span>
-            <span  class="fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to view and add members"></span>
+            <a class="fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="true" aria-controls="collapseExample"></a>
             <span class="tooltiptext">Start Date : {{sprint.startDate | date: "dd.MM.y"}}
                 <br>
                 No. of days : {{sprint.totalDays}}
@@ -24,7 +30,7 @@
             <p class="date"><strong>Start Date : </strong>{{sprint.startDate | date: "dd.MM.y"}}</p>
           </div>
           <!-- Drop here for Stories -->
-          <div dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" class="panel panel-info">
+          <div dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" id="collapseExample{{i}}" class="collapsed panel panel-info">
             <!-- backlogs in each sprint -->
             <div class="story" *ngFor="let story of backlogs">
               <div class="card-text" id="story_name" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>
@@ -38,19 +44,13 @@
           </div>
           <!-- End of drop here for stories -->
         </div>
-        <!-- End of Sprints already present -->
-        <hr>
-      <!-- Add Sprint Button -->
-      <button type="button" class="addButton" data-toggle="modal" data-target="#myModal">
-            <span>Add Sprint</span> <i class="ion-android-arrow-forward"></i>
-          </button>
-      <!-- End of Add Button -->
+        <!-- End of Sprints already present -->      
     </div>
     <!-- End of Sprint Container -->
     <!-- Unassigned Backlogs -->
     <div class="backlogItmes col-lg-4 col-sm-4 col-md-4 rounded">
       <div id="header_backlog_items">
-        <strong>Unassigned Backlog Items</strong>
+        <h5>Unassigned Backlog Items</h5>
       </div>
       <hr>
       <!-- Backlogs that are not assigned -->
@@ -80,7 +80,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Sprint Details</h4>
+        <h4 class="modal-title text-center" id="exampleModalLabel">Sprint Details</h4>
       </div>
       <!-- End of Modal Header -->
       <div class="modal-body container">

@@ -9,7 +9,7 @@ namespace MyNeo4j.Service
     //interface of project member class
     public interface IProjectMemberRepository
     {
-        ProjectMember GetMemberDetails(int id);
+        List<ProjectMember> getMemberDetails(int id);
         void Add_MemberDetails(ProjectMember member);
     }
     public class ProjectMemberRepository : IProjectMemberRepository
@@ -22,9 +22,10 @@ namespace MyNeo4j.Service
             _context = context;
         }
         //this method gets the details of particular project member
-        public ProjectMember GetMemberDetails(int id)
+
+        public List<ProjectMember> getMemberDetails(int memberid)
         {
-            return _context.Projectmember.FirstOrDefault(p => p.id == id);
+            return _context.Projectmember.Where(p =>p.MemberId == memberid).ToList();
         }
         //this method adds the details of particular member corresponding to projectid
         public void Add_MemberDetails(ProjectMember member)

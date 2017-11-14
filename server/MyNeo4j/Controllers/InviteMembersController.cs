@@ -7,18 +7,48 @@ using Microsoft.AspNetCore.Mvc;
 using ForgetPassword.service;
 using MyNeo4j.Service;
 using MyNeo4j.Viewmodel;
+using Microsoft.AspNetCore.Authorization;
+using MyNeo4j.model;
+using AgProMa.Services;
 
 namespace ForgetPassword.Controllers
 {
+
     [Produces("application/json")]
     public class InviteMembersController : Controller
     {
 
         private IinviteMembersService _service;
-
-        public InviteMembersController(IinviteMembersService service)
+        private ISignUpService _context;
+        public InviteMembersController(IinviteMembersService service, ISignUpService context)
         {
             _service = service;
+            _context = context;
+        }
+
+        //get all details of all users
+        [Route("api/[controller]")]
+        public IActionResult Get()
+        {
+            //exception handling
+            try
+            {
+                List<Master> list = _context.GetAllDetails();
+                if (list.Count != 0)
+                {
+                    return Ok(list);
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+
+            }
+            catch
+            {
+
+                return StatusCode(500);
+            }
         }
 
 
@@ -46,7 +76,7 @@ namespace ForgetPassword.Controllers
         //this method is to fetch the data
        [HttpGet]
        [Route("api/InviteMembers/{id}")]
-       public List<AvailableMember> GetMemberName(int id)
+       public List<InviteExistingMember> GetMemberName(int id)
         {
             return _service.GetMemberName(id);
         }
