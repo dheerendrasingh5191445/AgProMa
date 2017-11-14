@@ -20,10 +20,6 @@ namespace MyNeo4j.model
         [Key]
         public int TaskId { get; set; }
 
-        public int SprintId { get; set; }
-        [ForeignKey("SprintId")]
-        public SprintBacklog SprintBacklogs { get; set; }
-
         public string TaskName { get; set; }
 
         public int PersonId { get; set; }
@@ -37,5 +33,9 @@ namespace MyNeo4j.model
         [EnumDataType(typeof(TaskBacklogStatus))]
         [JsonConverter(typeof(StringEnumConverter))]
         public TaskBacklogStatus Status { get; set; }
+
+        public int SprintId { get; set; }
+        [ForeignKey("SprintId")]
+        public virtual SprintBacklog SprintBacklogs { get; set; }
     }
 }

@@ -54,7 +54,7 @@ namespace MyNeo4j.Service
             foreach (TeamMaster tm in teams)
             {
                 teammem = _teamRepo.GetTeamMember(tm.TeamId);
-                 foreach(TeamMember temem in teammem)
+                foreach (TeamMember temem in teammem)
                 {
                     finalmemlist.Add(temem);
                 }
@@ -77,7 +77,7 @@ namespace MyNeo4j.Service
                     {
                         avail.TeamId = 0;
                         avail.Id = 0;
-                    }               
+                    }
                 }
                 availTeam.Add(avail);
             }
@@ -98,7 +98,7 @@ namespace MyNeo4j.Service
             }
             return teamlistbyproject;
         }
-        //this method will update connection Id for particular member 
+        //this method will update connection Id for particular member
         public void UpdateConnectionId(string connectionid, int memberid)
         {
             _teamRepo.UpdateConnectionId(connectionid, memberid);

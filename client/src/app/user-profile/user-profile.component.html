@@ -19,9 +19,7 @@
             </div>
                 <!--card containing user information-->
                 <div class="card inverse col-md-12" *ngIf="details">
-                    <div class="card-header" id="YourInfo">
-                        Your Info
-                    </div>
+                    <div class="card-header" id="YourInfo">Your Info</div>
                     <div class="card-body">
                         <hr style="margin:5px 0 5px 0;">
                         <!--First name of the user shown-->
@@ -106,7 +104,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <!--close the modal-->
-                                        <button href="#" class="btn" (click)="resetOnClose()" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        <button href="#" id="closeFunc" class="btn" (click)="resetOnClose()" data-dismiss="modal" aria-hidden="true">Close</button>
                                         <button href="#" class="btn btn-primary" id="password_modal_save" (click)="checkPassword()">Save changes</button>
                                     </div>
                                 </div>

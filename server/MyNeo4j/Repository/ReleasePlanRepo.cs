@@ -62,11 +62,7 @@ namespace MyNeo4j.Repository
         {
             SprintBacklog sprbl = _context.Sprintbl.FirstOrDefault(p => p.SprintId == sprintId);
             ReleasePlanMaster replmaster = _context.Releasepl.FirstOrDefault(p => p.ReleasePlanId == releaseId);
-            if(sprbl.Status==SprintStatus.Completed)
-            {
-                replmaster.Status = ReleasePlanStatus.Release;
-            }
-            else if(sprbl.Status == SprintStatus.Inprogress)
+             if(sprbl.Status == SprintStatus.Inprogress)
             {
                 replmaster.Status = ReleasePlanStatus.Inprogress;
             }

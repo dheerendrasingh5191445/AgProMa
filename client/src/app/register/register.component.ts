@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
 
   CreateAccount() {  //registering the user
 
-    this.index = this.details.find((m) => m.email == this.model.Email);  //find the details of a particular user 
+    // this.index = this.details.find((m) => m.email == this.model.Email);  //find the details of a particular user 
 
     if (this.model.Department == '' || this.model.Email == '' || this.model.FirstName == '' || this.model.LastName == '' || this.model.Organization == '' || this.model.Password == '') {
       swal('', 'Enter the Required fields', 'error');             //if any entry is empty then show the alert 
@@ -162,7 +162,7 @@ export class RegisterComponent implements OnInit {
           .then(data => {
             if (data.json() == "success") {
               swal('', 'Your account has been created', 'success');
-              this.router.navigateByUrl(ConfigFile.RegisterUrls.signupNavigation);      //navigate to the signup page
+              this.router.navigateByUrl(ConfigFile.RegisterUrls.signupNavigationById);      //navigate to the signup page
             }
             else {
               swal('', 'Email Already Exists', 'error')      //if enter id matches with the existing id in database 

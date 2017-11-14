@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BacklogService } from '../shared/services/backlog.service';
 import { ProductBacklog } from '../shared/model/productBacklog';
 import swal from 'sweetalert2';
-import { EpicService } from "../shared/services/epic.service";
 import { Epic } from "../shared/model/epic";
 import { HubConnection } from '@aspnet/signalr-client';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router} from '@angular/router';
 import { ConfigFile } from '../shared/config';
 
 @Component({
@@ -19,9 +17,10 @@ export class EpicComponent implements OnInit {
   connection: HubConnection;
   data: Array<any> //all epics will store in this variable
   userId:number;
+  errorMsg:string;
 
   model = new Epic(null, ''); //model for adding new epic
-  constructor(private epicService: EpicService,private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((param) =>
@@ -30,13 +29,17 @@ export class EpicComponent implements OnInit {
     this.userId = parseInt(session);
     this.connection = new HubConnection(ConfigFile.EpicUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
-    this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
-    this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
-    this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); 
-    this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   
+    this.connection.on("getBacklog",data =>{this.data = data }); //for gettting all epics based on project id
+    this.connection.on("whenDeleted",data => { swal('Brainstorming deleted', '', 'success') });  //sweet alerts
+    this.connection.on("whenUpdated",data => { swal('Brainstorming updated', '', 'success') }); 
+    this.connection.on("whenAdded",data => { swal('Brainstorming Added', '', 'success') });   
     this.connection.start().then(() => { 
     this.connection.invoke("SetConnectId",this.userId);
     this.connection.invoke("Get",this.projectId);
+    })
+    .catch(err=>{                        
+      this.errorMsg=err;
+      this.router.navigate(['/app-error/']);
     });
   }
 
@@ -48,7 +51,11 @@ export class EpicComponent implements OnInit {
     else {
       this.model.description = story;
       this.model.projectId = this.projectId;
-      this.connection.invoke("Post",this.model);
+      this.connection.invoke("Post",this.model)
+      .catch(err=>{                        
+        this.errorMsg=err;
+        this.router.navigate(['/app-error/']);
+      });
       this.connection.invoke("Get",this.projectId);
     }
   }
@@ -59,12 +66,28 @@ export class EpicComponent implements OnInit {
     }
     else{
       item.description = content;
-      this.connection.invoke("put",item.epicId,item);
+      this.connection.invoke("put",item.epicId,item)
+      .catch(err=>{                        
+        this.errorMsg=err;
+        this.router.navigate(['/app-error/']);
+      });;
     } 
   }
 
   deleteBacklog(item:any){       //for deleting the epic 
-    this.connection.invoke("Delete",item.epicId);
-    this.connection.invoke("Get",this.projectId);
+    swal('Are you sure?','Once deleted, you will not be able to recover this brainstorming!','warning')
+    .then((willDelete) => {
+      if (willDelete) {
+        this.connection.invoke("Delete",item.epicId)
+        .catch(err=>{                        
+          this.errorMsg=err;
+          this.router.navigate(['/app-error/']);
+        });;
+        this.connection.invoke("Get",this.projectId);
+      }
+      else {
+        swal("Your brainstorming is safe!");
+      }
+    });
   }
 }

@@ -25,7 +25,7 @@ namespace MyNeo4j.Controllers
 
         //this method will return all the task in that same sprint
         [HttpGet("GetAllTaskDetail/{id}")]
-        public List<TaskBacklog> GetAllTaskDetail(int id)
+        public List<TaskBacklogView> GetAllTaskDetail(int id)
         {
             var resp= task.GetAllTask(id);
             return resp;

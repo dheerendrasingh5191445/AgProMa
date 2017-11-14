@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import{ TeamsService} from '../shared/services/teams.service';
 import{ TeamMaster} from '../shared/model/teamMaster';
 =======
 import { TeamsService } from '../shared/services/teams.service';
+=======
+>>>>>>> e4493559c8f851a7b38e3b2ef19fcf678d7822b0
 import { TeamMaster } from '../shared/model/teamMaster';
 >>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
 import { ActivatedRoute, Router } from "@angular/router";
@@ -32,8 +35,12 @@ export class TeamsComponent implements OnInit {
 =======
    letter:any;
 
+<<<<<<< HEAD
   constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
 >>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
+=======
+  constructor(private route:ActivatedRoute,private router:Router) {   
+>>>>>>> e4493559c8f851a7b38e3b2ef19fcf678d7822b0
   }
   ngOnInit() {
       this.route.params.subscribe(param =>this.projectId = +param['id']);

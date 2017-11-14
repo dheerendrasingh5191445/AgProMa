@@ -5,6 +5,6 @@ export class ReleasePlan {
     public startDate: string;
     public status: string;
     public projectId : number;
-    public actualReleaseDate?:string;
+    public actualReleaseDate?:Date;
     public releasePlanId ?: number   
 }

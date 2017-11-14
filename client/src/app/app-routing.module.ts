@@ -31,8 +31,7 @@ import { ErrorComponent } from "./shared/component/error/error.component";
 const routes: Routes = [
     { path: "", redirectTo: 'landingpage', pathMatch: "full" },
     { path: 'landingpage', component:LandingpageComponent},
-    { path : 'app-error/:id', component : ErrorComponent},
-    { path: 'app-signup', component: SignupComponent },
+    { path: 'app-error', component : ErrorComponent},
     { path: 'app-signup/:id', component: SignupComponent },
     { path: 'app-register/:id', component: RegisterComponent }, 
     { path: 'app-forget-password', component: ForgetPasswordComponent },

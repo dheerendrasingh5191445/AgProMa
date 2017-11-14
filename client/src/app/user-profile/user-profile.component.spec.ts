@@ -5,9 +5,10 @@ import { UserProfileComponent } from './user-profile.component';
 import { LoginService } from '.././shared/services/login.service';
 import { FormsModule } from '@angular/forms';
 import { HttpModule,Http } from '@angular/http';
-import {Router} from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs'
 import { RouterTestingModule } from '@angular/router/testing';
+import swal from 'sweetalert2';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
@@ -17,22 +18,27 @@ describe('UserProfileComponent', () => {
   let de:DebugElement;
   let el:HTMLElement;
   let MOCKMASTER = {"department":"Bootcamp","email":"aabhaas9413@gmail.com","firstName":"aabhaas","lastName":"malhotra","password":"abc"}
-  
+ 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[FormsModule,HttpModule,RouterTestingModule],
       declarations: [UserProfileComponent],
-      providers: [LoginService, {provide:Router}],
+      providers: [LoginService,{
+        provide: ActivatedRoute,
+        useValue: {
+          params: Observable.from([{id: 1}]),
+        },
+      }],
       schemas:[NO_ERRORS_SCHEMA]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     var login=fixture.debugElement.injector.get(LoginService);
-   
+ 
     spy=spyOn(login,'getById').and.returnValue(Observable.of(MOCKMASTER));
     fixture.detectChanges();
   });
@@ -40,29 +46,31 @@ describe('UserProfileComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-  it('Display title your info', () => {
+  it('Display title your info', fakeAsync(() => {
     //query the id head of form
+    tick();
+    fixture.detectChanges();
     let de = fixture.debugElement.query(By.css('#YourInfo'));
     let el = de.nativeElement;
-    expect('  Your Info  ').toContain(el.textContent);
-  });
-  it('should show building dropdown after ngOnInit (fakeAsync)', fakeAsync(() => {
+    expect(el.textContent).toContain("Your Info");
+  }));
+  it('should show the first name', fakeAsync(() => {
     // wait for fakeAsync getLocationName
     tick();
     fixture.detectChanges();
     let de = fixture.debugElement.query(By.css('#firstName'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual("aabhaas");
+    expect(el.textContent).toEqual(" AABHAAS");
   }));
-  it('should show building dropdown after ngOnInit (fakeAsync)', fakeAsync(() => {
+  it('should show show the last name', fakeAsync(() => {
     // wait for fakeAsync getLocationName
     tick();
     fixture.detectChanges();
     let de = fixture.debugElement.query(By.css('#lastName'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual(" malhotra");
+    expect(el.textContent).toEqual(" MALHOTRA");
   }));
-  it('should show building dropdown after ngOnInit (fakeAsync)', fakeAsync(() => {
+  it('should show the email ', fakeAsync(() => {
     // wait for fakeAsync getLocationName
     tick();
     fixture.detectChanges();
@@ -70,7 +78,7 @@ describe('UserProfileComponent', () => {
     let el = de.nativeElement;
     expect(el.textContent).toEqual(" aabhaas9413@gmail.com");
   }));
-  it('should show building dropdown after ngOnInit (fakeAsync)', fakeAsync(() => {
+  it('should show the department', fakeAsync(() => {
     // wait for fakeAsync getLocationName
     tick();
     fixture.detectChanges();
@@ -78,25 +86,32 @@ describe('UserProfileComponent', () => {
     let el = de.nativeElement;
     expect(el.textContent).toEqual(" Bootcamp");
   }));
-  it('should bind property toDate to the correct input', fakeAsync(() => {
+  it('should reset the value for current and new password whren click on close button', fakeAsync(() => {
     fixture.detectChanges();
     component.details.password="123";
     component.str="12345";
-    component.newPassword="1234";
-    component.confirmPassword="1234";
-    spyOn(window,'alert')
+    component.newPassword="123"
     fixture.detectChanges();
     tick();  
-    // component.model.toDate = '2017-09-09';
-    // fixture.detectChanges();
-     let element = fixture.debugElement.queryAll(By.css('#password_modal_save'));
-    // element.dispatchEvent(new Event('input'));
-     component.checkPassword();
+    let element = fixture.debugElement.queryAll(By.css('#closeFunc'));
+    component.resetOnClose();
      tick();
      fixture.detectChanges();
-     expect(window.alert).toHaveBeenCalledWith("enter correct password");
-    // ).toContain(component.model.toDate);
-
+     expect(component.str).toBe("");
+     expect(component.newPassword).toBe("");
+  
   }));
-
+  it('should reset the value for confirm password whren click on close button', fakeAsync(() => {
+    fixture.detectChanges();
+    component.details.password="123";
+    component.confirmPassword="12345";
+    fixture.detectChanges();
+    tick();  
+    let element = fixture.debugElement.queryAll(By.css('#closeFunc'));
+    component.resetOnClose();
+     tick();
+     fixture.detectChanges();
+     expect(component.confirmPassword).toBe("");
+    
+  }));
 })

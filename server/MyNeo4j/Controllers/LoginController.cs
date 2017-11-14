@@ -33,6 +33,10 @@ namespace AgProMa.Controllers
                 {
                     return Ok(list);
                 }
+                else if(list.Count == 0)
+                {
+                    return Ok("no data found");
+                }
                 else
                 {
                     return StatusCode(404);
@@ -109,8 +113,15 @@ namespace AgProMa.Controllers
         //this method updates the user details
         public IActionResult Details(int id)
         {
-            return Ok(_context.GetById(id));
-        }
+            try
+            {
+                return Ok(_context.GetById(id));
+            }
+            catch
+            {
+                return BadRequest("Bad Request");
+            }
+            }
         [HttpPut]
         [Route("api/[controller]/UpdatePassword/{id}")]
         //update user password

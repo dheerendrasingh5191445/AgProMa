@@ -14,14 +14,16 @@
       </div>
       <hr>
       <!-- Sprints already present  -->
-        <div class="sprints card" *ngFor=" let sprint of sprints;let i=index">
+        <div class="sprints card" role="tablist" aria-multiselectable="true" *ngFor=" let sprint of sprints;let i=index">
           <!-- Sprint and Stories in each sprint -->
-          <div class="card-header tool">
+          <div class="card-header tool" role="tab">
             <strong >{{sprint.sprintName}}</strong>
             <span routerLink = "/role-dashboard/{{projectId}}/taskadd/{{sprint.sprintId}}" class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to add task"></span>
             <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project details"></span>
-            <a class="fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="true" aria-controls="collapseExample"></a>
+            <a class="collapsed fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="false" aria-controls="collapseExample"></a>
             <span class="tooltiptext">Start Date : {{sprint.startDate | date: "dd.MM.y"}}
+                <br>
+                Status : {{sprint.status}}  
                 <br>
                 No. of days : {{sprint.totalDays}}
                 <br>
@@ -30,7 +32,7 @@
             <p class="date"><strong>Start Date : </strong>{{sprint.startDate | date: "dd.MM.y"}}</p>
           </div>
           <!-- Drop here for Stories -->
-          <div dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" id="collapseExample{{i}}" class="collapsed panel panel-info">
+          <div role="tabpanel" dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" id="collapseExample{{i}}" class="collapse panel panel-info">
             <!-- backlogs in each sprint -->
             <div class="story" *ngFor="let story of backlogs">
               <div class="card-text" id="story_name" *ngIf=compareStory(sprint.sprintId,story.inSprintNo)>

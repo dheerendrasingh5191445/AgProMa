@@ -65,10 +65,10 @@ ul {
     
     color:white;
     text-align: center;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
-.teamli li{
-    text-align: center;
+.teamli{
+  padding-left: 5px;
 }
 .add{
     background-color: #32456d;

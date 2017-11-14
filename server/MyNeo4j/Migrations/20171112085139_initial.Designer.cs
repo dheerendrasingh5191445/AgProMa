@@ -11,8 +11,8 @@ using System;
 namespace MyNeo4j.Migrations
 {
     [DbContext(typeof(Neo4jDbContext))]
-    [Migration("20171106070844_initialcommit")]
-    partial class initialcommit
+    [Migration("20171112085139_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,10 @@ namespace MyNeo4j.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ChecklistName");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("StartDate");
 
                     b.Property<bool>("Status");
 
@@ -152,6 +156,8 @@ namespace MyNeo4j.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("ProjectId");
+
                     b.ToTable("Projectmember");
                 });
 
@@ -159,6 +165,8 @@ namespace MyNeo4j.Migrations
                 {
                     b.Property<int>("ReleasePlanId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ActualReleaseDate");
 
                     b.Property<string>("Description");
 
@@ -218,6 +226,10 @@ namespace MyNeo4j.Migrations
                     b.Property<int>("SprintId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("ActualEndDate");
+
+                    b.Property<DateTime?>("ExpectedEndDate");
+
                     b.Property<int>("ProjectId");
 
                     b.Property<int>("ReleasePlanId");
@@ -228,7 +240,7 @@ namespace MyNeo4j.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<bool>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<int>("TotalDays");
 
@@ -243,6 +255,8 @@ namespace MyNeo4j.Migrations
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ActualEndDate");
 
                     b.Property<DateTime>("EndDate");
 
@@ -281,14 +295,16 @@ namespace MyNeo4j.Migrations
 
             modelBuilder.Entity("MyNeo4j.model.TeamMember", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("MemberId");
 
                     b.Property<int>("TeamId");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Teammemeber");
                 });
@@ -317,6 +333,14 @@ namespace MyNeo4j.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("MyNeo4j.model.ProjectMember", b =>
+                {
+                    b.HasOne("MyNeo4j.model.ProjectMaster", "ProjectMaster")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("MyNeo4j.model.ReleasePlanMaster", b =>
                 {
                     b.HasOne("MyNeo4j.model.ProjectMaster", "ProjectMaster")
@@ -335,8 +359,8 @@ namespace MyNeo4j.Migrations
 
             modelBuilder.Entity("MyNeo4j.model.TaskBacklog", b =>
                 {
-                    b.HasOne("MyNeo4j.model.SprintBacklog", "SprintBacklog")
-                        .WithMany()
+                    b.HasOne("MyNeo4j.model.SprintBacklog", "SprintBacklogs")
+                        .WithMany("Tasks")
                         .HasForeignKey("SprintId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -346,6 +370,14 @@ namespace MyNeo4j.Migrations
                     b.HasOne("MyNeo4j.model.ProjectMaster", "ProjectMaster")
                         .WithMany()
                         .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MyNeo4j.model.TeamMember", b =>
+                {
+                    b.HasOne("MyNeo4j.model.TeamMaster", "TeamMaster")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

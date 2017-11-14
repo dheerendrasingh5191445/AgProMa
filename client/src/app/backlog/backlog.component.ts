@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HubConnection } from "@aspnet/signalr-client";
 import swal from 'sweetalert2';
 import { ProductBacklog } from '../shared/model/productBacklog';
@@ -10,14 +10,15 @@ import { ConfigFile } from './../shared/config';
   styleUrls: ['./backlog.component.css']
 })
 export class BacklogComponent implements OnInit {
-  projectId: number;
-  stories: Array<ProductBacklog>;
+  projectId: number;//for getting particular project
+  stories: Array<ProductBacklog>;//for storing user stories
   userId: number;
-  length:number;
+  length:number;//for storingthe length of array
   model: ProductBacklog = new ProductBacklog(null, '', '', null, null);  //model for adding new user story
-  connection: HubConnection;
+  connection: HubConnection; //for connection
+  errorMsg:string;//for storing error message
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
     //get the id for the user.
@@ -60,7 +61,11 @@ export class BacklogComponent implements OnInit {
 
       //invoke the get backlog method
       this.connection.invoke("GetBacklog", this.projectId);
-    });
+    }).catch(err=>{
+      
+            this.errorMsg=err;
+            this.router.navigate(['/app-error/']);
+          });;
   }
 
   //Add a new user story
@@ -75,7 +80,11 @@ export class BacklogComponent implements OnInit {
         this.model.priority = priority;
         //invoke backend post method
         this.connection.invoke("PostBacklog", this.model)
-                      .then(data=>{swal('User Story Added', '', 'success');
+                      .then(data=>{swal('User Story Added', '', 'success')
+                      .catch(err=>{                        
+                        this.errorMsg=err;
+                        this.router.navigate(['/app-error/']);
+                      });
       
                       });
       this.connection.invoke("GetBacklog", this.projectId)
@@ -96,7 +105,11 @@ export class BacklogComponent implements OnInit {
       item.comments = comment;
       item.priority = priority;
       this.connection.invoke("UpdateBacklog", item.storyId, item)
-                    .then(data=>{swal('User Story Updated', '', 'success')});
+                    .then(data=>{swal('User Story Updated', '', 'success')})
+                    .catch(err=>{                        
+                      this.errorMsg=err;
+                      this.router.navigate(['/app-error/']);
+                    });
       this.connection.invoke("GetBacklog", this.projectId)
                     .then(data=>{this.stories.sort(function (a, b) {
                       return a.priority - b.priority;
@@ -107,12 +120,25 @@ export class BacklogComponent implements OnInit {
 
   //delete a backlog
   deleteBacklog(item: any) {
-    this.connection.invoke("DeleteBacklog", item.storyId, this.projectId)
-                    .then(data=>{ swal('User Story Deleted', '', 'success')});
-    this.connection.invoke("GetBacklog", this.projectId)
-                    .then(data=>{ this.stories.sort(function (a, b) {
-                        return a.priority - b.priority;
-                      });
-                    });
+    swal('Are you sure?','Once deleted, you will not be able to recover this brainstorming!','warning')
+    .then((willDelete) => {
+      if (willDelete) {
+        this.connection.invoke("DeleteBacklog", item.storyId, this.projectId)
+        .then(data=>{ swal('User Story Deleted', '', 'success')})
+        .catch(err=>{                        
+          this.errorMsg=err;
+          this.router.navigate(['/app-error/']);
+        });
+        this.connection.invoke("GetBacklog", this.projectId)
+                .then(data=>{ this.stories.sort(function (a, b) {
+                    return a.priority - b.priority;
+                  });
+                });
+       
+      }
+      else {
+        swal("Your brainstorming is safe!");
+      }
+    });
   }
 }
