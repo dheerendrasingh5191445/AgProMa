@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import{ TeamsService} from '../shared/services/teams.service';
 import{ TeamMaster} from '../shared/model/teamMaster';
-=======
-import { TeamsService } from '../shared/services/teams.service';
-=======
->>>>>>> e4493559c8f851a7b38e3b2ef19fcf678d7822b0
-import { TeamMaster } from '../shared/model/teamMaster';
->>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
+
+
 import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
 import swal from 'sweetalert2';
@@ -29,18 +22,12 @@ export class TeamsComponent implements OnInit {
    val:string="";
    connection:HubConnection;
    userId:number;
-<<<<<<< HEAD
-   letter:string;
-  constructor(private teamService:TeamsService,private route:ActivatedRoute, private router : Router) {   
-=======
-   letter:any;
 
-<<<<<<< HEAD
-  constructor(private teamService:TeamsService,private route:ActivatedRoute,private router:Router) {   
->>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
-=======
-  constructor(private route:ActivatedRoute,private router:Router) {   
->>>>>>> e4493559c8f851a7b38e3b2ef19fcf678d7822b0
+   letter:string;
+  constructor(private route:ActivatedRoute, private router : Router ) {   
+
+   
+
   }
   ngOnInit() {
       this.route.params.subscribe(param =>this.projectId = +param['id']);
@@ -69,12 +56,6 @@ export class TeamsComponent implements OnInit {
                    });
     });
   }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
   //method for dropping members in appropriate order
   filterByName(event:Event){
     this.letter=(<HTMLInputElement> event.target).value;
@@ -95,12 +76,7 @@ export class TeamsComponent implements OnInit {
                         });
         }
     }
-<<<<<<< HEAD
-  
-    //this will remove a particular team member
-=======
   //this will remove a particular team member
->>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
   removeMember(){
     this.connection.invoke("GetAvailableMember",this.projectId)
                    .catch(error=>{
@@ -162,9 +138,6 @@ export class TeamsComponent implements OnInit {
     return 0;             //unchanged
     
   }
-<<<<<<< HEAD
-}
-=======
 
   efficiency(Id:number){
   
@@ -172,4 +145,3 @@ export class TeamsComponent implements OnInit {
 
   }
 }
->>>>>>> a7583972b034e56e992d0fd2c08eddfc22f1dcd1
