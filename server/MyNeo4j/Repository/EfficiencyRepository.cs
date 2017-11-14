@@ -65,6 +65,14 @@ namespace MyNeo4j.Repository
                     //if all tasks are completed
                     TaskCompleted(checklist.TaskId);
                 }
+                else
+                {
+                    //change status to Inprogress in case of undoing checklist
+                    TaskBacklog taskblog = _context.Taaskbl.FirstOrDefault(m => m.TaskId == checklist.TaskId);
+                    taskblog.Status = TaskBacklogStatus.Inprogress;
+                    _context.SaveChanges();
+                    CheckAllTaskStatus(taskblog.TaskId);
+                }
             }
             catch (Exception)
             {
@@ -109,6 +117,14 @@ namespace MyNeo4j.Repository
                     //invoke sprint for changing status and date.
                     SprintCompleted(task.SprintId);
                 }
+                else
+                {
+                    //change status to Inprogress in case of undoing task
+                    SprintBacklog sprint = _context.Sprintbl.FirstOrDefault(m => m.SprintId == task.SprintId);
+                    sprint.Status = SprintStatus.Inprogress;
+                    _context.SaveChanges();
+                    CheckAllSprintStatus(sprint.SprintId);
+                }
             }
             catch (Exception)
             {
@@ -151,6 +167,12 @@ namespace MyNeo4j.Repository
                 {
                     //invoke release plan with release plan id.
                     ReleasePlanCompleted(sprint.ReleasePlanId);
+                }
+                else
+                {
+                    ReleasePlanMaster release = _context.Releasepl.FirstOrDefault(m => m.ReleasePlanId == sprint.ReleasePlanId);
+                    release.Status = ReleasePlanStatus.Inprogress;
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)

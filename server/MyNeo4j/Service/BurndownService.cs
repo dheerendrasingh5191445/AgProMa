@@ -12,6 +12,7 @@ namespace MyNeo4j.Service
     {
         List<ReleasePlanMaster> GetProjectData(int projectId);
         List<UserBurnDown> GetTasks(int userId);
+        List<SprintBacklog> GetSprintDetails(int projectId);
     }
 
     public class BurndownService : IBurndownService
@@ -48,6 +49,11 @@ namespace MyNeo4j.Service
         {
             var projectData= _repository.GetProjectData(projectId);
             return projectData;
+        }
+
+        public List<SprintBacklog> GetSprintDetails(int projectId)
+        {
+            return _repository.GetSprintDetails(projectId);
         }
     }
 }

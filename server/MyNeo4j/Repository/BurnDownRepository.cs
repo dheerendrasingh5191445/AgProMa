@@ -11,6 +11,7 @@ namespace MyNeo4j.Repository
     {
         List<ReleasePlanMaster> GetProjectData(int projectId);
         List<TaskBacklog> GetTasks(int userId);
+        List<SprintBacklog> GetSprintDetails(int projectId);
     }
     public class BurndownRepository : IBurndownRepository
     {
@@ -24,6 +25,11 @@ namespace MyNeo4j.Repository
         public List<ReleasePlanMaster> GetProjectData(int projectId)
         {
             return _context.Releasepl.Include(m=>m.Sprints).ThenInclude(m=>m.Tasks).Where(m => m.ProjectId == projectId).ToList();
+        }
+
+        public List<SprintBacklog> GetSprintDetails(int projectId)
+        {
+            return _context.Sprintbl.Include(n=>n.Tasks).Where(m=>m.ProjectId==projectId).ToList();
         }
 
         //get all tasks assigned to a user

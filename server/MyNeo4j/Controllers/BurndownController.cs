@@ -36,6 +36,13 @@ namespace MyNeo4j.Controllers
         {
             return _service.GetProjectData(id);
         }
-        
+
+        [HttpGet]
+        [Route("api/[controller]/GetSprintDetails/{id}")]
+        //get all project details for a project.
+        public List<SprintBacklog> GetSprintDetails(int id)
+        {
+            return _service.GetSprintDetails(id);
+        }
     }
 }
