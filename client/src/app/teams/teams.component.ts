@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamMaster } from '../shared/model/teamMaster';
+import{ TeamMaster} from '../shared/model/teamMaster';
+
 
 import { ActivatedRoute, Router } from "@angular/router";
 import { Members } from "../shared/model/members";
@@ -23,7 +24,9 @@ export class TeamsComponent implements OnInit {
    userId:number;
 
    letter:string;
-  constructor(private route:ActivatedRoute, private router : Router) {   
+  constructor(private route:ActivatedRoute, private router : Router ) {   
+
+   
 
   }
   ngOnInit() {
