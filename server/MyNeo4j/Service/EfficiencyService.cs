@@ -39,7 +39,7 @@ namespace MyNeo4j.Service
             return (expectedTime / actualTime) * 100;
         }
         
-
+        //update checklist item for a task
         public void Update(int id, ChecklistBacklog checklist)
         {
             _repository.Update(id, checklist);

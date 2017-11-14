@@ -155,7 +155,7 @@ namespace MyNeo4j.Repository
             }
             catch (Exception)
             {
-                //throw;
+                throw new Exception();
             }
         }
 
