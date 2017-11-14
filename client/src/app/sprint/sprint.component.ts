@@ -91,6 +91,7 @@ export class SprintComponent implements OnInit {
   //it will add sprint in the sprint container
   onSaveSprint() {
     this.newsprint.projectId = this.projectId;
+    this.newsprint.actualEndDate = new Date(ConfigFile.ActualEndDate);
     //invoke Add Sprint method of Backend
     this.connection.invoke("AddSprint",this.newsprint);
   }

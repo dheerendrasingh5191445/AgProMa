@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { Checklist } from './../shared/model/checklist';
 import { ChecklistService } from './../shared/services/checklist.service';
+import { ConfigFile } from '../shared/config';
 // import ends
 @Component({
   selector: 'app-checklist',
@@ -25,7 +26,8 @@ export class ChecklistComponent implements OnInit {
   model: Checklist = {
   taskId: null,
   checklistName: '',
-  status: false
+  status: false,
+  endDate:new Date(ConfigFile.ActualEndDate)
   };
   msg: string;
   constructor(private checkListService: ChecklistService,private route: ActivatedRoute) { }

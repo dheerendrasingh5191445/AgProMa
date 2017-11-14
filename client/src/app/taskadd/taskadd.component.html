@@ -16,7 +16,7 @@
                 <a class="contentstory" data-toggle="modal" href=#mymodal{{i}} >
                 <i class="fa fa-pencil" id="edit" aria-hidden="true"></i> 
                 </a>
-        <span  class="fa fa-check-square-o" id="checklist"></span>
+        <span  *ngIf = "item.status == 'Completed'"class="fa fa-check-square-o" id="checklist"></span>
         <span style="text-align: justify;" dnd-sortable [sortableIndex]="i">{{item.taskName}}</span>
         <!--div for task details ends  -->
         </div>
