@@ -52,7 +52,15 @@ private userDetail={
     }
     else {
       this.invitePeople.emailto(this.model)
-        .then(data => swal('E-mail Sent!', 'Please check your email and verify yourself', 'success'),error=>this.router.navigate(['/app-error/']));
-    }
+        .then(data => {
+          console.log("hellooooo",data);
+          if(data.json()=="Already Exist"){
+          swal('', 'Team Member Already Exist', 'error')}
+          else if(data.json()=="Mail Sent"){
+          swal('E-mail Sent!', 'Please check your email and verify yourself', 'success')}},error=>
+          this.router.navigate(['/app-error/'])
+        );
+        
+        }
   }
 }

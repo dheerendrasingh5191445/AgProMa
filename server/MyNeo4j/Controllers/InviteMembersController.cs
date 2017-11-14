@@ -59,8 +59,16 @@ namespace ForgetPassword.Controllers
         {
             try
             {
-                _service.EmailForInvitation(people); //mail for invite people
-                return new NoContentResult();
+                
+                int id = _service.EmailForInvitation(people); //mail for invite people
+                if(id==0)
+                {
+                    return Ok("Already Exist");
+                }
+                else
+                {
+                    return Ok("Mail Sent");
+                }
             }
             catch (ArgumentNullException e)
             {

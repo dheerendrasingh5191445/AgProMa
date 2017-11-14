@@ -48,8 +48,9 @@ import { ProjectScreenService } from './shared/services/project-screen.service';
 import { ChecklistService } from './shared/services/checklist.service';
 import { KanbanService } from "./shared/services/kanban.service";
 import { EfficiencyGraphService } from "./shared/services/efficiency-graph.service";
+import { ErrorComponent } from './shared/component/error/error.component';
 import { BurndownService } from './shared/services/burndown.service';
-import { ErrorComponent } from "./shared/component/error/error.component";
+
 
 
 
@@ -95,6 +96,7 @@ export function provideConfig() {
     KanbanBoardComponent,
     EfficiencyGraphComponent,
     DashboardRoleComponent,
+    ErrorComponent,
     UserProfileComponent
   ],
   imports: [

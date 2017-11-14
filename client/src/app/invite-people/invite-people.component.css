@@ -25,12 +25,14 @@
 
 .chip {
     display: inline-block;
-    padding: auto;
+    padding-left: 20px;
     height: auto;
+    width : 200px;
     border-radius: 25px;
     color: #050404;
-    background-color: #D1CFCF;
+    background-color: #CBC6C6;
     word-wrap: break-word;
+    text-align: center;
 }
 .chip img {
     float: left;
@@ -38,6 +40,11 @@
     height: 40px;
     width: 40px;
     border-radius: 50%;
+
+}
+.chip p
+{
+    padding-top : 10px;
 }
 .closebtn:hover {
     color: #000;
