@@ -5,8 +5,6 @@
 {
   text-align: center;
 }
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 .SprintDetail {
   font-family: 'Roboto', Arial, sans-serif;
@@ -104,8 +102,6 @@ body {
   padding: 0 5px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:500);
-@import url(https://fonts.googleapis.com/css?family=Teko:700);
 .KanbanLogo {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
@@ -322,6 +318,9 @@ p {
   border-radius: .25em;
 }
 
+u:hover{
+ text-decoration: none;
+}
 
 
 

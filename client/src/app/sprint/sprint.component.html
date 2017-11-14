@@ -19,8 +19,8 @@
           <div class="card-header tool" role="tab">
             <strong >{{sprint.sprintName}}</strong>
             <span routerLink = "/role-dashboard/{{projectId}}/taskadd/{{sprint.sprintId}}" class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to add task"></span>
-            <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to edit a project details"></span>
-            <a class="collapsed fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="false" aria-controls="collapseExample"></a>
+            <span routerLink = "/role-dashboard/{{projectId}}/taskassign/{{sprint.sprintId}}" class="fa fa-tasks fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="click to assign task to members"></span>
+            <a class="collapsed fa fa-arrows-v fa-lg" aria-hidden="true" data-toggle="collapse" href="#collapseExample{{i}}" aria-expanded="false" aria-controls="collapseExample" title="click to view full sprint details"></a>
             <span class="tooltiptext">Start Date : {{sprint.startDate | date: "dd.MM.y"}}
                 <br>
                 Status : {{sprint.status}}  
@@ -29,7 +29,7 @@
                 <br>
                 Sprint Goal : {{sprint.sprintGoal}}
               </span>
-            <p class="date"><strong>Start Date : </strong>{{sprint.startDate | date: "dd.MM.y"}}</p>
+            <p class="date"><strong>Start Date : </strong>{{sprint.startDate | date: "dd.MM.y"}}     </p>
           </div>
           <!-- Drop here for Stories -->
           <div role="tabpanel" dnd-droppable (onDropSuccess)="updateStoryInSprint($event,sprint.sprintId)" [dropZones]="['boxers-zone']" id="collapseExample{{i}}" class="collapse panel panel-info">

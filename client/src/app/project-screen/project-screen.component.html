@@ -18,5 +18,5 @@
   <div *ngIf="data">
     <p>There are no existing project,please make new project</p>
   </div>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <div *ngIf="count >= 3"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
 </div>

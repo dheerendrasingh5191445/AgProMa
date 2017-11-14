@@ -15,6 +15,7 @@ export class ProjectScreenComponent implements OnInit {
   data:string;
   connection:HubConnection;
   userId:number;
+  count:number = 0;
   constructor(private projectscrservice:ProjectScreenService,private router:Router) { }
 
   ngOnInit() {
@@ -26,6 +27,9 @@ export class ProjectScreenComponent implements OnInit {
                                             if(data != "There are no Porjects")
                                             {
                                               this.projects = data;
+                                              this.projects.forEach(element => {
+                                                this.count++;
+                                              });
                                             }
                                             else{ this.data = "no project";}
                             });
@@ -37,5 +41,6 @@ export class ProjectScreenComponent implements OnInit {
     var ele = this.projects.find(f => f.Id == Id);
     const index = this.projects.indexOf(ele);
     this.projects.splice(index, 1);
+      this.count--;
   }
 }
