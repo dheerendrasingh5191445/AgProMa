@@ -1,7 +1,7 @@
 <!--main-container-->
 <div class="container-fluid" ng-controller="dateCtrl">
   <!--this button takes you to the page where you can add a new release-->
-  <button class="btn-lg newRelease"  data-toggle="modal" data-target="#add">
+  <button class="btn-lg newRelease" data-toggle="modal" data-target="#add">
     <span>Add a new release</span><i class="ion-checkmark"></i>
   </button>
   <br>
@@ -10,7 +10,8 @@
     <h4 class="text-responsive text-center"><strong>Existing Release Plans</strong></h4>
   </div>
   <br>
-  <div class="row container-fluid"><!--container for existing release-->
+  <div class="row container-fluid">
+    <!--container for existing release-->
     <div class="col-md-9">
       <!--getting an existing release lists-->
       <div class="card" *ngFor="let list of release">
@@ -41,10 +42,10 @@
               <strong>Add Sprints:</strong>
             </div>
             <!--dragging and storing a sprints from a sprint list-->
-            <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.releasePlanId)"  [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
-              <div class="story" *ngFor="let story of sprints">    
+            <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.releasePlanId)" [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
+              <div class="story" *ngFor="let story of sprints">
                 <div class="card-text " id="story_name" *ngIf=compareStory(list.releasePlanId,story.releasePlanId)>
-                  <p>{{story.sprintId}}:{{story.sprintGoal}}</p>             
+                  <p>{{story.sprintId}}:{{story.sprintGoal}}</p>
                 </div>
               </div>
               <ul>
@@ -64,18 +65,20 @@
             <div class="card-header">
               <strong class="text-center">Lists of Sprints:</strong>
             </div>
-            <!--drag n drop starts-->
-            <div class="card-text" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item">
-              <!--list of all sprints related to a project id-->
-              <li class="list-group-item" *ngIf="item.releasePlanId == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
-            </div>
-            <!--drag and drop ends-->
-          </div>
+              <!--drag n drop starts-->
+              <ul class="card-body" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true"
+                [dragData]="item">
+                <!--list of all sprints related to a project id-->
+                <li *ngIf="item.releasePlanId == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
+              <!--drag and drop ends-->
+            </ul>
         </div>
       </div>
     </div>
-  </div><!--contaimer for existing release ends-->
-</div><!--main container ends-->
+  </div>
+  <!--contaimer for existing release ends-->
+</div>
+<!--main container ends-->
 
 <!-- Modal -->
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -86,27 +89,29 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        </div>
-        <div class="modal-body">
-          <div class="container jumbotron main">  <!--main container starts-->
-            <form>  <!--form starts-->
-              <div class="row">
-                <div class="col-3">
-                  <label>
+      </div>
+      <div class="modal-body">
+        <div class="container jumbotron main">
+          <!--main container starts-->
+          <form>
+            <!--form starts-->
+            <div class="row">
+              <div class="col-3">
+                <label>
                     <h5 class="text-responsive" id="relName">Release Name</h5>
                   </label>
-                </div>
-                <div class="col-9">
-                  <input type="text" name="releasename" class="form-control" placeholder="Release Name" [(ngModel)]="releasePlan.releaseName">
-                </div>
               </div>
-              <br>
-              <div class="row">
-                <div class="col-3">
-                  <label>
+              <div class="col-9">
+                <input type="text" name="releasename" class="form-control" placeholder="Release Name" [(ngModel)]="releasePlan.releaseName">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-3">
+                <label>
                     <h5 class="text-responsive" id="description">Description</h5>
                   </label>
-                </div>
+              </div>
               <div class="col-9">
                 <input name="description" [(ngModel)]="releasePlan.description" type="text" class="form-control" placeholder="Description">
               </div>
@@ -129,8 +134,10 @@
                 <input name="releaseDate" [(ngModel)]="releasePlan.releaseDate" class="form-control" type="date" value="" id="example-date-input">
               </div>
             </div>
-          </form> <!--form ends-->
-        </div>  <!--main container ends-->
+          </form>
+          <!--form ends-->
+        </div>
+        <!--main container ends-->
       </div>
       <div class="modal-footer">
         <button (click)="addingNewRelease()" class="snip1099" data-dismiss="modal">
@@ -139,4 +146,5 @@
       </div>
     </div>
   </div>
-</div><!--Modal ends-->
+</div>
+<!--Modal ends-->

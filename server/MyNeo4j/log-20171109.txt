@@ -1,0 +1,22 @@
+2017-11-09 01:46:38.563 -08:00 [Error] Method "Void UpdateConnectionId(System.String, Int32)", Description: "Object reference not set to an instance of an object.", Source: "MyNeo4j",Exception: "System.NullReferenceException: Object reference not set to an instance of an object.
+   at MyNeo4j.Repository.TeamRepo.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Repository\TeamRepo.cs:line 68
+   at MyNeo4j.Service.TeamService.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Service\TeamService.cs:line 106
+   at MyNeo4j.Hubs.TeamHub.SetConnectionId(Int32 Memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Hubs\TeamHub.cs:line 28"
+2017-11-09 01:46:38.639 -08:00 [Error] Failed to invoke hub method
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at MyNeo4j.Repository.TeamRepo.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Repository\TeamRepo.cs:line 68
+   at MyNeo4j.Service.TeamService.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Service\TeamService.cs:line 106
+   at MyNeo4j.Hubs.TeamHub.SetConnectionId(Int32 Memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Hubs\TeamHub.cs:line 34
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.SignalR.HubEndPoint`1.<Invoke>d__20.MoveNext()
+2017-11-09 01:47:22.259 -08:00 [Error] Method "Void UpdateConnectionId(System.String, Int32)", Description: "Object reference not set to an instance of an object.", Source: "MyNeo4j",Exception: "System.NullReferenceException: Object reference not set to an instance of an object.
+   at MyNeo4j.Repository.TeamRepo.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Repository\TeamRepo.cs:line 68
+   at MyNeo4j.Service.TeamService.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Service\TeamService.cs:line 106
+   at MyNeo4j.Hubs.TeamHub.SetConnectionId(Int32 Memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Hubs\TeamHub.cs:line 28"
+2017-11-09 01:47:22.264 -08:00 [Error] Failed to invoke hub method
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at MyNeo4j.Repository.TeamRepo.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Repository\TeamRepo.cs:line 68
+   at MyNeo4j.Service.TeamService.UpdateConnectionId(String connectionid, Int32 memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Service\TeamService.cs:line 106
+   at MyNeo4j.Hubs.TeamHub.SetConnectionId(Int32 Memberid) in C:\Users\Training\Desktop\AgProMa-Final\server\MyNeo4j\Hubs\TeamHub.cs:line 34
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.SignalR.HubEndPoint`1.<Invoke>d__20.MoveNext()

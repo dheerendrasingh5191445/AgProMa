@@ -57,6 +57,7 @@ namespace MyNeo4j.Repository
         {
             TaskBacklog task = _context.Taaskbl.FirstOrDefault(p => p.TaskId == TaskId);
             task.PersonId = memberId;
+            task.Status = TaskBacklogStatus.Inprogress;
             _context.SaveChanges();
         }
 

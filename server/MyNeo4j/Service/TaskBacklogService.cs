@@ -110,6 +110,7 @@ namespace MyNeo4j.Service
                 tblv.StartDate = tb.StartDate;
                 tblv.ActualEndDate = tb.ActualEndDate;
                 tblv.EndDate = tb.EndDate;
+                tblv.Status = tb.Status;
                 taskblv.Add(tblv);
             }
             return taskblv;

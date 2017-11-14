@@ -22,6 +22,7 @@ namespace MyNeo4j.Service
             _context = context;
         }
         //this method gets the details of particular project member
+
         public List<ProjectMember> getMemberDetails(int memberid)
         {
             return _context.Projectmember.Where(p =>p.MemberId == memberid).ToList();

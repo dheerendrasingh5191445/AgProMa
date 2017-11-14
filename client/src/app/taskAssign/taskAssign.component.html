@@ -14,7 +14,11 @@
                <div index='teamcard' class="team card col-6 col-6" *ngFor="let item of AvailTask; let i = index"><!--task cards starts here-->
                    <div index='teamcard' class="card-header tool" (click)="checkPerson(item)"><!-- card header for tasks-->
                        <i class="fa fa-tasks"></i>&nbsp;&nbsp;{{item.taskName}} <!--task name -->
-                       <span class="tooltiptext">Click here to add a checklist</span>
+                       <span class="tooltiptext">
+                           Click here to add a checklist
+                           <br>
+                           Status : {{item.status}}
+                       </span>
                    </div>
                    <div dnd-droppable (onDropSuccess)="teamListupdate($event,item.taskId)"  [dropZones]="['boxers-zone']" class="panel panel-info">
                        <div *ngFor="let data of names">

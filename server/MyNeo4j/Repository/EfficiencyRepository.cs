@@ -186,7 +186,7 @@ namespace MyNeo4j.Repository
         {
             //get a release plan specific to release plan id.
             var releasePlan = _context.Releasepl.FirstOrDefault(m => m.ReleasePlanId == releasePlanId);
-            releasePlan.Status = ReleasePlanStatus.Release;
+            releasePlan.Status = ReleasePlanStatus.Released;
             releasePlan.ActualReleaseDate = DateTime.Now;
             _context.SaveChanges();
         }

@@ -13,7 +13,7 @@ namespace MyNeo4j.model
     {
         Unplanned,
         Inprogress,
-        Release
+        Released
     }
     public class ReleasePlanMaster
     {//it will store the data of release plan of the project
