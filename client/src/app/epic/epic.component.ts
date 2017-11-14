@@ -29,7 +29,7 @@ export class EpicComponent implements OnInit {
     this.userId = parseInt(session);
     this.connection = new HubConnection(ConfigFile.EpicUrls.connection);//for connecting with hub // when this component reload ,it will call this method
     //registering event handlers
-    this.connection.on("getBacklog",data =>{console.log("backlog called"); this.data = data }); //for gettting all epics based on project id
+    this.connection.on("getBacklog",data =>{this.data = data }); //for gettting all epics based on project id
     this.connection.on("whenDeleted",data => { swal('Epic deleted', '', 'success') });  //sweet alerts
     this.connection.on("whenUpdated",data => { swal('Epic updated', '', 'success') }); 
     this.connection.on("whenAdded",data => { swal('Epic Added', '', 'success') });   

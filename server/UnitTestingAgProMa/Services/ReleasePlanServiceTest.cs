@@ -99,8 +99,8 @@ namespace UnitTestingAgProMa.Services
             sprintList.Add(sprint);
             var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
             var mockSprintRepository = new Mock<ISprintRepository>();
-            mockReleasePlanRepo.Setup(x => x.GetAllSprints(It.IsAny<int>())).Returns(sprintList);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            mockSprintRepository.Setup(x => x.GetAll(It.IsAny<int>())).Returns(sprintList);
+            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object,mockSprintRepository.Object);
 
             //Act
             List<SprintBacklog> result = service.GetAllSprints(It.IsAny<int>());

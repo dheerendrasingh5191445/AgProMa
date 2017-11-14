@@ -44,7 +44,7 @@ namespace UnitTestingAgProMa.Services
             var result = memberService.getMemberDetails(It.IsAny<int>());
 
             //assert
-            Assert.IsType<ProjectMember>(result);
+            Assert.IsType<List<ProjectMember>>(result);
             Assert.Equal(list, result);
 
         }
@@ -53,10 +53,11 @@ namespace UnitTestingAgProMa.Services
         public void ProjectMemberService_addMemberDetails_should_Throw_NullReferenceException()
         {
             //arrange
-
-            ProjectMember member = new ProjectMember() { id = 1 };
+            List<ProjectMember> projectmemberlist = new List<ProjectMember>();
+            ProjectMember member = new ProjectMember() { id = 1 ,MemberId = 1,ProjectId = 1};
             var mockRepo = new Mock<IProjectMemberRepository>();
             mockRepo.Setup(m => m.Add_MemberDetails(member)).Throws(new NullReferenceException());
+            mockRepo.Setup(m => m.getMemberDetails(1)).Returns(projectmemberlist);
             ProjectMemberService memberService = new ProjectMemberService(mockRepo.Object);
             //act
             var ex = Record.Exception(() => memberService.Add_MemberDetails(member));
@@ -68,12 +69,14 @@ namespace UnitTestingAgProMa.Services
         public void ProjectMemberService_addMemberDetails_should_Throw_Format_Exception()
         {
             //arrange
+            List<ProjectMember> projectmemberlist = new List<ProjectMember>();
             ProjectMember member = new ProjectMember();
             member.id = 1;
             member.MemberId = 1;
             member.ProjectId = 1;
             var mockRepo = new Mock<IProjectMemberRepository>();
             mockRepo.Setup(m => m.Add_MemberDetails(member)).Throws(new FormatException());
+            mockRepo.Setup(m => m.getMemberDetails(1)).Returns(projectmemberlist);
             ProjectMemberService memberService = new ProjectMemberService(mockRepo.Object);
             //act
             var ex = Record.Exception(() => memberService.Add_MemberDetails(member));

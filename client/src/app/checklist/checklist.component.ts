@@ -18,7 +18,7 @@ export class ChecklistComponent implements OnInit {
   totalCount:number;
   check: any;
   task: any;
-  checklistStatus: number;
+  checklistStatus: number = 0;
   statusInPer;
   countChecklist: number = 0;
   details: Checklist[];

@@ -31,12 +31,10 @@ namespace MyNeo4j.Service
             List<ProjectMember> projectmem = getMemberDetails(details.MemberId);
             foreach (var member in projectmem)
             {
-                if ( member.MemberId== details.MemberId && member.ProjectId == details.ProjectId)
+                if ( member.MemberId == details.MemberId && member.ProjectId == details.ProjectId)
                 {
                     return 0;
-                }
-            
-                    
+                }                    
             }
             _repo.Add_MemberDetails(details);
             return 1;
