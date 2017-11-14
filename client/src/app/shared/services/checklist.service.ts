@@ -18,7 +18,6 @@ export class ChecklistService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   //method used to add checklist
   addCheckList(checklist: Checklist) {
-    console.log('i am in post', checklist);
     return this.http.post(ConfigFile.ChecklistServiceUrl.checkListUrl, checklist, { headers: this.headers })
                     .catch((error: any) => {
     return Observable.throw(this.router.navigate(['/app-error/']));
