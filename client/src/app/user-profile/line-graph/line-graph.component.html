@@ -20,7 +20,7 @@
        <th>Task Id :</th> <th *ngFor="let label of lineChartLabels">{{label}}</th><!--Bring the values -->
       </tr>
       <tr *ngFor="let d of lineChartData ; let i=index">
-        <td *ngIf='i == 0'>Planned Time</td><td  *ngIf='i == 1'>Actual Time</td><td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j] | number:'.0-0'}}</td>
+        <td *ngIf='i == 0'>Planned Hours</td><td  *ngIf='i == 1'>Actual Hours</td><td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j] | number:'.0-0'}}</td>
       </tr>
     </tbody>
     </table>

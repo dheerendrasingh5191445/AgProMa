@@ -47,13 +47,17 @@ export class TaskAddComponent implements OnInit {
   addBacklog(taskName: string, startDate: any, endDate: any) {
     //this will give alert if nothing is entered as task
     if ((taskName == "")) {
-      swal('Task Cannot Be Empty ', '', 'warning')
+      swal('Task Cannot Be Empty ', '', 'warning');
     }
+    //to validate start date greater than enddate
     //this will work if task name is entered and  add new task to backlog
-    if (taskName) {
+    if (taskName && startDate < endDate) {
       let model = new Task(0,this.sprintId,taskName,0,startDate,endDate,new Date(ConfigFile.ActualEndDate));
       this.connection.invoke("PostTask",model,this.sprintId)
       this.connection.invoke("GetTaskBacklogs",this.sprintId);
+    }
+    else{
+      swal('startDate cannot be greater than enddate','', 'warning');
     }
   }
   //this will uddate task backlog values
@@ -62,12 +66,15 @@ export class TaskAddComponent implements OnInit {
     if (content == "") {
       swal('Enter Some Task', '', 'warning')
     }
-    else {
+    if(content && startDate < endDate) {
       item.taskName = content;
       item.startDate = startDate;
       item.endDate = endDate;
       //this will give alert if task is successfully upadated
       this.connection.invoke("UpdateTask",this.sprintId,item);
+    }
+    else{
+      swal('startDate cannot be greater than enddate','', 'warning');
     }
   }
 }
