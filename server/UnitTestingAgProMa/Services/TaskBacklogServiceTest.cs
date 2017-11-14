@@ -26,7 +26,7 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAllTask(1);
             //Assert
             Assert.NotNull(res);
-            Assert.Equal(tasks, res);
+            Assert.Equal(tasks.ToString(), res.ToString());
 
         }
         [Fact]

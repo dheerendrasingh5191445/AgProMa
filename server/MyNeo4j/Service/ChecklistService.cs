@@ -13,7 +13,6 @@ namespace MyNeo4j.Service
         List<ChecklistBacklog> Get();
         List<ChecklistBacklog> Get(int id);
         void Add_Checklist(ChecklistBacklog addChecklist);
-        void Update(int id, ChecklistBacklog addChecklist);
         void Delete(int id);
 
     }
@@ -50,9 +49,5 @@ namespace MyNeo4j.Service
             return _context.GetTaskDetail(Id);
         }
 
-        public void Update(int id, ChecklistBacklog addChecklist) //updating checklist
-        {
-            _context.Update(id, addChecklist);
-        }
     }
 }
