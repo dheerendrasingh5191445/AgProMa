@@ -62,7 +62,8 @@ export const ConfigFile =
     ChecklistServiceUrl:{
         getTaskUrl:"http://localhost:52258/api/Checklist/GetTaskDetail/",
         checkListUrl:'http://localhost:52258/api/Checklist/',
-        efficiencyUrl:'http://localhost:52258/api/Efficiency/'
+        efficiencyUrl:'http://localhost:52258/api/Efficiency/',
+        updateDailyStatus:'http://localhost:52258/api/Checklist/updateDailyStatus/'
     },
     BurndownServiceUrl:{
         burndownUrl:'http://localhost:52258/api/Burndown/GetTasks/'

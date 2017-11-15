@@ -96,7 +96,7 @@ namespace UnitTestingAgProMa.Services
             var request = new TaskBacklog();
             request.TaskId = 1;
             requests.Add(request);
-            var r = new SprintBacklog();
+            var r = new Sprint();
             var mockRepoReq = new Mock<ITaskRepository>(); //mocking RequestRepository
             mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(r);
             TaskService obj = new TaskService(mockRepoReq.Object);
@@ -115,7 +115,7 @@ namespace UnitTestingAgProMa.Services
             var request = new TaskBacklog();
             request.TaskId = 1;
             requests.Add(request);
-            var r = new SprintBacklog();
+            var r = new Sprint();
             //mocking RequestRepository
             var mockRepoReq = new Mock<ITaskRepository>();
             mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(r);

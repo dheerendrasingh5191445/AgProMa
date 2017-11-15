@@ -21,7 +21,8 @@ export class ChecklistService {
     return this.http.post(ConfigFile.ChecklistServiceUrl.checkListUrl, checklist, { headers: this.headers })
                     .catch((error: any) => {
     return Observable.throw(this.router.navigate(['/app-error/']));
-    });
+    }
+  );
 
   }
 
@@ -61,6 +62,14 @@ getById(id){
         return Observable.throw(this.router.navigate(['/app-error/']));
       });
 
+  }
+  updateDailyStatusofTask(dailyStatus:Checklist){
+    console.log("dailystatus",dailyStatus);
+    return this.http.put(ConfigFile.ChecklistServiceUrl.updateDailyStatus+dailyStatus.checklistId,dailyStatus,{headers : this.headers})
+    .map((Response)=>Response.json())
+    .catch((error: any) => {
+      return Observable.throw(this.router.navigate(['/app-error/']));
+    });
   }
 
 }

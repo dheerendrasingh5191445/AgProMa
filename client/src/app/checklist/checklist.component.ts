@@ -1,5 +1,5 @@
 // imports here
-import { Component, OnInit, trigger, state, animate, transition, style } from '@angular/core';
+import { Component, OnInit, trigger, state, animate, transition, style, ViewChild, ElementRef } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,20 +15,27 @@ import { ConfigFile } from '../shared/config';
 })
 export class ChecklistComponent implements OnInit {
   // variable declarations
+  @ViewChild('remainSize') remainSize:ElementRef;
   StatusStyle;
   totalCount:number;
   check: any;
   task: any;
   checklistStatus: number = 0;
   statusInPer;
+  completedStatus:number;
   countChecklist: number = 0;
   details: Checklist[];
-  model: Checklist = {
-  taskId: null,
-  checklistName: '',
-  status: false,
-  endDate:new Date(ConfigFile.ActualEndDate)
-  };
+  model: Checklist = 
+  {checklistId:0,
+    taskId:0,
+    checklistName:null,
+    status:false,
+    plannedSize:0,
+    remainingSize:0,
+    completedSize:0};
+  dailyStatus:Checklist;
+  Event:any;
+  checkListSelectedIndex: number;
   msg: string;
   constructor(private checkListService: ChecklistService,private route: ActivatedRoute) { }
   // for taking data from backend
@@ -42,10 +49,13 @@ export class ChecklistComponent implements OnInit {
   onStartComponent(){
     this.checkListService.getById(this.model.taskId).subscribe((tasks => {
       this.task = tasks;
+
+      console.log("aksashaada",tasks);
     }));
     this.checkListService.getCheckList(this.model.taskId)
       .subscribe(data => {
         this.details = data; 
+        console.log(this.details);
         this.totalCount = 0;
         this.countChecklist=0;
         for (let i in this.details) {
@@ -63,6 +73,8 @@ export class ChecklistComponent implements OnInit {
 
   // for adding checklist of user
   addCheckList() {
+    console.log("Post Data ",this.model)
+    this.model.remainingSize=this.model.plannedSize;
     this.checkListService.addCheckList(this.model)
       .subscribe(result => {
         this.onStartComponent();
@@ -70,7 +82,6 @@ export class ChecklistComponent implements OnInit {
       error => {
         this.msg = "Something Went Wrong, Please Try Again Later";
       });
-      this.model.checklistName="";
   }
 
 
@@ -111,5 +122,34 @@ export class ChecklistComponent implements OnInit {
         this.onStartComponent();
         this.msg = "deleted";
       });
+  }
+  updateRemainingTime(i){
+    this.checkListSelectedIndex = i
+    console.log(this.remainSize.nativeElement.textContent);
+    this.remainSize.nativeElement.textContent=this.details[i].remainingSize;
+  }
+  calculateRemaining(event){
+    this.Event=event;
+    console.log('hi',event.target.value);
+    if(event.target.value === undefined || event.target.value ==='')
+    {
+      this.remainSize.nativeElement.textContent = this.details[this.checkListSelectedIndex].remainingSize-0;
+      this.model.completedSize = event.target.value;
+    }
+    else
+    {
+      this.remainSize.nativeElement.textContent = this.details[this.checkListSelectedIndex].remainingSize-parseInt(event.target.value);
+      this.model.completedSize = event.target.value;
+    }
+    
+  }
+  updateDailyStatus()
+  {
+    
+    this.model.remainingSize=this.remainSize.nativeElement.textContent;
+    this.model.checklistId=this.details[this.checkListSelectedIndex].checklistId;
+    
+    let checklistData={checklistId:this.model.checklistId};
+    this.checkListService.updateDailyStatusofTask(this.model).subscribe(data=>this.dailyStatus=data);
   }
 }

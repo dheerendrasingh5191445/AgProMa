@@ -96,7 +96,7 @@ namespace UnitTestingAgProMa.Services
         public void SignUpServiceUnitTest_to_GetProjectId_for_NotNull()
         {
             ////Arrange
-            var sprint = new SprintBacklog() { SprintId = 1 };
+            var sprint = new Sprint() { SprintId = 1 };
             var mockRepo = new Mock<ITaskBacklogReposiory>();
             mockRepo.Setup(x => x.GetProjectId(1)).Returns(sprint);
             TaskBacklogService obj = new TaskBacklogService(mockRepo.Object);

@@ -18,7 +18,7 @@ namespace UnitTestingAgProMa.Controllers
         [Fact]
         public void Test_Case_To_Check_Return_List_of_Members_in_Get_by_id_Function()
         {
-            Master master = new Master() { Id = 1 };
+            User master = new User() { Id = 1 };
             var mockobj = new Mock<ISignUpService>();
             mockobj.Setup(x => x.GetById(It.IsAny<int>())).Returns(master);
             LoginController obj = new LoginController(mockobj.Object);
@@ -29,7 +29,7 @@ namespace UnitTestingAgProMa.Controllers
         [Fact]
         public void Test_Case_To_Check_Return_500_StatusCode_of_Get_by_id()
         {
-            Master master = new Master();
+            User master = new User();
             var mockobj = new Mock<ISignUpService>();
             mockobj.Setup(x => x.GetById(It.IsAny<int>())).Throws(new Exception());
             LoginController obj = new LoginController(mockobj.Object);
@@ -42,7 +42,7 @@ namespace UnitTestingAgProMa.Controllers
         [Fact]
         public void Test_Case_To_Check_Return_200_StatusCode_of_Add_Function()
         {
-            Master master = new Master() { Id = 0 };
+            User master = new User() { Id = 0 };
 
             var mockObj = new Mock<ISignUpService>();
             mockObj.Setup(x => x.GetById(It.IsAny<int>())).Returns(master);

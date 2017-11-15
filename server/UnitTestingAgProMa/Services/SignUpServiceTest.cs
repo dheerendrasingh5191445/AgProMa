@@ -18,8 +18,8 @@ namespace UnitTestingAgProMa.Services
         public void SignUp_Service_GetAllDetails_Method_To_Get_Details()
         {
             //Arrange
-            List<Master> requests = new List<Master>();
-            var request = new Master();
+            List<User> requests = new List<User>();
+            var request = new User();
             request.Id = 1;
             requests.Add(request);
             //mocking RequestRepository
@@ -37,8 +37,8 @@ namespace UnitTestingAgProMa.Services
         public void SignUp_Service_GetAllDetails_Method_To_Get_Details_Type_Object()
         {
             //Arrange
-            List<Master> requests = new List<Master>();
-            var request = new Master();
+            List<User> requests = new List<User>();
+            var request = new User();
             request.Id = 1;
             requests.Add(request);
             //mocking RequestRepository
@@ -49,14 +49,14 @@ namespace UnitTestingAgProMa.Services
             //Act
             var res = obj.GetAllDetails();
             //Assert
-            Assert.IsType<List<Master>>(res);
+            Assert.IsType<List<User>>(res);
         }
         [Fact]
         public void SignUp_Service_Get_by_Id_Method()
         {
             //Arrange
             //List<Master> requests = new List<Master>();
-            var request = new Master();
+            var request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
             mockRepoReq.Setup(x => x.GetById(1)).Returns(request);
@@ -72,7 +72,7 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             //List<Master> requests = new List<Master>();
-            var request = new Master();
+            var request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
             mockRepoReq.Setup(x => x.GetById(1)).Returns(request);
@@ -80,14 +80,14 @@ namespace UnitTestingAgProMa.Services
             //Act
             var res = obj.GetById(1);
             //Assert
-            Assert.IsType<Master>(res);
+            Assert.IsType<User>(res);
         }
         [Fact]
         public void SignUpService_GetId_Method()
         {
             //Arrange
             //List<Master> requests = new List<Master>();
-            Master request = new Master();
+            User request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
             mockRepoReq.Setup(x => x.Get(It.IsAny<String>())).Returns(request);
@@ -103,7 +103,7 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             //List<Master> requests = new List<Master>();
-            Master request = new Master();
+            User request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
             mockRepoReq.Setup(x => x.Get(It.IsAny<String>())).Returns(request);
@@ -117,54 +117,54 @@ namespace UnitTestingAgProMa.Services
         public void SignUp_Service_UpdatePassword_Method_Throws_NullReferenceException_With_Invalid_ValueType()
         {
             //Arrange
-            Master master = new Master();
+            User master = new User();
             master.Id = 1;
             //TaskBacklog Backlog1 = new TaskBacklog();
             //master.Id = 2;
-            var request = new Master();
+            var request = new User();
             var mockRepo = new Mock<ISignUpRepository>();
-            mockRepo.Setup(x => x.UpdatePassword(It.IsAny<int>(), It.IsAny<Master>())).Throws(new NullReferenceException());
+            mockRepo.Setup(x => x.UpdatePassword(It.IsAny<int>(), It.IsAny<User>())).Throws(new NullReferenceException());
             SignUpService obj = new SignUpService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.UpdatePassword(It.IsAny<int>(), It.IsAny<Master>()));
+            var exception = Record.Exception(() => obj.UpdatePassword(It.IsAny<int>(), It.IsAny<User>()));
             Assert.IsType<NullReferenceException>(exception);
         }
         [Fact]
         public void SignUp_Service_UpdatePassword_Method_Throws_FormatException_With_Invalid_ValueType()
         {
             //Arrange
-            Master master = new Master();
+            User master = new User();
             master.Id = 1;
-            var request = new Master();
+            var request = new User();
             var mockRepo = new Mock<ISignUpRepository>();
-            mockRepo.Setup(x => x.UpdatePassword(It.IsAny<int>(), It.IsAny<Master>())).Throws(new FormatException());
+            mockRepo.Setup(x => x.UpdatePassword(It.IsAny<int>(), It.IsAny<User>())).Throws(new FormatException());
             SignUpService obj = new SignUpService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.UpdatePassword(It.IsAny<int>(), It.IsAny<Master>()));
+            var exception = Record.Exception(() => obj.UpdatePassword(It.IsAny<int>(), It.IsAny<User>()));
             Assert.IsType<FormatException>(exception);
         }
         [Fact]
         public void SignUp_Service_Update_Method_Throws_FormatException_With_Invalid_ValueType()
         {
             //Arrange
-            Master master = new Master();
+            User master = new User();
             master.Id = 1;
-            var request = new Master();
+            var request = new User();
             var mockRepo = new Mock<ISignUpRepository>();
-            mockRepo.Setup(x => x.Update(It.IsAny<String>(), It.IsAny<Master>())).Throws(new FormatException());
+            mockRepo.Setup(x => x.Update(It.IsAny<String>(), It.IsAny<User>())).Throws(new FormatException());
             SignUpService obj = new SignUpService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.Update(It.IsAny<string>(), It.IsAny<Master>()));
+            var exception = Record.Exception(() => obj.Update(It.IsAny<string>(), It.IsAny<User>()));
             Assert.IsType<FormatException>(exception);
         }
         [Fact]
         public void SignUp_Service_Update_Method_Throws_NullReferenceException_With_Invalid_ValueType()
         {
             //Arrange
-            Master master = new Master();
+            User master = new User();
             master.Id = 1;
-            var request = new Master();
+            var request = new User();
             var mockRepo = new Mock<ISignUpRepository>();
-            mockRepo.Setup(x => x.Update(It.IsAny<String>(), It.IsAny<Master>())).Throws(new NullReferenceException());
+            mockRepo.Setup(x => x.Update(It.IsAny<String>(), It.IsAny<User>())).Throws(new NullReferenceException());
             SignUpService obj = new SignUpService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.Update(It.IsAny<string>(), It.IsAny<Master>()));
+            var exception = Record.Exception(() => obj.Update(It.IsAny<string>(), It.IsAny<User>()));
             Assert.IsType<NullReferenceException>(exception);
         }
         [Fact]
@@ -172,13 +172,13 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             //List<Master> requests = new List<Master>();
-            Master re = new Master();
+            User re = new User();
             re.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
-            mockRepoReq.Setup(x => x.Add_User(It.IsAny<Master>())).Throws(new NullReferenceException());
+            mockRepoReq.Setup(x => x.Add_User(It.IsAny<User>())).Throws(new NullReferenceException());
             SignUpService obj = new SignUpService(mockRepoReq.Object);
             //Act
-            var exception = Record.Exception(() => obj.Add_User(It.IsAny<Master>()));
+            var exception = Record.Exception(() => obj.Add_User(It.IsAny<User>()));
             //Assert
             Assert.IsType<NullReferenceException>(exception);
         }
@@ -187,7 +187,7 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             //List<Master> requests = new List<Master>();
-            Master re = new Master();
+            User re = new User();
             re.Id = 1;
             re.Email = "dhiru5195@gmail.com";
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
@@ -207,7 +207,7 @@ namespace UnitTestingAgProMa.Services
             var idPass = new IdPassword();
             idPass.Email = "preetam";
             idPass.Password = "1234";
-            Master master = new Master();
+            User master = new User();
             master.Email = "preetam";
             master.Password = "1234";
             master.FirstName = "preetam";

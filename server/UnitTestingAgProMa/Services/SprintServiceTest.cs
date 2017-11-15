@@ -15,8 +15,8 @@ namespace UnitTestingAgProMa.Services
         public void Sprint_Service_Getall_Method_should_return_sprintBacklog_type_object()
         {
             //Arrange
-            List<SprintBacklog> requests = new List<SprintBacklog>();
-            var request = new SprintBacklog();
+            List<Sprint> requests = new List<Sprint>();
+            var request = new Sprint();
             request.SprintId = 1;
             requests.Add(request);
             var mockRepoReq = new Mock<ISprintRepository>(); //mocking RequestRepository
@@ -26,14 +26,14 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAll(1);
 
             //Assert
-            Assert.IsType<List<SprintBacklog>>(res);
+            Assert.IsType<List<Sprint>>(res);
         }
         [Fact]
         public void Sprint_Service_GetAll_Method_should_return_allsprints()
         {
             //Arrange
 
-            var request = new SprintBacklog();
+            var request = new Sprint();
             request.SprintId = 1;
 
             var mockRepoReq = new Mock<ISprintRepository>(); //mocking RequestRepository
@@ -50,7 +50,7 @@ namespace UnitTestingAgProMa.Services
         public void Sprint_Service_Get_Method_should_return_particular_particualr_sprint()
         {
             //Arrange
-            var request = new SprintBacklog();
+            var request = new Sprint();
             request.SprintId = 1;
             var mockRepoReq = new Mock<ISprintRepository>(); //mocking RequestRepository
             mockRepoReq.Setup(x => x.Get(1)).Returns(request); //mocking GetAll() of RequestRepository
@@ -67,8 +67,8 @@ namespace UnitTestingAgProMa.Services
         public void Sprint_Service_Get_Method_should_return_sprintBacklog_type_object()
         {
             //Arrange
-            List<SprintBacklog> requests = new List<SprintBacklog>();
-            var request = new SprintBacklog();
+            List<Sprint> requests = new List<Sprint>();
+            var request = new Sprint();
             request.SprintId = 1;
             requests.Add(request);
             var mockRepoReq = new Mock<ISprintRepository>(); //mocking RequestRepository
@@ -120,7 +120,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Sprint_service_Add_method_should_throw_null_exception_with_empty_input_object()
         {
-            SprintBacklog bk = new SprintBacklog();
+            Sprint bk = new Sprint();
 
             var mockRepo = new Mock<ISprintRepository>();
             mockRepo.Setup(x => x.Add(bk));
@@ -131,7 +131,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Sprint_service_Add_method_should_throw_nullReferenceException()
         {
-            SprintBacklog bk = new SprintBacklog();
+            Sprint bk = new Sprint();
 
             var mockRepo = new Mock<ISprintRepository>();
             mockRepo.Setup(x => x.Add(bk)).Throws(new NullReferenceException());
@@ -142,7 +142,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Sprint_service_Add_method_should_throw_FormatException()
         {
-            SprintBacklog bk = new SprintBacklog();
+            Sprint bk = new Sprint();
 
             var mockRepo = new Mock<ISprintRepository>();
             mockRepo.Setup(x => x.Add(bk)).Throws(new FormatException());
@@ -172,7 +172,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Sprint_service_Delete_method_should_throw_FormatException()
         {
-            SprintBacklog bk = new SprintBacklog();
+            Sprint bk = new Sprint();
 
             var mockRepo = new Mock<ISprintRepository>();
             mockRepo.Setup(x => x.Delete(It.IsAny<int>())).Throws(new FormatException());
@@ -184,7 +184,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Sprint_service_Update_method_should_throw_null_exception_with_empty_input_object()
         {
-            ProductBacklog bk = new ProductBacklog();
+            UserStory bk = new UserStory();
             var mockRepo = new Mock<ISprintRepository>();
 
             mockRepo.Setup(x => x.Update(It.IsAny<int>(), bk));
@@ -196,20 +196,20 @@ namespace UnitTestingAgProMa.Services
         public void Sprint_service_Update_method_should_throw_nullReferenceException()
         {
             var mockRepo = new Mock<ISprintRepository>();
-            mockRepo.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<ProductBacklog>())).Throws(new NullReferenceException());
+            mockRepo.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserStory>())).Throws(new NullReferenceException());
             SprintService obj = new SprintService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.Update(It.IsAny<int>(), It.IsAny<ProductBacklog>()));
+            var exception = Record.Exception(() => obj.Update(It.IsAny<int>(), It.IsAny<UserStory>()));
             Assert.IsType<NullReferenceException>(exception);
         }
         [Fact]
         public void Sprint_service_Update_method_should_throw_FormatException()
         {
-            SprintBacklog bk = new SprintBacklog();
+            Sprint bk = new Sprint();
 
             var mockRepo = new Mock<ISprintRepository>();
-            mockRepo.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<ProductBacklog>())).Throws(new FormatException());
+            mockRepo.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserStory>())).Throws(new FormatException());
             SprintService obj = new SprintService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.Update(It.IsAny<int>(), It.IsAny<ProductBacklog>()));
+            var exception = Record.Exception(() => obj.Update(It.IsAny<int>(), It.IsAny<UserStory>()));
             Assert.IsType<FormatException>(exception);
         }
     }

@@ -78,9 +78,9 @@ namespace UnitTestingAgProMa.Services
             List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
 
             //Assert
-            Assert.IsNotType<SprintBacklog>(result);
+            Assert.IsNotType<Sprint>(result);
             Assert.IsNotType<EpicMaster>(result);
-            Assert.IsNotType<ProductBacklog>(result);
+            Assert.IsNotType<UserStory>(result);
             Assert.IsNotType<ChecklistBacklog>(result);
             Assert.IsNotType<TaskBacklog>(result);
             Assert.IsNotType<TeamMaster>(result);
@@ -91,8 +91,8 @@ namespace UnitTestingAgProMa.Services
         public void Test_For_GetAllSprints()
         {
             //Arrange
-            List<SprintBacklog> sprintList = new List<SprintBacklog>();
-            var sprint = new SprintBacklog()
+            List<Sprint> sprintList = new List<Sprint>();
+            var sprint = new Sprint()
             {
                 SprintId = 1
             };
@@ -103,7 +103,7 @@ namespace UnitTestingAgProMa.Services
             ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object,mockSprintRepository.Object);
 
             //Act
-            List<SprintBacklog> result = service.GetAllSprints(It.IsAny<int>());
+            List<Sprint> result = service.GetAllSprints(It.IsAny<int>());
 
             //Assert
             Assert.NotNull(result);
@@ -240,7 +240,7 @@ namespace UnitTestingAgProMa.Services
         public void Test_for_Checking_UpdateReleaseInSprint_Should_Be_NotNull()
         {
             //arrange
-            SprintBacklog sprint = new SprintBacklog()
+            Sprint sprint = new Sprint()
             {
                 SprintId = 1
             };
@@ -249,7 +249,7 @@ namespace UnitTestingAgProMa.Services
             mockReleasePlanRepo.Setup(m => m.UpdateReleaseInSprint(It.IsAny<int>(), It.IsAny<int>())).Throws(new NullReferenceException());
             ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
             //act
-            var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<SprintBacklog>(), It.IsAny<int>()));
+            var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<Sprint>(), It.IsAny<int>()));
             //assert
             Assert.NotNull(ex);
         }
@@ -258,7 +258,7 @@ namespace UnitTestingAgProMa.Services
         public void Test_for_Checking_UpdateReleaseInSprint()
         {
             //arrange
-            SprintBacklog sprint = new SprintBacklog()
+            Sprint sprint = new Sprint()
             {
                 SprintId = 1
             };
@@ -267,7 +267,7 @@ namespace UnitTestingAgProMa.Services
             mockReleasePlanRepo.Setup(m => m.UpdateReleaseInSprint(It.IsAny<int>(), It.IsAny<int>())).Throws(new NullReferenceException());
             ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
             //act
-            var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<SprintBacklog>(), It.IsAny<int>()));
+            var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<Sprint>(), It.IsAny<int>()));
             //assert
             Assert.IsType<NullReferenceException>(ex);
         }

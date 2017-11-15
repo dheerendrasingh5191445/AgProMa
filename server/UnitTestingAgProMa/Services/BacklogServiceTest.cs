@@ -15,8 +15,8 @@ namespace UnitTestingAgProMa.Services
         public void Backlog_Service_GetAll_Method_To_GetAll_Request()
         {
             //Arrange
-            List<ProductBacklog> requests = new List<ProductBacklog>();
-            var request = new ProductBacklog();
+            List<UserStory> requests = new List<UserStory>();
+            var request = new UserStory();
             request.StoryId = 1;
             requests.Add(request);
             var mockRepoReq = new Mock<IBacklogRepository>(); //mocking RequestRepository
@@ -34,8 +34,8 @@ namespace UnitTestingAgProMa.Services
         public void Backlog_Service_GetAll_Method_should_return_productbacklog_type_object()
         {
             //Arrange
-            List<ProductBacklog> requests = new List<ProductBacklog>();
-            var request = new ProductBacklog();
+            List<UserStory> requests = new List<UserStory>();
+            var request = new UserStory();
             request.StoryId = 1;
             requests.Add(request);
             var mockRepoReq = new Mock<IBacklogRepository>(); //mocking RequestRepository
@@ -45,14 +45,14 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAll(1);
 
             //Assert
-            Assert.IsType<List<ProductBacklog>>(res);
+            Assert.IsType<List<UserStory>>(res);
         }
         [Fact]
         public void Backlog_Service_Update_Method_To_Update_userStory()
         {
             //Arrange
-            List<ProductBacklog> requests = new List<ProductBacklog>();
-            var request = new ProductBacklog();
+            List<UserStory> requests = new List<UserStory>();
+            var request = new UserStory();
             request.StoryId = 1;
             requests.Add(request);
             var mockRepoReq = new Mock<IBacklogRepository>(); //mocking RequestRepository
@@ -64,15 +64,15 @@ namespace UnitTestingAgProMa.Services
             //Assert
             Assert.NotNull(res);
             Assert.Equal(request, res);
-            Assert.IsType<ProductBacklog>(res);
+            Assert.IsType<UserStory>(res);
         }
 
         [Fact]
         public void Backlog_Service_Update_Method_should_return_ProductBacklog_Type_object()
         {
             //Arrange
-            List<ProductBacklog> requests = new List<ProductBacklog>();
-            var request = new ProductBacklog();
+            List<UserStory> requests = new List<UserStory>();
+            var request = new UserStory();
             request.StoryId = 1;
             requests.Add(request);
             var mockRepoReq = new Mock<IBacklogRepository>(); //mocking RequestRepository
@@ -82,7 +82,7 @@ namespace UnitTestingAgProMa.Services
             var res = obj.Update(It.IsAny<int>(), request);
 
             //Assert
-            Assert.IsType<ProductBacklog>(res);
+            Assert.IsType<UserStory>(res);
         }
         [Fact]
         public void Backlog_Service_JoinGroup_Method()
@@ -125,9 +125,9 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_serive_Add_method_throw_exception_with_invalid_value_type()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             backlog.StoryId = 1;
-            ProductBacklog backlog2 = new ProductBacklog();
+            UserStory backlog2 = new UserStory();
             backlog.StoryId = 2;
             var mockrepo = new Mock<IBacklogRepository>();
             mockrepo.Setup(x => x.Add(backlog)).Throws(new FormatException());
@@ -139,7 +139,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_service_Add_method_throw_nullrefrence_Exception()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             backlog.StoryId = 1;
 
             var mockrepo = new Mock<IBacklogRepository>();
@@ -153,7 +153,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_serive_Delete_method_throw_exception_with_invalid_value_type()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
            
 
 
@@ -167,7 +167,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_serive_Delete_method_throw_nullReferenceException()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             
             var mockrepo = new Mock<IBacklogRepository>();
             mockrepo.Setup(x => x.Delete(It.IsAny<int>())).Throws(new NullReferenceException());
@@ -180,7 +180,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_serive_update_method_throw_nullrefrence_Exception()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             backlog.StoryId = 1;
 
             var mockrepo = new Mock<IBacklogRepository>();
@@ -193,7 +193,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_serive_update_method_throw_Format_Exception_with_invalid_input()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             backlog.StoryId = 1;
 
             var mockrepo = new Mock<IBacklogRepository>();
@@ -206,7 +206,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_service_setConnection_method_should_throw_Format_Exception_with_invalid_input()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             backlog.StoryId = 1;
             var mockrepo = new Mock<IBacklogRepository>();
             mockrepo.Setup(x => x.setConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new FormatException());
@@ -218,7 +218,7 @@ namespace UnitTestingAgProMa.Services
         [Fact]
         public void Backlog_service_setConnection_method_should_throw_Argument_Null_Exception_with_invalid_input()
         {
-            ProductBacklog backlog = new ProductBacklog();
+            UserStory backlog = new UserStory();
             backlog.StoryId = 1;
             var mockrepo = new Mock<IBacklogRepository>();
             mockrepo.Setup(x => x.setConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new ArgumentNullException());
