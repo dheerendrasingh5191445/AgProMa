@@ -12,7 +12,11 @@ namespace AgpromaWebAPI.Service
     {
         List<ReleasePlan> GetProjectData(int projectId);
         List<UserBurnDown> GetTasks(int userId);
-        List<Sprint> GetSprintDetails(int projectId);
+
+       // List<Sprint> GetSprintDetails(int projectId);
+
+        List<SprintBacklog> GetSprintDetails(int projectId);
+
     }
 
     public class BurndownService : IBurndownService
@@ -51,7 +55,11 @@ namespace AgpromaWebAPI.Service
             return projectData;
         }
 
-        public List<Sprint> GetSprintDetails(int projectId)
+
+        //public List<Sprint> GetSprintDetails(int projectId)
+
+        public List<SprintBacklog> GetSprintDetails(int projectId)
+
         {
             return _repository.GetSprintDetails(projectId);
         }

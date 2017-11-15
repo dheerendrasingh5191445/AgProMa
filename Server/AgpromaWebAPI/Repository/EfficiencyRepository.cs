@@ -68,7 +68,9 @@ namespace AgpromaWebAPI.Repository
                 else
                 {
                     //change status to Inprogress in case of undoing checklist
+
                     TaskBacklog taskblog = _context.Tasks.FirstOrDefault(m => m.TaskId == checklist.TaskId);
+
                     taskblog.Status = TaskBacklogStatus.Inprogress;
                     _context.SaveChanges();
                     CheckAllTaskStatus(taskblog.TaskId);
@@ -120,7 +122,11 @@ namespace AgpromaWebAPI.Repository
                 else
                 {
                     //change status to Inprogress in case of undoing task
+
                     Sprint sprint = _context.Sprints.FirstOrDefault(m => m.SprintId == task.SprintId);
+
+                   // SprintBacklog sprint = _context.Sprintbl.FirstOrDefault(m => m.SprintId == task.SprintId);
+
                     sprint.Status = SprintStatus.Inprogress;
                     _context.SaveChanges();
                     CheckAllSprintStatus(sprint.SprintId);
@@ -172,6 +178,12 @@ namespace AgpromaWebAPI.Repository
                 {
                     ReleasePlan release = _context.ReleasePlans.FirstOrDefault(m => m.ReleasePlansanId == sprint.ReleasePlansanId);
                     release.Status = ReleasePlansanStatus.Inprogress;
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    ReleasePlanMaster release = _context.Releasepl.FirstOrDefault(m => m.ReleasePlanId == sprint.ReleasePlanId);
+                    release.Status = ReleasePlanStatus.Inprogress;
                     _context.SaveChanges();
                 }
             }
