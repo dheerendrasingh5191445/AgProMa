@@ -64,12 +64,11 @@ getById(id){
 
   }
   updateDailyStatusofTask(dailyStatus:Checklist){
-    console.log("dailystatus",dailyStatus);
-    return this.http.put(ConfigFile.ChecklistServiceUrl.updateDailyStatus+dailyStatus.checklistId,dailyStatus,{headers : this.headers})
-    .map((Response)=>Response.json())
-    .catch((error: any) => {
+    return this.http.put(ConfigFile.ChecklistServiceUrl.updateDailyStatus+dailyStatus.checklistId,dailyStatus,{headers : this.headers}).toPromise().
+    catch((error: any) => {
+      if(error==400){
       return Observable.throw(this.router.navigate(['/app-error/']));
-    });
+     } });
   }
 
 }

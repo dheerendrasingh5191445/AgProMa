@@ -21,6 +21,7 @@ namespace AgpromaWebAPI.model
         public int CheckListId { get; set; }
 
         public DateTime Date { get; set; }
+        public ChecklistBacklog checklist { get; set; }
 
         public int TaskId { get; set; }
         [ForeignKey("TaskId")]

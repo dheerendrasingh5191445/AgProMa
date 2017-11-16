@@ -56,7 +56,8 @@ namespace AgpromaWebAPI.Repository
         {
             ChecklistBacklog updatechecklist = _context.Checklists.FirstOrDefault(m => m.ChecklistId == checklist.ChecklistId);
             updatechecklist.RemainingSize = checklist.RemainingSize;
-            updatechecklist.CompletedSize = checklist.CompletedSize;
+            updatechecklist.CompletedSize=checklist.CompletedSize;
+            updatechecklist.Status = checklist.Status;
             _context.SaveChanges();
         }
 

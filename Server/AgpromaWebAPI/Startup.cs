@@ -50,19 +50,19 @@ namespace AgpromaWebAPI
             //services.AddScoped<IEpicRepository, EpicRepository>();
             //services.AddScoped<IBacklogServices, BacklogService>();
             //services.AddScoped<IBacklogRepository, BacklogRepository>();
-            //services.AddScoped<IReleasePlanRepo,ReleasePlanRepo>();
-            //services.AddScoped<IReleasePlanService,ReleasePlanService>();
+            //services.AddScoped<IReleasePlanRepo, ReleasePlanRepo>();
+            //services.AddScoped<IReleasePlanService, ReleasePlanService>();
             //services.AddScoped<ISprintRepository, SprintRepository>();
             //services.AddScoped<ISprintService, SprintService>();
             services.AddScoped<ICheckListRepository, ChecklistRepository>();
             services.AddScoped<ICheckListService, ChecklistService>();
-            //services.AddScoped<ITaskRepository, TaskRepository>();
-            //services.AddScoped<ITaskServices, TaskService>();
-            //services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
-            //services.AddScoped<ITaskBacklogService, TaskBacklogService>();
-            //services.AddScoped<IEfficiencyService, EfficiencyService>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITaskServices, TaskService>();
+          //  services.AddScoped<ITaskBacklogReposiory, TaskBacklogRepository>();
+           // services.AddScoped<ITaskBacklogService, TaskBacklogService>();
+           // services.AddScoped<IEfficiencyService, EfficiencyService>();
             //services.AddScoped<IEfficiencyRepository, EfficiencyRepository>();
-            //services.AddScoped<IBurndownService, BurndownService>();
+          //  services.AddScoped<IBurndownService, BurndownService>();
             //services.AddScoped<IBurndownRepository, BurndownRepository>();
             services.AddSingleton(Configuration);
             // Add framework services.

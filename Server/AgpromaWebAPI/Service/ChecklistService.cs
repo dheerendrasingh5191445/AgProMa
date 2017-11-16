@@ -25,8 +25,9 @@ namespace AgpromaWebAPI.Service
         {
             _context = con;
             _taskservice = taskservice;
+       
         }
-
+        //add checklist
         public void Add_Checklist(ChecklistBacklog addChecklist)//for adding checklist
         {
             _context.Add_Checklist(addChecklist);
@@ -41,7 +42,7 @@ namespace AgpromaWebAPI.Service
         {
             return _context.Get().ToList();
         }
-
+        //get checklist corresponding to a task id
         public List<ChecklistBacklog> Get(int id)
         {
             return _context.Get(id);
@@ -51,10 +52,12 @@ namespace AgpromaWebAPI.Service
         {
             return _context.GetTaskDetail(Id);
         }
+        //update checklist remaining time
         public void Update_DailyStatus(ChecklistBacklog checklist)
         {
             _context.Update_DailyStatus(checklist);
             _taskservice.Update_RemainingTime(checklist);
+         
         }
 
     }

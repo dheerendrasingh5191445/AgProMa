@@ -85,6 +85,37 @@ img {
 .crossText{
   text-decoration: line-through;
 }
+#completedInput{
+ margin-top:5px;
+ height:30px;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tool .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  height: 55px;
+  bottom:100%;
+  left:50%;
+  margin-left:90px;
+  background-color: #2F2E2E;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+
+}
+
+.tool:hover .tooltiptext {
+  visibility: visible;
+}
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 button.addChecklist {

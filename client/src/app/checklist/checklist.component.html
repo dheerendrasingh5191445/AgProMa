@@ -22,10 +22,10 @@
 
     <!-- checklist  row start -->
     <div class="row">
-      <div class="col-1" id="progressTitle">
+      <div class="col-md-1" id="progressTitle">
         <img src="assets/images/Progress.png">
       </div>
-      <div class="col-2">
+      <div class="col-md-2">
         <h5 class="text-responsive">Task Progress :</h5>
       </div>
       <div class="col-md-8" id="progress">
@@ -40,14 +40,20 @@
     <br>
     <!-- checklist  row end -->
     <form>
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-2 col-form-label"><h5>Checklist Name</h5></label>
-          <div class="col-sm-10">
-            <textarea type="email" class="form-control" id="inputEmail3" placeholder="Checklist Name" [(ngModel)]="model.checklistName" [ngModelOptions]="{standalone: true}"></textarea>
+        <div class="row form-group">
+            <div class="col-md-1" id="progressTitle">
+                <img src="assets/images/Progress.png">
+              </div>
+          <label id="checklistname" class="col-md-2 col-form-label"><h5>Checklist Name:</h5></label>
+          <div class="col-md-8">
+            <textarea  class="form-control" id="inputEmail3" placeholder="Checklist Name" [(ngModel)]="model.checklistName" [ngModelOptions]="{standalone: true}"></textarea>
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputPassword3" class="col-sm-2 col-form-label"><h5>Checklist Size</h5></label>
+            <div class="col-md-1" id="progressTitle">
+                <img src="assets/images/Progress.png">
+              </div>
+          <label for="inputPassword3" class="col-sm-2 col-form-label"><h5>Checklist Size:</h5></label>
           <div class="col-sm-4">
             <input type="text" class="form-control" id="inputPassword3" placeholder="Checklist Size" [(ngModel)]="model.plannedSize" [ngModelOptions]="{standalone: true}">
           </div>
@@ -79,12 +85,11 @@
     <div>
       <ul>
         <!-- ngFor starts -->
-        <li *ngFor="let item of details;let i= index" class="row list-group-item list rounded">
-          <div class="col-md-8 material-switch">
+        <li *ngFor="let item of details;let i= index" class="row list-group-item list rounded tool">
+          <div class="col-md-9 material-switch">
             <ul class="tg-list">
               <li class="tg-list-item">
-                <input class="tgl tgl-flip" id="cb5{{item.checklistId}}" type="checkbox" [checked]="item.status" (click)="markCompleted(item.status,item)"
-                />
+                <input class="tgl tgl-flip" id="cb5{{item.checklistId}}" type="checkbox" [checked]="item.status" />
                 <label class="tgl-btn" id="taskdone" data-tg-off="Task" data-tg-on="Done" for="cb5{{item.checklistId}}"></label>
               </li>
               <li>
@@ -93,19 +98,30 @@
               </li>
             </ul>
             <br>
+            
           </div>
+          
           <div class="col-md-2">
               
                   <!-- Button trigger modal -->
-       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)=updateRemainingTime(i)>
+       <div *ngIf="item.status==true"><button type="button" class="btn btn-primary" data-toggle="modal" disabled  >
        Daily Status
-        </button>
+        </button></div>
+        <div *ngIf="item.status==false"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)=updateRemainingTime(i)>
+            Daily Status
+             </button></div>
                 </div>
                 <div class="col-md-1 pull-right">
             
                   <img src="assets/images/delete.png" (click)="deleteChecklist(item)">
                 
                 </div>
+                <span class="tooltiptext">Completed : {{item.completedSize}}
+                    <br>
+                    Remaining : {{item.remainingSize}}  
+                    
+                  </span>
+               
           <!-- ngFor ends here  -->
 
           
@@ -135,9 +151,9 @@
         <div class="modal-body">
             <form>
               <div class="form-group row">
-                <label for="completed" class="col-sm-2 col-form-label">Completed:</label>
+                <label for="completed" class="col-sm-3 col-form-label">Completed:</label>
                 <div class="col-sm-3 completed">
-                    <input type="number" min=1 max=6 class="form-control" (input)=calculateRemaining($event) id="completedInput" >
+                    <input type="number" min=0 max=5 class="form-control" (input)=calculateRemaining($event) id="completedInput" >
                 </div>
               </div>
               <div class="form-group row">
@@ -150,7 +166,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)=updateDailyStatus()>Submit </button>
+          <button type="button" class="btn btn-primary" (click)=updateDailyStatus() data-dismiss="modal">Submit </button>
         </div>
       </div>
     </div>

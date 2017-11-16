@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Checklist } from './../shared/model/checklist';
 import { ChecklistService } from './../shared/services/checklist.service';
 import { ConfigFile } from '../shared/config';
+import swal from 'sweetalert2';
 // import ends
 @Component({
   selector: 'app-checklist',
@@ -26,13 +27,15 @@ export class ChecklistComponent implements OnInit {
   countChecklist: number = 0;
   details: Checklist[];
   model: Checklist = 
-  {checklistId:0,
+  {
+    checklistId:0,
     taskId:0,
     checklistName:null,
     status:false,
     plannedSize:0,
     remainingSize:0,
-    completedSize:0};
+    completedSize:0
+  };
   dailyStatus:Checklist;
   Event:any;
   checkListSelectedIndex: number;
@@ -73,8 +76,15 @@ export class ChecklistComponent implements OnInit {
 
   // for adding checklist of user
   addCheckList() {
-    console.log("Post Data ",this.model)
     this.model.remainingSize=this.model.plannedSize;
+    let totalCompletedSize=0;
+    for(var checklistSize in this.details ){
+      totalCompletedSize += this.details[checklistSize].plannedSize + this.model.remainingSize;
+    }
+    if(totalCompletedSize > this.task.plannedSize){
+      swal('Sorry','You have entered size greater than the task size','error');
+    }
+    else{
     this.checkListService.addCheckList(this.model)
       .subscribe(result => {
         this.onStartComponent();
@@ -82,6 +92,7 @@ export class ChecklistComponent implements OnInit {
       error => {
         this.msg = "Something Went Wrong, Please Try Again Later";
       });
+    }
   }
 
 
@@ -148,8 +159,17 @@ export class ChecklistComponent implements OnInit {
     
     this.model.remainingSize=this.remainSize.nativeElement.textContent;
     this.model.checklistId=this.details[this.checkListSelectedIndex].checklistId;
-    
-    let checklistData={checklistId:this.model.checklistId};
-    this.checkListService.updateDailyStatusofTask(this.model).subscribe(data=>this.dailyStatus=data);
+    this.model.taskId=this.details[this.checkListSelectedIndex].taskId;
+    if(this.model.remainingSize==0){
+      this.model.status=true;
+      this.checkListService.updateDailyStatusofTask(this.model).then(()=>this.ngOnInit());
+    }
+    else if(this.model.remainingSize < 0){
+      swal('','Your Completed size is greater than the remaining Size ','error');
+    }
+    else{
+
+    this.checkListService.updateDailyStatusofTask(this.model).then(()=>this.ngOnInit());
+    }
   }
 }
