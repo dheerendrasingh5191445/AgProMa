@@ -64,6 +64,7 @@ getById(id){
 
   }
   updateDailyStatusofTask(dailyStatus:Checklist){
+    console.log("hellooooooooo",dailyStatus);
     return this.http.put(ConfigFile.ChecklistServiceUrl.updateDailyStatus+dailyStatus.checklistId,dailyStatus,{headers : this.headers}).toPromise().
     catch((error: any) => {
       if(error==400){

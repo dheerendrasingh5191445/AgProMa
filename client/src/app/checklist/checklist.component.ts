@@ -152,7 +152,6 @@ export class ChecklistComponent implements OnInit {
       this.remainSize.nativeElement.textContent = this.details[this.checkListSelectedIndex].remainingSize-parseInt(event.target.value);
       this.model.completedSize = event.target.value;
     }
-    
   }
   updateDailyStatus()
   {
@@ -160,7 +159,7 @@ export class ChecklistComponent implements OnInit {
     this.model.remainingSize=this.remainSize.nativeElement.textContent;
     this.model.checklistId=this.details[this.checkListSelectedIndex].checklistId;
     this.model.taskId=this.details[this.checkListSelectedIndex].taskId;
-    if(this.model.remainingSize==0){
+    if(this.model.remainingSize == 0){
       this.model.status=true;
       this.checkListService.updateDailyStatusofTask(this.model).then(()=>this.ngOnInit());
     }
@@ -168,8 +167,8 @@ export class ChecklistComponent implements OnInit {
       swal('','Your Completed size is greater than the remaining Size ','error');
     }
     else{
-
-    this.checkListService.updateDailyStatusofTask(this.model).then(()=>this.ngOnInit());
+        this.checkListService.updateDailyStatusofTask(this.model).then(()=>this.ngOnInit());
     }
+    
   }
 }
